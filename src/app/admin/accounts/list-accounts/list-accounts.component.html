@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <!-- <app-page-title title="Orders" [breadcrumbItems]="breadCrumbItems"></app-page-title> -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" autocomplete="off" id="searchTableList"
+                                        placeholder="Search...">
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <button type="button" class="btn btn-primary btn-rounded mb-2 me-2"
+                                    (click)="routeToAddAccount()"><i class="mdi mdi-plus mr-1"></i>
+                                    Add Account</button>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+                    <!-- Table data -->
+                    <div class="table-responsive mb-0">
+                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100 table-check"
+                            id="order-list">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 20px;">
+                                        <div class="form-check font-size-16 align-middle">
+                                            <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                            <label class="form-check-label" for="transactionCheck01"></label>
+                                        </div>
+                                    </th>
+                                    <th class="align-middle">Account ID</th>
+                                    <th class="align-middle">Account Name</th>
+                                    <th class="align-middle">Owner Name</th>
+                                    <th class="align-middle">Owner Email</th>
+                                    <th class="align-middle">Account Status</th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of usersList; let i = index;" id="o_{{data.id}}">
+                                    <td>
+                                        <div class="form-check font-size-16">
+                                            <input class="form-check-input" type="checkbox"
+                                                id="transactionCheck{{data.index}}" value="{{data.id}}">
+                                            <label class="form-check-label"
+                                                for="transactionCheck{{data.index}}"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="javascript: void(0);" class="text-body fw-bold">{{data.id}}</a>
+                                    </td>
+                                    <td>{{data.account.name}}</td>
+                                    <td>{{data.firstName+ ' '+data.lastName}}</td>
+                                    <td>{{data.email}}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-soft-success font-size-11"
+                                            [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
+                                            transformStatus}}</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <span class="text-success"><i class="mdi mdi-pencil font-size-18"
+                                                    (click)="routeToEditAccount(data.id)"></i></span>
+                                            <a href="javascript:void(0);" class="text-danger" (click)="confirm(i)"><i
+                                                    class="mdi mdi-delete font-size-18"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table -->
+                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                        <pagination [totalItems]="total" [itemsPerPage]="perPage"></pagination>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@ export const MENU: MenuItem[] = [
   {
     id: 2,
     label: 'Account',
-    link: '/list-account',
+    link: '/admin/accounts/list-accounts',
     icon: 'bx-user',
     permission: 'LIST-ACCOUNT',
   },

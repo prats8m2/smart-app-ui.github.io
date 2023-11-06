@@ -4,10 +4,10 @@ export const URL_ROUTES = {
   //dashboard
   DASHBOARD: 'admin/dashboard',
   //user
-  ADD_USER: '/add-account',
-  EDIT_USER: '/edit-account',
-  VIEW_USER: '/view-account/',
-  LIST_USER: '/list-account',
+  ADD_ACCOUNT: 'admin/accounts/add-account',
+  EDIT_ACCOUNT: 'admin/accounts/edit-account',
+  VIEW_ACCOUNT: 'admin/accounts/view-account/',
+  LIST_ACCOUNT: 'admin/accounts/list-account',
 
   //site
   ADD_SITE: '/add-site',
