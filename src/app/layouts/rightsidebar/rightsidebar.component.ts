@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../core/services/event.service';
 
-import { LAYOUT_WIDTH, SIDEBAR_TYPE, TOPBAR } from '../layouts.model';
+import { LAYOUT_WIDTH, SIDEBAR_TYPE, TOPBAR, LAYOUT_MODE } from '../layouts.model';
 
 @Component({
   selector: 'app-rightsidebar',
@@ -19,6 +19,7 @@ export class RightsidebarComponent implements OnInit {
 
   width: string;
   sidebartype: string;
+  mode: string;
   topbar: string;
 
   constructor(private eventService: EventService) { }
@@ -27,6 +28,7 @@ export class RightsidebarComponent implements OnInit {
     this.width = LAYOUT_WIDTH;
     this.sidebartype = SIDEBAR_TYPE;
     this.topbar = TOPBAR;
+    this.mode = LAYOUT_MODE;
 
     /**
      * horizontal-vertical layput set
@@ -70,10 +72,18 @@ export class RightsidebarComponent implements OnInit {
   changeWidth(width: string) {
     this.width = width;
     this.eventService.broadcast('changeWidth', width);
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 0);
   }
 
   changeSidebartype(sidebar: string) {
     this.sidebartype = sidebar;
     this.eventService.broadcast('changeSidebartype', sidebar);
+  }
+
+  changeMode(themeMode: string) {
+    this.mode = themeMode;
+    this.eventService.broadcast('changeMode', themeMode);
   }
 }

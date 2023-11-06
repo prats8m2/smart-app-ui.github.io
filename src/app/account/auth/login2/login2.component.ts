@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
@@ -20,27 +20,21 @@ import { environment } from '../../../../environments/environment';
  */
 export class Login2Component implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService) { }
-  loginForm: FormGroup;
-  submitted = false;
-  error = '';
+  loginForm: UntypedFormGroup;
+  submitted:boolean = false;
+  error:string = '';
   returnUrl: string;
 
   // set the currenr year
   year: number = new Date().getFullYear();
 
   ngOnInit(): void {
-    document.body.classList.add('auth-body-bg')
     this.loginForm = this.formBuilder.group({
       email: ['admin@themesbrand.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required]],
     });
-
-    // reset login status
-    // this.authenticationService.logout();
-    // get return url from route parameters or default to '/'
-    // tslint:disable-next-line: no-string-literal
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 

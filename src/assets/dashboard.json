@@ -117,17 +117,20 @@
     "balancelist": [{
         "text": "Ethereum",
         "coin": "4.5701 ETH",
-        "amount": "$ 1123.64"
+        "amount": "$ 1123.64",
+        "color":"primary"
       },
       {
         "text": "Bitcoin",
         "coin": "0.4412 BTC",
-        "amount": "$ 4025.32"
+        "amount": "$ 4025.32",
+        "color":"warning"
       },
       {
         "text": "Litecoin",
         "coin": "35.3811 LTC",
-        "amount": "$ 2263.09"
+        "amount": "$ 2263.09",
+        "color":"info"
       }
     ]
   }]

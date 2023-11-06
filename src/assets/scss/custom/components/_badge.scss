@@ -7,7 +7,7 @@
   &[href] {
     &:hover,
     &:focus {
-      color: $white;
+      color: var(--#{$prefix}secondary-bg);
     }
   }
 }
@@ -41,18 +41,18 @@
 
 .badge{
   &.bg-light{
-    color: $body-color;
+    color: var(--#{$prefix}body-color);
 
     &[href] {
       &:hover,
       &:focus {
-        color: $body-color;
+        color: var(--#{$prefix}body-color);
       }
     }
   }
 }
 
-  .badge-soft-#{$color} {
+.badge-soft-#{$color} {
       @include badge-variant-soft($value);
   }
   
@@ -66,5 +66,5 @@
 // Dark badge
 
 .badge.bg-dark{
-  color: $light;
+  color: var(--#{$prefix}light);
 }

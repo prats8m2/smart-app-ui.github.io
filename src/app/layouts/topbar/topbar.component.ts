@@ -59,12 +59,12 @@ export class TopbarComponent implements OnInit {
     }
   }
 
-  setLanguage(text: string, lang: string, flag: string) {
-    this.countryName = text;
-    this.flagvalue = flag;
-    this.cookieValue = lang;
-    this.languageService.setLanguage(lang);
-  }
+    setLanguage(text: string, lang: string, flag: string) {
+      this.countryName = text;
+      this.flagvalue = flag;
+      this.cookieValue = lang;
+      this.languageService.setLanguage(lang);
+    }
 
   /**
    * Toggles the right sidebar

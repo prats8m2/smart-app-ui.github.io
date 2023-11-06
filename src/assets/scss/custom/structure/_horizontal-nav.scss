@@ -3,8 +3,8 @@
 // 
 
 .topnav {
-    background: $topnav-bg;
-    padding: 0 calc(#{$grid-gutter-width} / 2);
+    background: var(--#{$prefix}topnav-bg);
+    padding: 0 calc(#{$grid-gutter-width} * 0.5);
     box-shadow: $box-shadow;
     margin-top: $header-height;
     position: fixed;
@@ -23,33 +23,33 @@
             font-size: 14px;
             position: relative;
             padding: 1rem 1.3rem;
-            color: $menu-item-color;
+            color: var(--#{$prefix}menu-item-color);
             i{
                 font-size: 15px;
             }
             &:focus, &:hover{
-                color: $menu-item-active-color;
+                color: var(--#{$prefix}menu-item-active-color);
                 background-color: transparent;
             }
         }
         
         .dropdown-item{
-            color: $menu-item-color;
+            color: var(--#{$prefix}menu-item-color);
             &.active, &:hover{
-                color: $menu-item-active-color;
+                color: var(--#{$prefix}menu-item-active-color);
             }
         }
         
         .nav-item{
             .nav-link.active{
-                color: $menu-item-active-color;
+                color: var(--#{$prefix}menu-item-active-color);
             }
         }
 
         .dropdown{
             &.active{
               >a {
-                    color: $menu-item-active-color;
+                    color: var(--#{$prefix}menu-item-active-color);
                     background-color: transparent;
                 }
             }
@@ -173,14 +173,14 @@
 
     .navbar-brand-box{
         .logo-dark {
-            display: $display-block;
+            display: var(--#{$prefix}display-block);
             span.logo-sm{
-                display: $display-block;
+                display: var(--#{$prefix}display-block);
             }
         }
     
         .logo-light {
-            display: $display-none;
+            display: var(--#{$prefix}display-none);
         }
     }
     
@@ -235,11 +235,11 @@
     body[data-layout="horizontal"][data-topbar="light"] {
         .navbar-brand-box{
             .logo-dark {
-                display: $display-block;
+                display: var(--#{$prefix}display-block);
             }
         
             .logo-light {
-                display: $display-none;
+                display: var(--#{$prefix}display-none);
             }
         }
 
@@ -286,7 +286,7 @@ body[data-layout="horizontal"][data-topbar="colored"] {
     .app-search {
     
         .form-control {
-            background-color: rgba($topbar-search-bg,0.07);
+            background-color: rgba(var(--#{$prefix}topbar-search-bg),0.07);
             color: $white;
         }
         span,
@@ -295,10 +295,10 @@ body[data-layout="horizontal"][data-topbar="colored"] {
         }
     }
     .header-item {
-        color: $header-dark-item-color;
+        color: var(--#{$prefix}header-dark-item-color);
     
         &:hover {
-            color: $header-dark-item-color;
+            color: var(--#{$prefix}header-dark-item-color);
         }
     }
 
@@ -316,87 +316,7 @@ body[data-layout="horizontal"][data-topbar="colored"] {
 
     .noti-icon {
         i {
-            color: $header-dark-item-color;
-        }
-    }
-
-    @include media-breakpoint-up(lg) {
-        .topnav{
-            background-color: $primary;
-            .navbar-nav {
-        
-                .nav-link {
-                    color: rgba($white, 0.6);
-                    
-                    &:focus, &:hover{
-                        color: rgba($white, 0.9);
-                    }
-                }
-        
-                > .dropdown{
-                    &.active{
-                      >a {
-                            color: rgba($white, 0.9) !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-
-// Colored Topbar 
-
-body[data-layout="horizontal"][data-topbar="colored"] {
-    #page-topbar{
-        background-color: $primary;
-        box-shadow: none;
-    }
-
-    .logo-dark {
-        display: none;
-    }
-
-    .logo-light {
-        display: block;
-    }
-
-    .app-search {
-    
-        .form-control {
-            background-color: rgba($topbar-search-bg,0.07);
-            color: $white;
-        }
-        span,
-        input.form-control::-webkit-input-placeholder {
-            color: rgba($white,0.5);
-        }
-    }
-    .header-item {
-        color: $header-dark-item-color;
-    
-        &:hover {
-            color: $header-dark-item-color;
-        }
-    }
-
-    .navbar-header {
-        .dropdown .show {
-            &.header-item{
-                background-color: rgba($white,0.1);
-            }
-        }
-
-        .waves-effect .waves-ripple {
-            background: rgba($white, 0.4);
-        }
-    }
-
-    .noti-icon {
-        i {
-            color: $header-dark-item-color;
+            color: var(--#{$prefix}header-dark-item-color);
         }
     }
 

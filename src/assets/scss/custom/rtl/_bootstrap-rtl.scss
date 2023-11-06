@@ -2,21 +2,71 @@
 // bootstrap-rtl.scss
 //
 
+//alert
+.alert-dismissible{
+  padding-left: $alert-dismissible-padding-r;
+  padding-right: var(--#{$prefix}alert-padding-x);
 
-// Dropdowns
+  .btn-close{
+    right: auto;
+    left: 0;
+  }
+}
 
-.dropdown-menu {
+
+// accordion
+.accordion-button::after{
+  margin-right: auto;
+  margin-left: 0;
+}
+
+
+
+
+.breadcrumb-item {
+  // The separator between breadcrumbs (by default, a forward-slash: "/")
+  + .breadcrumb-item {
+    padding-left: 0;
+    padding-right: var(--#{$prefix}breadcrumb-item-padding-x);
+
+    &::before {
+      float: right; // Suppress inline spacings and underlining of the separator
+      padding-right: 0;
+      padding-left: var(--#{$prefix}breadcrumb-item-padding-x);
+    }
+  }
+
+  &.active {
+    color: var(--#{$prefix}breadcrumb-item-active-color);
+  }
+}
+
+// dropdown
+
+.dropdown-item{
   text-align: right;
+}
+.dropdown-toggle::after {
+  margin-right: .255em;
+  margin-left: auto;
+}
+
+.dropdown-menu{
   left: auto !important;
-}
-
-.dropdown-menu[style] {
   right: 0 !important;
+  text-align: right;
 }
 
+.dropdown-menu-end[style]{
+  right: auto !important;
+  left: 0 !important;
+}
 
-
-
+.dropdown-megamenu{
+  &.show{
+    left: 20px!important;
+  }
+}
 
 // List
 
@@ -40,125 +90,294 @@ ul {
 }
 
 
-// Buttons
+//Buttons 
 
+//button with icon
 .btn-label {
+  position: relative;
   padding-right: 44px;
-  padding-left: 12px;
+  padding-left: $btn-padding-x;
 
   .label-icon {
-    left: auto;
-    right: 0;
-    border-right: 0;
-    border-left: 1px solid rgba($white, 0.4);
+      left: auto;
+      right: -$btn-border-width;
+      border-right: 0;
+      border-left: 1px solid rgba($white, 0.1);
   }
 
   &.btn-light {
     .label-icon {
-      border-right: 0;
-      border-left: 1px solid rgba($dark, 0.2);
+        background-color: rgba($dark, 0.1);
+        border-right: 0;
+        border-left: 1px solid rgba($dark, 0.2);
     }
+}
+}
+
+.btn-group>:not(.btn-check)+.btn {
+  border-radius: 0px;
+  border-top-left-radius: $btn-border-radius;
+  border-bottom-left-radius: $btn-border-radius;
+}
+
+
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0px;
+  border-top-right-radius: $btn-border-radius;
+  border-bottom-right-radius: $btn-border-radius;
+}
+.btn-group >{
+  .btn:nth-child(n+3), 
+  :not(.btn-check) + .btn, 
+  .btn-group:not(:first-child) > .btn {
+      border-radius: 0px;
+      border-top-left-radius: $btn-border-radius;
+      border-bottom-left-radius: $btn-border-radius;
+  }
+
+  :not(.btn-check:first-child) + .btn, 
+  .btn-group:not(:first-child) {
+      margin-left: 0;
+      margin-right: -1px;
+  }
+}
+.btn-group-example{
+  .btn:before{
+    left: auto;
+    right: -12px;
   }
 }
 
 
-
-.btn-group,
-.btn-group-vertical {
-  direction: ltr;
+// list
+ol,
+ul {
+    padding-left: 0;
+  padding-right: 2rem;
+}
+.list-unstyled{
+  padding-right: 0;
 }
 
-// pagination
+.list-group {
+  padding-right: 0px;
+}
 
-.pagination {
-  .page-item {
-    &:first-child {
-      .page-link {
-        margin-right: 0; //rtl
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-        // @include border-right-radius($border-radius); //rtl
-      }
-    }
+.list-inline-item {
 
-    &:last-child {
-      .page-link {
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        // @include border-left-radius($border-radius); //rtl
-      }
-    }
+  &:not(:last-child) {
+    margin-right: 0;
+    margin-left: $list-inline-padding;
   }
 }
 
-// blockquote
-
-.blockquote-reverse {
-  text-align: left !important;
+.list-group-horizontal-md>.list-group-item:first-child {
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
-// dl
+.list-group-horizontal-md>.list-group-item:last-child {
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.list-group-horizontal-md>.list-group-item+.list-group-item {
+  border-top-width: 1px;
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+
+.list-group-horizontal-md>.list-group-item+.list-group-item.active {
+  margin-right: -1px;
+  border-right-width: 1px;
+}
+
+.page-item {
+  &:not(:first-child) {
+      .page-link {
+          margin-right: -1px;
+      }
+  }
+}
 
 dd {
   margin-right: 0;
 }
 
-// Modal
+// Nav
+
+.nav{
+  padding-right: 0;
+}
+
+// modal
+.modal-open {
+  padding-right: 0px !important;
+}
+.modal{
+  .btn-close{
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+}
 
 
-.custom-modal-title {
+// select
+.input-group-lg > .form-select, .input-group-sm > .form-select {
+  padding-left: 1.75rem;
+}
+.form-select{
+  padding: $form-select-padding-y $form-select-padding-x $form-select-padding-y $form-select-indicator-padding;
+  background-position: left 0.75rem center;
+}
+
+
+// form-check
+.form-check{
   text-align: right;
-}
+  padding-right: $form-check-padding-start;
+  padding-left: 0;
+  .form-check-input {
+      float: right;
+      margin-left: 0;
+      margin-right:  $form-check-padding-start * -1;
+  }
 
-.modal-header {
-  .btn-close {
-    margin: -0.5rem auto -0.5rem -0.5rem;
-    left: 0px;
+  &.card-radio{
+      padding: 0;
   }
 }
 
-.modal-demo {
-  .btn-close {
-    left: 25px;
-    right: auto;
+.form-floating {
+  >label {
+    right: 0;
+    left: auto;
+    transform-origin: 100% 0;
+  }
+  > .form-control:focus,
+  > .form-control:not(:placeholder-shown),
+  > .form-control-plaintext,
+  > .form-select {
+    ~ label {
+      transform: scale(.85) translateY(-.5rem) translateX(-.15rem);
+    }
   }
 }
 
+.form-check-right{
+  text-align: left;
+  padding-left: $form-check-padding-start;
+  padding-right: 0;
 
-.modal-footer {
-  > :not(:first-child) {
-    margin-right: .25rem;
-    margin-left: 0;
-  }
-
-  > :not(:last-child) {
-    margin-left: .25rem;
+  .form-check-input{
+    float: left;
     margin-right: 0;
+    margin-left:  $form-check-padding-start * -1;
+  }
+}
+
+.form-check-inline {
+  margin-right: 0;
+  margin-left: $form-check-inline-margin-end;
+}
+
+.form-checkbox-outline .form-check-input:checked:after{
+  right: -3px;
+  left: auto;
+}
+
+// form-switch
+.form-switch {
+  padding-left: 0;
+  padding-right: $form-switch-padding-start;
+  .form-check-input{
+      margin-left: 0;
+      margin-right: $form-switch-padding-start * -1;
+  }
+}
+
+.form-switch-md {
+  padding-left: 0;
+  padding-right: 2.5rem;
+  .form-check-input {
+      left: auto;
+      right: -0.5rem;
+  }
+}
+
+.form-switch-lg{
+  padding-left: 0;
+  padding-right: 2.75rem;
+  .form-check-input {
+      left: auto;
+      right: -0.75rem;
+  }
+}
+
+// position
+.start-0, .start-50, .start-100{
+  &.translate-middle{
+      transform: translate(50%, -50%) !important;
+  }
+}
+
+.start-0{
+  right: 0%;
+  left: auto !important;
+}
+
+.start-50{
+  right: 50%;
+  left: auto !important;
+  &.translate-middle-x{
+      transform: translateX(50%) !important;
+  }
+}
+
+.start-100{
+  right: 100%;
+  left: auto !important;
+}
+
+.end-50 {
+  right: auto !important;
+  left: 50%;
+}
+
+// pagination
+
+.pagination{
+  padding: 0;
+}
+
+.page-item{
+  &:first-child .page-link {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: var(--#{$prefix}pagination-border-radius);
+      border-bottom-right-radius: var(--#{$prefix}pagination-border-radius);
+  }
+
+  &:last-child .page-link {
+      border-top-left-radius: var(--#{$prefix}pagination-border-radius);
+      border-bottom-left-radius: var(--#{$prefix}pagination-border-radius);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
   }
 }
 
 
-// Alerts
-
-.alert-dismissible {
-  padding-right: $alert-padding-x;
-
+// toast
+.toast-header {
   .btn-close {
-    left: 0;
-    right: auto;
+    margin-left: calc(-.5 * var(--#{$prefix}toast-padding-x));
+    margin-right: var(--#{$prefix}toast-padding-x);
   }
 }
-
-
-// Breadcrumb item arrow
-
-.breadcrumb-item {
-  +.breadcrumb-item {
-    padding-right: $breadcrumb-item-padding;
-    padding-left: 0px;
-  }
-}
-
 // ------------ FORM  //
 
 [type="tel"],
@@ -170,297 +389,20 @@ dd {
   }
 }
 
-// radio
 
-.form-radio-outline {
-  .form-check-input {
-    &:checked {
-      &:after {
-        right: 4px;
-      }
-    }
-  }
+.bx-fade-left
+{
+            animation: fade-right 1.5s infinite linear !important;
 }
-
-// checkbox
-
-.form-checkbox-outline {
-  .form-check-input {
-    &:checked {
-      &:after {
-        right: 1px;
-      }
-    }
-  }
+.bx-fade-left-hover:hover
+{
+            animation: fade-right 1.5s infinite linear !important;
 }
-
-// Switch sizes
-
-.form-switch {
-  .form-check-input {
-    margin-right: -2.5em !important;
-    margin-left: 0;
-    background-position: right center;
-  }
+.bx-fade-right
+{
+            animation: fade-left 1.5s infinite linear !important;
 }
-
-
-.form-switch {
-  padding-right: 2.5em !important;
-
-  .form-check-input:checked {
-    background-position: left center;
-  }
-}
-
-.form-switch-md {
-  padding-right: 2.5rem !important;
-
-  .form-check-input {
-    right: -0.5rem;
-  }
-}
-
-.form-switch-lg {
-  padding-right: 2.75rem !important;
-
-  .form-check-input {
-    right: -0.75rem;
-  }
-}
-
-// Forms right check box
-
-.form-check-right {
-  padding-right: 0 !important;
-  padding-left: 1.25rem !important;
-
-  .form-check-input {
-    right: auto;
-    left: 0;
-    margin-right: 0;
-  }
-}
-
-.custom-control-right {
-  padding-left: 1.5rem !important;
-  padding-right: 0 !important;
-
-  .custom-control-label {
-    display: block;
-
-    &:before,
-    &:after {
-      right: auto;
-      left: -1.5rem;
-    }
-  }
-
-  .custom-control-input {
-    right: auto;
-    left: 0;
-  }
-}
-
-
-// Forms
-
-.form-select {
-  background-position: left 0.75rem center;
-  padding: 0.47rem 0.75rem 0.47rem 1.75rem;
-}
-
-.form-select-sm {
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-// Custom Checkbox-Radio 
-
-.form-check {
-  text-align: right;
-  padding-right: 1.5em;
-  padding-left: 0;
-
-  .form-check-input {
-    float: right;
-    margin-right: -1.5em;
-  }
-}
-
-.form-check-inline {
-  margin-right: 1rem;
-  margin-left: 0;
-}
-
-.custom-control {
-  padding-left: 0;
-}
-
-.custom-control-inline {
-  margin-right: 0;
-}
-
-.custom-control-label {
-  &::before {
-    left: auto;
-  }
-
-  // Foreground (icon)
-  &::after {
-    left: auto;
-  }
-}
-
-.custom-switch {
-  padding-left: 0;
-
-  .custom-control-label {
-    &::before {
-      left: auto;
-    }
-
-    &::after {
-      left: auto;
-    }
-  }
-
-  // .custom-control-input:checked~.custom-control-label {
-  //     &::after {
-  //         transform: translateX(#{-($custom-switch-width - $custom-control-indicator-size)});
-  //     }
-  // }
-}
-
-.custom-file-label {
-  &::after {
-    right: auto;
-    left: 0;
-    border-right: inherit;
-  }
-}
-
-.custom-switch-md {
-  padding-right: 3rem;
-  padding-left: 0;
-
-  .custom-control-label {
-    &:before {
-      left: auto;
-      right: -3rem;
-    }
-
-    &:after {
-      right: calc(-3rem + 2px);
-      left: auto;
-    }
-
-  }
-
-  .custom-control-input:checked~.custom-control-label::after {
-    transform: translateX(-1.25rem);
-  }
-}
-
-
-.custom-switch-lg {
-  padding-right: 3.75rem;
-  padding-left: 0;
-
-  .custom-control-label {
-    &:before {
-      left: auto;
-      right: -3.75rem;
-    }
-
-    &:after {
-      right: calc(-3.75rem + 2px);
-      left: auto;
-    }
-
-  }
-
-  .custom-control-input:checked~.custom-control-label::after {
-    transform: translateX(-1.5rem);
-  }
-}
-
-// Swich
-
-// custom-checkbox-outline
-.custom-checkbox-outline {
-  .custom-control-input:checked~.custom-control-label:after {
-    left: auto;
-    right: -28px;
-  }
-}
-
-// custom-radio-outline
-.custom-radio-outline {
-  .custom-control-input:checked~.custom-control-label:after {
-    left: auto;
-    right: -20px;
-  }
-}
-
-// Input Group
-
-.input-group-prepend {
-  margin-left: -1px;
-  margin-right: 0;
-}
-
-.input-group-append {
-  margin-right: -1px;
-  margin-left: 0;
-}
-
-// .input-group>.input-group-prepend>.btn,
-// .input-group>.input-group-prepend>.input-group-text,
-// .input-group>.input-group-append:not(:last-child)>.btn,
-// .input-group>.input-group-append:not(:last-child)>.input-group-text,
-// .input-group>.input-group-append:last-child>.btn:not(:last-child):not(.dropdown-toggle),
-// .input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
-// .input-group>.custom-select:not(:last-child),
-// .input-group>.form-control:not(:last-child) {
-//     border-top-right-radius: $input-border-radius;
-//     border-bottom-right-radius: $input-border-radius;
-//     border-top-left-radius: 0;
-//     border-bottom-left-radius: 0;
-// }
-
-.input-group> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  margin-right: -1px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: $input-border-radius;
-  border-bottom-left-radius: $input-border-radius;
-}
-
-.input-group:not(.has-validation)> :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
-.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: $input-border-radius;
-  border-bottom-right-radius: $input-border-radius;
-}
-
-// .input-group>.input-group-append>.btn,
-// .input-group>.input-group-append>.input-group-text,
-// .input-group>.input-group-prepend:not(:first-child)>.btn,
-// .input-group>.input-group-prepend:not(:first-child)>.input-group-text,
-// .input-group>.input-group-prepend:first-child>.btn:not(:first-child),
-// .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child),
-// .input-group>.custom-select:not(:first-child),
-// .input-group>.form-control:not(:first-child) {
-//     border-top-left-radius: $input-border-radius;
-//     border-bottom-left-radius: $input-border-radius;
-//     border-top-right-radius: 0;
-//     border-bottom-right-radius: 0;
-// }
-
-.dropdown-menu-end[style] {
-  right: auto !important;
-  left: 0 !important;
+.bx-fade-right-hover:hover
+{
+            animation: fade-left 1.5s infinite linear !important;
 }

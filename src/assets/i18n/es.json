@@ -76,7 +76,8 @@
         "DEFAULT": "Defecto",
         "SAAS": "Saas",
         "CRYPTO": "Cripto",
-        "BLOG": "Blog"
+        "BLOG": "Blog",
+        "JOBS": "Trabajos"
       }
     },
     "LAYOUTS": {
@@ -190,6 +191,24 @@
         "DETAIL": "Detalles del blog"
       }
     },
+    "JOBS": {
+      "TEXT": "Trabajos",
+      "BADGE": "Nueva",
+      "LIST": {
+        "JOBLIST": "Lista de trabajo",
+        "JOBGRID": "Cuadrícula de trabajo",
+        "APPLYJOB": "Aplicar al trabajo",
+        "JOBDETAILS": "Detalles del trabajo",
+        "JOBCATEGORIES": "Categorías de trabajos",
+        "CANDIDATE": {
+          "TEXT": "Candidata",
+          "LIST": {
+            "LIST": "Lista",
+            "OVERVIEW": "Visión general"
+          }
+        }
+      }
+    },
     "PAGES": {
       "TEXT": "Páginas"
     },
@@ -238,16 +257,22 @@
         "DROPDOWNS": "Listas deplegables",
         "GRID": "Cuadrícula",
         "IMAGES": "Imágenes",
-        "MODALS": "Modalidades",
-        "RANGESLIDER": "Control deslizante de rango",
+        "LIGHTBOX": "Caja ligera",
+        "MODALS": "modales",
+        "RANGESLIDER": "Deslizador de rango",
         "PROGRESSBAR": "Barras de progreso",
-        "SWEETALERT": "Alerta dulce",
-        "TABS": "Pestañas y acordeones",
-        "TYPOGRAPHY": "Tipografía",
-        "VIDEO": "Vídeo",
+        "PLACEHOLDER": "Marcador de posición",
+        "SWEETALERT": "dulce alerta",
+        "TABS": "Tablaturas y acordeones",
+        "TYPOGRAPHY": "Typography",
+        "TOASTS": "tostadas",
+        "VIDEO": "Video",
         "GENERAL": "General",
         "COLORS": "Colores",
-        "CROPPER": "Recortador de imagen"
+        "RATING": "Clasificación",
+        "NOTIFICATION": "Notificación",
+        "UTILITIES": "Utilidades",
+        "CROPPER": "Recortador de imágenes"
       }
     },
     "FORMS": {
@@ -269,7 +294,8 @@
       "TEXT": "Mesas",
       "LIST": {
         "BASIC": "Tablas Básicas",
-        "ADVANCED": "Mesa avanzada"
+        "DataTables": "Tablas de datos",
+        "EditTableTables": "Tabla editable"
       }
     },
     "CHARTS": {
@@ -293,7 +319,8 @@
     "MAPS": {
       "TEXT": "Mapas",
       "LIST": {
-        "GOOGLEMAP": "mapas de Google"
+        "GOOGLEMAP": "mapas de Google",
+        "LEAFLETMAP": "Mapas de folletos"
       }
     },
     "MULTILEVEL": {

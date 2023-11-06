@@ -6,26 +6,15 @@
   th {
       font-weight: $font-weight-bold;
   }
-
-  .table-light{
-    color: $body-color;
-    border-color: $table-border-color;
-    background-color: $table-head-bg;
-  }
 }
-
-.table-bordered {
-  border: $table-border-width solid $table-border-color;
-
-  th,
-  td {
-    border: $table-border-width solid $table-border-color;
-  }
-}
-
 
 .table-dark>:not(:last-child)>:last-child>*{
   border-bottom-color:  $table-dark-border-color;
+}
+
+
+.table-bordered {
+  border: $table-border-width solid $table-border-color;
 }
 
 .table-nowrap {
@@ -34,4 +23,6 @@
   }
 }
 
-
+.table>:not(:first-child) {
+    border-top: 0;
+}

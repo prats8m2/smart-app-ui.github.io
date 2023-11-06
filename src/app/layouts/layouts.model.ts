@@ -8,3 +8,5 @@ export const LAYOUT_WIDTH = 'fluid';
 export const SIDEBAR_TYPE = 'dark';
 
 export const TOPBAR = 'dark';
+
+export const LAYOUT_MODE = 'light';

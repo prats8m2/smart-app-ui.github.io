@@ -76,7 +76,8 @@
         "DEFAULT": "По умолчанию",
         "SAAS": "Saas",
         "CRYPTO": "крипто-",
-        "BLOG": "Блог"
+        "BLOG": "Блог",
+        "JOBS": "Работа"
       }
     },
     "LAYOUTS": {
@@ -190,6 +191,24 @@
         "DETAIL": "Подробности блога"
       }
     },
+    "JOBS": {
+      "TEXT": "Работа",
+      "BADGE": "Новый",
+      "LIST": {
+        "JOBLIST": "Список вакансий",
+        "JOBGRID": "Сетка заданий",
+        "APPLYJOB": "Подать заявку",
+        "JOBDETAILS": "Детали работы",
+        "JOBCATEGORIES": "Категории вакансий",
+        "CANDIDATE": {
+          "TEXT": "Кандидат",
+          "LIST": {
+            "LIST": "Список",
+            "OVERVIEW": "Обзор"
+          }
+        }
+      }
+    },
     "PAGES": {
       "TEXT": "страницы"
     },
@@ -244,10 +263,14 @@
         "SWEETALERT": "Sweet Alert",
         "TABS": "Вкладки и Аккордеоны",
         "TYPOGRAPHY": "Типография",
+        "TOASTS": "Тосты",
         "VIDEO": "видео",
-        "GENERAL": "Общее",
+        "GENERAL": "Общий",
         "COLORS": "Цвета",
-        "CROPPER": "Изображение Кроппер"
+        "RATING": "Рейтинг",
+        "NOTIFICATION": "Уведомление",
+        "UTILITIES": "Утилиты",
+        "CROPPER": "Обрезка изображений"
       }
     },
     "FORMS": {
@@ -269,7 +292,8 @@
       "TEXT": "таблицы",
       "LIST": {
         "BASIC": "Основные таблицы",
-        "ADVANCED": "Расширенный стол"
+        "DataTables": "Таблицы данных",
+        "EditTableTables": "Редактируемая таблица"
       }
     },
     "CHARTS": {
@@ -293,7 +317,8 @@
     "MAPS": {
       "TEXT": "Карты",
       "LIST": {
-        "GOOGLEMAP": "Карты Гугл"
+        "GOOGLEMAP": "Карты Гугл",
+        "LEAFLETMAP": "Листовки Карты"
       }
     },
     "MULTILEVEL": {

@@ -1,44 +1,61 @@
-
 //
 // Range slider
 //
 
-.ng5-slider {
-  .ng5-slider-pointer {
-    background-color: $primary !important;
-    width: 18px !important;
-    height: 18px !important;
-    top: -7px !important;
-    outline: none !important;
+.irs {
+  font-family: $font-family-base;
+}
 
-    &:after {
-      top: 5px !important;
-      left: 5px !important;
+.irs--square {
+  cursor: pointer;
+
+  .irs-bar,
+  .irs-to,
+  .irs-from,
+  .irs-single {
+    background: $primary  !important;
+    font-size: 11px;
+  }
+
+  .irs-to,
+  .irs-from,
+  .irs-single {
+    &:before {
+      border-top-color: $primary;
     }
   }
 
-  .ng5-slider-active {
-    &:after {
-      background-color: $white !important;
+  .irs-line {
+    background: var(--#{$prefix}tertiary-bg);
+    border-color: var(--#{$prefix}tertiary-bg);
+  }
+
+  .irs-grid-text {
+    font-size: 11px;
+    color: var(--#{$prefix}secondary-color);
+  }
+
+  .irs-min,
+  .irs-max {
+    color: var(--#{$prefix}secondary-color);
+    background: var(--#{$prefix}tertiary-bg);
+    font-size: 11px;
+  }
+
+  .irs-handle {
+    border: 2px solid $primary;
+    width: 12px;
+    height: 12px;
+    top: 26px;
+    background-color: var(--#{$prefix}secondary-bg) !important;
+    cursor: pointer;
+
+    &:active {
+      cursor: pointer;
     }
   }
 
-  .ng5-slider-tick {
-    left: -3px !important;
-  }
-
-  .ng5-slider-tick-value {
-    left: 1px !important;
-    top: -25px !important;
-  }
-
-  .ng5-slider-tick-legend {
-    top: 14px !important;
-    text-transform: capitalize;
-    font-size: 0.7rem;
-  }
-
-  .ng5-slider-selection {
-    background: $primary !important;
+  .irs-grid-pol {
+    background-color: var(--#{$prefix}secondary-color);
   }
 }

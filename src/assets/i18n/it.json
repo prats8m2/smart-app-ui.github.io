@@ -76,7 +76,8 @@
         "DEFAULT": "Predefinita",
         "SAAS": "Saas",
         "CRYPTO": "Crypto",
-        "BLOG": "Blog"
+        "BLOG": "Blog",
+        "JOBS": "Lavori"
       }
     },
     "LAYOUTS": {
@@ -190,6 +191,24 @@
         "DETAIL": "Dettagli del blog"
       }
     },
+    "JOBS": {
+      "TEXT": "Lavori",
+      "BADGE": "Nuova",
+      "LIST": {
+        "JOBLIST": "Elenco lavori",
+        "JOBGRID": "Griglia di lavoro",
+        "APPLYJOB": "Applicare lavoro",
+        "JOBDETAILS": "Dettagli di lavoro",
+        "JOBCATEGORIES": "Categorie di lavoro",
+        "CANDIDATE": {
+          "TEXT": "Candidata",
+          "LIST": {
+            "LIST": "Elenco",
+            "OVERVIEW": "Panoramica"
+          }
+        }
+      }
+    },
     "PAGES": {
       "TEXT": "pagine"
     },
@@ -244,10 +263,14 @@
         "SWEETALERT": "Avviso dolce",
         "TABS": "Schede e fisarmoniche",
         "TYPOGRAPHY": "Tipografia",
-        "VIDEO": "Video",
+        "TOASTS": "Brindisi",
+        "VIDEO": "video",
         "GENERAL": "Generale",
         "COLORS": "Colori",
-        "CROPPER": "Image Cropper"
+        "RATING": "Valutazione",
+        "NOTIFICATION": "Notifica",
+        "UTILITIES": "Utilità",
+        "CROPPER": "Ritaglia immagine"
       }
     },
     "FORMS": {
@@ -269,7 +292,8 @@
       "TEXT": "tabelle",
       "LIST": {
         "BASIC": "Tabelle di base",
-        "ADVANCED": "Tabella avanzata"
+        "DataTables": "Tabelle dati",
+        "EditTableTables": "Tabella modificabile"
       }
     },
     "CHARTS": {
@@ -293,7 +317,8 @@
     "MAPS": {
       "TEXT": "Mappe",
       "LIST": {
-        "GOOGLEMAP": "Google Maps"
+        "GOOGLEMAP": "Google Maps",
+        "LEAFLETMAP": "Mappe volantino"
       }
     },
     "MULTILEVEL": {

@@ -76,7 +76,8 @@
         "DEFAULT": "Default",
         "SAAS": "Saas",
         "CRYPTO": "Crypto",
-        "BLOG": "Blog"
+        "BLOG": "Blog",
+        "JOBS": "Jobs"
       }
     },
     "LAYOUTS": {
@@ -190,6 +191,24 @@
         "DETAIL": "Blog Details"
       }
     },
+    "JOBS": {
+      "TEXT": "Jobs",
+      "BADGE": "New",
+      "LIST": {
+        "JOBLIST": "Job List",
+        "JOBGRID": "Job Grid",
+        "APPLYJOB": "Apply Job",
+        "JOBDETAILS": "Job Details",
+        "JOBCATEGORIES": "Jobs Categories",
+        "CANDIDATE": {
+          "TEXT": "Candidate",
+          "LIST": {
+            "LIST": "List",
+            "OVERVIEW": "Overview"
+          }
+        }
+      }
+    },
     "PAGES": {
       "TEXT": "Pages"
     },
@@ -246,9 +265,13 @@
         "SWEETALERT": "Sweet Alert",
         "TABS": "Tabs & Accordions",
         "TYPOGRAPHY": "Typography",
+        "TOASTS": "Toasts",
         "VIDEO": "Video",
         "GENERAL": "General",
         "COLORS": "Colors",
+        "RATING": "Rating",
+        "NOTIFICATION": "Notification",
+        "UTILITIES": "Utilities",
         "CROPPER": "Image Cropper"
       }
     },
@@ -271,7 +294,8 @@
       "TEXT": "Tables",
       "LIST": {
         "BASIC": "Basic Tables",
-        "ADVANCED": "Advanced Table"
+        "DataTables": "Data Tables",
+        "EditTableTables": "Editable Table"
       }
     },
     "CHARTS": {
@@ -295,7 +319,8 @@
     "MAPS": {
       "TEXT": "Maps",
       "LIST": {
-        "GOOGLEMAP": "Google Maps"
+        "GOOGLEMAP": "Google Maps",
+        "LEAFLETMAP": "Leaflet Maps"
       }
     },
     "MULTILEVEL": {

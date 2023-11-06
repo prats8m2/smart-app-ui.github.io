@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { StatComponent } from './stat/stat.component';
 import { TransactionComponent } from './transaction/transaction.component';
@@ -10,7 +10,7 @@ import { TransactionComponent } from './transaction/transaction.component';
   declarations: [StatComponent, TransactionComponent],
   imports: [
     CommonModule,
-    NgbModalModule
+    ModalModule.forRoot()
   ],
   exports: [StatComponent, TransactionComponent]
 })

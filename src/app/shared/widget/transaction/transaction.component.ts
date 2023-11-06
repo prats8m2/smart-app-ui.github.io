@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-transaction',
@@ -8,6 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit {
+
+  modalRef?: BsModalRef;
 
   @Input() transactions: Array<{
     id?: string;
@@ -19,7 +21,7 @@ export class TransactionComponent implements OnInit {
     payment?: string[],
   }>;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -29,7 +31,7 @@ export class TransactionComponent implements OnInit {
    * @param content modal content
    */
   openModal(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalRef = this.modalService.show(content);
   }
 
 }
