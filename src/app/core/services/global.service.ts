@@ -95,10 +95,10 @@ export class GlobalService {
     } else {
       this.router.navigateByUrl('');
     }
-    let role = decodeToken.role.name.toLowerCase();
+    let role = decodeToken.role.name;
     let userName = decodeToken.username;
     let name = decodeToken.name;
-    let account = decodeToken.account.name;
+    let account = decodeToken?.account?.name;
     let email = decodeToken.email;
 
     return {role,userName,name,account,email}

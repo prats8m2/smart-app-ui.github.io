@@ -51,7 +51,14 @@ export class TopbarComponent implements OnInit {
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
   //
-  userInfo: IUserInfo;
+  userInfo: IUserInfo={
+    'account': 'NA',
+    'email': 'NA',
+    'role': 'NA',
+    'userName': 'NA',
+    'name': 'NA'
+  }
+  badgeType: string= 'success';
 
   ngOnInit() {
     this.openMobileMenu = false;
@@ -69,6 +76,7 @@ export class TopbarComponent implements OnInit {
   }
 
     setLanguage(text: string, lang: string, flag: string) {
+          this.getUserInfo();
       this.countryName = text;
       this.flagvalue = flag;
       this.cookieValue = lang;
@@ -136,5 +144,10 @@ export class TopbarComponent implements OnInit {
 
   getUserInfo(){
     this.userInfo =   this.globalService.getUserInfo();
+    console.log('userInfo:', this.userInfo)
+    const role = this.userInfo.role;
+    if(role === 'Super-Admin'){
+      this.badgeType = 'warning';
+    }
   }
 }

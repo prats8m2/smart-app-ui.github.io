@@ -225,7 +225,8 @@
           <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
           <span class="d-none d-xl-inline-block ms-1">{{userInfo.name}} </span>
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-        </button>
+          <span class="badge badge-soft-{{badgeType}}">{{userInfo.role}}</span>
+          </button>
         <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
           <!-- item-->
           <a class="dropdown-item" routerLink="/"><i class="bx bx-user font-size-16 align-middle me-1"></i>
