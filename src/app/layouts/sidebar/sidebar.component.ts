@@ -142,8 +142,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    */
   initialize(): void {
      this.permissions = this.globalService.getUserRole('permissions');
-    console.log('permissions:', this.permissions);
-
+    
     let permissionArray: any[] = [];
     this.permissions.forEach((item: any) => {
       permissionArray.push(item.name);

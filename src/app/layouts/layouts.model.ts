@@ -9,4 +9,4 @@ export const SIDEBAR_TYPE = 'dark';
 
 export const TOPBAR = 'dark';
 
-export const LAYOUT_MODE = 'light';
+export const LAYOUT_MODE = 'dark';

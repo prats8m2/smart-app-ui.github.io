@@ -12,6 +12,7 @@ import { DOCUMENT } from '@angular/common';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { environment } from '../../../environments/environment';
+import { GlobalService } from '../../core/services/global.service';
 
 @Component({
   selector: 'app-horizontaltopbar',
@@ -29,6 +30,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   flagvalue;
   countryName;
   valueset;
+  permissions = [];
 
   menuItems = [];
 
@@ -45,7 +47,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     private authFackservice: AuthfakeauthenticationService,
     public languageService: LanguageService,
     // tslint:disable-next-line: variable-name
-    public _cookiesService: CookieService) {
+    public _cookiesService: CookieService,private globalService: GlobalService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.activateMenu();
@@ -257,7 +259,19 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
    * Initialize
    */
   initialize(): void {
-    this.menuItems = MENU;
+    // this.menuItems = MENU;
+    this.permissions = this.globalService.getUserRole('permissions');
+    
+    let permissionArray: any[] = [];
+    this.permissions.forEach((item: any) => {
+      permissionArray.push(item.name);
+    });
+
+    for (const item of MENU) {
+      if (permissionArray.includes(item.permission)) {
+        this.menuItems.push(item);
+      }
+    }
   }
 
   /**
