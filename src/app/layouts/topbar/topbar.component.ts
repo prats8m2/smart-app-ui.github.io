@@ -9,6 +9,8 @@ import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../core/services/storage.service';
 import { StorageType } from '../../constants/storage-type';
+import { GlobalService } from '../../core/services/global.service';
+import { IUserInfo } from '../../core/interface/userInfo';
 
 @Component({
   selector: 'app-topbar',
@@ -31,7 +33,8 @@ export class TopbarComponent implements OnInit {
               private authFackservice: AuthfakeauthenticationService,
               public languageService: LanguageService,
               public translate: TranslateService,
-              public _cookiesService: CookieService) {
+              public _cookiesService: CookieService,
+              private globalService: GlobalService) {
   }
 
   listLang = [
@@ -47,6 +50,9 @@ export class TopbarComponent implements OnInit {
   @Output() settingsButtonClicked = new EventEmitter();
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
+  //
+  userInfo: IUserInfo;
+
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
@@ -59,6 +65,7 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+    this.getUserInfo();
   }
 
     setLanguage(text: string, lang: string, flag: string) {
@@ -125,5 +132,9 @@ export class TopbarComponent implements OnInit {
         this.document.msExitFullscreen();
       }
     }
+  }
+
+  getUserInfo(){
+    this.userInfo =   this.globalService.getUserInfo();
   }
 }

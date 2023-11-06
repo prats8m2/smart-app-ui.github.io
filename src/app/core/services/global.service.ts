@@ -7,7 +7,7 @@ import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { StorageType } from 'src/app/constants/storage-type';
-import { IDecodeToken } from '../interface/decode-token';
+import { DecodedTokenI } from '../interface/decode-token';
 import { IAPIResponse } from '../interface/api-response';
 import { URL_ROUTES } from 'src/app/constants/routing';
 @Injectable({
@@ -15,7 +15,7 @@ import { URL_ROUTES } from 'src/app/constants/routing';
 })
 export class GlobalService {
   accessToken!: string | null;
-  decodeToken!: IDecodeToken;
+  decodeToken!: DecodedTokenI;
   userRole!: string;
   reportUrl!: string;
   public isSidenavOpened: BehaviorSubject<boolean> =
@@ -85,5 +85,22 @@ export class GlobalService {
     } else {
       return false;
     }
+  }
+
+  getUserInfo() {
+    const accessToken = StorageService.get(StorageType.ACCESS_TOKEN);
+    let decodeToken : DecodedTokenI;
+    if (accessToken) {
+      decodeToken = JSON.parse(atob(accessToken.split('.')[1]));
+    } else {
+      this.router.navigateByUrl('');
+    }
+    let role = decodeToken.role.name.toLowerCase();
+    let userName = decodeToken.username;
+    let name = decodeToken.name;
+    let account = decodeToken.account.name;
+    let email = decodeToken.email;
+
+    return {role,userName,name,account,email}
   }
 }

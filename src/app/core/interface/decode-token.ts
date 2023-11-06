@@ -1,8 +1,31 @@
-export interface IDecodeToken {
-  id: string;
+interface Permission {
+  id: number;
+  name: string;
+  createdOn: string;
+}
+
+interface Role {
+  id: number;
+  name: string;
+  type: number;
+  default: boolean;
+  createdOn: string;
+  permissions: Permission[];
+}
+
+interface Account {
+  id: number;
+  name: string;
+  createdOn: string;
+}
+
+export interface DecodedTokenI {
+  id: number;
   name: string;
   email: string;
-  isFirstLogin: boolean;
+  role: Role;
   exp: number;
+  account: Account;
+  username: string;
   iat: number;
 }
