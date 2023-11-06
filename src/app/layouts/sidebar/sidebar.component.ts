@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { TranslateService } from '@ngx-translate/core';
+import { GlobalService } from '../../core/services/global.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,12 +24,13 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   menu: any;
   data: any;
+  permissions: any;
 
   menuItems = [];
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient) {
+  constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient,private globalService: GlobalService) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
@@ -139,7 +141,20 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    * Initialize
    */
   initialize(): void {
-    this.menuItems = MENU;
+     this.permissions = this.globalService.getUserRole('permissions');
+    console.log('permissions:', this.permissions);
+
+    let permissionArray: any[] = [];
+    this.permissions.forEach((item: any) => {
+      permissionArray.push(item.name);
+    });
+
+    for (const item of MENU) {
+      if (permissionArray.includes(item.permission)) {
+        this.menuItems.push(item);
+      }
+    }
+
   }
 
   /**
