@@ -7,6 +7,8 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from '../../core/services/storage.service';
+import { StorageType } from '../../constants/storage-type';
 
 @Component({
   selector: 'app-topbar',
@@ -86,6 +88,7 @@ export class TopbarComponent implements OnInit {
    */
   logout() {
    this.router.navigate(['/auth/login']);
+   StorageService.remove(StorageType.ACCESS_TOKEN)
   }
 
   /**

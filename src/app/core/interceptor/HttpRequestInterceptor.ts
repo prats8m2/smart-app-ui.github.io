@@ -26,9 +26,12 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.accessToken = StorageService.get(StorageType.ACCESS_TOKEN);
-
+    let URL = environment.apiServer + req.url;
+    if(req.url.includes('assets')){
+      return next.handle(req);
+    }
     req = req.clone({
-      url: environment.apiServer + req.url,
+      url: URL,
       headers: req.headers.set(
         'token',
         this.accessToken ? this.accessToken : ''
