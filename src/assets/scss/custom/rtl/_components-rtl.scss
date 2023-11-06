@@ -2,13 +2,6 @@
 // components-rtl.scss
 //
 
-// dropdown
-
-.dropdown-megamenu{
-  &.show{
-    left: 20px!important;
-  }
-}
 
 
 // icons
@@ -20,19 +13,6 @@
   }
 }
 
-
-// Breadcrumb
-
-.breadcrumb-item + .breadcrumb-item::before {
-  float: right;
-  padding-left: 0.5rem;
-  padding-right: 0;
-}
-
-// select
-.input-group-lg > .form-select, .input-group-sm > .form-select {
-  padding-left: 1.75rem;
-}
 
 // Invoice
 
@@ -51,3 +31,38 @@
   border-radius: 0 6px 6px 0;
 }
 
+.input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+}
+
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-right: -1px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: $border-radius;
+  border-top-left-radius: $border-radius;
+}
+
+.input-group.has-validation>:nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+
+// search-box
+
+.search-box{
+  .form-control{
+    padding-right: 40px;
+    padding-left: $input-padding-x;
+  }
+  .search-icon{
+    left: auto;
+    right: 13px;
+  }
+}

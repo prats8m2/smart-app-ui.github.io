@@ -8,6 +8,17 @@
   padding: 0 0 0 calc(#{$grid-gutter-width} / 2);
 }
 
+.app-search{
+  .form-control{
+    padding-right: 40px;
+    padding-left: 20px;
+  }
+  span {
+    left: auto;
+    right: 13px;
+  }
+}
+
 .noti-icon {
   .badge {
     right: auto;
@@ -246,8 +257,8 @@ body[data-layout=horizontal] {
 
         .dropdown {
           .dropdown-menu {
-            right: 100%;
-            left: auto;
+            right: 100% !important;
+            left: auto !important;
           }
         }
       }
@@ -263,5 +274,11 @@ body[data-layout=horizontal] {
         padding-right: 15px;
       }
     }
+  }
+}
+
+.topnav-menu{
+  .navbar-nav{
+    padding-right: 0;
   }
 }

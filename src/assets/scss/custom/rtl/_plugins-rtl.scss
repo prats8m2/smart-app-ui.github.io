@@ -74,6 +74,15 @@ input[type=checkbox].tui-full-calendar-checkbox-round+span {
   }
 }
 
+
+// form validation
+.was-validated .form-control:invalid, .form-control.is-invalid,
+.was-validated .form-control:valid, .form-control.is-valid{
+  padding-left: calc(1.5em + 0.94rem);
+  padding-right: $input-padding-x;
+  background-position: left calc(0.375em + 0.235rem) center;
+}
+
 // datatable
 
 .dataTables_wrapper {
@@ -163,6 +172,11 @@ input[type=checkbox].tui-full-calendar-checkbox-round+span {
       float: left;
     }
   }
+}
+
+aw-wizard-navigation-bar.horizontal.large-empty-symbols ul.steps-indicator li:not(:last-child):after{
+  left: auto;
+  right: calc(50% + 25px);
 }
 
 

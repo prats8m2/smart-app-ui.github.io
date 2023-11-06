@@ -2,48 +2,50 @@
 // Form editors.scss
 //
 
-// ck-editor
+// Tinymce
 
-.ck.ck-toolbar {
-  background-color: $gray-200 !important;
-  border: 1px solid $gray-300 !important;
-}
+form {
+    .tox-tinymce {
+        border: 1px solid $border-color-translucent;
+    }
 
-.ck.ck-editor__main>.ck-editor__editable {
-  border-color: $gray-300 !important;
-  box-shadow: none !important;
-}
+    .tox {
 
-.ck.ck-dropdown__panel,
-.ck.ck-list {
-  background: $dropdown-bg !important;
-  border: 1px solid $dropdown-border-color !important;
-}
+        :not(svg):not(rect) {
+            color: $body-color;
+        }
 
-.ck-editor__editable {
-  min-height: 245px !important;
-}
+        &:not(.tox-tinymce-inline) {
+            .tox-editor-header {
+                box-shadow: var(--#{$prefix}box-shadow);
+            }
+        }
 
-.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
-  flex-wrap: wrap !important;
-}
+        .tox-mbtn {
+            color: $body-secondary-color;
 
-.ck.ck-editor__main>.ck-editor__editable {
-  background-color: $card-bg !important;
-}
+            &:hover:not(:disabled):not(.tox-mbtn--active) {
+                background-color: $body-tertiary-bg;
+            }
+        }
 
-.ck.ck-reset_all,
-.ck.ck-reset_all * {
-  color: $gray-600 !important
-}
+        .tox-tbtn {
 
-.ck.ck-toolbar .ck.ck-toolbar__separator {
-  background: transparent !important;
-}
+            &:hover {
+                color: $body-tertiary-color;
+                background-color: $body-tertiary-bg;
+            }
+        }
 
-.ck.ck-button.ck-on,
-a.ck.ck-button.ck-on,
-.ck.ck-button:not(.ck-disabled):hover,
-a.ck.ck-button:not(.ck-disabled):hover {
-  background: $gray-200 !important;
+        .tox-tbtn--disabled svg,
+        .tox-tbtn--disabled:hover svg,
+        .tox-tbtn:disabled svg,
+        .tox-tbtn:disabled:hover svg {
+            fill: $body-tertiary-color;
+        }
+
+        .tox-tbtn--bespoke {
+            background-color: $body-tertiary-bg;
+        }
+    }
 }

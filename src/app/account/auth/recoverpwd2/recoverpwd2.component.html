@@ -84,7 +84,7 @@
                             <div class="my-auto">
                                 <div>
                                     <h5 class="text-primary"> Reset Password</h5>
-                                    <p class="text-muted">Re-Password with Skote.</p>
+                                    <p class="text-muted">Reset Password with Skote.</p>
                                 </div>
 
                                 <div class="mt-4">
@@ -93,7 +93,7 @@
                                     </div>
                                     <form [formGroup]="resetForm" (ngSubmit)="onSubmit()"
                                     >
-                                    <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
+                                    <alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</alert>
                                         <div class="mb-3">
                                             <label for="useremail">Email</label>
                                             <input type="email" formControlName="email" 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -15,19 +15,17 @@ import { UserProfileService } from '../../../core/services/user.service';
 })
 export class Register2Component implements OnInit {
 
-  signupForm: FormGroup;
-  submitted = false;
-  error = '';
-  successmsg = false;
+  signupForm: UntypedFormGroup;
+  submitted:boolean = false;
+  error:string = '';
+  successmsg:boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
     private userService: UserProfileService) { }
   // set the currenr year
   year: number = new Date().getFullYear();
 
   ngOnInit(): void {
-    document.body.classList.add('auth-body-bg')
-
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

@@ -3,32 +3,8 @@
 // Datepicker
 //
 
-[dir="rtl"]{
-  .datepicker {
-    right: 0 !important;
-    left: auto;
-  }
-}
-
-[dir="rtl"]{
-  .bootstrap-timepicker-widget{
-    right: 0 !important;
-    left: auto;
-    
-  }
-
-  .timepicker-orient-top{
-    top: $input-height !important;
-  }
-
-  .timepicker-orient-bottom{
-    top: auto !important;
-    bottom: $input-height !important;
-  }
-}
-
 .datepicker {
-  border: 1px solid $border-color;
+  border: 1px solid var(--#{$prefix}border-color);
   padding: 8px;
   z-index: 999 !important;
   
@@ -53,19 +29,19 @@
         &.day:hover,
         span.focused,
         span:hover {
-            background: $light;
+            background: var(--#{$prefix}light);
         }
 
         &.new,
         &.old,
         span.new,
         span.old {
-            color: $gray-500;
+            color: var(--#{$prefix}gray-500);
             opacity: 0.6;
         }
 
         &.range, &.range.disabled, &.range.disabled:hover, &.range:hover{
-            background-color: $gray-300;
+            background-color: var(--#{$prefix}tertiary-bg);
         }
       }
     }
@@ -89,7 +65,7 @@
 // DATEPICKER
 
 .datepicker-container{
-  border: 1px solid $border-color;
+  border: 1px solid var(--#{$prefix}border-color);
   box-shadow: none;
   background-color: $dropdown-bg;
 
@@ -97,6 +73,14 @@
     width: 212px;
   }
 }
+
+.datepicker{
+  color: var(--#{$prefix}secondary-color);
+    .datepicker-switch:hover,.next:hover,.prev:hover,  tfoot tr th:hover {
+      background: var(--#{$prefix}light);
+    } 
+  }
+
 
 .datepicker-panel{
   
@@ -117,13 +101,16 @@
 
       
       &.muted, &.muted:hover{
-        color: $gray-500;
+        color: var(--#{$prefix}gray-500);
         opacity: 0.6;
       }
     }
+
+    
+
     &[data-view=week]{
       >li{
-        font-weight: $fw-medium;
+        font-weight: $font-weight-medium;
       }
 
       >li, >li:hover{
@@ -132,73 +119,3 @@
     }
   }
 }
-
-ngb-datepicker {
-  background-color: $dropdown-bg;
-  position: absolute;
-  z-index: $zindex-dropdown;
-}
-
-ngb-datepicker-navigation-select>.custom-select {
-  margin: 0 5px;
-}
-
-.ngb-dp-day,
-.ngb-dp-today {
-  outline: none !important;
-
-  .btn-light,
-  .btn-primary {
-    box-shadow: none !important;
-    outline: none !important;
-    border-radius: 50%;
-  }
-}
-
-.ngb-dp-weekday {
-  font-style: normal !important;
-}
-
-.ngb-tp {
-  box-shadow: $box-shadow;
-  background-color: $dropdown-bg;
-  margin-top: 5px;
-  float: left;
-  min-width: 10rem;
-  padding: 0.75rem;
-  margin: 0.125rem 0 0;
-  font-size: 0.875rem;
-  color: $dropdown-color;
-  text-align: left;
-  list-style: none;
-  background-clip: padding-box;
-  border: $dropdown-border-width solid $dropdown-border-color;
-  border-radius: $dropdown-border-radius;
-  position: absolute;
-  z-index: $zindex-dropdown;
-}
-
-// Date Range
-.custom-day {
-  line-height: 2rem;
-  border-radius: 50%;
-  padding: 0 !important;
-  outline: none !important;
-
-  &:hover {
-    background-color: $primary !important;
-  }
-
-  &.range {
-    background-color: $primary !important;
-  }
-
-  &.range.faded {
-    // background-color: lighten($gray-300, 5%) !important;
-    // color: $gray-700 !important;
-
-    background-color: rgba($primary, 0.25) !important;
-    color: $primary !important;
-  }
-}
-

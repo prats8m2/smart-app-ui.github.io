@@ -34,12 +34,12 @@
         </div>
       </form>
 
-      <div class="dropdown dropdown-mega d-none d-lg-block me-2" ngbDropdown>
-        <button type="button" class="btn header-item" ngbDropdownToggle>
+      <div class="dropdown dropdown-mega d-none d-lg-block me-2" dropdown>
+        <button type="button" class="btn header-item" dropdownToggle>
           {{ 'HEADER.MEGA_MENU' | translate}}
           <i class="mdi mdi-chevron-down"></i>
         </button>
-        <div class="dropdown-menu dropdown-megamenu" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-megamenu" *dropdownMenu>
           <div class="row">
             <div class="col-sm-8">
 
@@ -167,11 +167,11 @@
 
     <div class="d-flex">
 
-      <div class="dropdown d-inline-block d-lg-none me-2" ngbDropdown>
-        <button type="button" class="btn header-item noti-icon" id="page-header-search-dropdown" ngbDropdownToggle>
+      <div class="dropdown d-inline-block d-lg-none me-2" dropdown>
+        <button type="button" class="btn header-item noti-icon" id="page-header-search-dropdown" dropdownToggle>
           <i class="mdi mdi-magnify"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" *dropdownMenu>
 
           <form class="p-3">
             <div class="m-0">
@@ -186,14 +186,14 @@
         </div>
       </div>
 
-      <div class="dropdown d-inline-block" ngbDropdown>
-        <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
+      <div class="dropdown d-inline-block" dropdown>
+        <button type="button" class="btn header-item" id="page-header-user-dropdown" dropdownToggle>
           <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"> <span
             class="ms-1">{{countryName}}</span>
           <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="16">
           <span *ngIf="flagvalue === undefined" class="ms-1">English</span>
         </button>
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
             (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{'active': cookieValue === item.lang}">
@@ -201,14 +201,14 @@
               class="align-middle">{{item.text}}</span>
           </a>
           <!-- item-->
-        </div>
+        </div>  
       </div>
 
-      <div class="dropdown d-none d-lg-inline-block me-1" ngbDropdown>
-        <button type="button" class="btn header-item noti-icon" ngbDropdownToggle>
+      <div class="dropdown d-none d-lg-inline-block me-1" dropdown>
+        <button type="button" class="btn header-item noti-icon" dropdownToggle>
           <i class="bx bx-customize"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" *dropdownMenu>
           <div class="px-lg-2">
             <div class="row no-gutters">
               <div class="col">
@@ -261,13 +261,13 @@
         </button>
       </div>
 
-      <div class="dropdown d-inline-block" ngbDropdown>
+      <div class="dropdown d-inline-block" dropdown>
         <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown"
-          ngbDropdownToggle>
+          dropdownToggle>
           <i class="bx bx-bell bx-tada"></i>
           <span class="badge bg-danger rounded-pill">3</span>
         </button>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" ngbDropdownMenu
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" *dropdownMenu
           aria-labelledby="page-header-notifications-dropdown">
           <div class="p-3">
             <div class="row align-items-center">
@@ -349,13 +349,13 @@
         </div>
       </div>
 
-      <div class="dropdown d-inline-block" ngbDropdown>
-        <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
+      <div class="dropdown d-inline-block" dropdown>
+        <button type="button" class="btn header-item" id="page-header-user-dropdown" dropdownToggle>
           <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-          <span class="d-none d-xl-inline-block ms-1">Henry</span>
+          <span class="d-none d-xl-inline-block ms-1">Henry </span>
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
           <!-- item-->
           <a class="dropdown-item" href="javascript: void(0);"><i class="bx bx-user font-size-16 align-middle me-1"></i>
             {{ 'HEADER.LOGIN.PROFILE' | translate}}</a>
@@ -415,6 +415,15 @@
                       <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active" [routerLink]="item.subItems[i + 1]?.link">{{item.subItems[i + 1]?.label | translate}}</a></div>
                       <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active" [routerLink]="item.subItems[i + 2]?.link">{{item.subItems[i + 2]?.label | translate}}</a></div>
                   </div>
+              </div>
+
+              <div *ngIf="item.subItems.length == 11 && !hasItems(subitem)">
+                <!-- <div class="dropdown" *ngIf="hasItems(subitem)"> -->
+                  <a class="dropdown-item dropdown-toggle" href="javascript: void(0);"
+                    (click)="onMenuClick($event)">{{ subitem.label | translate }}
+                    <div class="arrow-down"></div>
+                  </a>
+                  <!-- </div> -->
               </div>
               
                 <div class="dropdown" *ngIf="hasItems(subitem)">

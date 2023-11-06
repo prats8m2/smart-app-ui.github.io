@@ -141,6 +141,13 @@
           color: $white;
       }
   }
+
+    table.focus-on tbody tr.unfocused th,
+    table.focus-on tfoot tr.unfocused th,
+    table.focus-on tbody tr.unfocused td,
+    table.focus-on tfoot tr.unfocused td {
+      color: var(--#{$prefix}body-color);
+    }
 }
 
 body[data-layout="horizontal"] {
@@ -148,48 +155,6 @@ body[data-layout="horizontal"] {
     .fixed-solution {
       .sticky-table-header{
         top: $header-height + 50px !important;;
-      }
-    }
-  }
-}
-
-
-// data table
-
-.datatables {
-  thead {
-    tr {
-      th {
-        position: relative;
-        &:before {
-          content: "\F0143";
-          position: absolute;
-          right: 0;
-          top: 7px;
-          font: normal normal normal 24px/1 "Material Design Icons";
-          opacity: 0.3;
-        }
-
-        &:after {
-          content: "\F0140";
-          position: absolute;
-          right: 0;
-          top: 14px;
-          opacity: 0.3;
-          font: normal normal normal 24px/1 "Material Design Icons";
-        }
-      }
-
-      .asc {
-        &:before {
-          opacity: 1;
-        }
-      }
-
-      .desc {
-        &:after {
-          opacity: 1;
-        }
       }
     }
   }

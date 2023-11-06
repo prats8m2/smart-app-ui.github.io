@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SimplebarAngularModule } from 'simplebar-angular';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClickOutsideModule } from 'ng-click-outside';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { UIModule } from '../shared/ui/ui.module';
 import { LayoutComponent } from './layout.component';
@@ -25,8 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TranslateModule,
     RouterModule,
-    NgbDropdownModule,
-    ClickOutsideModule,
+    BsDropdownModule.forRoot(),
     UIModule,
     SimplebarAngularModule
   ],

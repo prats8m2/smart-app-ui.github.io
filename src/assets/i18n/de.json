@@ -76,7 +76,8 @@
         "DEFAULT": "Standard",
         "SAAS": "Saas",
         "CRYPTO": "Krypto",
-        "BLOG": "Blog"
+        "BLOG": "Bloggen",
+        "JOBS": "Arbeitsplätze"
       }
     },
     "LAYOUTS": {
@@ -190,6 +191,24 @@
         "DETAIL": "Blog-Details"
       }
     },
+    "JOBS": {
+      "TEXT": "Arbeitsplätze",
+      "BADGE": "Neu",
+      "LIST": {
+        "JOBLIST": "Job-Liste",
+        "JOBGRID": "Job-Raster",
+        "APPLYJOB": "Stelle bewerben",
+        "JOBDETAILS": "Auftragsdetails",
+        "JOBCATEGORIES": "Job-Kategorien",
+        "CANDIDATE": {
+          "TEXT": "Kandidatin",
+          "LIST": {
+            "LIST": "Aufführen",
+            "OVERVIEW": "Überblick"
+          }
+        }
+      }
+    },
     "PAGES": {
       "TEXT": "Seiten"
     },
@@ -236,18 +255,24 @@
         "CARDS": "Karten",
         "CAROUSEL": "Karussell",
         "DROPDOWNS": "Dropdowns",
-        "GRID": "Gitter",
+        "GRID": "Netz",
         "IMAGES": "Bilder",
+        "LIGHTBOX": "Leuchtkasten",
         "MODALS": "Modale",
-        "RANGESLIDER": "Range Slider",
+        "RANGESLIDER": "Range-Schieberegler",
         "PROGRESSBAR": "Fortschrittsbalken",
+        "PLACEHOLDER": "Platzhalter",
         "SWEETALERT": "Süßer Alarm",
         "TABS": "Tabs & Akkordeons",
         "TYPOGRAPHY": "Typografie",
+        "TOASTS": "Toast",
         "VIDEO": "Video",
-        "GENERAL": "Allgemeines",
+        "GENERAL": "Allgemein",
         "COLORS": "Farben",
-        "CROPPER": "Bild Cropper"
+        "RATING": "Bewertung",
+        "NOTIFICATION": "Benachrichtigung",
+        "UTILITIES": "Dienstprogramme",
+        "CROPPER": "Bildbeschneidung"
       }
     },
     "FORMS": {
@@ -269,7 +294,8 @@
       "TEXT": "Tabellen",
       "LIST": {
         "BASIC": "Grundtabellen",
-        "ADVANCED": "Erweiterte Tabelle"
+        "DataTables": "Datentabellen",
+        "EditTableTables": "Bearbeitbare Tabelle"
       }
     },
     "CHARTS": {
@@ -293,7 +319,8 @@
     "MAPS": {
       "TEXT": "Karten",
       "LIST": {
-        "GOOGLEMAP": "Google Maps"
+        "GOOGLEMAP": "Google Maps",
+        "LEAFLETMAP": "Faltblatt Karten"
       }
     },
     "MULTILEVEL": {

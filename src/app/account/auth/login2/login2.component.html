@@ -11,13 +11,10 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
                                     <div class="text-center">
-                                        <h4 class="mb-3"><i
-                                                class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                class="text-primary">5k</span>+ Satisfied clients</h4>
+                                        <h4 class="mb-3"><i class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span class="text-primary">5k</span>+ Satisfied clients</h4>
 
                                         <div dir="ltr">
-                                            <owl-carousel-o class="owl-theme auth-review-carousel"
-                                                [options]="carouselOption">
+                                            <owl-carousel-o class="owl-theme auth-review-carousel" [options]="carouselOption">
                                                 <ng-template carouselSlide>
                                                     <div class="item">
                                                         <div class="py-3">
@@ -75,9 +72,9 @@
 
                     <div class="d-flex flex-column h-100">
                         <div class="mb-4 mb-md-5">
-                            <a routerLink="/" class="d-block auth-logo">
-                                <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
-                                <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
+                            <a routerLink="/" class="d-block card-logo">
+                                <img src="assets/images/logo-dark.png" alt="" height="18" class="card-logo-dark">
+                                <img src="assets/images/logo-light.png" alt="" height="18" class="card-logo-light">
                             </a>
                         </div>
                         <div class="my-auto">
@@ -92,9 +89,7 @@
 
                                     <div class="mb-3">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" formControlName="email"
-                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                            placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Enter email">
                                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                             <div *ngIf="f.email.errors.required">Email is required</div>
                                             <div *ngIf="f.email.errors.email">Email must be a valid email address
@@ -109,12 +104,8 @@
                                         </div>
                                         <label for="userpassword">Password</label>
                                         <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" class="form-control" formControlName="password"
-                                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                                placeholder="Enter password" aria-label="Password"
-                                                aria-describedby="password-addon">
-                                            <button class="btn btn-light " type="button" id="password-addon"><i
-                                                    class="mdi mdi-eye-outline"></i></button>
+                                            <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                            <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                                 <span *ngIf="f.password.errors.required">Password is required</span>
                                             </div>
@@ -138,20 +129,17 @@
 
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-primary text-white border-primary">
+                                                <a href="javascript::void()" class="social-list-item bg-primary text-white border-primary">
                                                     <i class="mdi mdi-facebook"></i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-info text-white border-info">
+                                                <a href="javascript::void()" class="social-list-item bg-info text-white border-info">
                                                     <i class="mdi mdi-twitter"></i>
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
-                                                <a href="javascript::void()"
-                                                    class="social-list-item bg-danger text-white border-danger">
+                                                <a href="javascript::void()" class="social-list-item bg-danger text-white border-danger">
                                                     <i class="mdi mdi-google"></i>
                                                 </a>
                                             </li>
@@ -160,8 +148,7 @@
 
                                 </form>
                                 <div class="mt-5 text-center">
-                                    <p>Don't have an account ? <a routerLink="/account/signup-2"
-                                            class="fw-medium text-primary"> Signup now </a> </p>
+                                    <p>Don't have an account ? <a routerLink="/account/signup-2" class="fw-medium text-primary"> Signup now </a> </p>
                                 </div>
                             </div>
                         </div>

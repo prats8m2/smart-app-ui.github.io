@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { UIModule } from '../../shared/ui/ui.module';
@@ -21,7 +21,7 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbAlertModule,
+    AlertModule.forRoot(),
     UIModule,
     AuthRoutingModule,
     CarouselModule
