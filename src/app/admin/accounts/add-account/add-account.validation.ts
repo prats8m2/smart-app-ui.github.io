@@ -1,0 +1,19 @@
+import {
+	ACCOUNT_NAME_VALIDATION,
+	EMAIL_VALIDATION,
+	FIRST_NAME_VALIDATION,
+	LAST_NAME_VALIDATION,
+	PASSWORD_VALIDATION,
+	PHONE_VALIDATION,
+	USER_NAME_VALIDATION,
+} from '../../../constants/validations';
+
+export const ADD_ACCOUNT_VALIDATION = {
+	firstName: ['', FIRST_NAME_VALIDATION],
+	lastName: ['', LAST_NAME_VALIDATION],
+	username: ['', USER_NAME_VALIDATION],
+	email: ['', EMAIL_VALIDATION],
+	accountName: ['', ACCOUNT_NAME_VALIDATION],
+	password: ['', PASSWORD_VALIDATION],
+	phone: ['', PHONE_VALIDATION],
+};

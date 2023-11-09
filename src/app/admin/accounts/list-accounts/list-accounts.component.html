@@ -25,16 +25,10 @@
                     </div>
                     <!-- Table data -->
                     <div class="table-responsive mb-0">
-                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100 table-check"
+                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100"
                             id="order-list">
                             <thead class="table-light">
                                 <tr>
-                                    <th style="width: 20px;">
-                                        <div class="form-check font-size-16 align-middle">
-                                            <input class="form-check-input" type="checkbox" id="transactionCheck01">
-                                            <label class="form-check-label" for="transactionCheck01"></label>
-                                        </div>
-                                    </th>
                                     <th class="align-middle">Account ID</th>
                                     <th class="align-middle">Account Name</th>
                                     <th class="align-middle">Owner Name</th>
@@ -45,14 +39,6 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let data of usersList; let i = index;" id="o_{{data.id}}">
-                                    <td>
-                                        <div class="form-check font-size-16">
-                                            <input class="form-check-input" type="checkbox"
-                                                id="transactionCheck{{data.index}}" value="{{data.id}}">
-                                            <label class="form-check-label"
-                                                for="transactionCheck{{data.index}}"></label>
-                                        </div>
-                                    </td>
                                     <td>
                                         <a href="javascript: void(0);" class="text-body fw-bold">{{data.id}}</a>
                                     </td>
@@ -80,7 +66,7 @@
                     </div>
                     <!-- end table -->
                     <ul class="pagination pagination-rounded justify-content-end mb-2">
-                        <pagination [totalItems]="total" [itemsPerPage]="perPage"></pagination>
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"></pagination>
                     </ul>
                 </div>
             </div>

@@ -10,6 +10,14 @@
 // LeafLet Chart
 @import 'leaflet/dist/leaflet.css';
 
+
+.form-error{
+    border: var(--bs-border-width) solid #f46a6a;
+}
+
+.form-success{
+    border: .05px solid #80f584;
+}
 // Emoji Picker
 // @import '~@ctrl/ngx-emoji-mart/picker';
 .emoji-mart {
