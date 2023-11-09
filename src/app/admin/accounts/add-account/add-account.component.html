@@ -1,6 +1,9 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title mb-4">Add Account</h4>
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
+            <h4 class="card-title mb-4">Add Account</h4>
+        </div>
                 <!-- Form Start -->
                 <form (ngSubmit)="addAccount()" [formGroup]="userForm">
                     <!-- First Row -->

@@ -10,7 +10,7 @@
                             <div class="search-box me-2 mb-2 d-inline-block">
                                 <div class="position-relative">
                                     <input type="text" class="form-control" autocomplete="off" id="searchTableList"
-                                        placeholder="Search...">
+                                        placeholder="Search..."  [(ngModel)]="searchInput" (input)="onSearch()">
                                     <i class="bx bx-search-alt search-icon"></i>
                                 </div>
                             </div>
@@ -66,7 +66,8 @@
                     </div>
                     <!-- end table -->
                     <ul class="pagination pagination-rounded justify-content-end mb-2">
-                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"></pagination>
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage" (pageChanged)="pageChanged($event)">
+                        </pagination>
                     </ul>
                 </div>
             </div>

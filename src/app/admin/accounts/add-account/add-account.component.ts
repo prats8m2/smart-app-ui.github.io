@@ -73,4 +73,8 @@ export class AddAccountComponent {
 			}
 		});
 	}
+
+	routeToListAccount() {
+		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+	}
 }

@@ -11,6 +11,10 @@
 @import 'leaflet/dist/leaflet.css';
 
 
+
+.pointer{
+    cursor: pointer;
+}
 .form-error{
     border: var(--bs-border-width) solid #f46a6a;
 }

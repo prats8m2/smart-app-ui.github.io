@@ -19,9 +19,11 @@ export class ListAccountsComponent {
 	) {}
 
 	usersList: any = [];
+	usersListResp: any = [];
 	total: number;
 	perPage: number = 10;
 	currentPage: number = 1;
+	searchInput: string = '';
 
 	userParams: IParams = {
 		limit: 100,
@@ -34,9 +36,9 @@ export class ListAccountsComponent {
 
 	listUserAPI() {
 		this.accountService.listUser(this.userParams).then((res) => {
-			this.usersList = [...res.data.users];
-			console.log('this.usersList:', this.usersList);
-			this.total = this.usersList.length;
+			this.usersListResp = [...res.data.users];
+			this.total = this.usersListResp.length;
+			this.updateDisplayedData();
 		});
 	}
 
@@ -48,5 +50,39 @@ export class ListAccountsComponent {
 	}
 	routeToViewAccount(accountId: number) {
 		this.router.navigateByUrl(URL_ROUTES.VIEW_ACCOUNT + '/' + accountId);
+	}
+
+	pageChanged(event: any): void {
+		this.currentPage = event.page;
+		this.updateDisplayedData();
+	}
+
+	updateDisplayedData(): void {
+		const startIndex = (this.currentPage - 1) * this.perPage;
+		const endIndex = startIndex + this.perPage;
+		this.usersList = this.usersListResp
+			.slice(startIndex, endIndex)
+			.filter(
+				(item) =>
+					item.firstName
+						.toLowerCase()
+						.includes(this.searchInput.toLowerCase()) ||
+					item.lastName
+						.toLowerCase()
+						.includes(this.searchInput.toLowerCase()) ||
+					item.account.name
+						.toLowerCase()
+						.includes(this.searchInput.toLowerCase()) ||
+					item.email.toLowerCase().includes(this.searchInput.toLowerCase())
+			);
+
+		this.total = this.searchInput
+			? this.usersList.length
+			: this.usersListResp.length;
+	}
+
+	onSearch(): void {
+		this.currentPage = 1; // Reset to the first page when performing a new search
+		this.updateDisplayedData();
 	}
 }
