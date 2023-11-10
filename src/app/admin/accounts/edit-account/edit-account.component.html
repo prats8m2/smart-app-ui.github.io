@@ -1,1 +1,171 @@
-<p>edit-account works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
+            <h4 class="card-title mb-4">Edit Account</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="editAccount()" [formGroup]="userForm">
+            <!-- First Row -->
+            <div class="row">
+                <!-- Account Name -->
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('accountName'),'form-success':showSuccess('accountName') }"
+                        formControlName="accountName">
+                    <!-- Account Name Validation -->
+                    <div *ngIf="formTouched('accountName')">
+                        <div *ngIf="isError('accountName','required')" class="text-danger">
+                            {{errorMessage('accountName','required')}}
+                        </div>
+                        <div *ngIf="isError('accountName','pattern')" class="text-danger">
+                            {{errorMessage('accountName','pattern')}} </div>
+                        <div *ngIf="isError('accountName','maxlength')" class="text-danger">
+                            {{errorMessage('accountName','maxlength')}} </div>
+                        <div *ngIf="isError('accountName','minlength')" class="text-danger">
+                            {{errorMessage('accountName','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="mb-2">Owner Details</h6>
+            <!-- Second Row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('firstName'),'form-success':showSuccess('firstName')  }"
+                            formControlName="firstName">
+                        <!-- First Name Validation -->
+                        <div *ngIf="formTouched('firstName')">
+                            <div *ngIf="isError('firstName','required')" class="text-danger">
+                                {{errorMessage('firstName','required')}}
+                            </div>
+                            <div *ngIf="isError('firstName','pattern')" class="text-danger">
+                                {{errorMessage('firstName','pattern')}} </div>
+                            <div *ngIf="isError('firstName','maxlength')" class="text-danger">
+                                {{errorMessage('firstName','maxlength')}} </div>
+                            <div *ngIf="isError('firstName','minlength')" class="text-danger">
+                                {{errorMessage('firstName','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}"
+                            formControlName="lastName">
+                        <!-- Last Name Validation -->
+                        <div *ngIf="formTouched('lastName')">
+                            <div *ngIf="isError('lastName','required')" class="text-danger">
+                                {{errorMessage('lastName','required')}}
+                            </div>
+                            <div *ngIf="isError('lastName','pattern')" class="text-danger">
+                                {{errorMessage('lastName','pattern')}} </div>
+                            <div *ngIf="isError('lastName','maxlength')" class="text-danger">
+                                {{errorMessage('lastName','maxlength')}} </div>
+                            <div *ngIf="isError('lastName','minlength')" class="text-danger">
+                                {{errorMessage('lastName','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"
+                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}"
+                            formControlName="email">
+                        <!-- Email Validation -->
+                        <div *ngIf="formTouched('email')">
+                            <div *ngIf="isError('email','required')" class="text-danger">
+                                {{errorMessage('email','required')}}
+                            </div>
+                            <div *ngIf="isError('email','pattern')" class="text-danger">
+                                {{errorMessage('email','pattern')}} </div>
+                            <div *ngIf="isError('email','maxlength')" class="text-danger">
+                                {{errorMessage('email','maxlength')}} </div>
+                            <div *ngIf="isError('email','minlength')" class="text-danger">
+                                {{errorMessage('email','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}"
+                            formControlName="mobile" />
+                        <!-- Password Validation -->
+                        <div *ngIf="formTouched('mobile')">
+                            <div *ngIf="isError('mobile','required')" class="text-danger">
+                                {{errorMessage('mobile','required')}}
+                            </div>
+                            <div *ngIf="isError('mobile','pattern')" class="text-danger">
+                                {{errorMessage('mobile','pattern')}} </div>
+                            <div *ngIf="isError('mobile','maxlength')" class="text-danger">
+                                {{errorMessage('mobile','maxlength')}} </div>
+                            <div *ngIf="isError('mobile','minlength')" class="text-danger">
+                                {{errorMessage('mobile','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="username">User Name</label>
+                        <input autocomplete="off" type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}"
+                            formControlName="username" autocomplete="off" name="randomName1">
+                        <!-- User Name Validation -->
+                        <div *ngIf="formTouched('username')">
+                            <div *ngIf="isError('username','required')" class="text-danger">
+                                {{errorMessage('username','required')}}
+                            </div>
+                            <div *ngIf="isError('username','pattern')" class="text-danger">
+                                {{errorMessage('username','pattern')}} </div>
+                            <div *ngIf="isError('username','maxlength')" class="text-danger">
+                                {{errorMessage('username','maxlength')}} </div>
+                            <div *ngIf="isError('username','minlength')" class="text-danger">
+                                {{errorMessage('username','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                            [ngClass]="{ 'form-error':showError('password'),'form-success':showSuccess('password')}"
+                            formControlName="password" />
+                        <!-- Password Validation -->
+                        <div *ngIf="formTouched('password')">
+                            <div *ngIf="isError('password','required')" class="text-danger">
+                                {{errorMessage('password','required')}}
+                            </div>
+                            <div *ngIf="isError('password','pattern')" class="text-danger">
+                                {{errorMessage('password','pattern')}} </div>
+                            <div *ngIf="isError('password','maxlength')" class="text-danger">
+                                {{errorMessage('password','maxlength')}} </div>
+                            <div *ngIf="isError('password','minlength')" class="text-danger">
+                                {{errorMessage('password','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="userForm.invalid">Submit</button>
+            </div>
+        </form>
+
+    </div>
+    </div>
