@@ -20,6 +20,8 @@
                                 <button type="button" class="btn btn-primary btn-rounded mb-2 me-2"
                                     (click)="routeToAddSite()"><i class="mdi mdi-plus mr-1"></i>
                                     Add Site</button>
+                                        
+                                      
                             </div>
                         </div><!-- end col-->
                     </div>
@@ -37,15 +39,12 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let data of sitesList; let i = index;" id="o_{{data.id}}">
-                                    {{data | json}}
                                     <td>
                                         <a href="javascript: void(0);" class="text-body fw-bold">{{data.id}}</a>
                                     </td>
                                     <td>{{data.name}}</td>
                                     <td>
-                                        <span class="badge badge-pill badge-soft-success font-size-11"
-                                            [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
-                                            transformStatus}}</span>
+                                        {{data.type | siteTypePipe}}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">

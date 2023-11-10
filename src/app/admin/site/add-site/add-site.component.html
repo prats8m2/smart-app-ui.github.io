@@ -1,1 +1,105 @@
-<p>add-site works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListSite()"></i>
+            <h4 class="card-title mb-4">Add Site</h4>
+        </div>
+                <!-- Form Start -->
+                <form (ngSubmit)="addSite()" [formGroup]="siteForm">
+                    <!-- First Row -->
+                    <div class="row">
+                        <!-- Site Name -->
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('siteName'),'form-success':showSuccess('siteName') }"
+                        formControlName="siteName">
+                    <!-- Site Name Validation -->
+                    <div *ngIf="formTouched('siteName')">
+                        <div *ngIf="isError('siteName','required')" class="text-danger">
+                            {{errorMessage('siteName','required')}}
+                        </div>
+                        <div *ngIf="isError('siteName','pattern')" class="text-danger">
+                            {{errorMessage('siteName','pattern')}} </div>
+                        <div *ngIf="isError('siteName','maxlength')" class="text-danger">
+                            {{errorMessage('siteName','maxlength')}} </div>
+                        <div *ngIf="isError('siteName','minlength')" class="text-danger">
+                            {{errorMessage('siteName','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+        
+            <h6 class="mb-2">Owner Details</h6>
+            <!-- Second Row -->
+
+
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <div class="card-body">
+                      <h4 class="card-title mb-4">Wifi Details</h4>
+                      <form class="repeater" [formGroup]="siteForm">
+                        <div formArrayName="wifiDetails">
+                          <div
+                            *ngFor="
+                              let data1 of formData.controls;
+                              let i = index
+                            "
+                          >
+                            <div [formGroupName]="i" class="row">
+                              <div class="mb-3 col-lg-5">
+                                <label for="username">Username</label>
+                                <input
+                                  type="text"
+                                  formControlName="username"
+                                  placeholder="Username"
+                                  class="form-control"
+                                />
+                                
+                              </div>
+
+                              <div class="mb-3 col-lg-5">
+                                <label for="password">Password</label>
+                                <input
+                                  type="password"
+                                  formControlName="password"
+                                  class="form-control"
+                                  placeholder="Password"
+                                />
+                                
+                              </div>
+
+                              <div class="col-lg-2 mt-1 align-self-center">
+                                <div class="d-grid">
+                                  <input
+                                    type="button"
+                                    class="btn btn-primary"
+                                    value="Delete"
+                                    (click)="removeField(i)"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12 d-flex justify-content-end">
+                            <input
+                              type="button"
+                              class="btn btn-success mt-3 mt-lg-0 ml-auto"
+                              value="Add"
+                              (click)="addField()"
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="siteForm.invalid">Submit</button>
+            </div>
+        </form>
+        
+    </div>
+</div>

@@ -13,7 +13,7 @@ export const URL_ROUTES = {
 	ADD_SITE: 'admin/sites/add-site',
 	EDIT_SITE: 'admin/sites/edit-site',
 	VIEW_SITE: 'admin/sites/view-site',
-	LIST_SITE: 'admin/sites/list-site',
+	LIST_SITE: 'admin/sites/list-sites',
 
 	//access denied page
 	ACCESS_DENIED: '/denied',

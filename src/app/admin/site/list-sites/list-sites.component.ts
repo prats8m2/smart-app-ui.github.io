@@ -28,6 +28,13 @@ export class ListSitesComponent {
 	searchInput: string = '';
 	userRole: string;
 
+	GG = [
+		{ id: 1, name: 'Site 1' },
+		{ id: 2, name: 'Site 2' },
+		{ id: 3, name: 'Site 3' },
+		// Add more sites as needed
+	];
+
 	userParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
@@ -85,7 +92,7 @@ export class ListSitesComponent {
 			.filter(
 				(item) =>
 					item.name.toLowerCase().includes(this.searchInput.toLowerCase()) ||
-					item.lastName.toLowerCase().includes(this.searchInput.toLowerCase())
+					item.address.toLowerCase().includes(this.searchInput.toLowerCase())
 			);
 
 		this.total = this.searchInput
@@ -96,5 +103,9 @@ export class ListSitesComponent {
 	onSearch(): void {
 		this.currentPage = 1; // Reset to the first page when performing a new search
 		this.updateDisplayedData();
+	}
+
+	changeAccountValue(value: any) {
+		console.log(value);
 	}
 }

@@ -7,7 +7,8 @@ import { ViewSiteComponent } from './view-site/view-site.component';
 import { SitesRoutingModule } from './site-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { StatusPipe } from '../../core/pipes/status.pipe';
+import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
 
 @NgModule({
 	declarations: [
@@ -15,6 +16,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 		EditSiteComponent,
 		ListSitesComponent,
 		ViewSiteComponent,
+		StatusPipe,
+		SiteTypePipe,
 	],
 	imports: [
 		FormsModule,

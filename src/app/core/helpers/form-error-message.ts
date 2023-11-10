@@ -34,4 +34,20 @@ export const errorMessages = {
 		minlength: 'Last Name must be at least 6 character long.',
 		pattern: 'Invalid Mobile number format',
 	},
+	siteName: {
+		required: 'Site Name is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Site Name must be at least 5 character long.',
+		pattern: 'Site Name must be alpha numeric with "_" or "-"',
+	},
+	wifiUserName: {
+		required: 'Wifi name is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Site Name must be at least 5 character long.',
+	},
+	wifiPassword: {
+		required: 'Wifi password is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Password must be at least 5 character long.',
+	},
 };
