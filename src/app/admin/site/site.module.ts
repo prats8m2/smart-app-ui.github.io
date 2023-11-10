@@ -7,6 +7,7 @@ import { ViewSiteComponent } from './view-site/view-site.component';
 import { SitesRoutingModule } from './site-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
 	declarations: [
