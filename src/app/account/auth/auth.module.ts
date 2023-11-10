@@ -16,15 +16,22 @@ import { AuthRoutingModule } from './auth-routing';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
 
 @NgModule({
-  declarations: [LoginComponent, Login2Component, SignupComponent, PasswordresetComponent, Register2Component, Recoverpwd2Component],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    AlertModule.forRoot(),
-    UIModule,
-    AuthRoutingModule,
-    CarouselModule
-  ]
+	declarations: [
+		LoginComponent,
+		Login2Component,
+		SignupComponent,
+		PasswordresetComponent,
+		Register2Component,
+		Recoverpwd2Component,
+	],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		FormsModule,
+		AlertModule.forRoot(),
+		UIModule,
+		AuthRoutingModule,
+		CarouselModule,
+	],
 })
-export class AuthModule { }
+export class AuthModule {}

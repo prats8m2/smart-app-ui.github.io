@@ -9,8 +9,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { StatusPipe } from '../../core/pipes/status.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
 	declarations: [
 		ListAccountsComponent,
