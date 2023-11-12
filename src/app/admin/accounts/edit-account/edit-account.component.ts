@@ -81,7 +81,7 @@ export class EditAccountComponent {
 	}
 
 	editAccount() {
-		this.accountService.addUser(this.userForm).then((res) => {
+		this.accountService.updateUser(this.userForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ACCOUNT]);
 			} else {
