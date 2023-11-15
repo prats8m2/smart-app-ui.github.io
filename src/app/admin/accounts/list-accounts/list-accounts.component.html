@@ -38,7 +38,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let data of usersList; let i = index;" id="o_{{data.id}}">
+                                <tr *ngFor="let data of usersList; let i = index;" id="o_{{data.id}}" (click)="routeToViewAccount(data.id)"
+                                    class='pointer'>
                                     <td>
                                         <a href="javascript: void(0);" class="text-body fw-bold">{{data.id}}</a>
                                     </td>
@@ -47,7 +48,7 @@
                                     <td>{{data.email}}</td>
                                     <td>
                                         <span class="badge badge-pill badge-soft-success font-size-11"
-                                            [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
+                                            [ngClass]=" { 'badge-soft-danger': data.account.status === 0 }">{{data.account.status |
                                             transformStatus}}</span>
                                     </td>
 

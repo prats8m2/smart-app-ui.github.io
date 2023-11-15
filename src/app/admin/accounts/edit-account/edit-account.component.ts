@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
 	ACCOUNT_NAME_VALIDATION,
 	EMAIL_VALIDATION,
@@ -40,6 +40,7 @@ export class EditAccountComponent {
 		accountName: ['', ACCOUNT_NAME_VALIDATION],
 		password: ['', PASSWORD_VALIDATION],
 		mobile: ['', PHONE_VALIDATION],
+		status: [true],
 	});
 	ngOnInit() {
 		this.getAccount();
@@ -74,6 +75,9 @@ export class EditAccountComponent {
 				if (res.status === true) {
 					this.userForm.patchValue(res.data);
 					this.userForm.get('password')?.patchValue('Pass@1234');
+					const status = res.data.account.status ? true : false;
+					this.userForm.get('status')?.patchValue(status);
+					console.log(this.userForm);
 					this.userForm.get('accountName').patchValue(res.data.account.name);
 				}
 			});
@@ -81,7 +85,7 @@ export class EditAccountComponent {
 	}
 
 	editAccount() {
-		this.accountService.addUser(this.userForm).then((res) => {
+		this.accountService.updateUser(this.userForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ACCOUNT]);
 			} else {
@@ -92,5 +96,10 @@ export class EditAccountComponent {
 
 	routeToListAccount() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+	}
+
+	toggle(): void {
+		const statusControl = this.userForm.get('status') as FormControl;
+		statusControl.setValue(!statusControl.value);
 	}
 }

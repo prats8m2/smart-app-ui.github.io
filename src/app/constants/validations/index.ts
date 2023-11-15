@@ -2,14 +2,14 @@ import { Validators } from '@angular/forms';
 
 export const FIRST_NAME_VALIDATION = [
 	Validators.required,
-	Validators.pattern('[a-zA-Z]+'),
+	Validators.pattern('[a-zA-Z0-9]+'),
 	Validators.maxLength(30),
 	Validators.minLength(1),
 ];
 
 export const LAST_NAME_VALIDATION = [
 	Validators.required,
-	Validators.pattern('[a-zA-Z]+'),
+	Validators.pattern('[a-zA-Z0-9]+'),
 	Validators.maxLength(30),
 	Validators.minLength(1),
 ];
@@ -17,7 +17,7 @@ export const LAST_NAME_VALIDATION = [
 export const USER_NAME_VALIDATION = [
 	Validators.required,
 	Validators.maxLength(30),
-	Validators.pattern('[a-zA-Z0-9_]+$'),
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
 ];
 
 export const EMAIL_VALIDATION = [

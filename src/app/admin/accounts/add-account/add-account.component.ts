@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
 	ACCOUNT_NAME_VALIDATION,
 	EMAIL_VALIDATION,
@@ -19,6 +19,7 @@ import { errorMessages } from '../../../core/helpers/form-error-message';
 import { AccountService } from '../service/account.service';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from '../../../constants/routing';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-add-account',
@@ -26,20 +27,40 @@ import { URL_ROUTES } from '../../../constants/routing';
 	styleUrls: ['./add-account.component.scss'],
 })
 export class AddAccountComponent {
+	isProduction = environment.production;
+	public userForm: FormGroup;
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private router: Router
-	) {}
-	public userForm: FormGroup = this.formBuilder.group({
-		firstName: ['', FIRST_NAME_VALIDATION],
-		lastName: ['', LAST_NAME_VALIDATION],
-		username: [null, USER_NAME_VALIDATION],
-		email: ['', EMAIL_VALIDATION],
-		accountName: ['', ACCOUNT_NAME_VALIDATION],
-		password: ['', PASSWORD_VALIDATION],
-		mobile: ['', PHONE_VALIDATION],
-	});
+	) {
+		if (this.isProduction) {
+			this.userForm = this.formBuilder.group({
+				firstName: ['', FIRST_NAME_VALIDATION],
+				lastName: ['', LAST_NAME_VALIDATION],
+				username: [null, USER_NAME_VALIDATION],
+				email: ['', EMAIL_VALIDATION],
+				accountName: ['', ACCOUNT_NAME_VALIDATION],
+				password: ['', PASSWORD_VALIDATION],
+				mobile: ['', PHONE_VALIDATION],
+				status: [true],
+			});
+		} else {
+			const randomNumber = Math.floor(1000 + Math.random() * 9000);
+			this.userForm = this.formBuilder.group({
+				firstName: ['John' + randomNumber, FIRST_NAME_VALIDATION],
+				lastName: ['Doe' + randomNumber, LAST_NAME_VALIDATION],
+				username: ['john-' + randomNumber, USER_NAME_VALIDATION],
+				email: ['john-' + randomNumber + '@yopmail.com', EMAIL_VALIDATION],
+				accountName: ['Account-' + randomNumber, ACCOUNT_NAME_VALIDATION],
+				password: ['Pass@1234', PASSWORD_VALIDATION],
+				mobile: ['9876543210', PHONE_VALIDATION],
+				status: [true],
+			});
+		}
+	}
+
 	ngOnInit() {
 		console.log(this.userForm);
 	}
@@ -76,5 +97,10 @@ export class AddAccountComponent {
 
 	routeToListAccount() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+	}
+
+	toggle(): void {
+		const statusControl = this.userForm.get('status') as FormControl;
+		statusControl.setValue(!statusControl.value);
 	}
 }

@@ -1,1 +1,89 @@
-<p>view-account works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
+            <h4 class="card-title mb-4">Account Details</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="editAccount()" [formGroup]="userForm" class="disabled">
+            <!-- First Row -->
+            <div class="row">
+                <!-- Account Name -->
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="accountName">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="accountName">Account Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                            formControlName="status" [checked]="this.userForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.userForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="mb-2">Owner Details</h6>
+            <!-- Second Row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" formControlName="email">
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control" formControlName="mobile" />
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="username">User Name</label>
+                        <input autocomplete="off" type="text" class="form-control" formControlName="username"
+                            autocomplete="off" name="randomName1">
+
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" formControlName="password" />
+                        </div>
+                    </div>
+                    </div>
+                    </form>
+                    </div>
+                    </div>
