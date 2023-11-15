@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { URL_ROUTES } from 'src/app/constants/routing';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
 	selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private globalService: GlobalService,
-		private loginService: LoginService
+		private loginService: LoginService,
+		private loadingService: LoadingService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
@@ -49,16 +51,19 @@ export class LoginComponent implements OnInit {
 	 * Form submit
 	 */
 	onSubmit() {
+		this.loadingService.showLoader();
 		this.submitted = true;
 
 		// stop here if form is invalid
 		if (this.loginForm.invalid) {
+			this.loadingService.hideLoader();
 			return;
 		} else {
 			// login function call
 			this.loginService.login(this.loginForm).then((res) => {
 				console.log(res);
 				if (this.globalService.handleSuccessService(res)) {
+					this.loadingService.hideLoader();
 					this.router.navigate([URL_ROUTES.DASHBOARD]);
 				}
 			});

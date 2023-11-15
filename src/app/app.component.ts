@@ -1,13 +1,26 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoadingService } from './core/services/loading.service';
+import { delay } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit {
+	loading = false;
 
-  ngOnInit() {
-    // document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
-  }
+	constructor(private loadingService: LoadingService) {}
+
+	ngOnInit() {
+		this.listenToLoading();
+	}
+
+	listenToLoading() {
+		this.loadingService.isLoadingSubject.pipe(delay(0)).subscribe((loading) => {
+			if (this.loading !== loading) this.loading = loading;
+		});
+
+		console.log(this.loading);
+	}
 }
