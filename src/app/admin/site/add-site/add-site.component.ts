@@ -1,23 +1,17 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccountService } from '../../accounts/service/account.service';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import {
-	FIRST_NAME_VALIDATION,
-	LAST_NAME_VALIDATION,
-	USER_NAME_VALIDATION,
-	EMAIL_VALIDATION,
-	ACCOUNT_NAME_VALIDATION,
 	PASSWORD_VALIDATION,
-	PHONE_VALIDATION,
 	SITE_NAME_VALIDATION,
+	USER_NAME_VALIDATION,
 } from 'src/app/constants/validations';
 import {
 	hasError,
-	isValid,
-	isTouchedAndValid,
 	isTouched,
+	isTouchedAndValid,
+	isValid,
 } from 'src/app/core/helpers/form-error';
 import { errorMessages } from 'src/app/core/helpers/form-error-message';
 
