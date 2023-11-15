@@ -33,18 +33,19 @@ export class GlobalService {
 					timer: 2000,
 				});
 				return true;
-			} else {
-				Swal.fire({
-					icon: 'error',
-					title: 'Error',
-					text: result.message,
-					toast: true,
-					position: 'top-end',
-					showConfirmButton: false,
-					timer: 2000,
-				});
-				return true;
 			}
+		}
+		if (!result.status) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: result.message,
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 2000,
+			});
+			return true;
 		}
 	}
 

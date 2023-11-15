@@ -15,18 +15,23 @@ import { StorageService } from '../services/storage.service';
 import { StorageType } from 'src/app/constants/storage-type';
 import { LoadingService } from '../services/loading.service';
 import Swal from 'sweetalert2';
+import { GlobalService } from '../services/global.service';
 /** Inject With Credentials into the request */
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 	accessToken!: string | null;
 
-	constructor(private loadingService: LoadingService) {}
+	constructor(
+		private loadingService: LoadingService,
+		private globalService: GlobalService
+	) {}
 
 	intercept(
 		req: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
+		this.loadingService.showLoader();
 		this.accessToken = StorageService.get(StorageType.ACCESS_TOKEN);
 		let URL = environment.apiServer + req.url;
 		if (req.url.includes('assets')) {
@@ -39,7 +44,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 				this.accessToken ? this.accessToken : ''
 			),
 		});
-		this.loadingService.showLoader();
 
 		return next
 			.handle(req)
@@ -62,11 +66,16 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 			.pipe(
 				map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
 					if (evt instanceof HttpResponse) {
+						this.loadingService.hideLoader();
 						if (evt.body.code === 501 || evt.body.code === 503) {
 							window.location.href = '';
 							StorageService.remove(StorageType.ACCESS_TOKEN);
 						}
-						this.loadingService.hideLoader();
+						if (req.method !== 'GET') {
+							this.globalService.handleSuccessService(evt.body, true);
+						} else {
+							this.globalService.handleSuccessService(evt.body, false);
+						}
 					}
 					return evt;
 				})
