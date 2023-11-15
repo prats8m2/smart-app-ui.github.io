@@ -32,7 +32,7 @@ export const MENU: MenuItem[] = [
 		id: 5,
 		label: 'Staff',
 		icon: 'bx-user-plus',
-		link: '/list-staff',
+		link: '/admin/staffs/list-staffs',
 		permission: 'LIST-STAFF',
 	},
 	{
