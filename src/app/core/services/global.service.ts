@@ -97,10 +97,11 @@ export class GlobalService {
 	}
 
 	checkForPermission(permission: any) {
+		console.log('permission:', permission);
 		let userPermission = this.getUserRole('permissions');
 		let permissionName = userPermission.map((per: any) => per.name);
+		console.log('permissionName:', permissionName);
 		if (permissionName.includes(permission)) {
-			console.log('true');
 			return true;
 		} else {
 			return false;
