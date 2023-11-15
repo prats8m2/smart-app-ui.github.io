@@ -10,10 +10,10 @@ export const URL_ROUTES = {
 	LIST_ACCOUNT: 'admin/accounts/list-accounts',
 
 	//site
-	ADD_SITE: '/add-site',
-	EDIT_SITE: '/edit-site',
-	VIEW_SITE: '/view-site/',
-	LIST_SITE: '/list-site',
+	ADD_SITE: 'admin/sites/add-site',
+	EDIT_SITE: 'admin/sites/edit-site',
+	VIEW_SITE: 'admin/sites/view-site',
+	LIST_SITE: 'admin/sites/list-sites',
 
 	//access denied page
 	ACCESS_DENIED: '/denied',

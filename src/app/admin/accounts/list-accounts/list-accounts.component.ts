@@ -85,4 +85,16 @@ export class ListAccountsComponent {
 		this.currentPage = 1; // Reset to the first page when performing a new search
 		this.updateDisplayedData();
 	}
+
+	deleteAccount(id: any) {
+		this.accountService.deleteUser(id).then((res) => {
+			if (res.status) {
+				console.log('Account deleted successfully');
+				this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+				this;
+			} else {
+				console.log('Error in deleting account');
+			}
+		});
+	}
 }

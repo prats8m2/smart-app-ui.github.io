@@ -4,18 +4,30 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './dashboards/default/default.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'dashboard' },
-  {
-    path: "",
-    component: DefaultComponent
-  },
-  { path: 'dashboard', component: DefaultComponent },
-  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
-    { path: 'accounts', loadChildren: () => import('./accounts/accounts.module').then(m => m.AccountsModule) },
+	// { path: '', redirectTo: 'dashboard' },
+	{
+		path: '',
+		component: DefaultComponent,
+	},
+	{ path: 'dashboard', component: DefaultComponent },
+	{
+		path: 'dashboards',
+		loadChildren: () =>
+			import('./dashboards/dashboards.module').then((m) => m.DashboardsModule),
+	},
+	{
+		path: 'accounts',
+		loadChildren: () =>
+			import('./accounts/accounts.module').then((m) => m.AccountsModule),
+	},
+	{
+		path: 'sites',
+		loadChildren: () => import('./site/site.module').then((m) => m.SitesModule),
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

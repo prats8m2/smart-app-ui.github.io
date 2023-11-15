@@ -15,11 +15,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8" *ngIf="userRole === 'super-admin' || userRole === 'user'">
                             <div class="text-sm-end">
                                 <button type="button" class="btn btn-primary btn-rounded mb-2 me-2"
-                                    (click)="routeToAddAccount()"><i class="mdi mdi-plus mr-1"></i>
-                                    Add Account</button>
+                                    (click)="routeToAddSite()"><i class="mdi mdi-plus mr-1"></i>
+                                    Add Site</button>
+                                        
+                                      
                             </div>
                         </div><!-- end col-->
                     </div>
@@ -29,35 +31,26 @@
                             id="order-list">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="align-middle">Account ID</th>
-                                    <th class="align-middle">Account Name</th>
-                                    <th class="align-middle">Owner Name</th>
-                                    <th class="align-middle">Owner Email</th>
-                                    <th class="align-middle">Account Status</th>
+                                    <th class="align-middle">Site ID</th>
+                                    <th class="align-middle">Site Name</th>
+                                    <th class="align-middle">Site Status</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let data of usersList; let i = index;" id="o_{{data.id}}" (click)="routeToViewAccount(data.id)"
-                                    class='pointer'>
+                                <tr *ngFor="let data of sitesList; let i = index;" id="o_{{data.id}}">
                                     <td>
                                         <a href="javascript: void(0);" class="text-body fw-bold">{{data.id}}</a>
                                     </td>
-                                    <td>{{data.account.name}}</td>
-                                    <td>{{data.firstName+ ' '+data.lastName}}</td>
-                                    <td>{{data.email}}</td>
+                                    <td>{{data.name}}</td>
                                     <td>
-                                        <span class="badge badge-pill badge-soft-success font-size-11"
-                                            [ngClass]=" { 'badge-soft-danger': data.account.status === 0 }">{{data.account.status |
-                                            transformStatus}}</span>
+                                        {{data.type | siteTypePipe}}
                                     </td>
-
-
                                     <td>
                                         <div class="d-flex gap-3">
                                             <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
-                                                    (click)="routeToEditAccount(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="deleteAccount(data.id)"><i class="mdi mdi-delete font-size-18"></i></span>
+                                                    (click)="routeToEditSite(data.id)"></i></span>
+                                            <span class="text-danger pointer" (click)="confirm(i)"><i class="mdi mdi-delete font-size-18"></i></span>
                                         </div>
                                     </td>
                                 </tr>
