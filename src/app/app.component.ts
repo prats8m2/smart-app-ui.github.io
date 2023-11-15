@@ -20,7 +20,5 @@ export class AppComponent implements OnInit {
 		this.loadingService.isLoadingSubject.pipe(delay(0)).subscribe((loading) => {
 			if (this.loading !== loading) this.loading = loading;
 		});
-
-		console.log(this.loading);
 	}
 }

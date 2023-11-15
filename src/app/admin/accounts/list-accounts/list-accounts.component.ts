@@ -25,6 +25,9 @@ export class ListAccountsComponent {
 	currentPage: number = 1;
 	searchInput: string = '';
 
+	showConfirmDialog = false;
+	confirmMessage = 'Are you sure you want to perform this action?';
+
 	userParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
@@ -98,5 +101,20 @@ export class ListAccountsComponent {
 				console.log('Error in deleting account');
 			}
 		});
+	}
+
+	openConfirmDialog() {
+		console.log('QQQQQ');
+		this.showConfirmDialog = true;
+	}
+
+	onConfirm() {
+		console.log('Confirmed');
+		this.showConfirmDialog = false;
+	}
+
+	onCancel() {
+		console.log('Canceled');
+		this.showConfirmDialog = false;
 	}
 }
