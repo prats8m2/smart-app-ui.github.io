@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 	submitted = false;
 	error = '';
 	returnUrl: string;
+	showPassword: boolean = false;
 
 	// set the currenr year
 	year: number = new Date().getFullYear();
