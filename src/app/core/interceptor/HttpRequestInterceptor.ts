@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment.prod';
 import { StorageService } from '../services/storage.service';
 import { StorageType } from 'src/app/constants/storage-type';
 import { LoadingService } from '../services/loading.service';
+import Swal from 'sweetalert2';
 /** Inject With Credentials into the request */
 
 @Injectable()
@@ -46,6 +47,15 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 				retry(2),
 				catchError((error: HttpErrorResponse) => {
 					this.loadingService.hideLoader();
+					Swal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: 'Some error occurred while loading',
+						toast: true,
+						position: 'top-end',
+						showConfirmButton: false,
+						timer: 2000,
+					});
 					return throwError(error);
 				})
 			)

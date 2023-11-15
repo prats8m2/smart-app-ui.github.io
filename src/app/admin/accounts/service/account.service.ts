@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable, map } from 'rxjs';
 import { USER } from 'src/app/constants/api';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -41,14 +42,15 @@ export class AccountService {
 			});
 	}
 
-	listUser(params: IParams) {
+	listUser(params: IParams): Observable<any> {
 		return this.http
 			.get(USER.LIST_USER + `/${params.pageNumber}/${params.limit}`)
-			.toPromise()
-			.then((response) => {
-				const result = JSON.parse(JSON.stringify(response));
-				return result;
-			});
+			.pipe(
+				map((response: any) => {
+					const result = JSON.parse(JSON.stringify(response));
+					return result;
+				})
+			);
 	}
 
 	deleteUser(id: number) {

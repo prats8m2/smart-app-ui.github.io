@@ -7,7 +7,6 @@ import { ViewSiteComponent } from './view-site/view-site.component';
 import { SitesRoutingModule } from './site-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { StatusPipe } from '../../core/pipes/status.pipe';
 import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
 		EditSiteComponent,
 		ListSitesComponent,
 		ViewSiteComponent,
-		StatusPipe,
 		SiteTypePipe,
 	],
 	imports: [

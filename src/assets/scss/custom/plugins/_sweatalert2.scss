@@ -20,7 +20,7 @@
     }
     &.swal2-success {
         [class^="swal2-success-line"] {
-            background-color: $success;
+            background-color: #83d589;
         }
 
         .swal2-success-ring {
@@ -60,11 +60,11 @@
     border-color: $primary transparent $primary transparent;
 }
 .swal2-popup {
-    background: var(--#{$prefix}secondary-bg);
+    background: #2a3042;
 }
 
 .swal2-title, .swal2-html-container{
-     color: var(--#{$prefix}emphasis-color);
+     color: #2a3042;
 }
 
 .swal2-file,

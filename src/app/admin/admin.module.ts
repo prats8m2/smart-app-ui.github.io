@@ -19,32 +19,31 @@ import { UIModule } from '../shared/ui/ui.module';
 // Emoji Picker
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
-
 import { DashboardsModule } from './dashboards/dashboards.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    FormsModule,
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    AdminRoutingModule,
-    NgApexchartsModule,
-    ReactiveFormsModule,
-    DashboardsModule,
-    HttpClientModule,
-    UIModule,
-    WidgetModule,
-    FullCalendarModule,
-    TabsModule.forRoot(),
-    TooltipModule.forRoot(),
-    CollapseModule.forRoot(),
-    SimplebarAngularModule,
-    LightboxModule,
-    PickerModule
-  ],
+	declarations: [],
+	imports: [
+		CommonModule,
+		FormsModule,
+		BsDropdownModule.forRoot(),
+		ModalModule.forRoot(),
+		AdminRoutingModule,
+		NgApexchartsModule,
+		ReactiveFormsModule,
+		DashboardsModule,
+		HttpClientModule,
+		UIModule,
+		WidgetModule,
+		FullCalendarModule,
+		TabsModule.forRoot(),
+		TooltipModule.forRoot(),
+		CollapseModule.forRoot(),
+		SimplebarAngularModule,
+		LightboxModule,
+		PickerModule,
+	],
 })
-export class AdminModule { }
+export class AdminModule {}

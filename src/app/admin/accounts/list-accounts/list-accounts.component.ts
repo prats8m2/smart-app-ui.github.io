@@ -35,10 +35,12 @@ export class ListAccountsComponent {
 	}
 
 	listUserAPI() {
-		this.accountService.listUser(this.userParams).then((res) => {
-			this.usersListResp = [...res.data.users];
-			this.total = this.usersListResp.length;
-			this.updateDisplayedData();
+		this.accountService.listUser(this.userParams).subscribe((res) => {
+			if (this.globalService.handleSuccessService(res)) {
+				this.usersListResp = [...res.data.users];
+				this.total = this.usersListResp.length;
+				this.updateDisplayedData();
+			}
 		});
 	}
 

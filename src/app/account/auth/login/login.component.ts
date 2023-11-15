@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 			return;
 		} else {
 			// login function call
-			this.loginService.login(this.loginForm).then((res) => {
+			this.loginService.login(this.loginForm).subscribe((res) => {
 				console.log(res);
 				if (this.globalService.handleSuccessService(res)) {
 					this.loadingService.hideLoader();

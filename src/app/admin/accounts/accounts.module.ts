@@ -6,8 +6,8 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { ViewAccountComponent } from './view-account/view-account.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { StatusPipe } from '../../core/pipes/status.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 
 @NgModule({
 	declarations: [
