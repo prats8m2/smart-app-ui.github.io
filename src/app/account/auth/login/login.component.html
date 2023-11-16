@@ -70,7 +70,7 @@
                   <label for="password">Password</label>
                   <div class="input-group auth-pass-inputgroup">
                     <input
-                      type="password"
+                    [type]="showPassword ? 'text' : 'password'"
                       class="form-control"
                       formControlName="password"
                       placeholder="Enter password"
@@ -85,8 +85,10 @@
                       class="btn btn-light ms-0"
                       type="button"
                       id="password-addon"
+                      (click)="showPassword = !showPassword"
                     >
-                      <i class="mdi mdi-eye-outline"></i>
+                    
+                      <i [ngClass]="showPassword ? 'mdi mdi-eye-off-outline' : 'mdi mdi-eye-outline'"></i>
                     </button>
                     <div
                       *ngIf="submitted && f.password.errors"
