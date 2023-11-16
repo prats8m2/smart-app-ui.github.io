@@ -62,10 +62,12 @@ export class ListSitesComponent {
 	}
 
 	listSiteAPI(param: IParams) {
-		this.siteServices.listSites(param).then((res) => {
-			this.sitesListResp = [...res.data.sites];
-			this.total = this.sitesListResp.length;
-			this.updateDisplayedData();
+		this.siteServices.listSites(this.siteParams).subscribe((res) => {
+			if (res.status) {
+				this.sitesListResp = [...res.data.users];
+				this.total = this.sitesListResp.length;
+				this.updateDisplayedData();
+			}
 		});
 	}
 
