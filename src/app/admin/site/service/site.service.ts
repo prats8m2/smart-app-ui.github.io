@@ -54,4 +54,22 @@ export class SiteService {
 				return result;
 			});
 	}
+
+	updateSite(userForm: any) {
+		const { id, siteName, siteAddress, type, wifiDetails } = userForm.value;
+
+		return this.http
+			.put(SITE.UPDATE_SITE, {
+				id: id,
+				name: siteName,
+				type: parseInt(type),
+				address: siteAddress,
+				wifiDetails: wifiDetails,
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
