@@ -1,0 +1,24 @@
+.form-select {
+    border-radius: 22px; /* Border radius similar to btn-rounded class*/
+}
+
+.table-responsive {
+    max-height: 400px; /* Set your desired max-height */
+    min-width: 400px;
+    overflow-y:scroll;
+  }
+
+  .table-responsive::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+  
+  /* Hide the scrollbar for Firefox */
+  .table-responsive {
+    scrollbar-width: none;
+  }
+  
+  /* Hide the scrollbar for IE/Edge */
+  .table-responsive {
+    -ms-overflow-style: none;
+  }
