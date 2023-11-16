@@ -45,6 +45,15 @@ export const PHONE_VALIDATION = [
 export const SITE_NAME_VALIDATION = [
 	Validators.required,
 	Validators.maxLength(30),
-	Validators.pattern('[a-zA-Z0-9_]+$'),
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
 	Validators.minLength(5),
 ];
+
+export const SITE_ADDRESS_VALIDATION = [
+	Validators.required,
+	Validators.maxLength(30),
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
+	Validators.minLength(5),
+];
+
+export const SITE_ACCOUNT_VALIDATION = [Validators.required];

@@ -50,4 +50,9 @@ export const errorMessages = {
 		maxlength: 'Maximum length exceeded (30 characters maximum).',
 		minlength: 'Password must be at least 5 character long.',
 	},
+	siteAddress: {
+		required: 'Site Address is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Address must be at least 5 character long.',
+	},
 };

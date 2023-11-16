@@ -7,6 +7,20 @@
                 <!-- Form Start -->
                 <form (ngSubmit)="addSite()" [formGroup]="siteForm">
                     <!-- First Row -->
+                    <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+                    <div class="row" *ngIf="showListAccount">
+              <div class="col-md-6 mb-4">
+                <select class="form-select" id="account" aria-label="Account"  formControlName="account">
+                  <option selected disabled hidden>Select Account</option>
+                  <option *ngFor="let acc of accountList" [value]="acc.account.id" >
+                      {{ acc.account.name }}
+                  </option>   
+                  </select>
+              </div>
+          </div>
+                    
+                    <h6 class="mb-2">Site Details</h6>
+                    <!-- Second Row -->
                     <div class="row">
                         <!-- Site Name -->
                 <div class="col-md-6 mb-4">
@@ -27,10 +41,37 @@
                             {{errorMessage('siteName','minlength')}} </div>
                     </div>
                 </div>
+                <div class="col-md-6 mb-4">
+                  <label for="siteAddress">Site Address</label>
+                  <input type="text" class="form-control"
+                      [ngClass]="{ 'form-error':showError('siteAddress'),'form-success':showSuccess('siteAddress') }"
+                      formControlName="siteAddress">
+                  <!-- Site Address Validation -->
+                  <div *ngIf="formTouched('siteAddress')">
+                      <div *ngIf="isError('siteAddress','required')" class="text-danger">
+                          {{errorMessage('siteAddress','required')}}
+                      </div>
+                      <div *ngIf="isError('siteAddress','pattern')" class="text-danger">
+                          {{errorMessage('siteAddress','pattern')}} </div>
+                      <div *ngIf="isError('siteAddress','maxlength')" class="text-danger">
+                          {{errorMessage('siteAddress','maxlength')}} </div>
+                      <div *ngIf="isError('siteAddress','minlength')" class="text-danger">
+                          {{errorMessage('siteAddress','minlength')}} </div>
+                  </div>
+              </div>
             </div>
-        
-            <h6 class="mb-2">Owner Details</h6>
-            <!-- Second Row -->
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label for="siteType">Site Type</label>
+                <select class="form-select" id="siteType" aria-label="Site Type"  formControlName="type">
+                  <option selected disabled hidden>Select Type</option>
+                  <option *ngFor="let site of siteTypes" [value]="site.id">
+                    {{ site.label }}
+                  </option>   
+                  </select>
+            </div>
+            </div>
 
 
             <div class="row">
@@ -99,7 +140,6 @@
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="siteForm.invalid">Submit</button>
             </div>
-        </form>
-        
+        </form>        
     </div>
 </div>

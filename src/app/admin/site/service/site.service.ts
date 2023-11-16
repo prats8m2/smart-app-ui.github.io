@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { SITE } from 'src/app/constants/api';
 import { IParams } from 'src/app/core/interface/params';
@@ -23,5 +24,24 @@ export class SiteService {
 					return result;
 				})
 			);
+	}
+
+	addSite(siteForm: FormGroup) {
+		const { account, siteName, siteAddress, type, wifiDetails } =
+			siteForm.value;
+
+		return this.http
+			.post(SITE.ADD_SITE, {
+				accountId: account,
+				name: siteName,
+				type: parseInt(type),
+				address: siteAddress,
+				wifiDetails: wifiDetails,
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
 	}
 }
