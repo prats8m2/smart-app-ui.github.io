@@ -26,17 +26,14 @@ export class RoleService {
 			);
 	}
 
-	addSite(siteForm: FormGroup) {
-		const { account, siteName, siteAddress, type, wifiDetails } =
-			siteForm.value;
+	addRole(roleForm: FormGroup) {
+		const { account, roleName, permissions } = roleForm.value;
 
 		return this.http
-			.post(SITE.ADD_SITE, {
+			.post(ROLE.ADD_ROLE, {
 				accountId: account,
-				name: siteName,
-				type: parseInt(type),
-				address: siteAddress,
-				wifiDetails: wifiDetails,
+				name: roleName,
+				permissions: permissions,
 			})
 			.toPromise()
 			.then((response) => {
