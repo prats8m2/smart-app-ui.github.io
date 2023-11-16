@@ -25,7 +25,7 @@ export const MENU: MenuItem[] = [
 		id: 4,
 		label: 'Role',
 		icon: 'bx-shield',
-		link: '/list-role',
+		link: '/admin/roles/list-roles',
 		permission: 'LIST-ROLE',
 	},
 	{
