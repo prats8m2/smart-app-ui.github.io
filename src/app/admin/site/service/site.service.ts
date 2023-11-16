@@ -44,4 +44,14 @@ export class SiteService {
 				return result;
 			});
 	}
+
+	viewSite(id: any) {
+		return this.http
+			.get(SITE.VIEW_SITE + id)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
