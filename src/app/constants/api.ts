@@ -22,6 +22,7 @@ export const SITE = {
 export const ROLE = {
 	LIST_ROLE: '/role/list',
 	ADD_ROLE: '/role/add',
+	VIEW_ROLE: '/role/get/',
 };
 
 export const STAFF = {

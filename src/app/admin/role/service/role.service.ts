@@ -42,9 +42,9 @@ export class RoleService {
 			});
 	}
 
-	viewSite(id: any) {
+	viewRole(roleId: any) {
 		return this.http
-			.get(SITE.VIEW_SITE + id)
+			.get(ROLE.VIEW_ROLE + roleId)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));
