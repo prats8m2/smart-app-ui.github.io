@@ -15,6 +15,12 @@ export const URL_ROUTES = {
 	VIEW_SITE: 'admin/sites/view-site',
 	LIST_SITE: 'admin/sites/list-sites',
 
+	//site
+	ADD_ROLE: 'admin/roles/add-role',
+	EDIT_ROLE: 'admin/roles/edit-role',
+	VIEW_ROLE: 'admin/roles/view-role',
+	LIST_ROLE: 'admin/roles/list-roles',
+
 	//access denied page
 	ACCESS_DENIED: '/denied',
 

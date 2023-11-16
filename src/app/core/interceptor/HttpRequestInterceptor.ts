@@ -54,7 +54,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 					Swal.fire({
 						icon: 'error',
 						title: 'Error',
-						text: 'Some error occurred while loading',
+						text: 'Some error occurred',
 						toast: true,
 						position: 'top-end',
 						showConfirmButton: false,
