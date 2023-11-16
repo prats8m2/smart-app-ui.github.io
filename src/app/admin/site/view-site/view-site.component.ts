@@ -28,7 +28,6 @@ import { SiteService } from '../service/site.service';
 	styleUrls: ['./view-site.component.scss'],
 })
 export class ViewSiteComponent {
-	isProduction = environment.production;
 	public siteForm: FormGroup = this.formBuilder.group({
 		account: [null],
 		siteName: ['', SITE_NAME_VALIDATION],
