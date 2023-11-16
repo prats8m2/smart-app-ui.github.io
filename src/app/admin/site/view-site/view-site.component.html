@@ -23,14 +23,12 @@
                 <div class="col-md-6 mb-4">
                     <label for="siteName">Site Name</label>
                     <input type="text" class="form-control"
-                        [ngClass]="{ 'form-error':showError('siteName'),'form-success':showSuccess('siteName') }"
                         formControlName="siteName">
                     
                 </div>
                 <div class="col-md-6 mb-4">
                   <label for="siteAddress">Site Address</label>
                   <input type="text" class="form-control"
-                      [ngClass]="{ 'form-error':showError('siteAddress'),'form-success':showSuccess('siteAddress') }"
                       formControlName="siteAddress">
                  
               </div>
@@ -40,13 +38,16 @@
               <div class="col-md-6 mb-4">
                     <label for="type">Site Type</label>
                     <input type="text" class="form-control"
-                        [ngClass]="{ 'form-error':showError('type'),'form-success':showSuccess('type') }"
                         formControlName="type">
                 </div>
             </div> 
 
             <h6 class="mb-2">Wifi Details</h6>
+            <div *ngIf="siteWifiDetails.length == 0">
+                <label for="wifiUserName">No details available.</label>
+            </div>
 
+            <div *ngIf="siteWifiDetails.length>0">
             <div class="row">
             <div class="col-md-6">
             <label for="wifiUserName">Username</label>
@@ -64,6 +65,7 @@
             <input type="text" class="form-control" value="**********" [attr.disabled] = "true">
       </div>
     </div>
+</div>
 
         </form>        
     </div>
