@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { RoleService } from '../service/role.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-role',
@@ -105,5 +106,21 @@ export class ListRoleComponent {
 	}
 	confirm(i: any) {
 		console.log('111');
+	}
+
+	showSWAL() {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#34c38f',
+			cancelButtonColor: '#f46a6a',
+			confirmButtonText: 'Yes, delete it!',
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+			}
+		});
 	}
 }

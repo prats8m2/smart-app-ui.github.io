@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../service/account.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { IParams } from '../../../core/interface/params';
 import { URL_ROUTES } from '../../../constants/routing';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-accounts',
@@ -14,7 +15,8 @@ export class ListAccountsComponent {
 	constructor(
 		public accountService: AccountService,
 		private router: Router,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private route: ActivatedRoute
 	) {}
 
 	usersList: any = [];
@@ -107,18 +109,25 @@ export class ListAccountsComponent {
 		});
 	}
 
-	openConfirmDialog() {
-		console.log('QQQQQ');
-		this.showConfirmDialog = true;
-	}
-
-	onConfirm() {
-		console.log('Confirmed');
-		this.showConfirmDialog = false;
-	}
-
-	onCancel() {
-		console.log('Canceled');
-		this.showConfirmDialog = false;
+	openConfirmDialog(accountId: any) {
+		console.log(accountId);
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#34c38f',
+			cancelButtonColor: '#f46a6a',
+			confirmButtonText: 'Yes, delete it!',
+		}).then((result) => {
+			if (result.value) {
+				//call delete account API
+				this.accountService.deleteUser(accountId).then((res: any) => {
+					if (res.status) {
+						this.ngOnInit();
+					}
+				});
+			}
+		});
 	}
 }
