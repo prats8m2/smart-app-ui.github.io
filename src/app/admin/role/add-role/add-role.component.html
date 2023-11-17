@@ -10,7 +10,8 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="account" aria-label="Account" formControlName="account">
+                    <select class="form-select" id="account" aria-label="Account" formControlName="account"
+                        (change)="changeAccountData($event.target.value)">
                         <option selected disabled hidden>Account</option>
                         <option *ngFor="let acc of accountList" [value]="acc.account.id">
                             {{ acc.account.name }}
@@ -45,14 +46,16 @@
                 <div class="col-container">
                     <div class="col-md-12 mb-4">
                         <h6>Permissions</h6>
-                        <div formGroupName="permissions" class="permission-groups mt-2">
-                            <div *ngFor="let heading of headings" class="permission-group">
-                                <label for="rolePermissions">{{heading}}</label>
-                                <div formGroupName="{{ heading }}" class="permission-items">
-                                    <label *ngFor="let permission of permissions" class="permission-item">
-                                        <input type="checkbox" [formControlName]="permission" />
-                                        {{ permission }}
-                                    </label>
+                        <div formGroupName="permissions" class="row">
+                            <div *ngFor="let key of permissionsData | keys" class="col-md-6 mt-3">
+                                <label for="rolePermissions">{{ key }}</label>
+                                <div formArrayName="{{ key }}">
+                                    <div class="form-check form-check-inline"
+                                        *ngFor="let permission of permissionsData[key]; let i = index">
+                                        <input class="form-check-input" type="checkbox"
+                                            [formControl]="getFormControl(key, i)" >
+                                        {{ getPermissionLabel(permission.name) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

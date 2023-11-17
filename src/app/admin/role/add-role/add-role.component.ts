@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+	FormArray,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { GlobalService } from 'src/app/core/services/global.service';
@@ -35,18 +41,13 @@ export class AddRoleComponent implements OnInit {
 		limit: 100,
 		pageNumber: 1,
 	};
+	permissionParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
 
-	headings: string[] = [
-		'Category',
-		'Device',
-		'Menu',
-		'Order',
-		'Product',
-		'Room',
-		'Staff',
-		'Table',
-	];
-	permissions: string[] = ['ADD', 'UPDATE', 'DELETE', 'VIEW', 'LIST'];
+	permissionsData: any = {};
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -67,6 +68,8 @@ export class AddRoleComponent implements OnInit {
 				roleName: ['Role-' + randomNumber, ROLE_NAME_VALIDATION],
 				permissions: this.formBuilder.group({}),
 			});
+
+			this.listPermissionsAPI(this.permissionParams);
 		}
 	}
 
@@ -79,25 +82,36 @@ export class AddRoleComponent implements OnInit {
 				}
 			});
 		}
-		this.headings.forEach((heading) => {
-			const headingGroup = {};
-			this.permissions.forEach((permission) => {
-				headingGroup[permission] = this.formBuilder.control(false);
-				if (permission !== 'LIST') {
-					headingGroup[permission].valueChanges.subscribe(() => {
-						const allSelected = ['ADD', 'UPDATE', 'DELETE', 'VIEW'].every(
-							(control) => headingGroup[control].value
-						);
-						headingGroup['LIST'].setValue(allSelected);
-					});
-				}
+	}
+
+	initialisePermissions() {
+		this.roleForm.get('permissions').setValidators(Validators.required);
+		this.roleForm.get('permissions').updateValueAndValidity();
+		Object.keys(this.permissionsData).forEach((key) => {
+			const formArray = this.permissionsData[key].map((permission) => {
+				return this.formBuilder.group({
+					[permission.name]: new FormControl(false),
+					id: permission.id,
+				});
 			});
 
 			(this.roleForm.get('permissions') as FormGroup).addControl(
-				heading,
-				this.formBuilder.group(headingGroup)
+				key,
+				this.formBuilder.array(formArray)
 			);
 		});
+	}
+
+	getFormControl(category: string, index: number): FormControl {
+		const formArray = (this.roleForm.get('permissions') as FormGroup).get(
+			category
+		) as FormArray;
+		const formGroup = formArray.controls[index] as FormGroup;
+		return formGroup.get(Object.keys(formGroup.controls)[0]) as FormControl;
+	}
+
+	getPermissionLabel(permissionName: string): string {
+		return permissionName.split('-')[0];
 	}
 
 	routeToListRole() {
@@ -126,11 +140,61 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	addRole() {
-		this.roleService.addRole(this.roleForm).then((res) => {
+		const selectedPermissions = {};
+		const transformedPermissionsData: any[] = [];
+		const originalPermissionsData = this.roleForm.get('permissions').value;
+
+		Object.keys(this.roleForm.value.permissions).forEach((key) => {
+			selectedPermissions[key] = this.roleForm.value.permissions[key]
+				.filter((permission) => permission[Object.keys(permission)[0]])
+				.map((permission) => permission[Object.keys(permission)[0]]);
+		});
+
+		Object.keys(originalPermissionsData).forEach((category) => {
+			originalPermissionsData[category].forEach((permission) => {
+				originalPermissionsData[category]
+					.filter((obj) => obj[Object.keys(obj)[0]] === true)
+					.forEach((obj) => {
+						const secondKey = Object.keys(obj)[1];
+						const newObj = {
+							category,
+							id: obj[secondKey],
+						};
+						const exists = transformedPermissionsData.some(
+							(item) =>
+								item.category === newObj.category && item.id === newObj.id
+						);
+						if (!exists) {
+							transformedPermissionsData.push(newObj);
+						}
+					});
+			});
+		});
+
+		this.roleForm.get('permissions').patchValue(transformedPermissionsData);
+		this.roleForm.setControl('p', new FormControl(transformedPermissionsData));
+		console.log(this.roleForm.value);
+		// this.roleForm.get('permissions').patchValue(transformedPermissionsData);
+
+		// this.roleService.addRole(this.roleForm).then((res) => {
+		// 	if (res.status) {
+		// 		this.router.navigate([URL_ROUTES.LIST_ROLE]);
+		// 	} else {
+		// 		console.log('error');
+		// 	}
+		// });
+	}
+
+	changeAccountData(accountId: any) {
+		this.permissionParams.accountId = accountId;
+		this.listPermissionsAPI(this.permissionParams);
+	}
+
+	listPermissionsAPI(params: any) {
+		this.roleService.listPermissions(params).subscribe((res) => {
 			if (res.status) {
-				this.router.navigate([URL_ROUTES.LIST_ROLE]);
-			} else {
-				console.log('error');
+				this.permissionsData = res.data.permissions;
+				this.initialisePermissions();
 			}
 		});
 	}

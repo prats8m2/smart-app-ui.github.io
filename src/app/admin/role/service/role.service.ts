@@ -79,4 +79,18 @@ export class RoleService {
 				return result;
 			});
 	}
+
+	listPermissions(params: IParams) {
+		return this.http
+			.get(
+				ROLE.LIST_PERMISSIONS +
+					`/${params.accountId}/${params.pageNumber}/${params.limit}`
+			)
+			.pipe(
+				map((response: any) => {
+					const result = JSON.parse(JSON.stringify(response));
+					return result;
+				})
+			);
+	}
 }

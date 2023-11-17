@@ -9,6 +9,7 @@ import { ListRoleComponent } from './list-role/list-role.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DefaultRolePipe } from 'src/app/core/pipes/defaultRole.pipe';
+import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
 
 @NgModule({
 	declarations: [
@@ -17,6 +18,7 @@ import { DefaultRolePipe } from 'src/app/core/pipes/defaultRole.pipe';
 		ViewRoleComponent,
 		ListRoleComponent,
 		DefaultRolePipe,
+		KeysPipe,
 	],
 	imports: [
 		FormsModule,
