@@ -3,6 +3,7 @@ import { GlobalService } from '../../../core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { IParams } from '../../../core/interface/params';
 import { SiteService } from '../../site/service/site.service';
+import { RoleService } from '../../role/service/role.service';
 
 @Component({
 	selector: 'app-list-staff',
@@ -13,7 +14,8 @@ export class ListStaffComponent {
 	constructor(
 		private globalService: GlobalService,
 		private accountService: AccountService,
-		private siteService: SiteService
+		private siteService: SiteService,
+		private roleService: RoleService
 	) {}
 	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
@@ -36,6 +38,7 @@ export class ListStaffComponent {
 	};
 	accountList: any = [];
 	siteList: any = [];
+	roleList: any = [];
 
 	ngOnInit(): void {
 		//Fetch Account
@@ -47,10 +50,12 @@ export class ListStaffComponent {
 						this.accountList = [...res.data.users];
 						this.siteParams.accountId = this.accountList[0].id;
 						this.roleParams.accountId = this.accountList[0].id;
+						console.log('this.accountList[0].id;:', this.accountList[0].id);
 					}
 				});
 		}
 
+		console.log('this.siteParams:', this.siteParams);
 		//Fetch Site
 		this.siteList = this.siteService
 			.listSites(this.siteParams)
@@ -61,5 +66,12 @@ export class ListStaffComponent {
 			});
 
 		//Fetch Roles
+		this.roleList = this.roleService
+			.listRoles(this.siteParams)
+			.subscribe((res) => {
+				if (res.status) {
+					this.roleList = [...res.data.roles];
+				}
+			});
 	}
 }
