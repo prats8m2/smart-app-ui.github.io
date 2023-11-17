@@ -20,9 +20,14 @@
                             <div class="col-sm-6" *ngIf="showListAccount">
                                 <select class="form-select" id="siteType" aria-label="Site Type"  (change)="changeSitesData($event.target.value)">
                                 <option selected disabled hidden>Account</option>
-                                <option *ngFor="let acc of accountList" [value]="acc.account.id" >
-                                    {{ acc.account.name }}
-                                </option>   
+                                <ng-container *ngIf="accountList.length > 0; else noData">
+                                    <option *ngFor="let acc of accountList" [value]="acc.account.id" >
+                                        {{ acc.account.name }}
+                                    </option>   
+                                </ng-container>
+                                <ng-template #noData>
+                                    <option disabled>No account available</option>
+                                </ng-template>
                                 </select>
                             </div>
                         </div>

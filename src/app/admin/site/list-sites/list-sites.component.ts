@@ -98,7 +98,6 @@ export class ListSitesComponent {
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
-				console.log(res);
 				this.sitesListResp = [...res.data.sites];
 				this.updateDisplayedData();
 			}
