@@ -30,11 +30,11 @@ export const URL_ROUTES = {
 	VIEW_STAFF: '/view-staff/',
 	LIST_STAFF: '/list-staff',
 
-	//device
-	ADD_DEVICE: '/add-device',
-	EDIT_DEVICE: '/edit-device',
-	VIEW_DEVICE: '/view-device/',
-	LIST_DEVICE: '/list-device',
+	//devices
+	ADD_DEVICE: 'admin/devices/add-device',
+	EDIT_DEVICE: 'admin/devices/edit-device',
+	VIEW_DEVICE: 'admin/devices/view-device/',
+	LIST_DEVICE: 'admin/devices/list-devices',
 
 	//room
 	ADD_ROOM: '/add-room',
