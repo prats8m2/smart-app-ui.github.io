@@ -1,1 +1,67 @@
-<p>add-role works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListRole()"></i>
+            <h4 class="card-title mb-4">Add Role</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="addRole()" [formGroup]="roleForm" class="role-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <select class="form-select" id="account" aria-label="Account" formControlName="account">
+                        <option selected disabled hidden>Select Account</option>
+                        <option *ngFor="let acc of accountList" [value]="acc.account.id">
+                            {{ acc.account.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <h6 class="mb-2">Role Details</h6>
+            <!-- Second Row -->
+            <div class="row">
+                <!-- Site Name -->
+                <div class="col-md-6 mb-4">
+                    <label for="roleName">Role Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('roleName'),'form-success':showSuccess('roleName') }"
+                        formControlName="roleName">
+                    <!-- Site Name Validation -->
+                    <div *ngIf="formTouched('roleName')">
+                        <div *ngIf="isError('roleName','required')" class="text-danger">
+                            {{errorMessage('roleName','required')}}
+                        </div>
+                        <div *ngIf="isError('roleName','pattern')" class="text-danger">
+                            {{errorMessage('roleName','pattern')}} </div>
+                        <div *ngIf="isError('roleName','maxlength')" class="text-danger">
+                            {{errorMessage('roleName','maxlength')}} </div>
+                        <div *ngIf="isError('roleName','minlength')" class="text-danger">
+                            {{errorMessage('roleName','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-container">
+                    <div class="col-md-12 mb-4">
+                        <h6>Permissions</h6>
+                        <div formGroupName="permissions" class="permission-groups mt-2">
+                            <div *ngFor="let heading of headings" class="permission-group">
+                                <label for="rolePermissions">{{heading}}</label>
+                                <div formGroupName="{{ heading }}" class="permission-items">
+                                    <label *ngFor="let permission of permissions" class="permission-item">
+                                        <input type="checkbox" [formControlName]="permission" />
+                                        {{ permission }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="roleForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

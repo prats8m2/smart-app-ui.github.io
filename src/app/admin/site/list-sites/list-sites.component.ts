@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { APP_ROLE } from 'src/app/constants/core';
 import { SiteService } from '../service/site.service';
 
 @Component({
@@ -20,55 +19,39 @@ export class ListSitesComponent {
 		private siteServices: SiteService
 	) {}
 
-	sitesList: any = [];
+	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showAddSite: boolean = this.globalService.checkForPermission('ADD-SITE');
+
+	accountParams: IParams = {
+		limit: 100,
+		pageNumber: 1,
+	};
+
+	accountList: any = [];
+	siteList: any = [];
+
 	sitesListResp: any = [];
 	total: number;
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
 	userRole: string;
-
-	GG = [
-		{ id: 1, name: 'Site 1' },
-		{ id: 2, name: 'Site 2' },
-		{ id: 3, name: 'Site 3' },
-		// Add more sites as needed
-	];
-
-	userParams: IParams = {
+	siteParams: IParams = {
+		accountId: null,
 		limit: 100,
 		pageNumber: 1,
 	};
 
-	siteParams: IParams;
-
 	ngOnInit(): void {
-		this.userRole = this.globalService.getUserRole('userRole');
-		if (this.userRole === APP_ROLE.SUPER_ADMIN) {
-			this.siteParams = {
-				accountId: 1,
-				limit: 100,
-				pageNumber: 1,
-			};
-			this.listSiteAPI(this.siteParams);
+		if (this.showListAccount) {
+			this.accountService.listUser(this.accountParams).subscribe((res) => {
+				if (res.status) {
+					this.accountList = [...res.data.users];
+				}
+			});
 		} else {
-			this.siteParams = {
-				accountId: null,
-				limit: 100,
-				pageNumber: 1,
-			};
 			this.listSiteAPI(this.siteParams);
 		}
-	}
-
-	listSiteAPI(param: IParams) {
-		this.siteServices.listSites(this.siteParams).subscribe((res) => {
-			if (res.status) {
-				this.sitesListResp = [...res.data.users];
-				this.total = this.sitesListResp.length;
-				this.updateDisplayedData();
-			}
-		});
 	}
 
 	routeToAddSite() {
@@ -89,7 +72,7 @@ export class ListSitesComponent {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		this.sitesList = this.sitesListResp
+		this.siteList = this.sitesListResp
 			.slice(startIndex, endIndex)
 			.filter(
 				(item) =>
@@ -98,7 +81,7 @@ export class ListSitesComponent {
 			);
 
 		this.total = this.searchInput
-			? this.sitesList.length
+			? this.siteList.length
 			: this.sitesListResp.length;
 	}
 
@@ -107,7 +90,17 @@ export class ListSitesComponent {
 		this.updateDisplayedData();
 	}
 
-	changeAccountValue(value: any) {
-		console.log(value);
+	changeSitesData(accountId: any) {
+		this.siteParams.accountId = accountId;
+		this.listSiteAPI(this.siteParams);
+	}
+
+	listSiteAPI(params: IParams) {
+		this.siteServices.listSites(params).subscribe((res) => {
+			if (res.status) {
+				this.sitesListResp = [...res.data.sites];
+				this.updateDisplayedData();
+			}
+		});
 	}
 }

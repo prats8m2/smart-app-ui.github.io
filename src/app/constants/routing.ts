@@ -15,6 +15,12 @@ export const URL_ROUTES = {
 	VIEW_SITE: 'admin/sites/view-site',
 	LIST_SITE: 'admin/sites/list-sites',
 
+	//site
+	ADD_ROLE: 'admin/roles/add-role',
+	EDIT_ROLE: 'admin/roles/edit-role',
+	VIEW_ROLE: 'admin/roles/view-role',
+	LIST_ROLE: 'admin/roles/list-roles',
+
 	//access denied page
 	ACCESS_DENIED: '/denied',
 
@@ -24,11 +30,11 @@ export const URL_ROUTES = {
 	VIEW_STAFF: '/view-staff/',
 	LIST_STAFF: '/list-staff',
 
-	//device
-	ADD_DEVICE: '/add-device',
-	EDIT_DEVICE: '/edit-device',
-	VIEW_DEVICE: '/view-device/',
-	LIST_DEVICE: '/list-device',
+	//devices
+	ADD_DEVICE: 'admin/devices/add-device',
+	EDIT_DEVICE: 'admin/devices/edit-device',
+	VIEW_DEVICE: 'admin/devices/view-device',
+	LIST_DEVICE: 'admin/devices/list-devices',
 
 	//room
 	ADD_ROOM: '/add-room',

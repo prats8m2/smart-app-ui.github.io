@@ -33,6 +33,11 @@ const routes: Routes = [
 		path: 'roles',
 		loadChildren: () => import('./role/role.module').then((m) => m.RoleModule),
 	},
+	{
+		path: 'devices',
+		loadChildren: () =>
+			import('./device/device.module').then((m) => m.DeviceModule),
+	},
 ];
 
 @NgModule({

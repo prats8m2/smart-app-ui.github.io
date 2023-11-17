@@ -39,7 +39,7 @@ export const MENU: MenuItem[] = [
 		id: 6,
 		label: 'Device',
 		icon: 'bx-devices',
-		link: '/list-device',
+		link: '/admin/devices/list-devices',
 		permission: 'LIST-DEVICE',
 	},
 	{

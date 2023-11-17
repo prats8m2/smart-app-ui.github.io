@@ -20,7 +20,7 @@
                 <div class="col-lg-6">
                     <label for="accountName">Account Status</label>
                     <div class="form-check form-switch form-switch-lg mb-3">
-                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg"
                             formControlName="status" [checked]="this.userForm.get('status').value">
                         <label class="form-check-label" for="SwitchCheckSizelg">{{this.userForm.get('status').value ?
                             'Active' : 'In
@@ -76,14 +76,14 @@
                             autocomplete="off" name="randomName1">
 
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" formControlName="password" />
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" formControlName="password" />
-                        </div>
-                    </div>
-                    </div>
-                    </form>
-                    </div>
-                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -76,7 +76,7 @@ export class ViewAccountComponent {
 					this.userForm.disable();
 					this.userForm.patchValue(res.data);
 					this.userForm.get('password')?.patchValue('Pass@1234');
-					const status = res.data.status ? true : false;
+					const status = res.data.account.status ? true : false;
 					this.userForm.get('status')?.patchValue(status);
 					console.log(this.userForm);
 					this.userForm.get('accountName').patchValue(res.data.account.name);
@@ -97,10 +97,5 @@ export class ViewAccountComponent {
 
 	routeToListAccount() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
-	}
-
-	toggle(): void {
-		const statusControl = this.userForm.get('status') as FormControl;
-		statusControl.setValue(!statusControl.value);
 	}
 }
