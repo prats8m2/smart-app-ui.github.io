@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../service/account.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { IParams } from '../../../core/interface/params';
 import { URL_ROUTES } from '../../../constants/routing';
-import Swal from 'sweetalert2';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-accounts',
@@ -16,7 +16,7 @@ export class ListAccountsComponent {
 		public accountService: AccountService,
 		private router: Router,
 		private globalService: GlobalService,
-		private route: ActivatedRoute
+		private dialogService: DialogService
 	) {}
 
 	usersList: any = [];
@@ -93,38 +93,17 @@ export class ListAccountsComponent {
 	}
 
 	onSearch(): void {
-		this.currentPage = 1; // Reset to the first page when performing a new search
+		this.currentPage = 1;
 		this.updateDisplayedData();
 	}
 
-	deleteAccount(id: any) {
-		this.accountService.deleteUser(id).then((res) => {
-			if (res.status) {
-				console.log('Account deleted successfully');
-				this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
-				this;
-			} else {
-				console.log('Error in deleting account');
-			}
-		});
-	}
-
 	openConfirmDialog(accountId: any) {
-		console.log(accountId);
-		Swal.fire({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#34c38f',
-			cancelButtonColor: '#f46a6a',
-			confirmButtonText: 'Yes, delete it!',
-		}).then((result) => {
+		this.dialogService.openConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete account API
-				this.accountService.deleteUser(accountId).then((res: any) => {
+				this.accountService.deleteAccount(accountId).then((res: any) => {
 					if (res.status) {
-						this.ngOnInit();
+						this.listUserAPI();
 					}
 				});
 			}

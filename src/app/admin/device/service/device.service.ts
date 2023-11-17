@@ -69,4 +69,14 @@ export class DeviceService {
 				return result;
 			});
 	}
+
+	deleteDevice(id: number) {
+		return this.http
+			.delete(DEVICE.DELETE_DEVICE + id.toString())
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

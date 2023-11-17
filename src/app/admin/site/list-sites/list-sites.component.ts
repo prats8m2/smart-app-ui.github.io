@@ -5,6 +5,7 @@ import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { SiteService } from '../service/site.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-sites',
@@ -16,7 +17,8 @@ export class ListSitesComponent {
 		public accountService: AccountService,
 		private router: Router,
 		private globalService: GlobalService,
-		private siteServices: SiteService
+		private siteServices: SiteService,
+		private dialogService: DialogService
 	) {}
 
 	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
@@ -100,6 +102,18 @@ export class ListSitesComponent {
 			if (res.status) {
 				this.sitesListResp = [...res.data.sites];
 				this.updateDisplayedData();
+			}
+		});
+	}
+	openConfirmDialog(siteId: any) {
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete site API
+				this.siteServices.deleteSite(siteId).then((res: any) => {
+					if (res.status) {
+						this.listSiteAPI(this.siteParams);
+					}
+				});
 			}
 		});
 	}

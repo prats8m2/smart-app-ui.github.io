@@ -72,4 +72,14 @@ export class SiteService {
 				return result;
 			});
 	}
+
+	deleteSite(id: number) {
+		return this.http
+			.delete(SITE.DELETE_SITE + id.toString())
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

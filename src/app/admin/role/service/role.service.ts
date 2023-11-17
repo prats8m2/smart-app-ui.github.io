@@ -69,4 +69,14 @@ export class RoleService {
 				return result;
 			});
 	}
+
+	deleteRole(roleId: number) {
+		return this.http
+			.delete(ROLE.DELETE_ROLE + roleId.toString())
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
