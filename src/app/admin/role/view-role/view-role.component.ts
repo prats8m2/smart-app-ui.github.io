@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { SiteService } from '../../site/service/site.service';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { ROLE_NAME_VALIDATION } from 'src/app/constants/validations';
 import { RoleService } from '../service/role.service';

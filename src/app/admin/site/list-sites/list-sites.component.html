@@ -46,7 +46,12 @@
                                     <th class="align-middle">Site Type</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
+                                <tr *ngIf="siteList.length == 0">
+                                    <th class="align-middle" style="text-align: center;" colspan="5">No data available</th>
+                                </tr>
                             </thead>
+                            
+
                             <tbody>
                                 <tr *ngFor="let data of siteList; let i = index;" id="o_{{data.id}}">
                                     <td>
