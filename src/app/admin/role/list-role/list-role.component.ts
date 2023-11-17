@@ -21,7 +21,8 @@ export class ListRoleComponent {
 		private dialogService: DialogService
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRole: boolean = this.globalService.checkForPermission('ADD-ROLE');
 
 	accountParams: IParams = {

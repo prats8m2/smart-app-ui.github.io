@@ -25,14 +25,11 @@ export class ListAccountsComponent {
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	showAddButton: boolean = this.globalService.checkForPermission('ADD-USER');
+	showAddButton: boolean = this.globalService.checkForPermission('ADD-ACCOUNT');
 	showEditButton: boolean =
-		this.globalService.checkForPermission('UPDATE-USER');
+		this.globalService.checkForPermission('UPDATE-ACCOUNT');
 	showDeleteButton: boolean =
-		this.globalService.checkForPermission('DELETE-USER');
-
-	showConfirmDialog = false;
-	confirmMessage = 'Are you sure you want to perform this action?';
+		this.globalService.checkForPermission('DELETE-ACCOUNT');
 
 	userParams: IParams = {
 		limit: 100,

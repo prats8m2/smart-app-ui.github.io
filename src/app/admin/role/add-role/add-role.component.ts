@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { SiteService } from '../../site/service/site.service';
+
 import {
 	hasError,
 	isValid,
@@ -16,7 +16,6 @@ import { environment } from 'src/environments/environment';
 import {
 	ROLE_NAME_VALIDATION,
 	SITE_ACCOUNT_VALIDATION,
-	SITE_NAME_VALIDATION,
 } from 'src/app/constants/validations';
 import { IParams } from 'src/app/core/interface/params';
 import { RoleService } from '../service/role.service';
@@ -30,7 +29,8 @@ export class AddRoleComponent implements OnInit {
 	isProduction = environment.production;
 	public roleForm: FormGroup;
 	accountList: any = [];
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,

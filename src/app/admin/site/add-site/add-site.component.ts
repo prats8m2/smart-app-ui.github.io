@@ -63,7 +63,8 @@ export class AddSiteComponent {
 		}
 	}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 
 	accountParams: IParams = {
 		limit: 100,

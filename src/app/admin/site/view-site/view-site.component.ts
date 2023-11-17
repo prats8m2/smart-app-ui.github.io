@@ -18,7 +18,6 @@ import {
 import { errorMessages } from 'src/app/core/helpers/form-error-message';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../service/site.service';
 
@@ -50,7 +49,8 @@ export class ViewSiteComponent {
 		private activatedRoute: ActivatedRoute
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	siteWifiDetails: any = [];
 
 	accountParams: IParams = {

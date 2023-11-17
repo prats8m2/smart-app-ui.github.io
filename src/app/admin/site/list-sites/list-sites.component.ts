@@ -21,7 +21,8 @@ export class ListSitesComponent {
 		private dialogService: DialogService
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddSite: boolean = this.globalService.checkForPermission('ADD-SITE');
 
 	accountParams: IParams = {

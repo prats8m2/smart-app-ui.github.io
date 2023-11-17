@@ -54,6 +54,7 @@ export const errorMessages = {
 		required: 'Site Address is required.',
 		maxlength: 'Maximum length exceeded (30 characters maximum).',
 		minlength: 'Address must be at least 5 character long.',
+		pattern: 'Role name must be alpha numeric with "_" or "-"',
 	},
 	roleName: {
 		required: 'Role name is required.',

@@ -11,7 +11,7 @@
                     <div class="row" *ngIf="showListAccount">
               <div class="col-md-6 mb-4">
                 <select class="form-select" id="account" aria-label="Account"  formControlName="account">
-                  <option selected disabled hidden>Select Account</option>
+                  <option selected disabled hidden>Account</option>
                   <option *ngFor="let acc of accountList" [value]="acc.account.id" >
                       {{ acc.account.name }}
                   </option>   

@@ -66,7 +66,8 @@ export class EditSiteComponent {
 		}
 	}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	siteData: any = [];
 
 	accountParams: IParams = {

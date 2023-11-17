@@ -24,7 +24,8 @@ export class ListDeviceComponent implements OnInit {
 		private dialogService: DialogService
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddDevice: boolean = this.globalService.checkForPermission('ADD-DEVICE');
 
 	accountParams: IParams = {
