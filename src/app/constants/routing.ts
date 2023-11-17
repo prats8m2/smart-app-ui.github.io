@@ -33,7 +33,7 @@ export const URL_ROUTES = {
 	//devices
 	ADD_DEVICE: 'admin/devices/add-device',
 	EDIT_DEVICE: 'admin/devices/edit-device',
-	VIEW_DEVICE: 'admin/devices/view-device/',
+	VIEW_DEVICE: 'admin/devices/view-device',
 	LIST_DEVICE: 'admin/devices/list-devices',
 
 	//room

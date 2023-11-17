@@ -71,7 +71,7 @@ export class ListDeviceComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_DEVICE + '/' + deviceId);
 	}
 	routeToViewDevice(deviceId: any) {
-		this.router.navigateByUrl(URL_ROUTES.EDIT_DEVICE + '/' + deviceId);
+		this.router.navigateByUrl(URL_ROUTES.VIEW_DEVICE + '/' + deviceId);
 	}
 
 	pageChanged(event: any): void {
