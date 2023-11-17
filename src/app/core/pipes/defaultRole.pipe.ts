@@ -9,7 +9,7 @@ export class DefaultRolePipe implements PipeTransform {
 			case true:
 				return 'Default';
 			case false:
-				return 'Non-default';
+				return 'Custom';
 		}
 	}
 }

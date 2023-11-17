@@ -3,7 +3,6 @@ import { AccountService } from '../service/account.service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { IParams } from '../../../core/interface/params';
-import { UntypedFormGroup } from '@angular/forms';
 import { URL_ROUTES } from '../../../constants/routing';
 
 @Component({
