@@ -8,7 +8,6 @@ import { ListDeviceComponent } from './list-device/list-device.component';
 import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { ViewDeviceComponent } from './view-device/view-device.component';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
-import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
 
 @NgModule({
 	declarations: [
@@ -17,7 +16,6 @@ import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
 		EditDeviceComponent,
 		ViewDeviceComponent,
 		StatusPipe,
-		KeysPipe,
 	],
 	imports: [
 		FormsModule,
