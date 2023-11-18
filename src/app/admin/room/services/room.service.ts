@@ -23,4 +23,14 @@ export class RoomService {
 				})
 			);
 	}
+
+	deleteRoom(id: number) {
+		return this.http
+			.delete(ROOM.DELETE_ROOM + id.toString())
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

@@ -8,6 +8,7 @@ import { RoomRoutingModule } from './room-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
 
 @NgModule({
 	declarations: [
@@ -16,6 +17,7 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		ListRoomComponent,
 		ViewRoomComponent,
 		StatusPipe,
+		RoomOccupiedPipe,
 	],
 	imports: [
 		FormsModule,
