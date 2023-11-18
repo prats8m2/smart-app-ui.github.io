@@ -41,10 +41,10 @@ export class AddAccountComponent {
 				lastName: ['', LAST_NAME_VALIDATION],
 				username: [null, USER_NAME_VALIDATION],
 				email: ['', EMAIL_VALIDATION],
-				accountName: ['', ACCOUNT_NAME_VALIDATION],
 				password: ['', PASSWORD_VALIDATION],
 				mobile: ['', PHONE_VALIDATION],
 				status: [true],
+				accountName: ['', ACCOUNT_NAME_VALIDATION],
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -53,10 +53,10 @@ export class AddAccountComponent {
 				lastName: ['Doe' + randomNumber, LAST_NAME_VALIDATION],
 				username: ['john-' + randomNumber, USER_NAME_VALIDATION],
 				email: ['john-' + randomNumber + '@yopmail.com', EMAIL_VALIDATION],
-				accountName: ['Account-' + randomNumber, ACCOUNT_NAME_VALIDATION],
 				password: ['Pass@1234', PASSWORD_VALIDATION],
 				mobile: ['9876543210', PHONE_VALIDATION],
 				status: [true],
+				accountName: ['Account-' + randomNumber, ACCOUNT_NAME_VALIDATION],
 			});
 		}
 	}

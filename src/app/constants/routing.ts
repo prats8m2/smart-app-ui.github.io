@@ -25,10 +25,10 @@ export const URL_ROUTES = {
 	ACCESS_DENIED: '/denied',
 
 	//staff
-	ADD_STAFF: '/add-staff',
-	EDIT_STAFF: '/edit-staff',
-	VIEW_STAFF: '/view-staff/',
-	LIST_STAFF: '/list-staff',
+	ADD_STAFF: 'admin/staffs/add-staff',
+	EDIT_STAFF: 'admin/staffs/edit-staff',
+	VIEW_STAFF: 'admin/staffs/view-staff',
+	LIST_STAFF: 'admin/staffs/list-staffs',
 
 	//devices
 	ADD_DEVICE: 'admin/devices/add-device',

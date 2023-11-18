@@ -1,1 +1,104 @@
-<p>list-staff works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class=" row col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="search-box me-2 mb-2 d-inline-block">
+                                    <div class="position-relative">
+                                        <input type="text" class="form-control" autocomplete="off" id="searchTableList"
+                                            placeholder="Search..." [(ngModel)]="searchInput" (input)="onSearch()">
+                                        <i class="bx bx-search-alt search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="showListAccount">
+                                <select class="form-select" id="siteType" aria-label="Site Type"
+                                    (change)="changeAccountData($event.target.value)">
+                                    <option selected disabled hidden>Account</option>
+                                    <ng-container *ngIf="accountList.length > 0; else noData">
+                                        <option *ngFor="let acc of accountList" [value]="acc.account.id">
+                                            {{ acc.account.name }}
+                                        </option>
+                                    </ng-container>
+                                    <ng-template #noData>
+                                        <option disabled>No account available</option>
+                                    </ng-template>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-select" id="role" aria-label="Role"
+                                    (change)="changeRoleData($event.target.value)">
+                                    <option selected disabled hidden>Role</option>
+                                    <ng-container *ngIf="roleList.length > 0; else noData">
+                                        <option *ngFor="let role of roleList" [value]="role.id">
+                                            {{ role.name }}
+                                        </option>
+                                    </ng-container>
+                                    <ng-template #noData>
+                                        <option disabled>No role available</option>
+                                    </ng-template>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" *ngIf="showAddStaff">
+                            <div class="text-sm-end">
+                                <button type="button" class="btn btn-primary btn-rounded mb-2 me-2"
+                                    (click)="routeToAddStaff()"><i class="mdi mdi-plus mr-1"></i>
+                                    Add Staff</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive mb-0">
+                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="device-list">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="align-middle">Staff ID</th>
+                                    <th class="align-middle">Name</th>
+                                    <th class="align-middle">Username</th>
+                                    <th class="align-middle">Email</th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                                <tr *ngIf="staffList.length == 0">
+                                    <th class="align-middle" style="text-align: center;" colspan="5">No data available
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of staffList; let i = index;" id="o_{{data.id}}">
+                                    <td>
+                                        <a class="text-body fw-bold pointer"
+                                            (click)="routeToViewStaff(data.id)">{{data.id}}</a>
+                                    </td>
+                                    <td class="pointer" (click)="routeToViewStaff(data.id)">{{data.firstName + ' ' + data.lastName}}</td>
+                                    <td>
+                                        {{ data?.username}}
+                                    </td>
+                                    <td>
+                                        {{ data?.email}}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
+                                                    (click)="routeToEditStaff(data.id)"></i></span>
+                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"><i
+                                                    class="mdi mdi-delete font-size-18"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
+                            (pageChanged)="pageChanged($event)">
+                        </pagination>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

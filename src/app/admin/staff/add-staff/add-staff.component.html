@@ -1,1 +1,203 @@
-<p>add-staff works!</p>;
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListStaff()"></i>
+            <h4 class="card-title mb-4">Add Staff</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="role-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+
+                    <select class="form-select" id="siteType" aria-label="Site Type"
+                        (change)="changeAccountData($event.target.value)">
+                        <option selected disabled hidden>Account</option>
+                        <ng-container *ngIf="accountList.length > 0; else noData">
+                            <option *ngFor="let acc of accountList" [value]="acc.account.id">
+                                {{ acc.account.name }}
+                            </option>
+                        </ng-container>
+                        <ng-template #noData>
+                            <option disabled>No account available</option>
+                        </ng-template>
+                    </select>
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <select class="form-select" id="site" aria-label="Site" formControlName="site" multiple
+                        (change)="changeSiteData($event)">
+                        <option selected disabled hidden>Site</option>
+                        <ng-container *ngIf="siteList.length > 0; else noData">
+                            <option *ngFor="let data of siteList" [value]="data.id">
+                                {{ data.name }}
+                            </option>
+                        </ng-container>
+                        <ng-template #noData>
+                            <option disabled>No site available</option>
+                        </ng-template>
+                    </select>
+                </div>
+            </div>
+
+            <!--Third Row -->
+
+            <h6 class="mb-2" *ngIf="showListRole">Role Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListRole">
+                <div class="col-md-6 mb-4">
+                    <select class="form-select" id="room" aria-label="Role" formControlName="role"
+                        (change)="changeRoleData($event.target.value)">
+                        <option selected disabled hidden>Role</option>
+                        <ng-container *ngIf="roleList.length > 0; else noData">
+                            <option *ngFor="let data of roleList" [value]="data.id">
+                                {{ data.name }}
+                            </option>
+                        </ng-container>
+                        <ng-template #noData>
+                            <option disabled>No room available</option>
+                        </ng-template>
+                    </select>
+                </div>
+            </div>
+
+
+            <h6 class="mb-2">Staff Details</h6>
+            <!-- Forth Row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('firstName'),'form-success':showSuccess('firstName')  }"
+                            formControlName="firstName">
+                        <!-- First Name Validation -->
+                        <div *ngIf="formTouched('firstName')">
+                            <div *ngIf="isError('firstName','required')" class="text-danger">
+                                {{errorMessage('firstName','required')}}
+                            </div>
+                            <div *ngIf="isError('firstName','pattern')" class="text-danger">
+                                {{errorMessage('firstName','pattern')}} </div>
+                            <div *ngIf="isError('firstName','maxlength')" class="text-danger">
+                                {{errorMessage('firstName','maxlength')}} </div>
+                            <div *ngIf="isError('firstName','minlength')" class="text-danger">
+                                {{errorMessage('firstName','minlength')}} </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}" formControlName="lastName">
+                        <!-- Last Name Validation -->
+                        <div *ngIf="formTouched('lastName')">
+                            <div *ngIf="isError('lastName','required')" class="text-danger">
+                                {{errorMessage('lastName','required')}}
+                            </div>
+                            <div *ngIf="isError('lastName','pattern')" class="text-danger">
+                                {{errorMessage('lastName','pattern')}} </div>
+                            <div *ngIf="isError('lastName','maxlength')" class="text-danger">
+                                {{errorMessage('lastName','maxlength')}} </div>
+                            <div *ngIf="isError('lastName','minlength')" class="text-danger">
+                                {{errorMessage('lastName','minlength')}} </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="row">
+        
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"
+                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}" formControlName="email">
+                        <!-- Email Validation -->
+                        <div *ngIf="formTouched('email')">
+                            <div *ngIf="isError('email','required')" class="text-danger">
+                                {{errorMessage('email','required')}}
+                            </div>
+                            <div *ngIf="isError('email','pattern')" class="text-danger">
+                                {{errorMessage('email','pattern')}} </div>
+                            <div *ngIf="isError('email','maxlength')" class="text-danger">
+                                {{errorMessage('email','maxlength')}} </div>
+                            <div *ngIf="isError('email','minlength')" class="text-danger">
+                                {{errorMessage('email','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}" formControlName="mobile" />
+                        <!-- Password Validation -->
+                        <div *ngIf="formTouched('mobile')">
+                            <div *ngIf="isError('mobile','required')" class="text-danger">
+                                {{errorMessage('mobile','required')}}
+                            </div>
+                            <div *ngIf="isError('mobile','pattern')" class="text-danger">
+                                {{errorMessage('mobile','pattern')}} </div>
+                            <div *ngIf="isError('mobile','maxlength')" class="text-danger">
+                                {{errorMessage('mobile','maxlength')}} </div>
+                            <div *ngIf="isError('mobile','minlength')" class="text-danger">
+                                {{errorMessage('mobile','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row">
+        
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="username">User Name</label>
+                        <input autocomplete="off" type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}" formControlName="username"
+                            autocomplete="off" name="randomName1">
+                        <!-- User Name Validation -->
+                        <div *ngIf="formTouched('username')">
+                            <div *ngIf="isError('username','required')" class="text-danger">
+                                {{errorMessage('username','required')}}
+                            </div>
+                            <div *ngIf="isError('username','pattern')" class="text-danger">
+                                {{errorMessage('username','pattern')}} </div>
+                            <div *ngIf="isError('username','maxlength')" class="text-danger">
+                                {{errorMessage('username','maxlength')}} </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                            [ngClass]="{ 'form-error':showError('password'),'form-success':showSuccess('password')}"
+                            formControlName="password" />
+                        <!-- Password Validation -->
+                        <div *ngIf="formTouched('password')">
+                            <div *ngIf="isError('password','required')" class="text-danger">
+                                {{errorMessage('password','required')}}
+                            </div>
+                            <div *ngIf="isError('password','pattern')" class="text-danger">
+                                {{errorMessage('password','pattern')}} </div>
+                            <div *ngIf="isError('password','maxlength')" class="text-danger">
+                                {{errorMessage('password','maxlength')}} </div>
+                            <div *ngIf="isError('password','minlength')" class="text-danger">
+                                {{errorMessage('password','minlength')}} </div>
+                        </div>
+                        </div>
+                        </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
