@@ -74,7 +74,7 @@
                                     </td>
                                     <td class="pointer" (click)="routeToViewDevice(data.id)">{{data.code}}</td>
                                     <td>
-                                        {{ data.room ? data.room : '-' }}
+                                        {{ data?.room?.name ? data?.room?.name : '-' }}
                                     </td>
                                     <td>
                                         <span class="badge badge-pill badge-soft-success font-size-11"

@@ -26,14 +26,16 @@ export class DeviceService {
 			);
 	}
 
-	addRole(roleForm: FormGroup) {
-		const { account, roleName, permissions } = roleForm.value;
+	addDevice(deviceForm: FormGroup) {
+		const { account, site, room, deviceName, status } = deviceForm.value;
 
 		return this.http
-			.post(ROLE.ADD_ROLE, {
+			.post(DEVICE.ADD_DEVICE, {
 				accountId: account,
-				name: roleName,
-				permissions: permissions,
+				code: deviceName,
+				roomId: room,
+				siteId: site,
+				status: status ? 1 : 0,
 			})
 			.toPromise()
 			.then((response) => {
@@ -42,9 +44,9 @@ export class DeviceService {
 			});
 	}
 
-	viewRole(roleId: any) {
+	viewDevice(deviceId: any) {
 		return this.http
-			.get(ROLE.VIEW_ROLE + roleId)
+			.get(DEVICE.VIEW_DEVICE + deviceId)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));
@@ -52,16 +54,15 @@ export class DeviceService {
 			});
 	}
 
-	updateSite(userForm: any) {
-		const { id, siteName, siteAddress, type, wifiDetails } = userForm.value;
+	updateDevice(deviceForm: any) {
+		const { id, room, deviceName, status } = deviceForm.value;
 
 		return this.http
-			.put(SITE.UPDATE_SITE, {
+			.put(DEVICE.UPDATE_DEVICE, {
 				id: id,
-				name: siteName,
-				type: parseInt(type),
-				address: siteAddress,
-				wifiDetails: wifiDetails,
+				code: deviceName,
+				roomId: room,
+				status: status,
 			})
 			.toPromise()
 			.then((response) => {

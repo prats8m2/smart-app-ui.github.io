@@ -1,1 +1,82 @@
-<p>edit-device works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListDevice()"></i>
+            <h4 class="card-title mb-4">Update Device</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="updateDevice()" [formGroup]="deviceForm" class="role-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
+                    <input type="text" class="form-control" formControlName="site">
+                </div>
+            </div>
+            <!--Third Row -->
+            <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListRooms">
+                <div class="col-md-6 mb-4">
+                    <select class="form-select" id="room" aria-label="Room" formControlName="room"
+                        (change)="changeSiteData($event.target.value)">
+                        <option selected disabled hidden>Room</option>
+                        <ng-container *ngIf="roomList.length > 0; else noData">
+                            <option *ngFor="let data of roomList" [value]="data.id">
+                                {{ data.name }}
+                            </option>
+                        </ng-container>
+                        <ng-template #noData>
+                            <option disabled>No room available</option>
+                        </ng-template>
+                    </select>
+                </div>
+            </div>
+            <h6 class="mb-2">Device Details</h6>
+            <!-- Forth Row -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="deviceName">Device Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('deviceName'),'form-success':showSuccess('deviceName') }"
+                        formControlName="deviceName">
+                    <!-- Site Name Validation -->
+                    <div *ngIf="formTouched('deviceName')">
+                        <div *ngIf="isError('deviceName','required')" class="text-danger">
+                            {{errorMessage('deviceName','required')}}
+                        </div>
+                        <div *ngIf="isError('deviceName','pattern')" class="text-danger">
+                            {{errorMessage('deviceName','pattern')}} </div>
+                        <div *ngIf="isError('deviceName','maxlength')" class="text-danger">
+                            {{errorMessage('deviceName','maxlength')}} </div>
+                        <div *ngIf="isError('deviceName','minlength')" class="text-danger">
+                            {{errorMessage('deviceName','minlength')}} </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Device Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                            formControlName="status" [checked]="this.deviceForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.deviceForm.status ? 'Active' :
+                            'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="deviceForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

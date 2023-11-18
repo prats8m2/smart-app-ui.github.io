@@ -62,4 +62,10 @@ export const errorMessages = {
 		minlength: 'Role name must be at least 5 character long.',
 		pattern: 'Role name must be alpha numeric with "_" or "-"',
 	},
+	deviceName: {
+		required: 'Device name is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Device name must be at least 5 character long.',
+		pattern: 'Device name must be alpha numeric with "_" or "-"',
+	},
 };
