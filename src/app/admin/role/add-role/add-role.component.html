@@ -46,7 +46,7 @@
                 <div class="col-container">
                     <div class="col-md-12 mb-4">
                         <h6>Permissions</h6>
-                        <div formGroupName="permissions" class="row">
+                        <div formGroupName="userPermissions" class="row">
                             <div *ngFor="let key of permissionsData | keys" class="col-md-6 mt-3">
                                 <label for="rolePermissions">{{ key }}</label>
                                 <div formArrayName="{{ key }}">

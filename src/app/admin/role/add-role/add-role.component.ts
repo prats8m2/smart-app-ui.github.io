@@ -59,14 +59,14 @@ export class AddRoleComponent implements OnInit {
 			this.roleForm = this.formBuilder.group({
 				account: [null],
 				roleName: ['', ROLE_NAME_VALIDATION],
-				permissions: this.formBuilder.group({}),
+				userPermissions: this.formBuilder.group({}),
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
 			this.roleForm = this.formBuilder.group({
 				account: [null],
 				roleName: ['Role-' + randomNumber, ROLE_NAME_VALIDATION],
-				permissions: this.formBuilder.group({}),
+				userPermissions: this.formBuilder.group({}),
 			});
 
 			this.listPermissionsAPI(this.permissionParams);
@@ -85,8 +85,8 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	initialisePermissions() {
-		this.roleForm.get('permissions').setValidators(Validators.required);
-		this.roleForm.get('permissions').updateValueAndValidity();
+		this.roleForm.get('userPermissions').setValidators(Validators.required);
+		this.roleForm.get('userPermissions').updateValueAndValidity();
 		Object.keys(this.permissionsData).forEach((key) => {
 			const formArray = this.permissionsData[key].map((permission) => {
 				return this.formBuilder.group({
@@ -95,7 +95,7 @@ export class AddRoleComponent implements OnInit {
 				});
 			});
 
-			(this.roleForm.get('permissions') as FormGroup).addControl(
+			(this.roleForm.get('userPermissions') as FormGroup).addControl(
 				key,
 				this.formBuilder.array(formArray)
 			);
@@ -103,7 +103,7 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	getFormControl(category: string, index: number): FormControl {
-		const formArray = (this.roleForm.get('permissions') as FormGroup).get(
+		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
 			category
 		) as FormArray;
 		const formGroup = formArray.controls[index] as FormGroup;
@@ -142,10 +142,10 @@ export class AddRoleComponent implements OnInit {
 	addRole() {
 		const selectedPermissions = {};
 		const transformedPermissionsData: any[] = [];
-		const originalPermissionsData = this.roleForm.get('permissions').value;
+		const originalPermissionsData = this.roleForm.get('userPermissions').value;
 
-		Object.keys(this.roleForm.value.permissions).forEach((key) => {
-			selectedPermissions[key] = this.roleForm.value.permissions[key]
+		Object.keys(originalPermissionsData).forEach((key) => {
+			selectedPermissions[key] = this.roleForm.value.userPermissions[key]
 				.filter((permission) => permission[Object.keys(permission)[0]])
 				.map((permission) => permission[Object.keys(permission)[0]]);
 		});
@@ -171,18 +171,18 @@ export class AddRoleComponent implements OnInit {
 			});
 		});
 
-		this.roleForm.get('permissions').patchValue(transformedPermissionsData);
-		this.roleForm.setControl('p', new FormControl(transformedPermissionsData));
-		console.log(this.roleForm.value);
-		// this.roleForm.get('permissions').patchValue(transformedPermissionsData);
+		this.roleForm.setControl(
+			'permissions',
+			new FormControl(transformedPermissionsData)
+		);
 
-		// this.roleService.addRole(this.roleForm).then((res) => {
-		// 	if (res.status) {
-		// 		this.router.navigate([URL_ROUTES.LIST_ROLE]);
-		// 	} else {
-		// 		console.log('error');
-		// 	}
-		// });
+		this.roleService.addRole(this.roleForm).then((res) => {
+			if (res.status) {
+				this.router.navigate([URL_ROUTES.LIST_ROLE]);
+			} else {
+				console.log('error');
+			}
+		});
 	}
 
 	changeAccountData(accountId: any) {

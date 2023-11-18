@@ -52,16 +52,15 @@ export class RoleService {
 			});
 	}
 
-	updateSite(userForm: any) {
-		const { id, siteName, siteAddress, type, wifiDetails } = userForm.value;
+	updateRole(roleForm: any) {
+		const { id, account, roleName, permissions } = roleForm.value;
 
 		return this.http
-			.put(SITE.UPDATE_SITE, {
+			.put(ROLE.UPDATE_ROLE, {
 				id: id,
-				name: siteName,
-				type: parseInt(type),
-				address: siteAddress,
-				wifiDetails: wifiDetails,
+				accountId: account,
+				name: roleName,
+				permissions: permissions,
 			})
 			.toPromise()
 			.then((response) => {

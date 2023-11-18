@@ -16,6 +16,8 @@ export class DialogService {
 			confirmButtonColor: '#34c38f',
 			cancelButtonColor: '#f46a6a',
 			confirmButtonText: 'Yes, delete!',
+			allowOutsideClick: false,
+			showCloseButton: true,
 		});
 		return result;
 	}

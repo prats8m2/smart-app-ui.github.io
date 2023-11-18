@@ -129,10 +129,6 @@ export class EditSiteComponent {
 	}
 
 	getSite() {
-		// const wifiDetailsData = [
-		// 	{ username: 'User1', password: 'Pass1' },
-		// 	{ username: 'User2', password: 'Pass2' },
-		// ];
 		this.activatedRoute.params.subscribe((params) => {
 			let siteId = params['id'];
 			console.log("params['id'];:", params);

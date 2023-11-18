@@ -25,6 +25,7 @@ export const ROLE = {
 	VIEW_ROLE: '/role/get/',
 	DELETE_ROLE: '/role/delete/',
 	LIST_PERMISSIONS: '/role/permissions/list',
+	UPDATE_ROLE: '/role/update',
 };
 
 export const STAFF = {
