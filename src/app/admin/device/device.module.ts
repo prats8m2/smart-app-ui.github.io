@@ -16,7 +16,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		ListDeviceComponent,
 		EditDeviceComponent,
 		ViewDeviceComponent,
-		StatusPipe,
 	],
 	imports: [
 		FormsModule,

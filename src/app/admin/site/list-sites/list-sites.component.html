@@ -19,6 +19,7 @@
                             </div>
                             <div class="col-sm-6" *ngIf="showListAccount">
                                 <ng-select  
+                                [ngModel]="accountList[0].account.id"
                                 [items]="accountList" 
                                 bindLabel="account.name"
                                 bindValue="account.id" 

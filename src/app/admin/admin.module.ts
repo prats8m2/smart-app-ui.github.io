@@ -22,9 +22,10 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DashboardsModule } from './dashboards/dashboards.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
+import { StatusPipe } from '../core/pipes/status.pipe';
 
 @NgModule({
-	declarations: [],
+	declarations: [StatusPipe],
 	imports: [
 		CommonModule,
 		FormsModule,

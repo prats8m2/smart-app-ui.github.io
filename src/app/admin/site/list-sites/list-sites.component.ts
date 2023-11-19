@@ -51,6 +51,8 @@ export class ListSitesComponent {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
+					this.siteParams.accountId = this.accountList[0].account.id;
+					this.listSiteAPI(this.siteParams);
 				}
 			});
 		} else {
