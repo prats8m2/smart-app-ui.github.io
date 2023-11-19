@@ -16,6 +16,7 @@
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
                                 <ng-select  
+                                [ngModel]="accountList[0]?.account?.id"
                                 [items]="accountList" 
                                 bindLabel="account.name"
                                 bindValue="account.id" 
@@ -24,6 +25,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <ng-select  
+                                [ngModel]="roleList[0]?.id"
                                 [items]="roleList" 
                                 bindLabel="name"
                                 bindValue="id" 

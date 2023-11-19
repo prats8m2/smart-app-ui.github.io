@@ -21,7 +21,7 @@
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
                     <ng-select [items]="siteList" bindLabel="name" bindValue="id" [placeholder]="'Site'"
-                        [multiple]="true"></ng-select>
+                        [multiple]="true" formControlName="site"></ng-select>
                 </div>
             </div>
             <!--Third Row -->

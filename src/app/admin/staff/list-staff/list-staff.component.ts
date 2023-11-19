@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { RoleService } from '../../role/service/role.service';
 import { StaffService } from '../service/staff.service';
+import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-list-staff',
@@ -22,7 +23,8 @@ export class ListStaffComponent implements OnInit {
 		private globalService: GlobalService,
 		private dialogService: DialogService,
 		private roleService: RoleService,
-		private staffService: StaffService
+		private staffService: StaffService,
+		private siteService: SiteService
 	) {}
 
 	showListAccount: boolean =
@@ -72,6 +74,8 @@ export class ListStaffComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
+					this.roleParams.accountId = this.accountList[0].account.id;
+					this.listRoleAPI(this.roleParams);
 				}
 			});
 		} else {
@@ -137,6 +141,8 @@ export class ListStaffComponent implements OnInit {
 		this.roleService.listRoles(params).subscribe((res) => {
 			if (res.status) {
 				this.roleList = [...res.data.roles];
+				this.staffParams.roleId = this.roleList[0].id;
+				this.listStaffAPI(this.staffParams);
 			}
 		});
 	}
