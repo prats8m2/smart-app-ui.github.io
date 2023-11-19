@@ -10,7 +10,7 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="accountList" bindLabel="account.name" bindValue="account.id"
+                    <ng-select [items]="accountList" [ngModel]="accountList[0].account.id" bindLabel="account.name" bindValue="account.id"
                         (change)="changeAccountData($event.account.id)" [placeholder]="'Account'"
                         formControlName="account"></ng-select>
                 </div>
@@ -20,7 +20,7 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList" bindLabel="name" bindValue="id" [placeholder]="'Site'"
+                    <ng-select [items]="siteList" [ngModel]="[siteList[0].id]" bindLabel="name" bindValue="id" [placeholder]="'Site'"
                         [multiple]="true" formControlName="site"></ng-select>
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRole">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="roleList" bindLabel="name" bindValue="id" [placeholder]="'Role'"
+                    <ng-select [items]="roleList" [ngModel]="roleList[0].id" bindLabel="name" bindValue="id" [placeholder]="'Role'"
                         formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
                 </div>
             </div>
