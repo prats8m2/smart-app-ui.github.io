@@ -46,7 +46,7 @@ export const MENU: MenuItem[] = [
 		id: 7,
 		label: 'Room',
 		icon: 'bx-hotel',
-		link: '/list-room',
+		link: '/admin/rooms/list-rooms',
 		permission: 'LIST-ROOM',
 	},
 	{

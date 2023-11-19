@@ -5,6 +5,10 @@ import { EditStaffComponent } from './edit-staff/edit-staff.component';
 import { ViewStaffComponent } from './view-staff/view-staff.component';
 import { ListStaffComponent } from './list-staff/list-staff.component';
 import { StaffRoutingModule } from './staff-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -13,6 +17,13 @@ import { StaffRoutingModule } from './staff-routing.module';
 		ViewStaffComponent,
 		ListStaffComponent,
 	],
-	imports: [CommonModule, StaffRoutingModule],
+	imports: [
+		CommonModule,
+		StaffRoutingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		PaginationModule.forRoot(),
+		NgSelectModule,
+	],
 })
 export class StaffModule {}

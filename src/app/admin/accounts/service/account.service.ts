@@ -53,7 +53,7 @@ export class AccountService {
 			);
 	}
 
-	deleteUser(id: number) {
+	deleteAccount(id: number) {
 		return this.http
 			.delete(USER.DELETE_USER + id.toString())
 			.toPromise()

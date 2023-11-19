@@ -25,10 +25,10 @@ export const URL_ROUTES = {
 	ACCESS_DENIED: '/denied',
 
 	//staff
-	ADD_STAFF: '/add-staff',
-	EDIT_STAFF: '/edit-staff',
-	VIEW_STAFF: '/view-staff/',
-	LIST_STAFF: '/list-staff',
+	ADD_STAFF: 'admin/staffs/add-staff',
+	EDIT_STAFF: 'admin/staffs/edit-staff',
+	VIEW_STAFF: 'admin/staffs/view-staff',
+	LIST_STAFF: 'admin/staffs/list-staffs',
 
 	//devices
 	ADD_DEVICE: 'admin/devices/add-device',
@@ -37,8 +37,8 @@ export const URL_ROUTES = {
 	LIST_DEVICE: 'admin/devices/list-devices',
 
 	//room
-	ADD_ROOM: '/add-room',
-	EDIT_ROOM: '/edit-room',
-	VIEW_ROOM: '/view-room/',
-	LIST_ROOM: '/list-room',
+	ADD_ROOM: 'admin/rooms/add-room',
+	EDIT_ROOM: 'admin/rooms/edit-room',
+	VIEW_ROOM: 'admin/rooms/view-room',
+	LIST_ROOM: 'admin/rooms/list-room',
 };

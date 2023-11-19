@@ -18,6 +18,11 @@ export const errorMessages = {
 		minlength: 'Last Name must be at least 1 character long.',
 		pattern: 'Last Name must be alpha numeric only',
 	},
+	username: {
+		required: 'Username is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		pattern: 'Username must be alpha numeric only',
+	},
 	email: {
 		required: 'Email is required.',
 		pattern: 'Invalid Email',
@@ -25,7 +30,7 @@ export const errorMessages = {
 	password: {
 		required: 'Password is required.',
 		maxlength: 'Maximum length exceeded (30 characters maximum).',
-		minlength: 'Last Name must be at least 6 character long.',
+		minlength: 'Password must be at least 6 character long.',
 		pattern: 'Invalid Password',
 	},
 	mobile: {
@@ -54,11 +59,18 @@ export const errorMessages = {
 		required: 'Site Address is required.',
 		maxlength: 'Maximum length exceeded (30 characters maximum).',
 		minlength: 'Address must be at least 5 character long.',
+		pattern: 'Role name must be alpha numeric with "_" or "-"',
 	},
 	roleName: {
 		required: 'Role name is required.',
 		maxlength: 'Maximum length exceeded (30 characters maximum).',
 		minlength: 'Role name must be at least 5 character long.',
 		pattern: 'Role name must be alpha numeric with "_" or "-"',
+	},
+	deviceName: {
+		required: 'Device name is required.',
+		maxlength: 'Maximum length exceeded (30 characters maximum).',
+		minlength: 'Device name must be at least 5 character long.',
+		pattern: 'Device name must be alpha numeric with "_" or "-"',
 	},
 };

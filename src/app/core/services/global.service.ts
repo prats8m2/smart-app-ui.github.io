@@ -30,7 +30,7 @@ export class GlobalService {
 					toast: true,
 					position: 'top-end',
 					showConfirmButton: false,
-					timer: 2000,
+					timer: 20000,
 				});
 				return true;
 			}

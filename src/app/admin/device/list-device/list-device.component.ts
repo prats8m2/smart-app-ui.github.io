@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
@@ -6,11 +6,13 @@ import { SiteService } from '../../site/service/site.service';
 import { IParams } from 'src/app/core/interface/params';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { DeviceService } from '../service/device.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-device',
 	templateUrl: './list-device.component.html',
 	styleUrls: ['./list-device.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ListDeviceComponent implements OnInit {
 	sitesList: any = [];
@@ -19,10 +21,12 @@ export class ListDeviceComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private deviceService: DeviceService
+		private deviceService: DeviceService,
+		private dialogService: DialogService
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddDevice: boolean = this.globalService.checkForPermission('ADD-DEVICE');
 
 	accountParams: IParams = {
@@ -108,7 +112,6 @@ export class ListDeviceComponent implements OnInit {
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
-				console.log(res);
 				this.sitesList = [...res.data.sites];
 			}
 		});
@@ -123,6 +126,19 @@ export class ListDeviceComponent implements OnInit {
 			if (res.status) {
 				this.deviceListResp = [...res.data.devices];
 				this.updateDisplayedData();
+			}
+		});
+	}
+
+	openConfirmDialog(deviceId: any) {
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete device API
+				this.deviceService.deleteDevice(deviceId).then((res: any) => {
+					if (res.status) {
+						this.listDeviceAPI(this.deviceParams);
+					}
+				});
 			}
 		});
 	}

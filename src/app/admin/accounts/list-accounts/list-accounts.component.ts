@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { IParams } from '../../../core/interface/params';
 import { URL_ROUTES } from '../../../constants/routing';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-accounts',
@@ -14,7 +15,8 @@ export class ListAccountsComponent {
 	constructor(
 		public accountService: AccountService,
 		private router: Router,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private dialogService: DialogService
 	) {}
 
 	usersList: any = [];
@@ -28,9 +30,6 @@ export class ListAccountsComponent {
 		this.globalService.checkForPermission('UPDATE-ACCOUNT');
 	showDeleteButton: boolean =
 		this.globalService.checkForPermission('DELETE-ACCOUNT');
-
-	showConfirmDialog = false;
-	confirmMessage = 'Are you sure you want to perform this action?';
 
 	userParams: IParams = {
 		limit: 100,
@@ -91,34 +90,20 @@ export class ListAccountsComponent {
 	}
 
 	onSearch(): void {
-		this.currentPage = 1; // Reset to the first page when performing a new search
+		this.currentPage = 1;
 		this.updateDisplayedData();
 	}
 
-	deleteAccount(id: any) {
-		this.accountService.deleteUser(id).then((res) => {
-			if (res.status) {
-				console.log('Account deleted successfully');
-				this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
-				this;
-			} else {
-				console.log('Error in deleting account');
+	openConfirmDialog(accountId: any) {
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete account API
+				this.accountService.deleteAccount(accountId).then((res: any) => {
+					if (res.status) {
+						this.listUserAPI();
+					}
+				});
 			}
 		});
-	}
-
-	openConfirmDialog() {
-		console.log('QQQQQ');
-		this.showConfirmDialog = true;
-	}
-
-	onConfirm() {
-		console.log('Confirmed');
-		this.showConfirmDialog = false;
-	}
-
-	onCancel() {
-		console.log('Canceled');
-		this.showConfirmDialog = false;
 	}
 }

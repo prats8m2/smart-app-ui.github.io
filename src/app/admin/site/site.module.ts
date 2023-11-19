@@ -8,6 +8,7 @@ import { SitesRoutingModule } from './site-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
 		CommonModule,
 		SitesRoutingModule,
 		PaginationModule.forRoot(),
+		NgSelectModule,
 	],
 })
 export class SitesModule {}

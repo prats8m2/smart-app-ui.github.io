@@ -4,9 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { PagetitleComponent } from './pagetitle/pagetitle.component';
 import { LoaderComponent } from './loader/loader.component';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 @NgModule({
-	declarations: [PagetitleComponent, LoaderComponent, ConfirmDialogComponent],
+	declarations: [PagetitleComponent, LoaderComponent],
 	imports: [CommonModule, FormsModule],
 	exports: [PagetitleComponent, LoaderComponent],
 })

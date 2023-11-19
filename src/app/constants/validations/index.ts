@@ -64,3 +64,10 @@ export const ROLE_NAME_VALIDATION = [
 	Validators.pattern('[a-zA-Z0-9_-]+$'),
 	Validators.minLength(5),
 ];
+
+export const DEVICE_NAME_VALIDATION = [
+	Validators.required,
+	Validators.maxLength(30),
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
+	Validators.minLength(5),
+];

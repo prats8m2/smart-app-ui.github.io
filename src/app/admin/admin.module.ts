@@ -20,7 +20,7 @@ import { UIModule } from '../shared/ui/ui.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 import { DashboardsModule } from './dashboards/dashboards.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({

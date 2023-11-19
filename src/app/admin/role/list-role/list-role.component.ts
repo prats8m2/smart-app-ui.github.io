@@ -1,27 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { SiteService } from '../../site/service/site.service';
 import { RoleService } from '../service/role.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-role',
 	templateUrl: './list-role.component.html',
 	styleUrls: ['./list-role.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ListRoleComponent {
 	constructor(
 		public accountService: AccountService,
 		private router: Router,
 		private globalService: GlobalService,
-		private siteServices: SiteService,
-		private roleService: RoleService
+		private roleService: RoleService,
+		private dialogService: DialogService
 	) {}
 
-	showListAccount: boolean = this.globalService.checkForPermission('LIST-USER');
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRole: boolean = this.globalService.checkForPermission('ADD-ROLE');
 
 	accountParams: IParams = {
@@ -103,7 +105,17 @@ export class ListRoleComponent {
 			}
 		});
 	}
-	confirm(i: any) {
-		console.log('111');
+
+	openConfirmDialog(roleId: any) {
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete role API
+				this.roleService.deleteRole(roleId).then((res: any) => {
+					if (res.status) {
+						this.listRoleAPI(this.roleParams);
+					}
+				});
+			}
+		});
 	}
 }

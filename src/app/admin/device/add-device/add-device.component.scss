@@ -1,0 +1,61 @@
+.permission-groups {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-group {
+    width: 50%;
+  }
+  
+  .permission-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .role-form{
+    max-height: 450px;
+    overflow-y:scroll;
+
+  }
+
+  .role-form::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+  
+  /* Hide the scrollbar for Firefox */
+  .role-form {
+    scrollbar-width: none;
+  }
+  
+  /* Hide the scrollbar for IE/Edge */
+  .role-form {
+    -ms-overflow-style: none;
+  }
+
+  .permissions-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-group {
+    width: 50%; 
+    box-sizing: border-box;
+    padding: 0 15px; 
+  }
+  
+  .permission-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+  }
+  
+  .permission-item input {
+    margin-right: 5px; 
+  }
+  

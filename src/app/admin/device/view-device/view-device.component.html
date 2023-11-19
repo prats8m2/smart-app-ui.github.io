@@ -1,1 +1,47 @@
-<p>view-device works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListDevice()"></i>
+            <h4 class="card-title mb-4">View Device</h4>
+        </div>
+        <!-- Form Start -->
+        <form [formGroup]="deviceForm" class="role-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
+                    <input type="text" class="form-control" formControlName="site">
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2">Device Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="deviceName">Device Name</label>
+                    <input type="text" class="form-control" formControlName="deviceName">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="deviceStatus">Device Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" formControlName="status"
+                            [checked]="this.deviceForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.deviceForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6>
+            <!--Third Row -->
+            <div class="row" *ngIf="showListRooms">
+                <!-- Room Name -->
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Room Name</label>
+                    <input type="text" class="form-control" formControlName="room">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
