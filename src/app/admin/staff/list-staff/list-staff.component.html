@@ -15,32 +15,20 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                <select class="form-select" id="siteType" aria-label="Site Type"
-                                    (change)="changeAccountData($event.target.value)">
-                                    <option selected disabled hidden>Account</option>
-                                    <ng-container *ngIf="accountList.length > 0; else noData">
-                                        <option *ngFor="let acc of accountList" [value]="acc.account.id">
-                                            {{ acc.account.name }}
-                                        </option>
-                                    </ng-container>
-                                    <ng-template #noData>
-                                        <option disabled>No account available</option>
-                                    </ng-template>
-                                </select>
+                                <ng-select  
+                                [items]="accountList" 
+                                bindLabel="account.name"
+                                bindValue="account.id" 
+                                (change)="changeAccountData($event.account.id)"
+                             [placeholder]="'Account'"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <select class="form-select" id="role" aria-label="Role"
-                                    (change)="changeRoleData($event.target.value)">
-                                    <option selected disabled hidden>Role</option>
-                                    <ng-container *ngIf="roleList.length > 0; else noData">
-                                        <option *ngFor="let role of roleList" [value]="role.id">
-                                            {{ role.name }}
-                                        </option>
-                                    </ng-container>
-                                    <ng-template #noData>
-                                        <option disabled>No role available</option>
-                                    </ng-template>
-                                </select>
+                                <ng-select  
+                                [items]="roleList" 
+                                bindLabel="name"
+                                bindValue="id" 
+                                (change)="changeRoleData($event.id)"
+                             [placeholder]="'Role'"></ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6" *ngIf="showAddStaff">

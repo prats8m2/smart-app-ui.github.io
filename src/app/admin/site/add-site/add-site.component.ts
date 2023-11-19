@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment';
 	selector: 'app-add-site',
 	templateUrl: './add-site.component.html',
 	styleUrls: ['./add-site.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class AddSiteComponent {
 	isProduction = environment.production;

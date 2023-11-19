@@ -16,7 +16,6 @@ import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
 		EditRoomComponent,
 		ListRoomComponent,
 		ViewRoomComponent,
-		StatusPipe,
 		RoomOccupiedPipe,
 	],
 	imports: [

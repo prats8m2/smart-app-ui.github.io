@@ -8,6 +8,7 @@ import { StaffRoutingModule } from './staff-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -15,7 +16,6 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		EditStaffComponent,
 		ViewStaffComponent,
 		ListStaffComponent,
-		StatusPipe,
 	],
 	imports: [
 		CommonModule,
@@ -23,6 +23,7 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		FormsModule,
 		ReactiveFormsModule,
 		PaginationModule.forRoot(),
+		NgSelectModule,
 	],
 })
 export class StaffModule {}

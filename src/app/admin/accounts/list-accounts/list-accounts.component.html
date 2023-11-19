@@ -53,8 +53,6 @@
                                             [ngClass]=" { 'badge-soft-danger': data.account.status === 0 }">{{data.account.status |
                                             transformStatus}}</span>
                                     </td>
-
-
                                     <td>
                                         <div class="d-flex gap-3">
                                             <span class="text-success pointer" *ngIf="showEditButton" (click)="routeToEditAccount(data.id)"><i

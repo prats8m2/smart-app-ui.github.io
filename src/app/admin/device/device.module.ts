@@ -8,6 +8,7 @@ import { ListDeviceComponent } from './list-device/list-device.component';
 import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { ViewDeviceComponent } from './view-device/view-device.component';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		CommonModule,
 		DeviceRoutingModule,
 		PaginationModule.forRoot(),
+		NgSelectModule,
 	],
 })
 export class DeviceModule {}

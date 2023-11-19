@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
@@ -12,6 +12,7 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 	selector: 'app-list-device',
 	templateUrl: './list-device.component.html',
 	styleUrls: ['./list-device.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ListDeviceComponent implements OnInit {
 	sitesList: any = [];

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DefaultRolePipe } from 'src/app/core/pipes/defaultRole.pipe';
 import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
 		CommonModule,
 		RoleRoutingModule,
 		PaginationModule.forRoot(),
+		NgSelectModule,
 	],
 })
 export class RoleModule {}

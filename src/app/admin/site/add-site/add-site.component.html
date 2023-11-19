@@ -10,15 +10,14 @@
                     <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
                     <div class="row" *ngIf="showListAccount">
               <div class="col-md-6 mb-4">
-                <select class="form-select" id="account" aria-label="Account"  formControlName="account">
-                  <option selected disabled hidden>Account</option>
-                  <option *ngFor="let acc of accountList" [value]="acc.account.id" >
-                      {{ acc.account.name }}
-                  </option>   
-                  </select>
+              <ng-select  
+                  [items]="accountList" 
+                  bindLabel="account.name"
+                  bindValue="account.id" 
+                  formControlName="account"
+               [placeholder]="'Account'"></ng-select>
               </div>
-          </div>
-                    
+          </div>    
                     <h6 class="mb-2">Site Details</h6>
                     <!-- Second Row -->
                     <div class="row">
@@ -64,12 +63,11 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <label for="siteType">Site Type</label>
-                <select class="form-select" id="siteType" aria-label="Site Type"  formControlName="type">
-                  <option selected disabled hidden>Select Type</option>
-                  <option *ngFor="let site of siteTypes" [value]="site.id">
-                    {{ site.label }}
-                  </option>   
-                  </select>
+                  <ng-select  
+                  [items]="siteTypes" 
+                  bindLabel="label"
+                  bindValue="id" formControlName="type"
+               [placeholder]="'Site'"></ng-select>
             </div>
             </div>
 

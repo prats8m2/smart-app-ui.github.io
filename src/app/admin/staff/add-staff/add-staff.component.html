@@ -10,19 +10,9 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-
-                    <select class="form-select" id="siteType" aria-label="Site Type"
-                        (change)="changeAccountData($event.target.value)">
-                        <option selected disabled hidden>Account</option>
-                        <ng-container *ngIf="accountList.length > 0; else noData">
-                            <option *ngFor="let acc of accountList" [value]="acc.account.id">
-                                {{ acc.account.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No account available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select [items]="accountList" bindLabel="account.name" bindValue="account.id"
+                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'"
+                        formControlName="account"></ng-select>
                 </div>
             </div>
             <!-- Second Row -->
@@ -30,43 +20,19 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="site" aria-label="Site" formControlName="site" multiple
-                        (change)="changeSiteData($event)">
-                        <option selected disabled hidden>Site</option>
-                        <ng-container *ngIf="siteList.length > 0; else noData">
-                            <option *ngFor="let data of siteList" [value]="data.id">
-                                {{ data.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No site available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select [items]="siteList" bindLabel="name" bindValue="id" [placeholder]="'Site'"
+                        [multiple]="true"></ng-select>
                 </div>
             </div>
-
             <!--Third Row -->
-
             <h6 class="mb-2" *ngIf="showListRole">Role Details</h6>
             <!-- Site Name -->
             <div class="row" *ngIf="showListRole">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="room" aria-label="Role" formControlName="role"
-                        (change)="changeRoleData($event.target.value)">
-                        <option selected disabled hidden>Role</option>
-                        <ng-container *ngIf="roleList.length > 0; else noData">
-                            <option *ngFor="let data of roleList" [value]="data.id">
-                                {{ data.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No room available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select [items]="roleList" bindLabel="name" bindValue="id" [placeholder]="'Role'"
+                        formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
                 </div>
             </div>
-
-
             <h6 class="mb-2">Staff Details</h6>
             <!-- Forth Row -->
             <div class="row">
@@ -90,13 +56,14 @@
                                 {{errorMessage('firstName','minlength')}} </div>
                         </div>
                     </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Last Name -->
+                </div>
+                <div class="col-lg-6">
+                    <!-- Last Name -->
                     <div class="mb-3">
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}" formControlName="lastName">
+                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}"
+                            formControlName="lastName">
                         <!-- Last Name Validation -->
                         <div *ngIf="formTouched('lastName')">
                             <div *ngIf="isError('lastName','required')" class="text-danger">
@@ -110,15 +77,15 @@
                                 {{errorMessage('lastName','minlength')}} </div>
                         </div>
                     </div>
-                    </div>
-                    </div>
-                    <div class="row">
-        
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control"
-                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}" formControlName="email">
+                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}"
+                            formControlName="email">
                         <!-- Email Validation -->
                         <div *ngIf="formTouched('email')">
                             <div *ngIf="isError('email','required')" class="text-danger">
@@ -137,7 +104,8 @@
                     <div class="mb-3">
                         <label for="mobile">Mobile</label>
                         <input type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}" formControlName="mobile" />
+                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}"
+                            formControlName="mobile" />
                         <!-- Password Validation -->
                         <div *ngIf="formTouched('mobile')">
                             <div *ngIf="isError('mobile','required')" class="text-danger">
@@ -153,15 +121,13 @@
                     </div>
                 </div>
             </div>
-        
             <div class="row">
-        
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="username">User Name</label>
                         <input autocomplete="off" type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}" formControlName="username"
-                            autocomplete="off" name="randomName1">
+                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}"
+                            formControlName="username" autocomplete="off" name="randomName1">
                         <!-- User Name Validation -->
                         <div *ngIf="formTouched('username')">
                             <div *ngIf="isError('username','required')" class="text-danger">
@@ -172,7 +138,7 @@
                             <div *ngIf="isError('username','maxlength')" class="text-danger">
                                 {{errorMessage('username','maxlength')}} </div>
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -192,8 +158,8 @@
                             <div *ngIf="isError('password','minlength')" class="text-danger">
                                 {{errorMessage('password','minlength')}} </div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid">Submit</button>

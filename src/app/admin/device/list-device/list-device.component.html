@@ -15,32 +15,22 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                <select class="form-select" id="siteType" aria-label="Site Type"
-                                    (change)="changeAccountData($event.target.value)">
-                                    <option selected disabled hidden>Account</option>
-                                    <ng-container *ngIf="accountList.length > 0; else noData">
-                                        <option *ngFor="let acc of accountList" [value]="acc.account.id">
-                                            {{ acc.account.name }}
-                                        </option>
-                                    </ng-container>
-                                    <ng-template #noData>
-                                        <option disabled>No account available</option>
-                                    </ng-template>
-                                </select>
+                                
+
+                                <ng-select  
+                                [items]="accountList" 
+                                bindLabel="account.name"
+                                bindValue="account.id" 
+                                (change)="changeAccountData($event.account.id)"
+                             [placeholder]="'Account'"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <select class="form-select" id="site" aria-label="Site"
-                                    (change)="changeSitesData($event.target.value)">
-                                    <option selected disabled hidden>Site</option>
-                                    <ng-container *ngIf="sitesList.length > 0; else noData">
-                                        <option *ngFor="let site of sitesList" [value]="site.id">
-                                            {{ site.name }}
-                                        </option>
-                                    </ng-container>
-                                    <ng-template #noData>
-                                        <option disabled>No site available</option>
-                                    </ng-template>
-                                </select>
+                                <ng-select  
+                                [items]="sitesList" 
+                                bindLabel="name"
+                                bindValue="id" 
+                                (change)="changeSitesData($event.id)"
+                             [placeholder]="'Site'"></ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6" *ngIf="showAddDevice">

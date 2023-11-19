@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
 	FormGroup,
 	FormBuilder,
 	Validators,
 	FormControl,
+	FormArray,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -35,6 +36,7 @@ import { StaffService } from '../service/staff.service';
 	selector: 'app-add-staff',
 	templateUrl: './add-staff.component.html',
 	styleUrls: ['./add-staff.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class AddStaffComponent implements OnInit {
 	isProduction = environment.production;
@@ -172,9 +174,6 @@ export class AddStaffComponent implements OnInit {
 		this.listRoleAPI(this.roleParams);
 	}
 
-	changeSiteData(siteId: any) {
-		this.staffForm.get('site').patchValue({ id: siteId });
-	}
 	changeRoleData(roleId: any) {
 		this.staffForm.get('role').patchValue(roleId);
 	}
@@ -192,5 +191,8 @@ export class AddStaffComponent implements OnInit {
 	toggle(): void {
 		const statusControl = this.staffForm.get('status') as FormControl;
 		statusControl.setValue(!statusControl.value);
+	}
+	getValue() {
+		console.log(this.staffForm.value);
 	}
 }

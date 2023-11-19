@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { IParams } from '../../../core/interface/params';
-import { SiteService } from '../../site/service/site.service';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/core/services/dialog.service';
-import { DeviceService } from '../../device/service/device.service';
 import { RoleService } from '../../role/service/role.service';
 import { StaffService } from '../service/staff.service';
 
@@ -14,6 +12,7 @@ import { StaffService } from '../service/staff.service';
 	selector: 'app-list-staff',
 	templateUrl: './list-staff.component.html',
 	styleUrls: ['./list-staff.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ListStaffComponent implements OnInit {
 	sitesList: any = [];
@@ -21,7 +20,6 @@ export class ListStaffComponent implements OnInit {
 		public accountService: AccountService,
 		private router: Router,
 		private globalService: GlobalService,
-		private deviceService: DeviceService,
 		private dialogService: DialogService,
 		private roleService: RoleService,
 		private staffService: StaffService
