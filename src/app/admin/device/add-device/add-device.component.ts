@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
 	FormGroup,
 	FormBuilder,
@@ -27,6 +27,7 @@ import { DeviceService } from '../service/device.service';
 	selector: 'app-add-device',
 	templateUrl: './add-device.component.html',
 	styleUrls: ['./add-device.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class AddDeviceComponent implements OnInit {
 	isProduction = environment.production;

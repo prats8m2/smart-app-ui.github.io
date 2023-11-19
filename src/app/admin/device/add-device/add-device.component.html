@@ -10,19 +10,16 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-
-                    <select class="form-select" id="siteType" aria-label="Site Type"
-                        (change)="changeAccountData($event.target.value)">
-                        <option selected disabled hidden>Account</option>
-                        <ng-container *ngIf="accountList.length > 0; else noData">
-                            <option *ngFor="let acc of accountList" [value]="acc.account.id">
-                                {{ acc.account.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No account available</option>
-                        </ng-template>
-                    </select>
+                    <div class="col-sm-12" *ngIf="showListAccount">
+                        <ng-select  
+                        [ngModel]="accountList[0]?.account?.id"
+                        [items]="accountList" 
+                        bindLabel="account.name"
+                        bindValue="account.id" 
+                        formControlName="account"
+                        (change)="changeAccountData($event.account.id)"
+                     [placeholder]="'Account'"></ng-select>
+                    </div>
                 </div>
             </div>
             <!-- Second Row -->
@@ -30,18 +27,15 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="site" aria-label="Site" formControlName="site"
-                        (change)="changeSiteData($event.target.value)">
-                        <option selected disabled hidden>Site</option>
-                        <ng-container *ngIf="siteList.length > 0; else noData">
-                            <option *ngFor="let data of siteList" [value]="data.id">
-                                {{ data.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No site available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select  
+                        [ngModel]="siteList[0]?.id"
+                        [items]="siteList" 
+                        bindLabel="name"
+                        bindValue="id" 
+                        (change)="changeSiteData($event.id)"
+                        formControlName="site"
+                        [placeholder]="'Site'">
+                    </ng-select>
                 </div>
             </div>
 
@@ -51,18 +45,14 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRooms">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="room" aria-label="Room" formControlName="room"
-                        (change)="changeSiteData($event.target.value)">
-                        <option selected disabled hidden>Room</option>
-                        <ng-container *ngIf="roomList.length > 0; else noData">
-                            <option *ngFor="let data of roomList" [value]="data.id">
-                                {{ data.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No room available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select  
+                    [ngModel]="roomList[0]?.id"
+                    [items]="roomList" 
+                    bindLabel="name"
+                    bindValue="id" 
+                    formControlName="room"
+                    [placeholder]="'Room'">
+                </ng-select>
                 </div>
             </div>
 

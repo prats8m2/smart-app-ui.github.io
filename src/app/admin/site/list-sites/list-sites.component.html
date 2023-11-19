@@ -19,11 +19,11 @@
                             </div>
                             <div class="col-sm-6" *ngIf="showListAccount">
                                 <ng-select  
-                                [ngModel]="accountList[0].account.id"
+                                [ngModel]="accountList[0]?.account?.id"
                                 [items]="accountList" 
                                 bindLabel="account.name"
                                 bindValue="account.id" 
-                                (change)="changeSitesData($event.account.id)"
+                                (change)="changeSitesData($event?.account?.id)"
                              [placeholder]="'Account'"></ng-select>
                             </div>
                         </div>
