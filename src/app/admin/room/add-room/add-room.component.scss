@@ -1,0 +1,108 @@
+.permission-groups {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-group {
+    width: 50%;
+  }
+  
+  .permission-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .role-form{
+    max-height: 450px;
+    overflow-y:scroll;
+
+  }
+
+  .role-form::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+
+  .role-form {
+    scrollbar-width: none;
+  }
+  
+  .role-form {
+    -ms-overflow-style: none;
+  }
+
+  .permissions-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .permission-group {
+    width: 50%; 
+    box-sizing: border-box;
+    padding: 0 15px; 
+  }
+  
+  .permission-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+  }
+  
+  .permission-item input {
+    margin-right: 5px; 
+  }
+  .ng-dropdown-panel .scroll-host::-webkit-scrollbar {
+    width: 5px; 
+  }
+  
+  .ng-dropdown-panel .scroll-host::-webkit-scrollbar-thumb {
+    background-color: #556080; 
+    border-radius: 10px;
+  }
+  
+  .ng-dropdown-panel .scroll-host::-webkit-scrollbar-track {
+    background-color: transparent; 
+  }
+  
+  .ng-dropdown-panel .scroll-host {
+    background: #2a3042;
+    overflow: hidden;
+    overflow-y: hidden;
+    position: relative;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #556080; 
+  }
+  
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: #556080;
+    color: #a6b0cf;
+  }
+  
+  .ng-select.ng-select-single .ng-select-container {
+    height: 36px;
+  }
+  
+  .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+    color: #a6b0cf;
+  }
+  
+  .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    font-size: .9em;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #556080;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  color: #a6b0cf;
+  background-color: #262b3c;
+}

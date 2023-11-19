@@ -40,5 +40,5 @@ export const URL_ROUTES = {
 	ADD_ROOM: 'admin/rooms/add-room',
 	EDIT_ROOM: 'admin/rooms/edit-room',
 	VIEW_ROOM: 'admin/rooms/view-room',
-	LIST_ROOM: 'admin/rooms/list-room',
+	LIST_ROOM: 'admin/rooms/list-rooms',
 };

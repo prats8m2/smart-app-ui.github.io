@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
 		CommonModule,
 		RoomRoutingModule,
 		PaginationModule.forRoot(),
+		NgSelectModule,
 	],
 })
 export class RoomModule {}

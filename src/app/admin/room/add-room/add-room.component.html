@@ -1,1 +1,77 @@
-<p>add-room works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListRoom()"></i>
+            <h4 class="card-title mb-4">Add Room</h4>
+        </div>
+        <!-- Form Start -->
+        <form (ngSubmit)="addRoom()" [formGroup]="staffForm" class="role-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="accountList" [ngModel]="[accountList[0]?.account?.id]" bindLabel="account.name"
+                        bindValue="account?.id" (change)="changeAccountData($event.account.id)"
+                        [placeholder]="'Account'" formControlName="account"></ng-select>
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="siteList" [ngModel]="[siteList[0]?.id]" bindLabel="name" bindValue="id"
+                        [placeholder]="'Site'" (change)="changeSiteData($event.id)" formControlName="site"></ng-select>
+                </div>
+            </div>
+            <!--Third Row -->
+            <h6 class="mb-2">Wifi Details</h6>
+            <!-- Site Name -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="wifiList" [ngModel]="wifiList[0]?.id" bindLabel="username" bindValue="id"
+                        [placeholder]="'Wifi'" formControlName="wifi"></ng-select>
+                </div>
+            </div>
+            <h6 class="mb-2">Room Details</h6>
+            <!-- Forth Row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="roomName">Room Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('roomName'),'form-success':showSuccess('roomName')  }"
+                            formControlName="roomName">
+                        <!-- First Name Validation -->
+                        <div *ngIf="formTouched('roomName')">
+                            <div *ngIf="isError('roomName','required')" class="text-danger">
+                                {{errorMessage('roomName','required')}}
+                            </div>
+                            <div *ngIf="isError('roomName','pattern')" class="text-danger">
+                                {{errorMessage('roomName','pattern')}} </div>
+                            <div *ngIf="isError('roomName','maxlength')" class="text-danger">
+                                {{errorMessage('roomName','maxlength')}} </div>
+                            <div *ngIf="isError('roomName','minlength')" class="text-danger">
+                                {{errorMessage('roomName','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <label for="accountName">Room Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                            formControlName="status" [checked]="this.staffForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.staffForm.get('status').value ? 'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

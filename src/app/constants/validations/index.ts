@@ -71,3 +71,10 @@ export const DEVICE_NAME_VALIDATION = [
 	Validators.pattern('[a-zA-Z0-9_-]+$'),
 	Validators.minLength(5),
 ];
+
+export const ROOM_NAME_VALIDATION = [
+	Validators.required,
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
+	Validators.maxLength(10),
+	Validators.minLength(3),
+];

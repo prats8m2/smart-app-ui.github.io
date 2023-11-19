@@ -73,4 +73,10 @@ export const errorMessages = {
 		minlength: 'Device name must be at least 5 character long.',
 		pattern: 'Device name must be alpha numeric with "_" or "-"',
 	},
+	roomName: {
+		required: 'Room Name is required.',
+		maxlength: 'Maximum length exceeded (10 characters maximum).',
+		minlength: 'Room Name must be at least 3 character long.',
+		pattern: 'Room Name must be alpha numeric only',
+	},
 };
