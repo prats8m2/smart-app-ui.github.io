@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
 	FormArray,
 	FormBuilder,
@@ -30,7 +30,6 @@ import { RoleService } from '../service/role.service';
 	selector: 'app-add-role',
 	templateUrl: './add-role.component.html',
 	styleUrls: ['./add-role.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class AddRoleComponent implements OnInit {
 	isProduction = environment.production;

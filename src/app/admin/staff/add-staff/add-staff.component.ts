@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
 	FormGroup,
 	FormBuilder,
 	Validators,
 	FormControl,
-	FormArray,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import {
-	DEVICE_NAME_VALIDATION,
 	EMAIL_VALIDATION,
 	FIRST_NAME_VALIDATION,
 	LAST_NAME_VALIDATION,
@@ -36,7 +34,6 @@ import { StaffService } from '../service/staff.service';
 	selector: 'app-add-staff',
 	templateUrl: './add-staff.component.html',
 	styleUrls: ['./add-staff.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class AddStaffComponent implements OnInit {
 	isProduction = environment.production;

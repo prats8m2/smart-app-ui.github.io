@@ -25,7 +25,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { StatusPipe } from '../core/pipes/status.pipe';
 
 @NgModule({
-	declarations: [StatusPipe],
+	declarations: [],
 	imports: [
 		CommonModule,
 		FormsModule,

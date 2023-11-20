@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LoadingService } from './core/services/loading.service';
 import { delay } from 'rxjs';
 
@@ -6,6 +6,7 @@ import { delay } from 'rxjs';
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
 	loading = false;

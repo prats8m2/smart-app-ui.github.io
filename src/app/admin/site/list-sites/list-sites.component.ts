@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccountService } from '../../accounts/service/account.service';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -11,7 +11,6 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 	selector: 'app-list-sites',
 	templateUrl: './list-sites.component.html',
 	styleUrls: ['./list-sites.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class ListSitesComponent {
 	constructor(

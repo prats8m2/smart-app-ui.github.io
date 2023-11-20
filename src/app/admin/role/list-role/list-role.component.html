@@ -19,7 +19,7 @@
                                 <ng-select  
                                 [items]="accountList" 
                                 bindLabel="account.name"
-                                bindValue="account.id" 
+                                [clearable]="false" bindValue="account.id" 
                                 (change)="changeSitesData($event.account.id)"
                              [placeholder]="'Account'"></ng-select>
                             </div>

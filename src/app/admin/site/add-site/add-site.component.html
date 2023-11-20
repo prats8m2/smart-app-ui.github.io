@@ -13,7 +13,7 @@
               <ng-select  
                   [items]="accountList" 
                   bindLabel="account.name"
-                  bindValue="account.id" 
+                  [clearable]="false" bindValue="account.id" 
                   formControlName="account"
                [placeholder]="'Account'"></ng-select>
               </div>
@@ -66,7 +66,7 @@
                   <ng-select  
                   [items]="siteTypes" 
                   bindLabel="label"
-                  bindValue="id" formControlName="type"
+                  [clearable]="false" bindValue="id" formControlName="type"
                [placeholder]="'Site'"></ng-select>
             </div>
             </div>

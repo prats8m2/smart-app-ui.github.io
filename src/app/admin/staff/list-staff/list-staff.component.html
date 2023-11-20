@@ -19,7 +19,7 @@
                                 [ngModel]="accountList[0]?.account?.id"
                                 [items]="accountList" 
                                 bindLabel="account.name"
-                                bindValue="account.id" 
+                                [clearable]="false" bindValue="account.id" 
                                 (change)="changeAccountData($event.account.id)"
                              [placeholder]="'Account'"></ng-select>
                             </div>
@@ -28,7 +28,7 @@
                                 [ngModel]="roleList[0]?.id"
                                 [items]="roleList" 
                                 bindLabel="name"
-                                bindValue="id" 
+                                [clearable]="false" bindValue="id" 
                                 (change)="changeRoleData($event.id)"
                              [placeholder]="'Role'"></ng-select>
                             </div>

@@ -18,18 +18,20 @@
                                 
 
                                 <ng-select  
+                                [ngModel]="accountList[0]?.account?.id"                                
                                 [items]="accountList" 
                                 bindLabel="account.name"
-                                bindValue="account.id" 
-                                (change)="changeAccountData($event.account.id)"
+                                [clearable]="false" bindValue="account.id" 
+                                (change)="changeAccountData($event?.account?.id)"
                              [placeholder]="'Account'"></ng-select>
                             </div>
                             <div class="col-sm-4">
                                 <ng-select  
                                 [items]="sitesList" 
                                 bindLabel="name"
-                                bindValue="id" 
-                                (change)="changeSitesData($event.id)"
+                                [clearable]="false" bindValue="id" 
+                                [ngModel]="sitesList[0]?.id"  
+                                (change)="changeSitesData($event?.id)"
                              [placeholder]="'Site'"></ng-select>
                             </div>
                         </div>

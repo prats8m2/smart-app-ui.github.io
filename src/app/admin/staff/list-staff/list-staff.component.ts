@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GlobalService } from '../../../core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { IParams } from '../../../core/interface/params';
@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { RoleService } from '../../role/service/role.service';
 import { StaffService } from '../service/staff.service';
-import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-list-staff',
 	templateUrl: './list-staff.component.html',
 	styleUrls: ['./list-staff.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class ListStaffComponent implements OnInit {
 	sitesList: any = [];
@@ -23,8 +21,7 @@ export class ListStaffComponent implements OnInit {
 		private globalService: GlobalService,
 		private dialogService: DialogService,
 		private roleService: RoleService,
-		private staffService: StaffService,
-		private siteService: SiteService
+		private staffService: StaffService
 	) {}
 
 	showListAccount: boolean =

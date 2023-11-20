@@ -15,7 +15,7 @@
                         [ngModel]="accountList[0]?.account?.id"
                         [items]="accountList" 
                         bindLabel="account.name"
-                        bindValue="account.id" 
+                        [clearable]="false" bindValue="account.id" 
                         formControlName="account"
                         (change)="changeAccountData($event.account.id)"
                      [placeholder]="'Account'"></ng-select>
@@ -31,7 +31,7 @@
                         [ngModel]="siteList[0]?.id"
                         [items]="siteList" 
                         bindLabel="name"
-                        bindValue="id" 
+                        [clearable]="false" bindValue="id" 
                         (change)="changeSiteData($event.id)"
                         formControlName="site"
                         [placeholder]="'Site'">
@@ -49,7 +49,7 @@
                     [ngModel]="roomList[0]?.id"
                     [items]="roomList" 
                     bindLabel="name"
-                    bindValue="id" 
+                    [clearable]="false" bindValue="id" 
                     formControlName="room"
                     [placeholder]="'Room'">
                 </ng-select>

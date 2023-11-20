@@ -10,7 +10,7 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="accountList" bindLabel="account.name" bindValue="account.id"
+                    <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
                         (change)="changeAccountData($event.account.id)" [placeholder]="'Account'" 
                         formControlName="account"></ng-select>
                 </div>

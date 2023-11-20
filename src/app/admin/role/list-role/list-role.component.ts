@@ -1,4 +1,4 @@
-import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
@@ -11,7 +11,6 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 	selector: 'app-list-role',
 	templateUrl: './list-role.component.html',
 	styleUrls: ['./list-role.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class ListRoleComponent {
 	constructor(

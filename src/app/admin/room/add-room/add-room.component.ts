@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
 	FormGroup,
 	FormBuilder,
@@ -7,15 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
-import {
-	FIRST_NAME_VALIDATION,
-	LAST_NAME_VALIDATION,
-	USER_NAME_VALIDATION,
-	EMAIL_VALIDATION,
-	PASSWORD_VALIDATION,
-	PHONE_VALIDATION,
-	ROOM_NAME_VALIDATION,
-} from 'src/app/constants/validations';
+import { ROOM_NAME_VALIDATION } from 'src/app/constants/validations';
 import {
 	hasError,
 	isValid,
@@ -29,21 +21,22 @@ import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { RoleService } from '../../role/service/role.service';
 import { SiteService } from '../../site/service/site.service';
-import { StaffService } from '../../staff/service/staff.service';
+import { DeviceService } from '../../device/service/device.service';
+import { RoomService } from '../services/room.service';
 
 @Component({
 	selector: 'app-add-room',
 	templateUrl: './add-room.component.html',
 	styleUrls: ['./add-room.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class AddRoomComponent implements OnInit {
 	isProduction = environment.production;
-	public staffForm: FormGroup;
+	public roomForm: FormGroup;
 	accountList: any = [];
 	siteList: any = [];
 	roleList: any = [];
 	wifiList: any = [];
+	deviceList: any = [];
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
@@ -71,6 +64,12 @@ export class AddRoomComponent implements OnInit {
 		pageNumber: 1,
 	};
 
+	deviceParams: IParams = {
+		siteId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -78,22 +77,25 @@ export class AddRoomComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private roleService: RoleService,
-		private staffService: StaffService
+		private deviceService: DeviceService,
+		private roomService: RoomService
 	) {
 		if (this.isProduction) {
-			this.staffForm = this.formBuilder.group({
+			this.roomForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
-				wifi: [null, Validators.required],
+				wifi: [null],
+				device: [null, Validators.required],
 				status: [true],
 				roomName: ['', ROOM_NAME_VALIDATION],
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
-			this.staffForm = this.formBuilder.group({
+			this.roomForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
-				wifi: [null, Validators.required],
+				wifi: [null],
+				device: [null, Validators.required],
 				status: [true],
 				roomName: ['Room-' + randomNumber, ROOM_NAME_VALIDATION],
 			});
@@ -141,19 +143,19 @@ export class AddRoomComponent implements OnInit {
 
 	//form validation function
 	isError(formControlName: string, errorType: string): boolean {
-		return hasError(this.staffForm, formControlName, errorType);
+		return hasError(this.roomForm, formControlName, errorType);
 	}
 
 	showError(formControlName: string): boolean {
-		return isValid(this.staffForm, formControlName);
+		return isValid(this.roomForm, formControlName);
 	}
 
 	showSuccess(formControlName: string): boolean {
-		return isTouchedAndValid(this.staffForm, formControlName);
+		return isTouchedAndValid(this.roomForm, formControlName);
 	}
 
 	formTouched(formControlName: string): boolean {
-		return isTouched(this.staffForm, formControlName);
+		return isTouched(this.roomForm, formControlName);
 	}
 
 	errorMessage(formControlName: string, errorType: string): string {
@@ -163,38 +165,42 @@ export class AddRoomComponent implements OnInit {
 	changeAccountData(accountId: any) {
 		this.siteParams.accountId = accountId;
 		this.roleParams.accountId = accountId;
-		this.staffForm.get('account').patchValue(accountId);
+		this.roomForm.get('account').patchValue(accountId);
 		this.listSiteAPI(this.siteParams);
 		this.listRoleAPI(this.roleParams);
 	}
 
 	changeRoleData(roleId: any) {
-		this.staffForm.get('role').patchValue(roleId);
+		this.roomForm.get('role').patchValue(roleId);
 	}
 
 	addRoom() {
-		// this.staffService.addStaff(this.staffForm).then((res) => {
-		// 	if (res.status) {
-		// 		this.router.navigate([URL_ROUTES.LIST_STAFF]);
-		// 	} else {
-		// 		console.log('error');
-		// 	}
-		// });
-		console.log(this.staffForm.value);
+		this.roomService.addRoom(this.roomForm).then((res) => {
+			if (res.status) {
+				this.router.navigate([URL_ROUTES.LIST_ROOM]);
+			} else {
+				console.log('error');
+			}
+		});
 	}
 
 	toggle(): void {
-		const statusControl = this.staffForm.get('status') as FormControl;
+		const statusControl = this.roomForm.get('status') as FormControl;
 		statusControl.setValue(!statusControl.value);
-	}
-	getValue() {
-		console.log(this.staffForm.value);
 	}
 
 	changeSiteData(siteId: any) {
 		this.siteServices.viewSite(siteId).then((res) => {
-			console.log(res.data.wifi);
 			this.wifiList = [...res.data.wifi];
+		});
+
+		this.deviceParams.siteId = siteId;
+		this.listDeviceAPI(this.deviceParams);
+	}
+
+	listDeviceAPI(params: IParams) {
+		this.deviceService.listDevice(this.deviceParams).subscribe((res) => {
+			this.deviceList = [...res.data.devices];
 		});
 	}
 }
