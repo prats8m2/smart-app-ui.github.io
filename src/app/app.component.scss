@@ -53,4 +53,14 @@
   .ng-select .ng-select-container .ng-value-container .ng-placeholder {
     color: #a6b0cf;
   }
-  
+  .ng-select.ng-select-disabled>.ng-select-container {
+    overflow-x:hidden;
+    background-color: #222736;
+}
+
+.ng-select.ng-select-disabled .ng-arrow-wrapper {
+  cursor: default;
+  pointer-events: none; 
+  opacity: 0;
+}
+

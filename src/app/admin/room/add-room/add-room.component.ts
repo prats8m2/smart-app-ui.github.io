@@ -94,9 +94,10 @@ export class AddRoomComponent implements OnInit {
 			this.roomForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
-				wifi: [null],
+				wifi: [[]],
 				device: [null, Validators.required],
 				status: [true],
+
 				roomName: ['Room-' + randomNumber, ROOM_NAME_VALIDATION],
 			});
 		}
@@ -175,6 +176,12 @@ export class AddRoomComponent implements OnInit {
 	}
 
 	addRoom() {
+		const selectedWifiIds = this.roomForm.get('wifi').value;
+
+		const selectedWifiObjects = selectedWifiIds.map((id: number) => ({
+			id,
+		}));
+		this.roomForm.get('wifi').patchValue(selectedWifiObjects);
 		this.roomService.addRoom(this.roomForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ROOM]);

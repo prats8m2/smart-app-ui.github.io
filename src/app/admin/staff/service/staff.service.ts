@@ -10,10 +10,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 	providedIn: 'root',
 })
 export class StaffService {
-	constructor(
-		private http: HttpClient,
-		private globalService: GlobalService
-	) {}
+	constructor(private http: HttpClient, private globalService: GlobalService) {}
 
 	listStaff(params: IParams): Observable<any> {
 		return this.http
@@ -62,9 +59,9 @@ export class StaffService {
 			});
 	}
 
-	viewRole(roleId: any) {
+	viewStaff(staffId: any) {
 		return this.http
-			.get(ROLE.VIEW_ROLE + roleId)
+			.get(STAFF.VIEW_STAFF + staffId)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));

@@ -88,7 +88,7 @@ export class ListStaffComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_STAFF + '/' + staffId);
 	}
 	routeToViewStaff(staffId: any) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_DEVICE + '/' + staffId);
+		this.router.navigateByUrl(URL_ROUTES.VIEW_STAFF + '/' + staffId);
 	}
 
 	pageChanged(event: any): void {

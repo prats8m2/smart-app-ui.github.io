@@ -17,27 +17,6 @@
     margin-bottom: 10px;
   }
 
-  .role-form{
-    max-height: 450px;
-    overflow-y:scroll;
-
-  }
-
-  .role-form::-webkit-scrollbar {
-    width: 0 !important;
-    display: none;
-  }
-  
-  /* Hide the scrollbar for Firefox */
-  .role-form {
-    scrollbar-width: none;
-  }
-  
-  /* Hide the scrollbar for IE/Edge */
-  .role-form {
-    -ms-overflow-style: none;
-  }
-
   .permissions-container {
     display: flex;
     flex-wrap: wrap;
@@ -57,6 +36,25 @@
   
   .permission-item input {
     margin-right: 5px; 
+  }
+
+  .custom-form{
+    max-height: 450px;
+    overflow-y:scroll;
+    overflow-x: hidden;
+  }
+  
+  .custom-form::-webkit-scrollbar {
+    width: 5px; 
+  }
+  
+  .custom-form::-webkit-scrollbar-thumb {
+    background-color: #556080; 
+    border-radius: 10px;
+  }
+  
+  .custom-form::-webkit-scrollbar-track {
+    background-color: transparent; 
   }
   
   

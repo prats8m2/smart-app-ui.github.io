@@ -5,7 +5,7 @@
             <h4 class="card-title mb-4">Add Staff</h4>
         </div>
         <!-- Form Start -->
-        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="role-form">
+        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="custom-form">
             <!-- First Row -->
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
@@ -20,7 +20,7 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList" [ngModel]="[siteList[0]?.id]" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                    <ng-select [items]="siteList" [ngModel]="siteList[0]?.id" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
                         [multiple]="true" formControlName="site"></ng-select>
                 </div>
             </div>

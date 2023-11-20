@@ -1,1 +1,94 @@
-<p>view-staff works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListStaff()"></i>
+            <h4 class="card-title mb-4">View Staff</h4>
+        </div>
+        <!-- Form Start -->
+        <form [formGroup]="staffForm" class="custom-form">
+            <!-- First Row -->
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                        <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="this.staffForm.get('site').value" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                        [multiple]="true" formControlName="site">
+                    </ng-select>
+                </div>
+            </div>
+            <!--Third Row -->
+            <h6 class="mb-2" *ngIf="showListRole">Role Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListRole">
+                <div class="col-md-6 mb-4">
+                        <input type="text" class="form-control" formControlName="role">
+                </div>
+            </div>
+            <h6 class="mb-2">Staff Details</h6>
+            <!-- Forth Row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control"
+                            formControlName="firstName">
+                        <!-- First Name Validation -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control"
+                            formControlName="lastName">
+                        <!-- Last Name Validation -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"
+                            formControlName="email">
+                        <!-- Email Validation -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control"
+                            formControlName="mobile" />
+                        <!-- Password Validation -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="username">User Name</label>
+                        <input autocomplete="off" type="text" class="form-control"
+                            formControlName="username" autocomplete="off" name="randomName1">
+                        <!-- User Name Validation -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                            formControlName="password" />
+                        <!-- Password Validation -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -5,7 +5,7 @@
       <h4 class="card-title mb-4">Edit Site</h4>
     </div>
     <!-- Form Start -->
-    <form (ngSubmit)="updateSite()" [formGroup]="siteForm">
+    <form (ngSubmit)="updateSite()" [formGroup]="siteForm" class="custom-form">
       <!-- First Row -->
       <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
       <div class="row" *ngIf="showListAccount">

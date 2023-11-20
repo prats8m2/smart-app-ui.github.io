@@ -5,7 +5,7 @@
             <h4 class="card-title mb-4">Add Room</h4>
         </div>
         <!-- Form Start -->
-        <form (ngSubmit)="addRoom()" [formGroup]="roomForm" class="role-form">
+        <form (ngSubmit)="addRoom()" [formGroup]="roomForm" class="custom-form">
             <!-- First Row -->
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id"
-                        [placeholder]="'Wifi'" formControlName="wifi"  ></ng-select>
+                        [placeholder]="'Wifi'" formControlName="wifi"   [multiple]="true"></ng-select>
                 </div>
             </div>
 

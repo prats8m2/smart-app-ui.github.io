@@ -49,7 +49,7 @@ export class ViewDeviceComponent {
 					this.deviceForm.get('site').patchValue(res.data.device.site.name);
 					this.deviceForm
 						.get('room')
-						.patchValue(res.data.device.room ? res.data.device.room : '-');
+						.patchValue(res.data.device.room ? res.data.device.room.name : '-');
 					this.deviceForm.get('deviceName').patchValue(res.data.device.code);
 					const status = res.data.device.status ? 1 : true ? 0 : false;
 					this.deviceForm.get('status')?.patchValue(status);

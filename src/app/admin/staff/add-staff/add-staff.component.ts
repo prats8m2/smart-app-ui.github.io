@@ -80,7 +80,7 @@ export class AddStaffComponent implements OnInit {
 		if (this.isProduction) {
 			this.staffForm = this.formBuilder.group({
 				account: [null],
-				site: [null, Validators.required],
+				site: [[], Validators.required],
 				role: [null, Validators.required],
 				status: [true],
 				firstName: ['', FIRST_NAME_VALIDATION],
@@ -94,7 +94,7 @@ export class AddStaffComponent implements OnInit {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
 			this.staffForm = this.formBuilder.group({
 				account: [null],
-				site: [null, Validators.required],
+				site: [[], Validators.required],
 				role: [null, Validators.required],
 				status: [true],
 				firstName: ['John' + randomNumber, FIRST_NAME_VALIDATION],
@@ -180,6 +180,12 @@ export class AddStaffComponent implements OnInit {
 	}
 
 	addStaff() {
+		const selectedSiteIds = this.staffForm.get('site').value;
+
+		const selectedSiteObjects = selectedSiteIds.map((id: number) => ({
+			id,
+		}));
+		this.staffForm.get('site').patchValue(selectedSiteObjects);
 		this.staffService.addStaff(this.staffForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_STAFF]);
