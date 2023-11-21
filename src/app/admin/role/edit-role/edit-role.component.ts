@@ -74,7 +74,6 @@ export class EditRoleComponent implements OnInit {
 	getRole() {
 		this.activatedRoute.params.subscribe((params) => {
 			let roleId = params['id'];
-			console.log(roleId);
 			this.roleForm.get('id').patchValue(roleId);
 			this.roleService.viewRole(roleId).then((res) => {
 				if (res.status === true) {
@@ -137,7 +136,6 @@ export class EditRoleComponent implements OnInit {
 
 			if (category !== null) {
 				const formArray = userPermissionsArray.get('ACCOUNT') as FormArray;
-				console.log(formArray);
 
 				if (formArray) {
 					const control = formArray.controls.find((c) => c.get(patch.name));
@@ -156,7 +154,6 @@ export class EditRoleComponent implements OnInit {
 		if (permission) {
 			return permission.category;
 		} else {
-			console.error(`Category not found for permission with id ${id}`);
 			return null;
 		}
 	}

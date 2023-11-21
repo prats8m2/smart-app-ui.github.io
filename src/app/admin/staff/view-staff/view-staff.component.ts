@@ -39,19 +39,21 @@ export class ViewStaffComponent implements OnInit {
 		account: [null],
 		site: [[], Validators.required],
 		role: [null, Validators.required],
-		status: [true],
-		firstName: ['', FIRST_NAME_VALIDATION],
-		lastName: ['', LAST_NAME_VALIDATION],
-		username: [null, USER_NAME_VALIDATION],
-		email: ['', EMAIL_VALIDATION],
-		password: ['', PASSWORD_VALIDATION],
-		mobile: ['', PHONE_VALIDATION],
+		status: [null],
+		firstName: [''],
+		lastName: [''],
+		username: [null],
+		email: [''],
+		password: [''],
+		mobile: [''],
 	});
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
 	showListStaff: boolean = this.globalService.checkForPermission('LIST-STAFF');
+	showEditStaff: boolean =
+		this.globalService.checkForPermission('UPDATE-STAFF');
 	showDeleteStaff: boolean =
 		this.globalService.checkForPermission('DELETE-STAFF');
 
@@ -109,5 +111,13 @@ export class ViewStaffComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	routeToEditStaff() {
+		let staffId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			staffId = params['id'];
+		});
+		this.router.navigateByUrl(URL_ROUTES.EDIT_STAFF + '/' + staffId);
 	}
 }

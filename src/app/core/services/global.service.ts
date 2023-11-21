@@ -86,7 +86,6 @@ export class GlobalService {
 		let userPermission = this.getUserRole('permissions');
 		let permissionName = userPermission.map((per: any) => per.name);
 		if (permissionName.includes(permission)) {
-			console.log('PERMISSION GRANTED');
 			this.router.navigateByUrl(routerLink);
 
 			return true;

@@ -117,7 +117,8 @@ export class EditStaffComponent implements OnInit {
 			this.staffService.viewStaff(staffId).then((res) => {
 				if (res.status === true) {
 					this.staffForm.get('account')?.patchValue(res.data.account.id);
-					this.staffForm.get('role')?.patchValue(res.data.role.name);
+					this.staffForm.get('account')?.disable();
+					this.staffForm.get('role')?.patchValue(res.data.role);
 					this.staffForm.get('firstName')?.patchValue(res.data.firstName);
 					this.staffForm.get('lastName')?.patchValue(res.data.lastName);
 					this.staffForm.get('email')?.patchValue(res.data.email);
@@ -126,12 +127,9 @@ export class EditStaffComponent implements OnInit {
 					this.staffForm.get('password')?.patchValue('Pass@1234');
 					const siteName = res.data.sites.map((site) => site.name);
 					this.staffForm.get('site')?.patchValue(siteName);
-
-					console.log(this.staffForm.get('site').value);
 				}
 			});
 		});
-		console.log(this.staffForm.value);
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {
@@ -210,8 +208,5 @@ export class EditStaffComponent implements OnInit {
 	toggle(): void {
 		const statusControl = this.staffForm.get('status') as FormControl;
 		statusControl.setValue(!statusControl.value);
-	}
-	getValue() {
-		console.log(this.staffForm.value);
 	}
 }

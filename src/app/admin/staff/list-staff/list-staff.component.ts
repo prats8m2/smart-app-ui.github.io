@@ -119,8 +119,6 @@ export class ListStaffComponent implements OnInit {
 					item.email.toLowerCase().includes(this.searchInput.toLowerCase())
 			);
 
-		console.log(this.staffList);
-
 		this.total = this.searchInput
 			? this.staffList.length
 			: this.staffListResp.length;

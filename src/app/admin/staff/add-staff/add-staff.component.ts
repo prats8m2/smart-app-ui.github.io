@@ -199,7 +199,4 @@ export class AddStaffComponent implements OnInit {
 		const statusControl = this.staffForm.get('status') as FormControl;
 		statusControl.setValue(!statusControl.value);
 	}
-	getValue() {
-		console.log(this.staffForm.value);
-	}
 }

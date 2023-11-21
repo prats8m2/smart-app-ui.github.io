@@ -18,10 +18,12 @@ export class ViewDeviceComponent {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListRooms: boolean = this.globalService.checkForPermission('LIST-ROOM');
-
-	showListDevice: boolean = this.globalService.checkForPermission('LIST-STAFF');
+	showEditDevice: boolean =
+		this.globalService.checkForPermission('UPDATE-DEVICE');
+	showListDevice: boolean =
+		this.globalService.checkForPermission('LIST-DEVICE');
 	showDeleteDevice: boolean =
-		this.globalService.checkForPermission('DELETE-STAFF');
+		this.globalService.checkForPermission('DELETE-DEVICE');
 
 	public deviceForm: FormGroup = this.formBuilder.group({
 		account: [null],
@@ -48,7 +50,6 @@ export class ViewDeviceComponent {
 	getDevice() {
 		this.activatedRoute.params.subscribe((params) => {
 			let deviceId = params['id'];
-			console.log("params['id'];:", params);
 			this.deviceService.viewDevice(deviceId).then((res) => {
 				if (res.status === true) {
 					this.deviceForm.get('account').patchValue('asasa');
@@ -83,5 +84,13 @@ export class ViewDeviceComponent {
 				});
 			}
 		});
+	}
+
+	routeToEditDevice() {
+		let deviceId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			deviceId = params['id'];
+		});
+		this.router.navigateByUrl(URL_ROUTES.EDIT_DEVICE + '/' + deviceId);
 	}
 }

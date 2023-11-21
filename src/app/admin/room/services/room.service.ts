@@ -53,4 +53,14 @@ export class RoomService {
 				return result;
 			});
 	}
+
+	viewRoom(id: any) {
+		return this.http
+			.get(ROOM.VIEW_ROOM + id)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

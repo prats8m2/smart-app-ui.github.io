@@ -56,6 +56,7 @@ export class ViewSiteComponent {
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showDeleteSite: boolean =
 		this.globalService.checkForPermission('DELETE-SITE');
+	showEditSite: boolean = this.globalService.checkForPermission('UPDATE-SITE');
 	siteWifiDetails: any = [];
 
 	accountParams: IParams = {
@@ -95,14 +96,9 @@ export class ViewSiteComponent {
 		this.formData.push(this.field());
 	}
 
-	showFormValue() {
-		console.log(this.siteForm.value);
-	}
-
 	getSite() {
 		this.activatedRoute.params.subscribe((params) => {
 			let siteId = params['id'];
-			console.log("params['id'];:", params);
 			this.siteForm.value.id = params['id'];
 			this.siteService.viewSite(siteId).then((res) => {
 				if (res.status === true) {
@@ -139,5 +135,14 @@ export class ViewSiteComponent {
 				});
 			}
 		});
+	}
+
+	routeToEditSite() {
+		let siteId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			siteId = params['id'];
+		});
+
+		this.router.navigateByUrl(URL_ROUTES.EDIT_SITE + '/' + siteId);
 	}
 }

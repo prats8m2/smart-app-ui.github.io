@@ -131,7 +131,6 @@ export class EditSiteComponent {
 	getSite() {
 		this.activatedRoute.params.subscribe((params) => {
 			let siteId = params['id'];
-			console.log("params['id'];:", params);
 			this.siteForm.value.id = params['id'];
 			this.siteService.viewSite(siteId).then((res) => {
 				if (res.status === true) {
@@ -149,7 +148,6 @@ export class EditSiteComponent {
 	}
 
 	updateSite() {
-		console.log(this.siteForm.value);
 		this.siteService.updateSite(this.siteForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_SITE]);

@@ -29,6 +29,7 @@ export class ViewRoleComponent implements OnInit {
 	});
 
 	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
+	showEditRole: boolean = this.globalService.checkForPermission('UPDATE-ROLE');
 	showDeleteRole: boolean =
 		this.globalService.checkForPermission('DELETE-ROLE');
 
@@ -87,7 +88,6 @@ export class ViewRoleComponent implements OnInit {
 	getRole() {
 		this.activatedRoute.params.subscribe((params) => {
 			let roleId = params['id'];
-			console.log("params['id'];:", params);
 			this.roleForm.value.id = params['id'];
 			this.roleService.viewRole(roleId).then((res) => {
 				if (res.status === true) {
@@ -96,8 +96,6 @@ export class ViewRoleComponent implements OnInit {
 					this.roleForm.get('roleName')?.patchValue(res.data.name);
 					this.roleForm.get('isDefault')?.patchValue(res.data.default);
 					this.permissionParams.accountId = res.data.account.id;
-					console.log(res.data.permissions);
-					console.log(this.permissionParams);
 				}
 			});
 		});
@@ -151,7 +149,6 @@ export class ViewRoleComponent implements OnInit {
 
 			if (category !== null) {
 				const formArray = userPermissionsArray.get('ACCOUNT') as FormArray;
-				console.log(formArray);
 
 				if (formArray) {
 					const control = formArray.controls.find((c) => c.get(patch.name));
@@ -170,7 +167,6 @@ export class ViewRoleComponent implements OnInit {
 		if (permission) {
 			return permission.category;
 		} else {
-			console.error(`Category not found for permission with id ${id}`);
 			return null;
 		}
 	}
@@ -190,5 +186,14 @@ export class ViewRoleComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	routeToEditRole() {
+		let roleId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			roleId = params['id'];
+		});
+
+		this.router.navigateByUrl(URL_ROUTES.EDIT_ROLE + '/' + roleId);
 	}
 }

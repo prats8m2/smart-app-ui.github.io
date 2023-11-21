@@ -69,7 +69,6 @@ export class EditAccountComponent {
 	getAccount() {
 		this.activatedRoute.params.subscribe((params) => {
 			let userId = params['id'];
-			console.log("params['id'];:", params);
 			this.userForm.value.id = params['id'];
 			this.accountService.viewUser(userId).then((res) => {
 				if (res.status === true) {
@@ -77,7 +76,6 @@ export class EditAccountComponent {
 					this.userForm.get('password')?.patchValue('Pass@1234');
 					const status = res.data.account.status ? true : false;
 					this.userForm.get('status')?.patchValue(status);
-					console.log(this.userForm);
 					this.userForm.get('accountName').patchValue(res.data.account.name);
 				}
 			});

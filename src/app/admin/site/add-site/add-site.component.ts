@@ -141,8 +141,4 @@ export class AddSiteComponent {
 	addField() {
 		this.formData.push(this.field());
 	}
-
-	showFormValue() {
-		console.log(this.siteForm.value);
-	}
 }

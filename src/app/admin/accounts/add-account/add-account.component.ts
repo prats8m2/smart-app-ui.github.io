@@ -61,9 +61,7 @@ export class AddAccountComponent {
 		}
 	}
 
-	ngOnInit() {
-		console.log(this.userForm);
-	}
+	ngOnInit() {}
 	//form validation function
 	isError(formControlName: string, errorType: string): boolean {
 		return hasError(this.userForm, formControlName, errorType);
