@@ -50,7 +50,7 @@
                                     <th class="align-middle">Name</th>
                                     <th class="align-middle">Username</th>
                                     <th class="align-middle">Email</th>
-                                    <th class="align-middle">Action</th>
+                                    <th class="align-middle" *ngIf="showEditStaff || showDeleteStaff">Action</th>
                                 </tr>
                                 <tr *ngIf="staffList.length == 0">
                                     <th class="align-middle" style="text-align: center;" colspan="5">No data available
@@ -72,9 +72,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
+                                            <span class="text-success pointer" *ngIf="showEditStaff"><i class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditStaff(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"><i
+                                            <span class="text-danger pointer"  (click)="openConfirmDialog(data.id)" *ngIf="showDeleteStaff"><i
                                                     class="mdi mdi-delete font-size-18"></i></span>
                                         </div>
                                     </td>

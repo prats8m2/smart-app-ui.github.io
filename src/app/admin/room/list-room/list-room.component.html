@@ -42,7 +42,7 @@
                                     <th class="align-middle">Name</th>
                                     <th class="align-middle">Occupied</th>
                                     <th class="align-middle">Status</th>
-                                    <th class="align-middle">Action</th>
+                                    <th class="align-middle" *ngIf="showEditRoom || showDeleteRoom">Action</th>
                                 </tr>
                                 <tr *ngIf="deviceList.length == 0">
                                     <th class="align-middle" style="text-align: center;" colspan="5">No data available
@@ -70,9 +70,9 @@
                                     <td>
                                         <div class="d-flex gap-3">
                                             <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
-                                                    (click)="routeToEditRoom(data.id)"></i></span>
+                                                    (click)="routeToEditRoom(data.id)" *ngIf="showEditRoom"></i></span>
                                             <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"><i
-                                                    class="mdi mdi-delete font-size-18"></i></span>
+                                                    class="mdi mdi-delete font-size-18" *ngIf="showDeleteRoom"></i></span>
                                         </div>
                                     </td>
                                 </tr>

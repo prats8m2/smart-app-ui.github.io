@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import {
 	ACCOUNT_NAME_VALIDATION,
 	EMAIL_VALIDATION,
@@ -9,16 +9,11 @@ import {
 	PHONE_VALIDATION,
 	USER_NAME_VALIDATION,
 } from '../../../constants/validations';
-import {
-	hasError,
-	isTouched,
-	isTouchedAndValid,
-	isValid,
-} from '../../../core/helpers/form-error';
-import { errorMessages } from '../../../core/helpers/form-error-message';
 import { AccountService } from '../service/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_ROUTES } from '../../../constants/routing';
+import { DialogService } from 'src/app/core/services/dialog.service';
+import { GlobalService } from 'src/app/core/services/global.service';
 @Component({
 	selector: 'app-view-account',
 	templateUrl: './view-account.component.html',
@@ -29,8 +24,16 @@ export class ViewAccountComponent {
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService,
+		private globalService: GlobalService
 	) {}
+
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showDeleteAccount: boolean =
+		this.globalService.checkForPermission('DELETE-ACCOUNT');
+
 	public userForm: FormGroup = this.formBuilder.group({
 		id: [''],
 		firstName: ['', FIRST_NAME_VALIDATION],
@@ -45,27 +48,6 @@ export class ViewAccountComponent {
 	ngOnInit() {
 		this.getAccount();
 	}
-	//form validation function
-	isError(formControlName: string, errorType: string): boolean {
-		return hasError(this.userForm, formControlName, errorType);
-	}
-
-	showError(formControlName: string): boolean {
-		return isValid(this.userForm, formControlName);
-	}
-
-	showSuccess(formControlName: string): boolean {
-		return isTouchedAndValid(this.userForm, formControlName);
-	}
-
-	formTouched(formControlName: string): boolean {
-		return isTouched(this.userForm, formControlName);
-	}
-
-	errorMessage(formControlName: string, errorType: string): string {
-		return errorMessages[formControlName][errorType];
-	}
-
 	getAccount() {
 		this.activatedRoute.params.subscribe((params) => {
 			let userId = params['id'];
@@ -97,5 +79,22 @@ export class ViewAccountComponent {
 
 	routeToListAccount() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+	}
+
+	deleteAccount() {
+		let accountId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			accountId = params['id'];
+		});
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete account API
+				this.accountService.deleteAccount(accountId).then((res: any) => {
+					if (res.status) {
+						this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+					}
+				});
+			}
+		});
 	}
 }

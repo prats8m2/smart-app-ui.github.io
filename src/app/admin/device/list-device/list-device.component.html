@@ -15,8 +15,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                
-
                                 <ng-select  
                                 [ngModel]="accountList[0]?.account?.id"                                
                                 [items]="accountList" 
@@ -51,7 +49,7 @@
                                     <th class="align-middle">Code</th>
                                     <th class="align-middle">Room</th>
                                     <th class="align-middle">Status</th>
-                                    <th class="align-middle">Action</th>
+                                    <th class="align-middle" *ngIf="showEditDevice || showDeleteDevice">Action</th>
                                 </tr>
                                 <tr *ngIf="deviceList.length == 0">
                                     <th class="align-middle" style="text-align: center;" colspan="5">No data available
@@ -75,9 +73,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
+                                            <span class="text-success pointer" *ngIf="showEditDevice"><i class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditDevice(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"><i
+                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)" *ngIf="showDeleteDevice"><i
                                                     class="mdi mdi-delete font-size-18"></i></span>
                                         </div>
                                     </td>

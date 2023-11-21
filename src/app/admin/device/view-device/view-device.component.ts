@@ -6,6 +6,7 @@ import { DEVICE_NAME_VALIDATION } from 'src/app/constants/validations';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { DeviceService } from '../service/device.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-view-device',
@@ -17,6 +18,10 @@ export class ViewDeviceComponent {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListRooms: boolean = this.globalService.checkForPermission('LIST-ROOM');
+
+	showListDevice: boolean = this.globalService.checkForPermission('LIST-STAFF');
+	showDeleteDevice: boolean =
+		this.globalService.checkForPermission('DELETE-STAFF');
 
 	public deviceForm: FormGroup = this.formBuilder.group({
 		account: [null],
@@ -32,7 +37,8 @@ export class ViewDeviceComponent {
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private activatedRoute: ActivatedRoute,
-		private deviceService: DeviceService
+		private deviceService: DeviceService,
+		private dialogService: DialogService
 	) {}
 
 	ngOnInit(): void {
@@ -60,5 +66,22 @@ export class ViewDeviceComponent {
 	}
 	routeToListDevice() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+	}
+
+	deleteDevice() {
+		let deviceId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			deviceId = params['id'];
+		});
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete site API
+				this.deviceService.deleteDevice(deviceId).then((res: any) => {
+					if (res.status) {
+						this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+					}
+				});
+			}
+		});
 	}
 }

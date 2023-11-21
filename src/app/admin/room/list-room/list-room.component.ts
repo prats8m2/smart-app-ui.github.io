@@ -29,7 +29,9 @@ export class ListRoomComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRoom: boolean = this.globalService.checkForPermission('ADD-ROOM');
-
+	showEditRoom: boolean = this.globalService.checkForPermission('UPDATE-ROOM');
+	showDeleteRoom: boolean =
+		this.globalService.checkForPermission('DELETE-ROOM');
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,

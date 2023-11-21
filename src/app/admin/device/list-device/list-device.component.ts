@@ -27,6 +27,10 @@ export class ListDeviceComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddDevice: boolean = this.globalService.checkForPermission('ADD-DEVICE');
+	showEditDevice: boolean =
+		this.globalService.checkForPermission('UPDATE-DEVICE');
+	showDeleteDevice: boolean =
+		this.globalService.checkForPermission('DELETE-DEVICE');
 
 	accountParams: IParams = {
 		limit: 100,

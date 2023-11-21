@@ -24,6 +24,9 @@ export class ListSitesComponent {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddSite: boolean = this.globalService.checkForPermission('ADD-SITE');
+	showEditSite: boolean = this.globalService.checkForPermission('UPDATE-SITE');
+	showDeleteSite: boolean =
+		this.globalService.checkForPermission('DELETE-SITE');
 
 	accountParams: IParams = {
 		limit: 100,

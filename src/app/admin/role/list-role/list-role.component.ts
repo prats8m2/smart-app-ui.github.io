@@ -24,6 +24,9 @@ export class ListRoleComponent {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRole: boolean = this.globalService.checkForPermission('ADD-ROLE');
+	showEditRole: boolean = this.globalService.checkForPermission('UPDATE-ROLE');
+	showDeleteRole: boolean =
+		this.globalService.checkForPermission('DELETE-ROLE');
 
 	accountParams: IParams = {
 		limit: 100,

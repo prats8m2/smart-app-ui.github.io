@@ -20,6 +20,7 @@ import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../service/site.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-view-site',
@@ -46,11 +47,15 @@ export class ViewSiteComponent {
 		private globalService: GlobalService,
 		private siteService: SiteService,
 		public accountService: AccountService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {}
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
+	showDeleteSite: boolean =
+		this.globalService.checkForPermission('DELETE-SITE');
 	siteWifiDetails: any = [];
 
 	accountParams: IParams = {
@@ -67,27 +72,6 @@ export class ViewSiteComponent {
 	ngOnInit() {
 		this.getSite();
 	}
-	//form validation function
-	isError(formControlName: string, errorType: string): boolean {
-		return hasError(this.siteForm, formControlName, errorType);
-	}
-
-	showError(formControlName: string): boolean {
-		return isValid(this.siteForm, formControlName);
-	}
-
-	showSuccess(formControlName: string): boolean {
-		return isTouchedAndValid(this.siteForm, formControlName);
-	}
-
-	formTouched(formControlName: string): boolean {
-		return isTouched(this.siteForm, formControlName);
-	}
-
-	errorMessage(formControlName: string, errorType: string): string {
-		return errorMessages[formControlName][errorType];
-	}
-
 	field(): FormGroup {
 		return this.formBuilder.group({
 			username: ['', USER_NAME_VALIDATION],
@@ -137,6 +121,23 @@ export class ViewSiteComponent {
 					this.siteWifiDetails = [...res.data.wifi];
 				}
 			});
+		});
+	}
+
+	deleteSite() {
+		let siteId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			siteId = params['id'];
+		});
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete site API
+				this.siteService.deleteSite(siteId).then((res: any) => {
+					if (res.status) {
+						this.router.navigateByUrl(URL_ROUTES.LIST_SITE);
+					}
+				});
+			}
 		});
 	}
 }

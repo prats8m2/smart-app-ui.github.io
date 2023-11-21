@@ -26,6 +26,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { StaffService } from '../service/staff.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-view-staff',
@@ -50,6 +51,9 @@ export class ViewStaffComponent implements OnInit {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
+	showListStaff: boolean = this.globalService.checkForPermission('LIST-STAFF');
+	showDeleteStaff: boolean =
+		this.globalService.checkForPermission('DELETE-STAFF');
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -57,7 +61,8 @@ export class ViewStaffComponent implements OnInit {
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private activatedRoute: ActivatedRoute,
-		private staffService: StaffService
+		private staffService: StaffService,
+		private dialogService: DialogService
 	) {}
 
 	ngOnInit(): void {
@@ -87,5 +92,22 @@ export class ViewStaffComponent implements OnInit {
 
 	routeToListStaff() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+	}
+
+	deleteStaff() {
+		let staffId: any;
+		this.activatedRoute.params.subscribe((params) => {
+			staffId = params['id'];
+		});
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete site API
+				this.staffService.deleteStaff(staffId).then((res: any) => {
+					if (res.status) {
+						this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+					}
+				});
+			}
+		});
 	}
 }

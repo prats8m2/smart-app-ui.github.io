@@ -1,8 +1,22 @@
 <div class="card">
     <div class="card-body">
-        <div class="d-flex align-items-start justify-content-start">
-            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
-            <h4 class="card-title mb-4">Account Details</h4>
+        <div class="d-flex align-items-start justify-content-between">
+            <div class="d-flex align-items-start">
+                <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
+                <h4 class="card-title mb-4">Account Details</h4>
+            </div>
+            
+            <div class="text-end">
+                <button type="button" class="btn btn-primary btn-rounded mb-2 me-2" *ngIf="showListAccount"  (click)="routeToListAccount()">
+                    <i class="mdi mdi-format-list-bulleted mr-1"></i>
+                    List Account(s)
+                </button>
+                
+                <button type="button" class="btn btn-danger btn-rounded mb-2 me-2" *ngIf="showDeleteAccount"  (click)="deleteAccount()">
+                    <i class="mdi mdi-delete mr-1" ></i>
+                    Delete
+                </button>
+            </div>
         </div>
         <!-- Form Start -->
         <form (ngSubmit)="editAccount()" [formGroup]="userForm" class="custom-form">
@@ -12,7 +26,6 @@
                 <div class="col-md-6 mb-4">
                     <label for="accountName">Account Name</label>
                     <input type="text" class="form-control" formControlName="accountName">
-
                 </div>
             </div>
 

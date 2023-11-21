@@ -27,6 +27,10 @@ export class ListStaffComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddStaff: boolean = this.globalService.checkForPermission('ADD-ROLE');
+	showEditStaff: boolean =
+		this.globalService.checkForPermission('UPDATE-STAFF');
+	showDeleteStaff: boolean =
+		this.globalService.checkForPermission('DELETE-STAFF');
 
 	accountParams: IParams = {
 		limit: 100,
