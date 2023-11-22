@@ -33,32 +33,10 @@ export class ViewRoleComponent implements OnInit {
 	showDeleteRole: boolean =
 		this.globalService.checkForPermission('DELETE-ROLE');
 
-	gg = [
-		{
-			id: 1,
-			name: 'ADD-ACCOUNT',
-			category: 'ACCOUNT',
-			createdOn: '2023-11-17T15:35:34.935Z',
-		},
-		{
-			id: 2,
-			name: 'UPDATE-ACCOUNT',
-			category: 'ACCOUNT',
-			createdOn: '2023-11-17T15:35:34.963Z',
-		},
-		{
-			id: 11,
-			name: 'ADD-ROLE',
-			category: 'ROLE',
-			createdOn: '2023-11-17T15:35:35.026Z',
-		},
-		{
-			id: 12,
-			name: 'UPDATE-ROLE',
-			category: 'ROLE',
-			createdOn: '2023-11-17T15:35:35.032Z',
-		},
-	];
+	selectedRole: any = [];
+	disableEditRole: boolean = false;
+	disableDeleteRole: boolean = false;
+
 	permissionsData: any = {};
 	permissionParams: IParams = {
 		accountId: null,
@@ -77,8 +55,6 @@ export class ViewRoleComponent implements OnInit {
 	ngOnInit(): void {
 		this.getRole();
 		this.listPermissionsAPI(this.permissionParams);
-
-		this.patchPermissionValues();
 	}
 
 	routeToListRole() {
@@ -96,6 +72,9 @@ export class ViewRoleComponent implements OnInit {
 					this.roleForm.get('roleName')?.patchValue(res.data.name);
 					this.roleForm.get('isDefault')?.patchValue(res.data.default);
 					this.permissionParams.accountId = res.data.account.id;
+					this.selectedRole = res.data.permissions;
+					this.disableEditRole = res.data.default;
+					this.disableDeleteRole = res.data.default;
 				}
 			});
 		});
@@ -125,6 +104,7 @@ export class ViewRoleComponent implements OnInit {
 
 			userPermissionsArray.setControl(key, this.formBuilder.array(formArray));
 		});
+		this.patchPermissionsData(this.selectedRole);
 	}
 
 	getFormControl(category: string, index: number): FormControl {
@@ -139,38 +119,6 @@ export class ViewRoleComponent implements OnInit {
 		return permissionName.split('-')[0];
 	}
 
-	patchPermissionValues() {
-		const userPermissionsArray = this.roleForm.get(
-			'userPermissions'
-		) as FormArray;
-
-		this.gg.forEach((patch) => {
-			const category = this.getPermissionCategoryById(patch.id);
-
-			if (category !== null) {
-				const formArray = userPermissionsArray.get('ACCOUNT') as FormArray;
-
-				if (formArray) {
-					const control = formArray.controls.find((c) => c.get(patch.name));
-
-					if (control) {
-						const permissionControl = control.get(patch.name) as FormControl;
-						permissionControl.setValue(true);
-					}
-				}
-			}
-		});
-	}
-
-	getPermissionCategoryById(id: number): string {
-		const permission = this.gg.find((p) => p.id === id);
-		if (permission) {
-			return permission.category;
-		} else {
-			return null;
-		}
-	}
-
 	deletRole() {
 		let roleId: any;
 		this.activatedRoute.params.subscribe((params) => {
@@ -178,7 +126,6 @@ export class ViewRoleComponent implements OnInit {
 		});
 		this.dialogService.openConfirmDialog().then((result) => {
 			if (result.value) {
-				//call delete role API
 				this.roleService.deleteRole(roleId).then((res: any) => {
 					if (res.status) {
 						this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
@@ -193,7 +140,26 @@ export class ViewRoleComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			roleId = params['id'];
 		});
-
 		this.router.navigateByUrl(URL_ROUTES.EDIT_ROLE + '/' + roleId);
+	}
+
+	patchPermissionsData(data: any[]) {
+		const userPermissionsControl = this.roleForm.get(
+			'userPermissions'
+		) as FormGroup;
+		data.forEach((permission) => {
+			const category = permission.category;
+			const formArray = userPermissionsControl.get(category) as FormArray;
+			const formGroupIndex = formArray.controls.findIndex(
+				(control: FormGroup) => {
+					return control.get('id').value === permission.id;
+				}
+			);
+			if (formGroupIndex !== -1) {
+				const formGroup = formArray.controls[formGroupIndex] as FormGroup;
+				formGroup.get(permission.name).patchValue(true);
+			}
+		});
+		userPermissionsControl.disable();
 	}
 }
