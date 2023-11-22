@@ -25,6 +25,7 @@ export class ListRoleComponent {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRole: boolean = this.globalService.checkForPermission('ADD-ROLE');
 	showEditRole: boolean = this.globalService.checkForPermission('UPDATE-ROLE');
+	showViewRole: boolean = this.globalService.checkForPermission('VIEW-ROLE');
 	showDeleteRole: boolean =
 		this.globalService.checkForPermission('DELETE-ROLE');
 
@@ -32,16 +33,13 @@ export class ListRoleComponent {
 		limit: 100,
 		pageNumber: 1,
 	};
-
 	accountList: any = [];
 	roleList: any = [];
-
 	roleListResp: any = [];
 	total: number;
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	userRole: string;
 	roleParams: IParams = {
 		accountId: null,
 		limit: 100,
@@ -67,7 +65,9 @@ export class ListRoleComponent {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_ROLE + '/' + roleId);
 	}
 	routeToViewRole(roleId: number) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_ROLE + '/' + roleId);
+		if (this.showViewRole) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_ROLE + '/' + roleId);
+		}
 	}
 
 	pageChanged(event: any): void {

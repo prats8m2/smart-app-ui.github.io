@@ -26,6 +26,8 @@ export class ListAccountsComponent {
 	currentPage: number = 1;
 	searchInput: string = '';
 	showAddButton: boolean = this.globalService.checkForPermission('ADD-ACCOUNT');
+	showViewButton: boolean =
+		this.globalService.checkForPermission('VIEW-ACCOUNT');
 	showEditButton: boolean =
 		this.globalService.checkForPermission('UPDATE-ACCOUNT');
 	showDeleteButton: boolean =
@@ -54,10 +56,14 @@ export class ListAccountsComponent {
 		this.router.navigateByUrl(URL_ROUTES.ADD_ACCOUNT);
 	}
 	routeToEditAccount(accountId: number) {
-		this.router.navigateByUrl(URL_ROUTES.EDIT_ACCOUNT + '/' + accountId);
+		if (this.showEditButton) {
+			this.router.navigateByUrl(URL_ROUTES.EDIT_ACCOUNT + '/' + accountId);
+		}
 	}
 	routeToViewAccount(accountId: number) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_ACCOUNT + '/' + accountId);
+		if (this.showViewButton) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_ACCOUNT + '/' + accountId);
+		}
 	}
 
 	pageChanged(event: any): void {

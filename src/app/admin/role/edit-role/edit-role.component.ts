@@ -165,4 +165,38 @@ export class EditRoleComponent implements OnInit {
 			}
 		});
 	}
+
+	onCheckboxChange(category: string, index: number) {
+		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
+			category
+		) as FormArray;
+		const formGroup = formArray.controls[index] as FormGroup;
+		const checkboxControl = formGroup.get(
+			Object.keys(formGroup.controls)[0]
+		) as FormControl;
+		if (checkboxControl.value) {
+			const listCheckbox: any = formArray.controls.find(
+				(control: FormGroup) => {
+					const permissionName = Object.keys(control.controls)[0];
+					const label = this.getPermissionLabel(permissionName);
+					return label === 'LIST';
+				}
+			);
+			const allOthersNotSelected = formArray.controls.every(
+				(control: FormGroup) => {
+					return (
+						control === formGroup ||
+						!control.get(Object.keys(control.controls)[0]).value
+					);
+				}
+			);
+			if (listCheckbox && allOthersNotSelected) {
+				const listCheckboxControl = listCheckbox.get(
+					Object.keys(listCheckbox.controls)[0]
+				) as FormControl;
+				listCheckboxControl.setValue(true);
+				listCheckboxControl.disable();
+			}
+		}
+	}
 }

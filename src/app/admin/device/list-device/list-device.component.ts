@@ -27,6 +27,9 @@ export class ListDeviceComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddDevice: boolean = this.globalService.checkForPermission('ADD-DEVICE');
+	showViewDevice: boolean =
+		this.globalService.checkForPermission('VIEW-DEVICE');
+
 	showEditDevice: boolean =
 		this.globalService.checkForPermission('UPDATE-DEVICE');
 	showDeleteDevice: boolean =
@@ -43,7 +46,6 @@ export class ListDeviceComponent implements OnInit {
 	};
 
 	accountList: any = [];
-	roleList: any = [];
 	deviceList: any = [];
 
 	deviceListResp: any = [];
@@ -51,7 +53,6 @@ export class ListDeviceComponent implements OnInit {
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	userRole: string;
 	deviceParams: IParams = {
 		siteId: null,
 		limit: 100,
@@ -78,7 +79,9 @@ export class ListDeviceComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_DEVICE + '/' + deviceId);
 	}
 	routeToViewDevice(deviceId: any) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_DEVICE + '/' + deviceId);
+		if (this.showViewDevice) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_DEVICE + '/' + deviceId);
+		}
 	}
 
 	pageChanged(event: any): void {

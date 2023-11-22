@@ -31,13 +31,9 @@ export class ListStaffComponent implements OnInit {
 		this.globalService.checkForPermission('UPDATE-STAFF');
 	showDeleteStaff: boolean =
 		this.globalService.checkForPermission('DELETE-STAFF');
+	showViewStaff: boolean = this.globalService.checkForPermission('VIEW-STAFF');
 
 	accountParams: IParams = {
-		limit: 100,
-		pageNumber: 1,
-	};
-	siteParams: IParams = {
-		accountId: null,
 		limit: 100,
 		pageNumber: 1,
 	};
@@ -63,12 +59,6 @@ export class ListStaffComponent implements OnInit {
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	userRole: string;
-	deviceParams: IParams = {
-		siteId: null,
-		limit: 100,
-		pageNumber: 1,
-	};
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -92,7 +82,9 @@ export class ListStaffComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_STAFF + '/' + staffId);
 	}
 	routeToViewStaff(staffId: any) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_STAFF + '/' + staffId);
+		if (this.showViewStaff) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_STAFF + '/' + staffId);
+		}
 	}
 
 	pageChanged(event: any): void {

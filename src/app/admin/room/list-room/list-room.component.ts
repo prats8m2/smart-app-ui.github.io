@@ -30,6 +30,7 @@ export class ListRoomComponent implements OnInit {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddRoom: boolean = this.globalService.checkForPermission('ADD-ROOM');
 	showEditRoom: boolean = this.globalService.checkForPermission('UPDATE-ROOM');
+	showViewRoom: boolean = this.globalService.checkForPermission('VIEW-ROOM');
 	showDeleteRoom: boolean =
 		this.globalService.checkForPermission('DELETE-ROOM');
 	accountParams: IParams = {
@@ -43,7 +44,6 @@ export class ListRoomComponent implements OnInit {
 	};
 
 	accountList: any = [];
-	roleList: any = [];
 	deviceList: any = [];
 
 	roomListResp: any = [];
@@ -51,7 +51,6 @@ export class ListRoomComponent implements OnInit {
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	userRole: string;
 	roomParams: IParams = {
 		siteId: null,
 		limit: 100,
@@ -78,7 +77,9 @@ export class ListRoomComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_ROOM + '/' + roomId);
 	}
 	routeToViewRoom(roomId: any) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_ROOM + '/' + roomId);
+		if (this.showViewRoom) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_ROOM + '/' + roomId);
+		}
 	}
 
 	pageChanged(event: any): void {

@@ -61,7 +61,9 @@ export class AddAccountComponent {
 		}
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.userForm.get('status').disable();
+	}
 	//form validation function
 	isError(formControlName: string, errorType: string): boolean {
 		return hasError(this.userForm, formControlName, errorType);

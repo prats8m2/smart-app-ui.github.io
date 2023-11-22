@@ -25,6 +25,7 @@ export class ListSitesComponent {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showAddSite: boolean = this.globalService.checkForPermission('ADD-SITE');
 	showEditSite: boolean = this.globalService.checkForPermission('UPDATE-SITE');
+	showViewSite: boolean = this.globalService.checkForPermission('VIEW-SITE');
 	showDeleteSite: boolean =
 		this.globalService.checkForPermission('DELETE-SITE');
 
@@ -41,7 +42,6 @@ export class ListSitesComponent {
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
-	userRole: string;
 	siteParams: IParams = {
 		accountId: null,
 		limit: 100,
@@ -69,7 +69,9 @@ export class ListSitesComponent {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_SITE + '/' + siteId);
 	}
 	routeToViewSite(siteId: number) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_SITE + '/' + siteId);
+		if (this.showViewSite) {
+			this.router.navigateByUrl(URL_ROUTES.VIEW_SITE + '/' + siteId);
+		}
 	}
 
 	pageChanged(event: any): void {

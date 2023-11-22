@@ -114,11 +114,36 @@ export class AddRoleComponent implements OnInit {
 		return permissionName.split('-')[0];
 	}
 
+	onCheckboxChange(category: string, index: number) {
+		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
+			category
+		) as FormArray;
+		const formGroup = formArray.controls[index] as FormGroup;
+		const checkboxControl = formGroup.get(
+			Object.keys(formGroup.controls)[0]
+		) as FormControl;
+		if (checkboxControl.value) {
+			const listCheckbox: any = formArray.controls.find(
+				(control: FormGroup) => {
+					const permissionName = Object.keys(control.controls)[0];
+					const label = this.getPermissionLabel(permissionName);
+					return label === 'LIST';
+				}
+			);
+			if (listCheckbox) {
+				const listCheckboxControl = listCheckbox.get(
+					Object.keys(listCheckbox.controls)[0]
+				) as FormControl;
+				listCheckboxControl.setValue(true);
+				listCheckboxControl.disable();
+			}
+		}
+	}
+
 	routeToListRole() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
 	}
 
-	//form validation function
 	isError(formControlName: string, errorType: string): boolean {
 		return hasError(this.roleForm, formControlName, errorType);
 	}
@@ -151,7 +176,7 @@ export class AddRoleComponent implements OnInit {
 		});
 
 		Object.keys(originalPermissionsData).forEach((category) => {
-			originalPermissionsData[category].forEach((permission) => {
+			originalPermissionsData[category].forEach(() => {
 				originalPermissionsData[category]
 					.filter((obj) => obj[Object.keys(obj)[0]] === true)
 					.forEach((obj) => {
