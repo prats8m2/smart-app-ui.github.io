@@ -2,9 +2,23 @@
     border-radius: 22px; /* Border radius similar to btn-rounded class*/
 }
 
+.card-body{
+  height: calc(100vh - 180px);
+}
+
+.table-fixed-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-light {
+  @extend .table-fixed-header;
+}
+
+
 .table-responsive {
-  max-height: 400px;
-  min-width: 400px;
+  height: 84%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #556080; 

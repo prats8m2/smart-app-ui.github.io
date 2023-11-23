@@ -2,9 +2,12 @@
     border-radius: 22px;
 }
 
+.card-body{
+  height: calc(100vh - 180px);
+}
+
 .table-responsive {
-  max-height: 400px;
-  min-width: 400px;
+  height: 84%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #556080; 
@@ -60,4 +63,14 @@
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
   color: #a6b0cf;
+}
+
+.table-fixed-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-light {
+  @extend .table-fixed-header;
 }

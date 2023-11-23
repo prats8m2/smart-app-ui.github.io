@@ -3,8 +3,7 @@
 }
 
 .table-responsive {
-  max-height: 400px;
-  min-width: 400px;
+  height: 84%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #556080; 
@@ -25,4 +24,19 @@
 
 .your-custom-title-class {
   color: #ff0000; /* Change the color to your desired color */
+}
+
+.card-body{
+  height: calc(100vh - 180px);
+}
+
+
+.table-fixed-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-light {
+  @extend .table-fixed-header;
 }

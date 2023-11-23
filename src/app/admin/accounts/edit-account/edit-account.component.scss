@@ -1,5 +1,5 @@
 .custom-form{
-    max-height: 450px;
+  height: 90%;
     overflow-y:scroll;
     overflow-x: hidden;
   }
@@ -20,4 +20,8 @@
     padding-left: 3rem;
     min-height: 28px;
     line-height: 28px;
+}
+
+.card-body{
+  height: calc(100vh - 180px);
 }

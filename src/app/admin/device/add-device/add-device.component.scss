@@ -39,7 +39,7 @@
   }
 
   .custom-form{
-    max-height: 450px;
+    height: 90%;
     overflow-y:scroll;
     overflow-x: hidden;
   }
@@ -98,4 +98,8 @@
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
   color: #a6b0cf;
+}
+
+.card-body{
+  height: calc(100vh - 180px);
 }

@@ -18,9 +18,13 @@
   }
 
   .custom-form{
-    max-height: 450px;
+    height: 90%;
     overflow-y:scroll;
     overflow-x: hidden;
+  }
+
+  .card-body{
+    height: calc(100vh - 180px);
   }
   
   .custom-form::-webkit-scrollbar {
