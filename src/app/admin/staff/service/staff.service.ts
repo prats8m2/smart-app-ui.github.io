@@ -69,15 +69,31 @@ export class StaffService {
 			});
 	}
 
-	updateRole(roleForm: any) {
-		const { id, account, roleName, permissions } = roleForm.value;
+	updateStaff(roleForm: any) {
+		const {
+			id,
+			site,
+			role,
+			status,
+			firstName,
+			lastName,
+			username,
+			email,
+			password,
+			mobile,
+		} = roleForm.value;
 
 		return this.http
-			.put(ROLE.UPDATE_ROLE, {
+			.put(STAFF.UPDATE_STAFF, {
 				id: id,
-				accountId: account,
-				name: roleName,
-				permissions: permissions,
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				username: username,
+				password: password,
+				mobile: mobile,
+				role: role,
+				sites: site,
 			})
 			.toPromise()
 			.then((response) => {

@@ -80,6 +80,7 @@ export class EditStaffComponent implements OnInit {
 	) {
 		if (this.isProduction) {
 			this.staffForm = this.formBuilder.group({
+				id: [null],
 				account: [null],
 				site: [[], Validators.required],
 				role: [null, Validators.required],
@@ -92,18 +93,18 @@ export class EditStaffComponent implements OnInit {
 				mobile: ['', PHONE_VALIDATION],
 			});
 		} else {
-			const randomNumber = Math.floor(1000 + Math.random() * 9000);
 			this.staffForm = this.formBuilder.group({
+				id: [null],
 				account: [null],
 				site: [[], Validators.required],
 				role: [null, Validators.required],
-				status: [true],
-				firstName: ['John' + randomNumber, FIRST_NAME_VALIDATION],
-				lastName: ['Doe' + randomNumber, LAST_NAME_VALIDATION],
-				username: ['john-' + randomNumber, USER_NAME_VALIDATION],
-				email: ['john-' + randomNumber + '@yopmail.com', EMAIL_VALIDATION],
+				status: [null],
+				firstName: [null, FIRST_NAME_VALIDATION],
+				lastName: [null, LAST_NAME_VALIDATION],
+				username: [null, USER_NAME_VALIDATION],
+				email: [null, EMAIL_VALIDATION],
 				password: ['Pass@1234', PASSWORD_VALIDATION],
-				mobile: ['9876543210', PHONE_VALIDATION],
+				mobile: [null, PHONE_VALIDATION],
 			});
 		}
 	}
@@ -116,17 +117,25 @@ export class EditStaffComponent implements OnInit {
 			let staffId = params['id'];
 			this.staffService.viewStaff(staffId).then((res) => {
 				if (res.status === true) {
-					this.staffForm.get('account')?.patchValue(res.data.account.id);
-					this.staffForm.get('account')?.disable();
-					this.staffForm.get('role')?.patchValue(res.data.role);
-					this.staffForm.get('firstName')?.patchValue(res.data.firstName);
-					this.staffForm.get('lastName')?.patchValue(res.data.lastName);
-					this.staffForm.get('email')?.patchValue(res.data.email);
-					this.staffForm.get('mobile')?.patchValue(res.data.mobile);
-					this.staffForm.get('username')?.patchValue(res.data.username);
-					this.staffForm.get('password')?.patchValue('Pass@1234');
-					const siteName = res.data.sites.map((site) => site.name);
-					this.staffForm.get('site')?.patchValue(siteName);
+					const data = res.data;
+					const form = this.staffForm;
+					form.patchValue({
+						id: staffId,
+						account: data.account.name,
+						role: data.role.id,
+						firstName: data.firstName,
+						lastName: data.lastName,
+						email: data.email,
+						mobile: data.mobile,
+						username: data.username,
+						password: 'Pass@1234',
+						site: data.sites.map((site) => site.id),
+					});
+					form.get('account')?.disable();
+					const accountId = data.account.id;
+					this.siteParams.accountId = accountId;
+					this.roleParams.accountId = accountId;
+					this.listSiteAPI(this.siteParams);
 				}
 			});
 		});
@@ -189,14 +198,14 @@ export class EditStaffComponent implements OnInit {
 		this.staffForm.get('role').patchValue(roleId);
 	}
 
-	addStaff() {
+	updateStaff() {
 		const selectedSiteIds = this.staffForm.get('site').value;
 
 		const selectedSiteObjects = selectedSiteIds.map((id: number) => ({
 			id,
 		}));
 		this.staffForm.get('site').patchValue(selectedSiteObjects);
-		this.staffService.addStaff(this.staffForm).then((res) => {
+		this.staffService.updateStaff(this.staffForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_STAFF]);
 			} else {

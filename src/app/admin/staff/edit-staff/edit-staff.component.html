@@ -5,14 +5,12 @@
             <h4 class="card-title mb-4">Edit Staff</h4>
         </div>
         <!-- Form Start -->
-        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="custom-form">
+        <form (ngSubmit)="updateStaff()" [formGroup]="staffForm" class="custom-form">
             <!-- First Row -->
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="accountList" [ngModel]="accountList[0]?.account?.id" bindLabel="account.name" [clearable]="false" bindValue="account?.id"
-                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'"
-                        formControlName="account"></ng-select>
+                    <input type="text" class="form-control" formControlName="account">
                 </div>
             </div>
             <!-- Second Row -->
@@ -20,7 +18,7 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                        <ng-select [items]="this.staffForm.get('site').value" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                        <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
                         [multiple]="true" formControlName="site">
                         </ng-select>
                 </div>
@@ -30,7 +28,7 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRole">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="this.staffForm.get('role').value" [ngModel]="roleList[0]?.id" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Role'"
+                    <ng-select [items]="roleList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Role'"
                         formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
                 </div>
             </div>
