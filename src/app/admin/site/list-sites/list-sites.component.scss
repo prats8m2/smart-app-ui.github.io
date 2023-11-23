@@ -1,9 +1,19 @@
 .form-select {
-    border-radius: 22px; /* Border radius similar to btn-rounded class*/
+    border-radius: 22px;
+}
+.site-cal-row{ //show 5 cards in each row
+    flex: 0 0 auto;
+    width: 20%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .card-body{
   height: calc(100vh - 180px);
+}
+
+.site-card-body{
+  height: max-content;
 }
 
 .table-fixed-header {
@@ -16,16 +26,43 @@
   @extend .table-fixed-header;
 }
 
+.text-body {
+  --bs-text-opacity: 1;
+  color: white !important;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px; 
+}
+
+.icon-container i {
+  font-size: 48px; 
+}
+
 
 .table-responsive {
   height: 84%;
+  width: 100%;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #556080; 
+  padding-bottom: 2%;
 }
 
 .table-responsive::-webkit-scrollbar {
   width: 5px; 
+}
+
+.site-card {
+  transition: transform 0.3s ease-in-out;
+  border-width: thin;
+}
+
+.site-card:hover {
+  transform: scale(1.1);
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
@@ -73,4 +110,24 @@
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
   color: #a6b0cf;
+}
+
+.card-row {
+  --bs-gutter-x: 24px;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: 0px;
+  margin-left: 0px; 
+}
+
+.site-name-text {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 10%; 
+  padding-right: 10%; 
 }
