@@ -24,12 +24,11 @@
   }
 
   .role-form{
-    max-height: 450px;
-    min-width: 400px;
     overflow-y: scroll;
     overflow-x:hidden;
     scrollbar-width: thin;
     scrollbar-color: #556080; 
+    height: 90%;
   }
   
   .role-form::-webkit-scrollbar {
