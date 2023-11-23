@@ -1,11 +1,9 @@
 <div class="container-fluid">
-    <!-- <app-page-title title="Orders" [breadcrumbItems]="breadCrumbItems"></app-page-title> -->
-
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row mb-2" >
+                    <div class="row mb-2">
                         <div class=" row col-sm-4">
                             <div class="col-sm-6">
                                 <div class="search-box me-2 mb-2 d-inline-block">
@@ -38,17 +36,25 @@
                                 <div class="col-12">
                                     <div class="card-row">
                                         <div class="site-cal-row" *ngFor="let data of siteList; let i = index;">
-                                            <div class="card site-card  pointer" >
-                                                <div class="icon-container text-center" (click)="routeToViewSite(data.id)">
-                                                    <i class="bx" [ngClass]="{'bx-building-house': data.type === 2, 'bx-restaurant': data.type === 1}"></i>
+                                            <div class="card site-card  pointer">
+                                                <div class="icon-container text-center"
+                                                    (click)="routeToViewSite(data.id)">
+                                                    <i class="bx"
+                                                        [ngClass]="{'bx-building-house': data.type === 2, 'bx-restaurant': data.type === 1}"></i>
                                                 </div>
                                                 <div class="site-card-body text-center">
-                                                    <h4 class="card-title mt-2 "><a class="text-body fw-bold site-name-text">{{data.name}}</a></h4>
+                                                    <h4 class="card-title mt-2 "><a
+                                                            class="text-body fw-bold site-name-text">{{data.name}}</a>
+                                                    </h4>
                                                     <p class="card-text site-name-text">{{data.address}}</p>
                                                     <p class="card-text">{{data.type | siteTypePipe}}</p>
-                                                    <div class="d-flex justify-content-center gap-3 mb-3" >
-                                                        <span class="text-success pointer" *ngIf="showEditSite"><i class="mdi mdi-pencil font-size-24" (click)="routeToEditSite(data.id)"></i></span>
-                                                        <span class="text-danger pointer" *ngIf="showDeleteSite" (click)="openConfirmDialog(data.id)"><i class="mdi mdi-delete font-size-24"></i></span>
+                                                    <div class="d-flex justify-content-center gap-3 mb-3">
+                                                        <span class="text-success pointer" *ngIf="showEditSite"><i
+                                                                class="mdi mdi-pencil font-size-24"
+                                                                (click)="routeToEditSite(data.id)"></i></span>
+                                                        <span class="text-danger pointer" *ngIf="showDeleteSite"
+                                                            (click)="openConfirmDialog(data.id)"><i
+                                                                class="mdi mdi-delete font-size-24"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -63,11 +69,13 @@
                             </ng-template>
                         </div>
                     </div>
-                    <ul class="pagination pagination-rounded justify-content-end mb-2" >
-                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage" (pageChanged)="pageChanged($event)">
+                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
+                            (pageChanged)="pageChanged($event)">
                         </pagination>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
