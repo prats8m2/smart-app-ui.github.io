@@ -15,22 +15,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                <ng-select  
-                                [ngModel]="accountList[0]?.account?.id"
-                                [items]="accountList" 
-                                bindLabel="account.name"
-                                [clearable]="false" bindValue="account.id" 
-                                (change)="changeAccountData($event.account.id)"
-                             [placeholder]="'Account'"></ng-select>
+                                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                                    bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                                    (change)="changeAccountData($event.account.id)"
+                                    [placeholder]="'Account'"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <ng-select  
-                                [ngModel]="roleList[0]?.id"
-                                [items]="roleList" 
-                                bindLabel="name"
-                                [clearable]="false" bindValue="id" 
-                                (change)="changeRoleData($event.id)"
-                             [placeholder]="'Role'"></ng-select>
+                                <ng-select [ngModel]="roleList[0]?.id" [items]="roleList" bindLabel="name"
+                                    [clearable]="false" bindValue="id" (change)="changeRoleData($event.id)"
+                                    [placeholder]="'Role'"></ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6" *ngIf="showAddStaff">
@@ -41,7 +34,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="table-responsive mb-0">
                         <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="device-list">
                             <thead class="table-light table-fixed-header">
@@ -63,7 +55,8 @@
                                         <a class="text-body fw-bold pointer"
                                             (click)="routeToViewStaff(data.id)">{{data.id}}</a>
                                     </td>
-                                    <td class="pointer" (click)="routeToViewStaff(data.id)">{{data.firstName + ' ' + data.lastName}}</td>
+                                    <td class="pointer" (click)="routeToViewStaff(data.id)">{{data.firstName + ' ' +
+                                        data.lastName}}</td>
                                     <td>
                                         {{ data?.username}}
                                     </td>
@@ -72,9 +65,11 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <span class="text-success pointer" *ngIf="showEditStaff"><i class="mdi mdi-pencil font-size-18"
+                                            <span class="text-success pointer" *ngIf="showEditStaff"><i
+                                                    class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditStaff(data.id)"></i></span>
-                                            <span class="text-danger pointer"  (click)="openConfirmDialog(data.id)" *ngIf="showDeleteStaff"><i
+                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"
+                                                *ngIf="showDeleteStaff"><i
                                                     class="mdi mdi-delete font-size-18"></i></span>
                                         </div>
                                     </td>

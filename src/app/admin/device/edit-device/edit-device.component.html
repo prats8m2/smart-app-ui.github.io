@@ -28,18 +28,8 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRooms">
                 <div class="col-md-6 mb-4">
-                    <select class="form-select" id="room" aria-label="Room" formControlName="room"
-                        (change)="changeSiteData($event.target.value)">
-                        <option selected disabled hidden>Room</option>
-                        <ng-container *ngIf="roomList.length > 0; else noData">
-                            <option *ngFor="let data of roomList" [value]="data.id">
-                                {{ data.name }}
-                            </option>
-                        </ng-container>
-                        <ng-template #noData>
-                            <option disabled>No room available</option>
-                        </ng-template>
-                    </select>
+                    <ng-select [items]="roomList" bindLabel="name" [clearable]="false" bindValue="id"
+                        formControlName="room" [placeholder]="'Room'"></ng-select>
                 </div>
             </div>
             <h6 class="mb-2">Device Details</h6>
@@ -75,7 +65,8 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="deviceForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="deviceForm.invalid || !deviceForm.dirty">Submit</button>
             </div>
         </form>
     </div>

@@ -11,36 +11,21 @@
                 <!-- Account Name -->
                 <div class="col-md-6 mb-4">
                     <label for="accountName">Account Name</label>
-                    <input type="text" class="form-control"
-                        [ngClass]="{ 'form-error':showError('accountName'),'form-success':showSuccess('accountName') }"
-                        formControlName="accountName">
-                    <!-- Account Name Validation -->
-                    <div *ngIf="formTouched('accountName')">
-                        <div *ngIf="isError('accountName','required')" class="text-danger">
-                            {{errorMessage('accountName','required')}}
-                        </div>
-                        <div *ngIf="isError('accountName','pattern')" class="text-danger">
-                            {{errorMessage('accountName','pattern')}} </div>
-                        <div *ngIf="isError('accountName','maxlength')" class="text-danger">
-                            {{errorMessage('accountName','maxlength')}} </div>
-                        <div *ngIf="isError('accountName','minlength')" class="text-danger">
-                            {{errorMessage('accountName','minlength')}} </div>
-                    </div>
+                    <input type="text" class="form-control" formControlName="accountName">
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-6">
                     <label for="accountName">Account Status</label>
                     <div class="form-check form-switch form-switch-lg mb-3">
                         <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
                             formControlName="status" [checked]="this.userForm.get('status').value">
-                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.userForm.get('status').value ? 'Active' : 'In
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.userForm.get('status').value ?
+                            'Active' : 'In
                             Active'}}</label>
                     </div>
                 </div>
             </div>
-
             <h6 class="mb-2">Owner Details</h6>
             <!-- Second Row -->
             <div class="row">
@@ -88,7 +73,6 @@
                 </div>
             </div>
             <div class="row">
-
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email">Email</label>
@@ -130,9 +114,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
-
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="username">User Name</label>
@@ -175,9 +157,9 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="userForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="userForm.invalid || || !userForm.dirty">Submit</button>
             </div>
         </form>
-
     </div>
-    </div>
+</div>

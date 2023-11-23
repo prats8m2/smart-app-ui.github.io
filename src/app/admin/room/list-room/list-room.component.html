@@ -15,8 +15,8 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                                    [ngModel]="accountList[0]?.account?.id"
+                                <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false"
+                                    bindValue="account.id" [ngModel]="accountList[0]?.account?.id"
                                     (change)="changeAccountData($event.account.id)"
                                     [placeholder]="'Account'"></ng-select>
                             </div>
@@ -72,7 +72,8 @@
                                             <span class="text-success pointer"><i class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditRoom(data.id)" *ngIf="showEditRoom"></i></span>
                                             <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"><i
-                                                    class="mdi mdi-delete font-size-18" *ngIf="showDeleteRoom"></i></span>
+                                                    class="mdi mdi-delete font-size-18"
+                                                    *ngIf="showDeleteRoom"></i></span>
                                         </div>
                                     </td>
                                 </tr>

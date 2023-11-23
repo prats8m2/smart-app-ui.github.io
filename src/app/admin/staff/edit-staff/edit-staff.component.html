@@ -161,7 +161,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid || !staffForm.dirty">Submit</button>
             </div>
         </form>
     </div>

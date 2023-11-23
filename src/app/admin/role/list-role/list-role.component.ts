@@ -52,6 +52,8 @@ export class ListRoleComponent {
 				if (res.status) {
 					this.accountList = [...res.data.users];
 				}
+				this.roleParams.accountId = this.accountList[0]?.account?.id;
+				this.listRoleAPI(this.roleParams);
 			});
 		} else {
 			this.listRoleAPI(this.roleParams);

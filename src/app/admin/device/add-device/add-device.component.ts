@@ -73,11 +73,12 @@ export class AddDeviceComponent implements OnInit {
 				status: [true],
 			});
 		} else {
+			const randomNumber = Math.floor(1000 + Math.random() * 9000);
 			this.deviceForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
 				room: [null],
-				deviceName: ['', DEVICE_NAME_VALIDATION],
+				deviceName: ['DV-' + randomNumber, DEVICE_NAME_VALIDATION],
 				status: [true],
 			});
 		}
@@ -88,6 +89,8 @@ export class AddDeviceComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
+					this.siteParams.accountId = this.accountList[0].account.id;
+					this.listSiteAPI(this.siteParams);
 				}
 			});
 		} else {
@@ -98,6 +101,8 @@ export class AddDeviceComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
+				this.roomParams.siteId = this.siteList[0].id;
+				this.listRoomAPI(this.roomParams);
 			}
 		});
 	}

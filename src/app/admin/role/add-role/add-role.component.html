@@ -12,6 +12,7 @@
                 <div class="col-md-6 mb-4">
                     <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
                         (change)="changeAccountData($event.account.id)" [placeholder]="'Account'" 
+                        [ngModel]="accountList[0]?.account?.id"
                         formControlName="account"></ng-select>
                 </div>
             </div>

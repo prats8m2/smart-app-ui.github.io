@@ -19,7 +19,6 @@ import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
-import { RoleService } from '../../role/service/role.service';
 import { SiteService } from '../../site/service/site.service';
 import { DeviceService } from '../../device/service/device.service';
 import { RoomService } from '../services/room.service';
@@ -58,12 +57,6 @@ export class AddRoomComponent implements OnInit {
 		pageNumber: 1,
 	};
 
-	roleParams: IParams = {
-		accountId: null,
-		limit: 100,
-		pageNumber: 1,
-	};
-
 	deviceParams: IParams = {
 		siteId: null,
 		limit: 100,
@@ -76,7 +69,6 @@ export class AddRoomComponent implements OnInit {
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private siteServices: SiteService,
-		private roleService: RoleService,
 		private deviceService: DeviceService,
 		private roomService: RoomService
 	) {
@@ -84,8 +76,8 @@ export class AddRoomComponent implements OnInit {
 			this.roomForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
-				wifi: [null],
-				device: [null, Validators.required],
+				wifi: [[]],
+				device: [null],
 				status: [true],
 				roomName: ['', ROOM_NAME_VALIDATION],
 			});
@@ -95,7 +87,7 @@ export class AddRoomComponent implements OnInit {
 				account: [null],
 				site: [null, Validators.required],
 				wifi: [[]],
-				device: [null, Validators.required],
+				device: [null],
 				status: [true],
 				roomName: ['Room-' + randomNumber, ROOM_NAME_VALIDATION],
 			});
@@ -108,7 +100,6 @@ export class AddRoomComponent implements OnInit {
 				if (res.status) {
 					this.accountList = [...res.data.users];
 					this.siteParams.accountId = this.accountList[0].account.id;
-					this.roleParams.accountId = this.accountList[0].account.id;
 					this.listSiteAPI(this.siteParams);
 				}
 			});
@@ -120,15 +111,8 @@ export class AddRoomComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
-				this.listRoleAPI(this.roleParams);
-			}
-		});
-	}
-
-	listRoleAPI(params: IParams) {
-		this.roleService.listRoles(params).subscribe((res) => {
-			if (res.status) {
-				this.roleList = [...res.data.roles];
+				this.deviceParams.siteId = this.siteList[0].id;
+				this.changeSiteData(this.siteList[0].id);
 			}
 		});
 	}
@@ -164,10 +148,7 @@ export class AddRoomComponent implements OnInit {
 
 	changeAccountData(accountId: any) {
 		this.siteParams.accountId = accountId;
-		this.roleParams.accountId = accountId;
-		this.roomForm.get('account').patchValue(accountId);
 		this.listSiteAPI(this.siteParams);
-		this.listRoleAPI(this.roleParams);
 	}
 
 	changeRoleData(roleId: any) {
@@ -187,6 +168,7 @@ export class AddRoomComponent implements OnInit {
 				console.log('error');
 			}
 		});
+		console.log(this.roomForm.value);
 	}
 
 	toggle(): void {
@@ -198,13 +180,12 @@ export class AddRoomComponent implements OnInit {
 		this.siteServices.viewSite(siteId).then((res) => {
 			this.wifiList = [...res.data.wifi];
 		});
-
 		this.deviceParams.siteId = siteId;
 		this.listDeviceAPI(this.deviceParams);
 	}
 
 	listDeviceAPI(params: IParams) {
-		this.deviceService.listDevice(this.deviceParams).subscribe((res) => {
+		this.deviceService.listDevice(params).subscribe((res) => {
 			this.deviceList = [...res.data.devices];
 		});
 	}

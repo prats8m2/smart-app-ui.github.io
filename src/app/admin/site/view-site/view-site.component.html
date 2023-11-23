@@ -2,86 +2,74 @@
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
             <div class="d-flex align-items-start">
-                <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListSite" (click)="routeToListSite()"></i>
+                <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListSite"
+                    (click)="routeToListSite()"></i>
                 <h4 class="card-title mb-4">Site Details</h4>
             </div>
-            
             <div class="text-end">
-                <button type="button" class="btn btn-success btn-rounded mb-2 me-2" *ngIf="showEditSite"  (click)="routeToEditSite()">
+                <button type="button" class="btn btn-success btn-rounded mb-2 me-2" *ngIf="showEditSite"
+                    (click)="routeToEditSite()">
                     <i class="mdi mdi-pencil mr-1"></i>
                     Edit
                 </button>
-                
-                <button type="button" class="btn btn-danger btn-rounded mb-2 me-2" *ngIf="showDeleteSite"  (click)="deleteSite()">
-                    <i class="mdi mdi-delete mr-1" ></i>
+                <button type="button" class="btn btn-danger btn-rounded mb-2 me-2" *ngIf="showDeleteSite"
+                    (click)="deleteSite()">
+                    <i class="mdi mdi-delete mr-1"></i>
                     Delete
                 </button>
             </div>
         </div>
-                <!-- Form Start -->
-                <form  [formGroup]="siteForm" class="custom-form">
-                    <!-- First Row -->
-                    <h6 class="mb-2" >Account Details</h6>
-                    <div class="row" >
-              <div class="col-md-6 mb-4">
-                <label for="accountName">Account Name</label>
-                <input type="text" class="form-control" formControlName="account">
-
-              </div>
-          </div>
-
-                    
-                    <h6 class="mb-2">Site Details</h6>
-                    <!-- Second Row -->
-                    <div class="row">
-                        <!-- Site Name -->
+        <!-- Form Start -->
+        <form [formGroup]="siteForm" class="custom-form">
+            <!-- First Row -->
+            <h6 class="mb-2">Account Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <h6 class="mb-2">Site Details</h6>
+            <!-- Second Row -->
+            <div class="row">
+                <!-- Site Name -->
                 <div class="col-md-6 mb-4">
                     <label for="siteName">Site Name</label>
-                    <input type="text" class="form-control"
-                        formControlName="siteName">
-                    
+                    <input type="text" class="form-control" formControlName="siteName">
                 </div>
                 <div class="col-md-6 mb-4">
-                  <label for="siteAddress">Site Address</label>
-                  <input type="text" class="form-control"
-                      formControlName="siteAddress">
-                 
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 mb-4">
-                    <label for="type">Site Type</label>
-                    <input type="text" class="form-control"
-                        formControlName="type">
+                    <label for="siteAddress">Site Address</label>
+                    <input type="text" class="form-control" formControlName="siteAddress">
                 </div>
-            </div> 
-
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="type">Site Type</label>
+                    <input type="text" class="form-control" formControlName="type">
+                </div>
+            </div>
             <h6 class="mb-2">Wifi Details</h6>
             <div *ngIf="siteWifiDetails.length == 0">
                 <label for="wifiUserName">No details available.</label>
             </div>
-
             <div *ngIf="siteWifiDetails.length>0">
-            <div class="row">
-            <div class="col-md-6">
-            <label for="wifiUserName">Username</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="wifiUserName">Username</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="wifiPassword">Password</label>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let wifi of siteWifiDetails; let i = index;">
+                    <div class="col-md-6 mb-4">
+                        <input type="text" class="form-control" [value]="wifi.username" [attr.disabled]="true">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <input type="text" class="form-control" value="**********" [attr.disabled]="true">
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <label for="wifiPassword">Password</label>
-
-            </div>
-        </div>
-            <div class="row" *ngFor="let wifi of siteWifiDetails; let i = index;">
-        <div class="col-md-6 mb-4">
-            <input type="text" class="form-control" [value]="wifi.username" [attr.disabled] = "true">
-        </div>
-        <div class="col-md-6 mb-4">
-            <input type="text" class="form-control" value="**********" [attr.disabled] = "true">
-      </div>
-    </div>
-</div>
-
-        </form>        
+        </form>
     </div>
 </div>

@@ -40,7 +40,7 @@ export class EditAccountComponent {
 		accountName: ['', ACCOUNT_NAME_VALIDATION],
 		password: ['', PASSWORD_VALIDATION],
 		mobile: ['', PHONE_VALIDATION],
-		status: [true],
+		status: [null],
 	});
 	ngOnInit() {
 		this.getAccount();

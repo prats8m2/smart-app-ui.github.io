@@ -47,7 +47,8 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="roleForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="roleForm.invalid || !roleForm.dirty">Submit</button>
             </div>
         </form>
     </div>

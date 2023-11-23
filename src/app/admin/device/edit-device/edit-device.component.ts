@@ -153,17 +153,18 @@ export class EditDeviceComponent implements OnInit {
 			let deviceId = params['id'];
 			this.deviceService.viewDevice(deviceId).then((res) => {
 				if (res.status === true) {
-					// this.deviceForm.get('account').patchValue('asasa');
-					this.deviceForm.get('id').patchValue(deviceId);
-					this.deviceForm.get('site').patchValue(res.data.device.site.name);
-					this.deviceForm
-						.get('room')
-						.patchValue(res.data.device.room ? res.data.device.room : null);
-					this.deviceForm.get('deviceName').patchValue(res.data.device.code);
-					const status = res.data.device.status ? 1 : true ? 0 : false;
-					this.deviceForm.get('status')?.patchValue(status);
+					const { device } = res.data;
+					this.deviceForm.patchValue({
+						id: deviceId,
+						site: device.site.name,
+						room: device.room.id || null,
+						deviceName: device.code,
+						status: device.status ? true : false,
+					});
 					this.deviceForm.get('site').disable();
 					this.deviceForm.get('account').disable();
+					this.roomParams.siteId = device.site.id;
+					this.listRoomAPI(this.roomParams);
 				}
 			});
 		});

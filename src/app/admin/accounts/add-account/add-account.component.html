@@ -4,11 +4,11 @@
             <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListAccount()"></i>
             <h4 class="card-title mb-4">Add Account</h4>
         </div>
-                <!-- Form Start -->
-                <form (ngSubmit)="addAccount()" [formGroup]="userForm" class="custom-form">
-                    <!-- First Row -->
-                    <div class="row">
-                        <!-- Account Name -->
+        <!-- Form Start -->
+        <form (ngSubmit)="addAccount()" [formGroup]="userForm" class="custom-form">
+            <!-- First Row -->
+            <div class="row">
+                <!-- Account Name -->
                 <div class="col-md-6 mb-4">
                     <label for="accountName">Account Name</label>
                     <input type="text" class="form-control"
@@ -28,14 +28,14 @@
                     </div>
                 </div>
             </div>
-            
             <div class="row">
                 <div class="col-lg-6">
                     <label for="accountName">Account Status</label>
                     <div class="form-check form-switch form-switch-lg mb-3">
                         <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
                             formControlName="status" [checked]="this.userForm.get('status').value">
-                        <label class="form-check-label" for="SwitchCheckSizelg" >{{this.userForm.get('status').value ? 'Active' : 'In
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.userForm.get('status').value ?
+                            'Active' : 'In
                             Active'}}</label>
                     </div>
                 </div>
@@ -63,13 +63,14 @@
                                 {{errorMessage('firstName','minlength')}} </div>
                         </div>
                     </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Last Name -->
+                </div>
+                <div class="col-lg-6">
+                    <!-- Last Name -->
                     <div class="mb-3">
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}" formControlName="lastName">
+                            [ngClass]="{ 'form-error':showError('lastName'),'form-success':showSuccess('lastName')}"
+                            formControlName="lastName">
                         <!-- Last Name Validation -->
                         <div *ngIf="formTouched('lastName')">
                             <div *ngIf="isError('lastName','required')" class="text-danger">
@@ -83,15 +84,15 @@
                                 {{errorMessage('lastName','minlength')}} </div>
                         </div>
                     </div>
-                    </div>
-                    </div>
-                    <div class="row">
-        
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control"
-                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}" formControlName="email">
+                            [ngClass]="{ 'form-error':showError('email'),'form-success':showSuccess('email')}"
+                            formControlName="email">
                         <!-- Email Validation -->
                         <div *ngIf="formTouched('email')">
                             <div *ngIf="isError('email','required')" class="text-danger">
@@ -110,7 +111,8 @@
                     <div class="mb-3">
                         <label for="mobile">Mobile</label>
                         <input type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}" formControlName="mobile" />
+                            [ngClass]="{ 'form-error':showError('mobile'),'form-success':showSuccess('mobile')}"
+                            formControlName="mobile" />
                         <!-- Password Validation -->
                         <div *ngIf="formTouched('mobile')">
                             <div *ngIf="isError('mobile','required')" class="text-danger">
@@ -126,15 +128,13 @@
                     </div>
                 </div>
             </div>
-        
             <div class="row">
-        
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="username">User Name</label>
                         <input autocomplete="off" type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}" formControlName="username"
-                            autocomplete="off" name="randomName1">
+                            [ngClass]="{ 'form-error':showError('username'),'form-success':showSuccess('username')}"
+                            formControlName="username" autocomplete="off" name="randomName1">
                         <!-- User Name Validation -->
                         <div *ngIf="formTouched('username')">
                             <div *ngIf="isError('username','required')" class="text-danger">
@@ -147,7 +147,7 @@
                             <div *ngIf="isError('username','minlength')" class="text-danger">
                                 {{errorMessage('username','minlength')}} </div>
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -167,13 +167,12 @@
                             <div *ngIf="isError('password','minlength')" class="text-danger">
                                 {{errorMessage('password','minlength')}} </div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="userForm.invalid">Submit</button>
             </div>
         </form>
-        
     </div>
 </div>

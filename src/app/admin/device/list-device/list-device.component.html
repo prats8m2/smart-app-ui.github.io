@@ -15,22 +15,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
-                                <ng-select  
-                                [ngModel]="accountList[0]?.account?.id"                                
-                                [items]="accountList" 
-                                bindLabel="account.name"
-                                [clearable]="false" bindValue="account.id" 
-                                (change)="changeAccountData($event?.account?.id)"
-                             [placeholder]="'Account'"></ng-select>
+                                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                                    bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                                    (change)="changeAccountData($event?.account?.id)"
+                                    [placeholder]="'Account'"></ng-select>
                             </div>
                             <div class="col-sm-4">
-                                <ng-select  
-                                [items]="sitesList" 
-                                bindLabel="name"
-                                [clearable]="false" bindValue="id" 
-                                [ngModel]="sitesList[0]?.id"  
-                                (change)="changeSitesData($event?.id)"
-                             [placeholder]="'Site'"></ng-select>
+                                <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
+                                    [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
+                                    [placeholder]="'Site'"></ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6" *ngIf="showAddDevice">
@@ -73,9 +66,11 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <span class="text-success pointer" *ngIf="showEditDevice"><i class="mdi mdi-pencil font-size-18"
+                                            <span class="text-success pointer" *ngIf="showEditDevice"><i
+                                                    class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditDevice(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)" *ngIf="showDeleteDevice"><i
+                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"
+                                                *ngIf="showDeleteDevice"><i
                                                     class="mdi mdi-delete font-size-18"></i></span>
                                         </div>
                                     </td>

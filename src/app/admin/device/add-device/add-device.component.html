@@ -11,14 +11,10 @@
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <div class="col-sm-12" *ngIf="showListAccount">
-                        <ng-select  
-                        [ngModel]="accountList[0]?.account?.id"
-                        [items]="accountList" 
-                        bindLabel="account.name"
-                        [clearable]="false" bindValue="account.id" 
-                        formControlName="account"
-                        (change)="changeAccountData($event.account.id)"
-                     [placeholder]="'Account'"></ng-select>
+                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                            formControlName="account" (change)="changeAccountData($event.account.id)"
+                            [placeholder]="'Account'"></ng-select>
                     </div>
                 </div>
             </div>
@@ -27,36 +23,22 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select  
-                        [ngModel]="siteList[0]?.id"
-                        [items]="siteList" 
-                        bindLabel="name"
-                        [clearable]="false" bindValue="id" 
-                        (change)="changeSiteData($event.id)"
-                        formControlName="site"
+                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
+                        bindValue="id" (change)="changeSiteData($event.id)" formControlName="site"
                         [placeholder]="'Site'">
                     </ng-select>
                 </div>
             </div>
-
             <!--Third Row -->
-
             <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6>
             <!-- Site Name -->
             <div class="row" *ngIf="showListRooms">
                 <div class="col-md-6 mb-4">
-                    <ng-select  
-                    [ngModel]="roomList[0]?.id"
-                    [items]="roomList" 
-                    bindLabel="name"
-                    [clearable]="false" bindValue="id" 
-                    formControlName="room"
-                    [placeholder]="'Room'">
-                </ng-select>
+                    <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name" [clearable]="true"
+                        bindValue="id" formControlName="room" [placeholder]="'Room'">
+                    </ng-select>
                 </div>
             </div>
-
-
             <h6 class="mb-2">Device Details</h6>
             <!-- Forth Row -->
             <div class="row">
@@ -79,14 +61,15 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                <label for="accountName">Device Status</label>
+                    <label for="accountName">Device Status</label>
                     <div class="form-check form-switch form-switch-lg mb-3">
                         <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
-                            formControlName="status" [checked]="this.deviceForm.status">
-                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.deviceForm.status ? 'Active' : 'In
+                            formControlName="status" [ngModel]="this.deviceForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.deviceForm.get('status').value ?
+                            'Active' : 'In
                             Active'}}</label>
                     </div>
-                    </div>
+                </div>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="deviceForm.invalid">Submit</button>
