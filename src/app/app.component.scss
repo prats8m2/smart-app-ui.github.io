@@ -47,7 +47,7 @@
   
   .ng-select.ng-select-single .ng-select-container {
     height: 36px;
-    border-radius: 22px;
+    border-radius: 5px;
   }
   
   .ng-select .ng-select-container .ng-value-container .ng-placeholder {
@@ -62,5 +62,9 @@
   cursor: default;
   pointer-events: none; 
   opacity: 0;
+}
+.search-box .form-control {
+  border-radius: 5px;
+  padding-left: 40px;
 }
 
