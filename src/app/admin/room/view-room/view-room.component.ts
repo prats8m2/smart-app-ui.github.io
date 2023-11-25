@@ -1,21 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
-import {
-	FIRST_NAME_VALIDATION,
-	LAST_NAME_VALIDATION,
-	USER_NAME_VALIDATION,
-	EMAIL_VALIDATION,
-	PASSWORD_VALIDATION,
-	PHONE_VALIDATION,
-	ROOM_NAME_VALIDATION,
-} from 'src/app/constants/validations';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
-import { StaffService } from '../../staff/service/staff.service';
 import { RoomService } from '../services/room.service';
 
 @Component({

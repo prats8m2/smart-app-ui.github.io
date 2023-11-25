@@ -1,1 +1,91 @@
-<p>edit-room works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between">
+            <div class="d-flex align-items-start">
+                <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListRoom"
+                    (click)="routeToListRoom()"></i>
+                <h4 class="card-title mb-4">Update Room</h4>
+            </div>
+        </div>
+        <form [formGroup]="roomForm" class="custom-form" (ngSubmit)="updateRoom()">
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <h6 class="mb-2">Site Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
+                    <ng-select [items]="siteList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                        formControlName="site"></ng-select>
+                </div>
+            </div>
+            <h6 class="mb-2">Room Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Room Name</label>
+                    <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('roomName'),'form-success':showSuccess('roomName')  }"
+                            formControlName="roomName">
+                        <!-- First Name Validation -->
+                        <div *ngIf="formTouched('roomName')">
+                            <div *ngIf="isError('roomName','required')" class="text-danger">
+                                {{errorMessage('roomName','required')}}
+                            </div>
+                            <div *ngIf="isError('roomName','pattern')" class="text-danger">
+                                {{errorMessage('roomName','pattern')}} </div>
+                            <div *ngIf="isError('roomName','maxlength')" class="text-danger">
+                                {{errorMessage('roomName','maxlength')}} </div>
+                            <div *ngIf="isError('roomName','minlength')" class="text-danger">
+                                {{errorMessage('roomName','minlength')}} </div>
+                        </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Room Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" formControlName="status"
+                            [checked]="this.roomForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.roomForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Occupied?</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg"
+                            formControlName="occupied" [checked]="this.roomForm.get('occupied').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.roomForm.get('occupied').value ?
+                            'Yes' : 'No'}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="mb-2">Device Details</h6>
+            <!-- Site Name -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="deviceList"  bindLabel="code" [clearable]="true" bindValue="id" [placeholder]="'Device'"
+                        formControlName="device"></ng-select>
+                </div>
+            </div>
+
+            <h6 class="mb-2">Wifi Details</h6>
+            <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id" [placeholder]="'Wifi'"
+                        [multiple]="true" formControlName="wifi">
+                        </ng-select>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="roomForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

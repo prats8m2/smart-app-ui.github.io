@@ -121,10 +121,6 @@ export class AddRoomComponent implements OnInit {
 		});
 	}
 
-	getPermissionLabel(permissionName: string): string {
-		return permissionName.split('-')[0];
-	}
-
 	routeToListRoom() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
 	}

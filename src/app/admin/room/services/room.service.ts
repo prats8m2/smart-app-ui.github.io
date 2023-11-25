@@ -63,4 +63,25 @@ export class RoomService {
 				return result;
 			});
 	}
+
+	updateRoom(roomForm: any) {
+		const { id, site, wifi, device, status, roomName, occupied } =
+			roomForm.value;
+
+		return this.http
+			.put(ROOM.UPDATE_ROOM, {
+				id: id,
+				name: roomName,
+				wifi: wifi,
+				siteId: site,
+				deviceId: device,
+				status: status ? 1 : 0,
+				occupied: occupied ? 1 : 0,
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
