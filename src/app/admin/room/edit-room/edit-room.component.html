@@ -8,21 +8,6 @@
             </div>
         </div>
         <form [formGroup]="roomForm" class="custom-form" (ngSubmit)="updateRoom()">
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
-                <div class="col-md-6 mb-4">
-                    <label for="accountName">Account Name</label>
-                    <input type="text" class="form-control" formControlName="account">
-                </div>
-            </div>
-            <h6 class="mb-2">Site Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="siteName">Site Name</label>
-                    <ng-select [items]="siteList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                        formControlName="site"></ng-select>
-                </div>
-            </div>
             <h6 class="mb-2">Room Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
@@ -66,6 +51,21 @@
                 </div>
             </div>
 
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <h6 class="mb-2">Site Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
+                    <ng-select [items]="siteList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                        formControlName="site"></ng-select>
+                </div>
+            </div>
             <h6 class="mb-2">Device Details</h6>
             <!-- Site Name -->
             <div class="row">

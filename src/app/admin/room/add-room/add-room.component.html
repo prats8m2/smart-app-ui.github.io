@@ -7,41 +7,6 @@
         <!-- Form Start -->
         <form (ngSubmit)="addRoom()" [formGroup]="roomForm" class="custom-form">
             <!-- First Row -->
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
-                <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList" bindLabel="account.name"
-                        [clearable]="false" bindValue="account.id" (change)="changeAccountData($event?.account?.id)"
-                        [placeholder]="'Account'" formControlName="account" [clearable]="false"></ng-select>
-                </div>
-            </div>
-            <!-- Second Row -->
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
-            <!-- Site Name -->
-            <div class="row" *ngIf="showListSite">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList" [ngModel]="siteList[0]?.id" bindLabel="name" [clearable]="false"
-                        bindValue="id" [placeholder]="'Site'" (change)="changeSiteData($event.id)"
-                        formControlName="site"></ng-select>
-                </div>
-            </div>
-            <!--Third Row -->
-            <h6 class="mb-2">Wifi Details</h6>
-            <!-- Site Name -->
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id"
-                        [placeholder]="'Wifi'" formControlName="wifi" [multiple]="true"></ng-select>
-                </div>
-            </div>
-            <h6 class="mb-2">Device Details</h6>
-            <!-- Site Name -->
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="deviceList" [ngModel]="deviceList[0]?.id" bindLabel="code" [clearable]="false"
-                        bindValue="id" [placeholder]="'Device'" formControlName="device"></ng-select>
-                </div>
-            </div>
             <h6 class="mb-2">Room Details</h6>
             <!-- Forth Row -->
             <div class="row">
@@ -77,6 +42,42 @@
                     </div>
                 </div>
             </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList" bindLabel="account.name"
+                        [clearable]="false" bindValue="account.id" (change)="changeAccountData($event?.account?.id)"
+                        [placeholder]="'Account'" formControlName="account" [clearable]="false"></ng-select>
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="siteList" [ngModel]="siteList[0]?.id" bindLabel="name" [clearable]="false"
+                        bindValue="id" [placeholder]="'Site'" (change)="changeSiteData($event.id)"
+                        formControlName="site"></ng-select>
+                </div>
+            </div>
+            <!--Third Row -->
+            <h6 class="mb-2">Wifi Details</h6>
+            <!-- Site Name -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id"
+                        [placeholder]="'Wifi'" formControlName="wifi" [multiple]="true"></ng-select>
+                </div>
+            </div>
+            <h6 class="mb-2">Device Details</h6>
+            <!-- Site Name -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="deviceList" [ngModel]="deviceList[0]?.id" bindLabel="code" [clearable]="false"
+                        bindValue="id" [placeholder]="'Device'" formControlName="device"></ng-select>
+                </div>
+            </div>
+            
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="roomForm.invalid">Submit</button>
             </div>

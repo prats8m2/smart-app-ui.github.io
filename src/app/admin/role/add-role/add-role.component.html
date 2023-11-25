@@ -7,15 +7,6 @@
         <!-- Form Start -->
         <form (ngSubmit)="addRole()" [formGroup]="roleForm" class="custom-form">
             <!-- First Row -->
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'" 
-                        [ngModel]="accountList[0]?.account?.id"
-                        formControlName="account"></ng-select>
-                </div>
-            </div>
             <h6 class="mb-2">Role Details</h6>
             <!-- Second Row -->
             <div class="row">
@@ -37,6 +28,15 @@
                         <div *ngIf="isError('roleName','minlength')" class="text-danger">
                             {{errorMessage('roleName','minlength')}} </div>
                     </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'" 
+                        [ngModel]="accountList[0]?.account?.id"
+                        formControlName="account"></ng-select>
                 </div>
             </div>
             <div class="row">

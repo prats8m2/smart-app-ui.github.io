@@ -77,7 +77,7 @@ export class AddRoomComponent implements OnInit {
 				account: [null],
 				site: [null, Validators.required],
 				wifi: [[]],
-				device: [null],
+				device: [null, Validators.required],
 				status: [true],
 				roomName: ['', ROOM_NAME_VALIDATION],
 			});
@@ -87,7 +87,7 @@ export class AddRoomComponent implements OnInit {
 				account: [null],
 				site: [null, Validators.required],
 				wifi: [[]],
-				device: [null],
+				device: [null, Validators.required],
 				status: [true],
 				roomName: ['Room-' + randomNumber, ROOM_NAME_VALIDATION],
 			});

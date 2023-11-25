@@ -7,38 +7,6 @@
         <!-- Form Start -->
         <form (ngSubmit)="addDevice()" [formGroup]="deviceForm" class="cutsom-form">
             <!-- First Row -->
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
-                <div class="col-md-6 mb-4">
-                    <div class="col-sm-12" *ngIf="showListAccount">
-                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
-                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                            formControlName="account" (change)="changeAccountData($event.account.id)"
-                            [placeholder]="'Account'"></ng-select>
-                    </div>
-                </div>
-            </div>
-            <!-- Second Row -->
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
-            <!-- Site Name -->
-            <div class="row" *ngIf="showListSite">
-                <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
-                        bindValue="id" (change)="changeSiteData($event.id)" formControlName="site"
-                        [placeholder]="'Site'">
-                    </ng-select>
-                </div>
-            </div>
-            <!--Third Row -->
-            <!-- <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6> -->
-            <!-- Site Name -->
-            <!-- <div class="row" *ngIf="showListRooms">
-                <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name" [clearable]="true"
-                        bindValue="id" formControlName="room" [placeholder]="'Room'">
-                    </ng-select>
-                </div>
-            </div> -->
             <h6 class="mb-2">Device Details</h6>
             <!-- Forth Row -->
             <div class="row">
@@ -71,6 +39,39 @@
                     </div>
                 </div>
             </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <div class="col-sm-12" *ngIf="showListAccount">
+                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                            formControlName="account" (change)="changeAccountData($event.account.id)"
+                            [placeholder]="'Account'"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
+                        bindValue="id" (change)="changeSiteData($event.id)" formControlName="site"
+                        [placeholder]="'Site'">
+                    </ng-select>
+                </div>
+            </div>
+            <!--Third Row -->
+            <!-- <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6> -->
+            <!-- Site Name -->
+            <!-- <div class="row" *ngIf="showListRooms">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name" [clearable]="true"
+                        bindValue="id" formControlName="room" [placeholder]="'Room'">
+                    </ng-select>
+                </div>
+            </div> -->
+            
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="deviceForm.invalid">Submit</button>
             </div>

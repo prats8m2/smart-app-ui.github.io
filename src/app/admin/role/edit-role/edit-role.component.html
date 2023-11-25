@@ -5,13 +5,6 @@
             <h4 class="card-title mb-4">Edit Role</h4>
         </div>
         <form [formGroup]="roleForm" class="role-form" (ngSubmit)="updateRole()">
-            <h6 class="mb-2">Account Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="accountName">Account Name</label>
-                    <input type="text" class="form-control" formControlName="account">
-                </div>
-            </div>
             <h6 class="mb-2">Role Details</h6>
             <!-- Second Row -->
             <div class="row">
@@ -26,6 +19,14 @@
         'Default' : 'Custom'" [attr.disabled]="true">
                 </div>
             </div>
+            <h6 class="mb-2">Account Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-container">
                     <div class="col-md-12 mb-4">

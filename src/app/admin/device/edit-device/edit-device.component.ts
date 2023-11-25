@@ -70,7 +70,7 @@ export class EditDeviceComponent implements OnInit {
 				id: [''],
 				account: [null],
 				site: [null, Validators.required],
-				room: [null],
+				room: [null, Validators.required],
 				deviceName: ['', DEVICE_NAME_VALIDATION],
 				status: [null],
 			});
@@ -79,7 +79,7 @@ export class EditDeviceComponent implements OnInit {
 				id: [''],
 				account: [null],
 				site: [null, Validators.required],
-				room: [null],
+				room: [null, Validators.required],
 				deviceName: ['', DEVICE_NAME_VALIDATION],
 				status: [null],
 			});

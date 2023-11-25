@@ -7,31 +7,6 @@
         <!-- Form Start -->
         <form (ngSubmit)="updateStaff()" [formGroup]="staffForm" class="custom-form">
             <!-- First Row -->
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
-                <div class="col-md-6 mb-4">
-                    <input type="text" class="form-control" formControlName="account">
-                </div>
-            </div>
-            <!-- Second Row -->
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
-            <!-- Site Name -->
-            <div class="row" *ngIf="showListSite">
-                <div class="col-md-6 mb-4">
-                        <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                        [multiple]="true" formControlName="site">
-                        </ng-select>
-                </div>
-            </div>
-            <!--Third Row -->
-            <h6 class="mb-2" *ngIf="showListRole">Role Details</h6>
-            <!-- Site Name -->
-            <div class="row" *ngIf="showListRole">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="roleList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Role'"
-                        formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
-                </div>
-            </div>
             <h6 class="mb-2">Staff Details</h6>
             <!-- Forth Row -->
             <div class="row">
@@ -172,6 +147,32 @@
                     </div>
                 </div>
             </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <input type="text" class="form-control" formControlName="account">
+                </div>
+            </div>
+            <!-- Second Row -->
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                        <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
+                        [multiple]="true" formControlName="site">
+                        </ng-select>
+                </div>
+            </div>
+            <!--Third Row -->
+            <h6 class="mb-2" *ngIf="showListRole">Role Details</h6>
+            <!-- Site Name -->
+            <div class="row" *ngIf="showListRole">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="roleList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Role'"
+                        formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
+                </div>
+            </div>
+            
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid || !staffForm.dirty">Submit</button>
             </div>
