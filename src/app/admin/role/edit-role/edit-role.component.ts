@@ -22,6 +22,9 @@ export class EditRoleComponent implements OnInit {
 	});
 
 	permissionsData: any = {};
+	selectedCheckboxCount = 0;
+	categoryDropdowncounter: any[] = [];
+
 	permissionParams: IParams = {
 		accountId: null,
 		limit: 100,
@@ -52,7 +55,6 @@ export class EditRoleComponent implements OnInit {
 				if (res.status === true) {
 					const { account, name, default: isDefault } = res.data;
 					const roleForm = this.roleForm;
-
 					roleForm.get('account').disable();
 					roleForm.get('isDefault').disable();
 					roleForm.patchValue({
@@ -60,7 +62,6 @@ export class EditRoleComponent implements OnInit {
 						roleName: name,
 						isDefault,
 					});
-
 					this.permissionParams.accountId = account.id;
 					this.userPermissionsData = res.data.permissions;
 				}
@@ -111,14 +112,15 @@ export class EditRoleComponent implements OnInit {
 	updateRole() {
 		const selectedPermissions = {};
 		const transformedPermissionsData: any[] = [];
-		const originalPermissionsData = this.roleForm.get('userPermissions').value;
+		const originalPermissionsData = this.roleForm
+			.get('userPermissions')
+			.getRawValue();
 
 		Object.keys(originalPermissionsData).forEach((key) => {
 			selectedPermissions[key] = this.roleForm.value.userPermissions[key]
 				.filter((permission) => permission[Object.keys(permission)[0]])
 				.map((permission) => permission[Object.keys(permission)[0]]);
 		});
-
 		Object.keys(originalPermissionsData).forEach((category) => {
 			originalPermissionsData[category].forEach((permission) => {
 				originalPermissionsData[category]
@@ -139,7 +141,6 @@ export class EditRoleComponent implements OnInit {
 					});
 			});
 		});
-
 		this.roleForm.setControl(
 			'permissions',
 			new FormControl(transformedPermissionsData)
@@ -173,14 +174,24 @@ export class EditRoleComponent implements OnInit {
 	}
 
 	onCheckboxChange(category: string, index: number) {
+		let isCategoryExist = this.categoryDropdowncounter.filter(
+			(x) => x.category === category
+		);
+		if (!isCategoryExist.length) {
+			let obj = {
+				category: category,
+				value: 1,
+			};
+			this.categoryDropdowncounter.push(obj);
+		}
 		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
 			category
 		) as FormArray;
 		const formGroup = formArray.controls[index] as FormGroup;
-		const checkboxControl = formGroup.get(
-			Object.keys(formGroup.controls)[0]
-		) as FormControl;
-		if (checkboxControl.value) {
+		if (this.getPermissionLabel(Object.keys(formGroup.controls)[0]) != 'LIST') {
+			const checkboxControl = formGroup.get(
+				Object.keys(formGroup.controls)[0]
+			) as FormControl;
 			const listCheckbox: any = formArray.controls.find(
 				(control: FormGroup) => {
 					const permissionName = Object.keys(control.controls)[0];
@@ -188,20 +199,40 @@ export class EditRoleComponent implements OnInit {
 					return label === 'LIST';
 				}
 			);
-			const allOthersNotSelected = formArray.controls.every(
-				(control: FormGroup) => {
-					return (
-						control === formGroup ||
-						!control.get(Object.keys(control.controls)[0]).value
+			if (isCategoryExist.length) {
+				if (checkboxControl.value) {
+					let selectedCategoryCheckboxs = this.categoryDropdowncounter.filter(
+						(x) => x.category === category
 					);
+					selectedCategoryCheckboxs[0].value =
+						selectedCategoryCheckboxs[0].value + 1;
 				}
-			);
-			if (listCheckbox && allOthersNotSelected) {
-				const listCheckboxControl = listCheckbox.get(
-					Object.keys(listCheckbox.controls)[0]
-				) as FormControl;
-				listCheckboxControl.setValue(true);
-				listCheckboxControl.disable();
+				if (!checkboxControl.value) {
+					let unselectedCategoryCheckboxs = this.categoryDropdowncounter.filter(
+						(x) => x.category === category
+					);
+					unselectedCategoryCheckboxs[0].value =
+						unselectedCategoryCheckboxs[0].value - 1;
+				}
+			}
+			if (checkboxControl.value) {
+				if (listCheckbox) {
+					const listCheckboxControl = listCheckbox.get(
+						Object.keys(listCheckbox.controls)[0]
+					) as FormControl;
+					listCheckbox.disable();
+					listCheckboxControl.setValue(true);
+				}
+			}
+			if (isCategoryExist[0]?.value == 0) {
+				if (listCheckbox) {
+					const listCheckboxControl = listCheckbox.get(
+						Object.keys(listCheckbox.controls)[0]
+					) as FormControl;
+					listCheckbox.enable();
+					listCheckboxControl.setValue(false);
+				}
+				this.roleForm.setErrors({ invalid: true });
 			}
 		}
 	}
