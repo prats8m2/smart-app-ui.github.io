@@ -4,19 +4,14 @@
             <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListRole()"></i>
             <h4 class="card-title mb-4">Add Role</h4>
         </div>
-        <!-- Form Start -->
         <form (ngSubmit)="addRole()" [formGroup]="roleForm" class="custom-form">
-            <!-- First Row -->
             <h6 class="mb-2">Role Details</h6>
-            <!-- Second Row -->
             <div class="row">
-                <!-- Site Name -->
                 <div class="col-md-6 mb-4">
                     <label for="roleName">Role Name</label>
                     <input type="text" class="form-control"
                         [ngClass]="{ 'form-error':showError('roleName'),'form-success':showSuccess('roleName') }"
                         formControlName="roleName">
-                    <!-- Site Name Validation -->
                     <div *ngIf="formTouched('roleName')">
                         <div *ngIf="isError('roleName','required')" class="text-danger">
                             {{errorMessage('roleName','required')}}
@@ -34,9 +29,8 @@
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'" 
-                        [ngModel]="accountList[0]?.account?.id"
-                        formControlName="account"></ng-select>
+                        (change)="changeAccountData($event.account.id)" [placeholder]="'Account'"
+                        [ngModel]="accountList[0]?.account?.id" formControlName="account"></ng-select>
                 </div>
             </div>
             <div class="row">

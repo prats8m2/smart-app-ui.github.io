@@ -4,18 +4,14 @@
             <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListDevice()"></i>
             <h4 class="card-title mb-4">Add Device</h4>
         </div>
-        <!-- Form Start -->
         <form (ngSubmit)="addDevice()" [formGroup]="deviceForm" class="cutsom-form">
-            <!-- First Row -->
             <h6 class="mb-2">Device Details</h6>
-            <!-- Forth Row -->
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="deviceName">Device Name</label>
                     <input type="text" class="form-control"
                         [ngClass]="{ 'form-error':showError('deviceName'),'form-success':showSuccess('deviceName') }"
                         formControlName="deviceName">
-                    <!-- Site Name Validation -->
                     <div *ngIf="formTouched('deviceName')">
                         <div *ngIf="isError('deviceName','required')" class="text-danger">
                             {{errorMessage('deviceName','required')}}
@@ -50,9 +46,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Second Row -->
             <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
-            <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
                     <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
@@ -61,17 +55,6 @@
                     </ng-select>
                 </div>
             </div>
-            <!--Third Row -->
-            <!-- <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6> -->
-            <!-- Site Name -->
-            <!-- <div class="row" *ngIf="showListRooms">
-                <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name" [clearable]="true"
-                        bindValue="id" formControlName="room" [placeholder]="'Room'">
-                    </ng-select>
-                </div>
-            </div> -->
-            
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="deviceForm.invalid">Submit</button>
             </div>

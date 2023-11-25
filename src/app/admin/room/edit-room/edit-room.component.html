@@ -13,20 +13,20 @@
                 <div class="col-md-6 mb-4">
                     <label for="accountName">Room Name</label>
                     <input type="text" class="form-control"
-                            [ngClass]="{ 'form-error':showError('roomName'),'form-success':showSuccess('roomName')  }"
-                            formControlName="roomName">
-                        <!-- First Name Validation -->
-                        <div *ngIf="formTouched('roomName')">
-                            <div *ngIf="isError('roomName','required')" class="text-danger">
-                                {{errorMessage('roomName','required')}}
-                            </div>
-                            <div *ngIf="isError('roomName','pattern')" class="text-danger">
-                                {{errorMessage('roomName','pattern')}} </div>
-                            <div *ngIf="isError('roomName','maxlength')" class="text-danger">
-                                {{errorMessage('roomName','maxlength')}} </div>
-                            <div *ngIf="isError('roomName','minlength')" class="text-danger">
-                                {{errorMessage('roomName','minlength')}} </div>
+                        [ngClass]="{ 'form-error':showError('roomName'),'form-success':showSuccess('roomName')  }"
+                        formControlName="roomName">
+                    <!-- First Name Validation -->
+                    <div *ngIf="formTouched('roomName')">
+                        <div *ngIf="isError('roomName','required')" class="text-danger">
+                            {{errorMessage('roomName','required')}}
                         </div>
+                        <div *ngIf="isError('roomName','pattern')" class="text-danger">
+                            {{errorMessage('roomName','pattern')}} </div>
+                        <div *ngIf="isError('roomName','maxlength')" class="text-danger">
+                            {{errorMessage('roomName','maxlength')}} </div>
+                        <div *ngIf="isError('roomName','minlength')" class="text-danger">
+                            {{errorMessage('roomName','minlength')}} </div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="accountName">Room Status</label>
@@ -50,7 +50,6 @@
                     </div>
                 </div>
             </div>
-
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
@@ -62,25 +61,25 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteName">Site Name</label>
-                    <ng-select [items]="siteList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                        formControlName="site"></ng-select>
+                    <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
+                        [placeholder]="'Site'" formControlName="site"></ng-select>
                 </div>
             </div>
             <h6 class="mb-2">Device Details</h6>
             <!-- Site Name -->
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="deviceList"  bindLabel="code" [clearable]="true" bindValue="id" [placeholder]="'Device'"
-                        formControlName="device"></ng-select>
+                    <ng-select [items]="deviceList" bindLabel="code" [clearable]="true" bindValue="id"
+                        [placeholder]="'Device'" formControlName="device"></ng-select>
                 </div>
             </div>
 
             <h6 class="mb-2">Wifi Details</h6>
             <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id" [placeholder]="'Wifi'"
-                        [multiple]="true" formControlName="wifi">
-                        </ng-select>
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id"
+                        [placeholder]="'Wifi'" [multiple]="true" formControlName="wifi">
+                    </ng-select>
                 </div>
             </div>
             <div>

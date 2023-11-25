@@ -15,13 +15,12 @@
                         </div>
                         <div class="col-sm-8" *ngIf="showAddButton">
                             <div class="text-sm-end">
-                                <button type="button" class="btn btn-primary mb-2 me-2"
-                                    (click)="routeToAddAccount()"><i class="mdi mdi-plus mr-1"></i>
+                                <button type="button" class="btn btn-primary mb-2 me-2" (click)="routeToAddAccount()"><i
+                                        class="mdi mdi-plus mr-1"></i>
                                     Add Account</button>
                             </div>
-                        </div><!-- end col-->
+                        </div>
                     </div>
-                    <!-- Table data -->
                     <div class="table-responsive mb-0">
                         <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="order-list">
                             <thead class="table-light table-fixed-header">
@@ -68,7 +67,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- end table -->
                     <ul class="pagination pagination-rounded justify-content-end mb-2">
                         <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
                             (pageChanged)="pageChanged($event)">

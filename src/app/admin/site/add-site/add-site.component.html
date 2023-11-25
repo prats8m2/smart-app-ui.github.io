@@ -4,19 +4,14 @@
       <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListSite()"></i>
       <h4 class="card-title mb-4">Add Site</h4>
     </div>
-    <!-- Form Start -->
     <form (ngSubmit)="addSite()" [formGroup]="siteForm" class="custom-form">
-      <!-- First Row -->
       <h6 class="mb-2">Site Details</h6>
-      <!-- Second Row -->
       <div class="row">
-        <!-- Site Name -->
         <div class="col-md-6 mb-4">
           <label for="siteName">Site Name</label>
           <input type="text" class="form-control"
             [ngClass]="{ 'form-error':showError('siteName'),'form-success':showSuccess('siteName') }"
             formControlName="siteName">
-          <!-- Site Name Validation -->
           <div *ngIf="formTouched('siteName')">
             <div *ngIf="isError('siteName','required')" class="text-danger">
               {{errorMessage('siteName','required')}}
@@ -34,7 +29,6 @@
           <input type="text" class="form-control"
             [ngClass]="{ 'form-error':showError('siteAddress'),'form-success':showSuccess('siteAddress') }"
             formControlName="siteAddress">
-          <!-- Site Address Validation -->
           <div *ngIf="formTouched('siteAddress')">
             <div *ngIf="isError('siteAddress','required')" class="text-danger">
               {{errorMessage('siteAddress','required')}}
