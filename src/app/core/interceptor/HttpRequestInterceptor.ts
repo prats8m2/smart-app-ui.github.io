@@ -35,6 +35,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 		this.accessToken = StorageService.get(StorageType.ACCESS_TOKEN);
 		let URL = environment.apiServer + req.url;
 		if (req.url.includes('assets')) {
+			this.loadingService.hideLoader();
 			return next.handle(req);
 		}
 		req = req.clone({

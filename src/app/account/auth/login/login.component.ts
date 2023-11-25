@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		this.loginForm = this.formBuilder.group({
-			email: ['', [Validators.required, Validators.email]],
+			email: ['', [Validators.required]],
 			password: ['', [Validators.required]],
 		});
 	}
@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
 		} else {
 			// login function call
 			this.loginService.login(this.loginForm).subscribe((res) => {
-				console.log(res);
 				if (this.globalService.handleSuccessService(res)) {
 					this.loadingService.hideLoader();
 					let userRole = this.globalService.getUserRole('userRole');

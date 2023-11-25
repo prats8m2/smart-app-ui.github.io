@@ -78,7 +78,6 @@ export class AddRoomComponent implements OnInit {
 				site: [null, Validators.required],
 				wifi: [[]],
 				device: [null, Validators.required],
-				status: [true],
 				roomName: ['', ROOM_NAME_VALIDATION],
 			});
 		} else {
@@ -88,7 +87,6 @@ export class AddRoomComponent implements OnInit {
 				site: [null, Validators.required],
 				wifi: [[]],
 				device: [null, Validators.required],
-				status: [true],
 				roomName: ['Room-' + randomNumber, ROOM_NAME_VALIDATION],
 			});
 		}
