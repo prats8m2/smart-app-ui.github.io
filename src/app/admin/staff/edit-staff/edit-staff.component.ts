@@ -135,6 +135,9 @@ export class EditStaffComponent implements OnInit {
 					const accountId = data.account.id;
 					this.siteParams.accountId = accountId;
 					this.roleParams.accountId = accountId;
+					const status = res.data.status ? true : false;
+					this.staffForm.get('status')?.patchValue(status);
+
 					this.listSiteAPI(this.siteParams);
 				}
 			});

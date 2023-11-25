@@ -160,6 +160,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="accountName">Staff Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                            formControlName="status" [checked]="this.staffForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.staffForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
+            </div>
             <div>
                 <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid || !staffForm.dirty">Submit</button>
             </div>

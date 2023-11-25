@@ -51,6 +51,7 @@ export class StaffService {
 				mobile: mobile,
 				role: role,
 				sites: site,
+				status: status ? 1 : 0,
 			})
 			.toPromise()
 			.then((response) => {
@@ -94,6 +95,7 @@ export class StaffService {
 				mobile: mobile,
 				role: role,
 				sites: site,
+				status: status ? 1 : 0,
 			})
 			.toPromise()
 			.then((response) => {
