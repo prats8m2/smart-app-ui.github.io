@@ -50,12 +50,18 @@ export class EditRoleComponent implements OnInit {
 			this.roleForm.get('id').patchValue(roleId);
 			this.roleService.viewRole(roleId).then((res) => {
 				if (res.status === true) {
-					this.roleForm.get('account').disable();
-					this.roleForm.get('isDefault').disable();
-					this.roleForm.get('account')?.patchValue(res.data.account.name);
-					this.roleForm.get('roleName')?.patchValue(res.data.name);
-					this.roleForm.get('isDefault')?.patchValue(res.data.default);
-					this.permissionParams.accountId = res.data.account.id;
+					const { account, name, default: isDefault } = res.data;
+					const roleForm = this.roleForm;
+
+					roleForm.get('account').disable();
+					roleForm.get('isDefault').disable();
+					roleForm.patchValue({
+						account: account.name,
+						roleName: name,
+						isDefault,
+					});
+
+					this.permissionParams.accountId = account.id;
 					this.userPermissionsData = res.data.permissions;
 				}
 			});

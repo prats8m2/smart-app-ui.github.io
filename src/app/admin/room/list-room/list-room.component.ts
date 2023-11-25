@@ -62,8 +62,10 @@ export class ListRoomComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
-					this.siteParams.accountId = this.accountList[0].account.id;
-					this.listSiteAPI(this.siteParams);
+					if (this.accountList.length) {
+						this.siteParams.accountId = this.accountList[0].account.id;
+						this.listSiteAPI(this.siteParams);
+					}
 				}
 			});
 		} else {
@@ -119,8 +121,10 @@ export class ListRoomComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.sitesList = [...res.data.sites];
-				this.roomParams.siteId = this.sitesList[0]?.id;
-				this.listRoomAPI(this.roomParams);
+				if (this.sitesList.length) {
+					this.roomParams.siteId = this.sitesList[0]?.id;
+					this.listRoomAPI(this.roomParams);
+				}
 			}
 		});
 	}

@@ -99,8 +99,10 @@ export class AddRoomComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
-					this.siteParams.accountId = this.accountList[0].account.id;
-					this.listSiteAPI(this.siteParams);
+					if (this.accountList.length) {
+						this.siteParams.accountId = this.accountList[0].account.id;
+						this.listSiteAPI(this.siteParams);
+					}
 				}
 			});
 		} else {
@@ -111,8 +113,10 @@ export class AddRoomComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
-				this.deviceParams.siteId = this.siteList[0].id;
-				this.changeSiteData(this.siteList[0].id);
+				if (this.siteList.length) {
+					this.deviceParams.siteId = this.siteList[0]?.id;
+					this.changeSiteData(this.siteList[0]?.id);
+				}
 			}
 		});
 	}
@@ -168,7 +172,6 @@ export class AddRoomComponent implements OnInit {
 				console.log('error');
 			}
 		});
-		console.log(this.roomForm.value);
 	}
 
 	toggle(): void {

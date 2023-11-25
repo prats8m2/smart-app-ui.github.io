@@ -12,16 +12,13 @@
                     <i class="mdi mdi-pencil mr-1"></i>
                     Edit
                 </button>
-                <button type="button" class="btn btn-danger  mb-2 me-2" *ngIf="showDeleteRoom"
-                    (click)="deleteRoom()">
+                <button type="button" class="btn btn-danger  mb-2 me-2" *ngIf="showDeleteRoom" (click)="deleteRoom()">
                     <i class="mdi mdi-delete mr-1"></i>
                     Delete
                 </button>
             </div>
         </div>
-        <!-- Form Start -->
         <form [formGroup]="roomForm" class="custom-form">
-            <!-- First Row -->
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
@@ -29,28 +26,11 @@
                     <input type="text" class="form-control" formControlName="account">
                 </div>
             </div>
-            <!-- Second Row -->
             <h6 class="mb-2">Site Details</h6>
-            <!-- Site Name -->
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteName">Site Name</label>
                     <input type="text" class="form-control" formControlName="site">
-                </div>
-            </div>
-            <!--Third Row -->
-            <h6 class="mb-2">Wifi Details</h6>
-            <!-- Site Name -->
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <input type="text" class="form-control" formControlName="wifi">
-                </div>
-            </div>
-            <h6 class="mb-2">Device Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="deviceStatus">Device Code</label>
-                    <input type="text" class="form-control" formControlName="device">
                 </div>
             </div>
             <h6 class="mb-2">Room Details</h6>
@@ -79,6 +59,19 @@
                         <label class="form-check-label" for="SwitchCheckSizelg">{{this.roomForm.get('occupied').value ?
                             'Yes' : 'No'}}</label>
                     </div>
+                </div>
+            </div>
+            <h6 class="mb-2">Device Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="deviceStatus">Device Code</label>
+                    <input type="text" class="form-control" formControlName="device">
+                </div>
+            </div>
+            <h6 class="mb-2">Wifi Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <input type="text" class="form-control" formControlName="wifi">
                 </div>
             </div>
         </form>

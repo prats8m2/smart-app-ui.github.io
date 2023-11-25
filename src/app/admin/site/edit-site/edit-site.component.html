@@ -66,6 +66,9 @@
         <div class="col-md-12">
           <div class="mb-3">
             <h4 class="card-title mb-4">Wifi Details</h4>
+            <div *ngIf="siteWifiDetails.length == 0 && showNoSiteAvailable">
+              <label for="wifiUserName">No details available.</label>
+          </div>
             <form class="repeater" [formGroup]="siteForm">
               <div formArrayName="wifiDetails">
                 <div *ngFor="

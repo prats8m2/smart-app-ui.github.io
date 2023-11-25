@@ -62,7 +62,7 @@ export class DeviceService {
 				id: id,
 				code: deviceName,
 				roomId: room,
-				status: status,
+				status: status ? 1 : 0,
 			})
 			.toPromise()
 			.then((response) => {

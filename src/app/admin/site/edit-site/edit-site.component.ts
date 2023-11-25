@@ -35,6 +35,7 @@ export class EditSiteComponent {
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
 	];
+	showNoSiteAvailable: boolean = true;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -65,6 +66,7 @@ export class EditSiteComponent {
 			});
 		}
 	}
+	siteWifiDetails: any = [];
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
@@ -125,6 +127,7 @@ export class EditSiteComponent {
 	}
 
 	addField() {
+		this.showNoSiteAvailable = false;
 		this.formData.push(this.field());
 	}
 
@@ -134,14 +137,20 @@ export class EditSiteComponent {
 			this.siteForm.value.id = params['id'];
 			this.siteService.viewSite(siteId).then((res) => {
 				if (res.status === true) {
+					const { id, account, name, address, type, wifi } = res.data;
+					const siteForm = this.siteForm;
+
 					this.siteData = res.data;
-					this.siteForm.get('account').disable();
-					this.siteForm.get('id')?.patchValue(res.data.id);
-					this.siteForm.get('account')?.setValue(res.data.account.name);
-					this.siteForm.get('siteName')?.patchValue(res.data.name);
-					this.siteForm.get('siteAddress')?.patchValue(res.data.address);
-					this.siteForm.get('type')?.patchValue(res.data.type);
-					this.initializeWifiDetails(res.data.wifi);
+					siteForm.get('account').disable();
+					siteForm.patchValue({
+						id,
+						account: account.name,
+						siteName: name,
+						siteAddress: address,
+						type,
+					});
+					this.siteWifiDetails = [...res.data.wifi];
+					this.initializeWifiDetails(wifi);
 				}
 			});
 		});

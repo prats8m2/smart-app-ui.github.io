@@ -65,8 +65,10 @@ export class ListStaffComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
-					this.roleParams.accountId = this.accountList[0].account.id;
-					this.listRoleAPI(this.roleParams);
+					if (this.accountList.length) {
+						this.roleParams.accountId = this.accountList[0].account.id;
+						this.listRoleAPI(this.roleParams);
+					}
 				}
 			});
 		} else {
@@ -132,8 +134,10 @@ export class ListStaffComponent implements OnInit {
 		this.roleService.listRoles(params).subscribe((res) => {
 			if (res.status) {
 				this.roleList = [...res.data.roles];
-				this.staffParams.roleId = this.roleList[0].id;
-				this.listStaffAPI(this.staffParams);
+				if (this.roleList.length) {
+					this.staffParams.roleId = this.roleList[0].id;
+					this.listStaffAPI(this.staffParams);
+				}
 			}
 		});
 	}

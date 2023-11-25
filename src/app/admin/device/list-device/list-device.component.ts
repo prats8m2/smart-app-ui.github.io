@@ -64,8 +64,10 @@ export class ListDeviceComponent implements OnInit {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
 					this.accountList = [...res.data.users];
-					this.siteParams.accountId = this.accountList[0]?.account.id;
-					this.listSiteAPI(this.siteParams);
+					if (this.accountList.length) {
+						this.siteParams.accountId = this.accountList[0]?.account.id;
+						this.listSiteAPI(this.siteParams);
+					}
 				}
 			});
 		} else {
@@ -121,8 +123,10 @@ export class ListDeviceComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.sitesList = [...res.data.sites];
-				this.deviceParams.siteId = this.sitesList[0]?.id;
-				this.listDeviceAPI(this.deviceParams);
+				if (this.sitesList.length) {
+					this.deviceParams.siteId = this.sitesList[0]?.id;
+					this.listDeviceAPI(this.deviceParams);
+				}
 			}
 		});
 	}

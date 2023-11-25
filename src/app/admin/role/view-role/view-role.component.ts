@@ -67,14 +67,18 @@ export class ViewRoleComponent implements OnInit {
 			this.roleForm.value.id = params['id'];
 			this.roleService.viewRole(roleId).then((res) => {
 				if (res.status === true) {
-					this.roleForm.disable();
-					this.roleForm.get('account')?.patchValue(res.data.account.name);
-					this.roleForm.get('roleName')?.patchValue(res.data.name);
-					this.roleForm.get('isDefault')?.patchValue(res.data.default);
-					this.permissionParams.accountId = res.data.account.id;
-					this.selectedRole = res.data.permissions;
-					this.disableEditRole = res.data.default;
-					this.disableDeleteRole = res.data.default;
+					const { account, name, default: isDefault, permissions } = res.data;
+					const roleForm = this.roleForm;
+					roleForm.disable();
+					roleForm.patchValue({
+						account: account.name,
+						roleName: name,
+						isDefault,
+					});
+					this.permissionParams.accountId = account.id;
+					this.selectedRole = permissions;
+					this.disableEditRole = isDefault;
+					this.disableDeleteRole = isDefault;
 				}
 			});
 		});
