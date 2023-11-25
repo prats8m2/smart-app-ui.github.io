@@ -65,7 +65,12 @@ export class LoginComponent implements OnInit {
 				console.log(res);
 				if (this.globalService.handleSuccessService(res)) {
 					this.loadingService.hideLoader();
-					this.router.navigate([URL_ROUTES.DASHBOARD]);
+					let userRole = this.globalService.getUserRole('userRole');
+					if (userRole === 'super-admin') {
+						this.router.navigate([URL_ROUTES.LIST_ACCOUNT]);
+					} else {
+						this.router.navigate([URL_ROUTES.LIST_SITE]);
+					}
 				}
 			});
 		}
