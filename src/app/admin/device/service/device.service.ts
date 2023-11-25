@@ -26,6 +26,17 @@ export class DeviceService {
 			);
 	}
 
+	listAvailableDevice(params: IParams): Observable<any> {
+		return this.http
+			.get(DEVICE.LIST_AVAILABLE_DEVICE + `/${params.siteId}`)
+			.pipe(
+				map((response: any) => {
+					const result = JSON.parse(JSON.stringify(response));
+					return result;
+				})
+			);
+	}
+
 	addDevice(deviceForm: FormGroup) {
 		const { account, site, room, deviceName, status } = deviceForm.value;
 

@@ -50,4 +50,5 @@ export const DEVICE = {
 	VIEW_DEVICE: '/device/get/',
 	DELETE_DEVICE: '/device/delete/',
 	UPDATE_DEVICE: '/device/update',
+	LIST_AVAILABLE_DEVICE: '/device/list/available',
 };

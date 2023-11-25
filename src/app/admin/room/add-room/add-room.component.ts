@@ -184,7 +184,7 @@ export class AddRoomComponent implements OnInit {
 	}
 
 	listDeviceAPI(params: IParams) {
-		this.deviceService.listDevice(params).subscribe((res) => {
+		this.deviceService.listAvailableDevice(params).subscribe((res) => {
 			this.deviceList = [...res.data.devices];
 		});
 	}
