@@ -38,7 +38,8 @@ export class DeviceService {
 	}
 
 	addDevice(deviceForm: FormGroup) {
-		const { account, site, room, deviceName, status } = deviceForm.value;
+		const { account, site, room, deviceName, status } =
+			deviceForm.getRawValue();
 
 		return this.http
 			.post(DEVICE.ADD_DEVICE, {

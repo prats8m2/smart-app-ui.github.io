@@ -38,7 +38,7 @@ export class StaffService {
 			email,
 			password,
 			mobile,
-		} = staffForm.value;
+		} = staffForm.getRawValue();
 
 		return this.http
 			.post(STAFF.ADD_STAFF, {

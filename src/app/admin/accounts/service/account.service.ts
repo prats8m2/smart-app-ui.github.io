@@ -23,7 +23,7 @@ export class AccountService {
 			password,
 			accountName,
 			status,
-		} = userForm.value;
+		} = userForm.getRawValue();
 
 		return this.http
 			.post(USER.ADD_USER, {

@@ -122,6 +122,7 @@ export class AddStaffComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+		this.staffForm.get('status').disable();
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {
