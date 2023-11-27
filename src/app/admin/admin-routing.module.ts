@@ -42,6 +42,11 @@ const routes: Routes = [
 		path: 'rooms',
 		loadChildren: () => import('./room/room.module').then((m) => m.RoomModule),
 	},
+	{
+		path: 'tables',
+		loadChildren: () =>
+			import('./table/table.module').then((m) => m.TableModule),
+	},
 ];
 
 @NgModule({

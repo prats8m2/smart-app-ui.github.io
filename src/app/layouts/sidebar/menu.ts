@@ -53,7 +53,7 @@ export const MENU: MenuItem[] = [
 		id: 8,
 		label: 'Table',
 		icon: 'bx bxs-drink',
-		link: '/list-table',
+		link: '/admin/tables/list-tables',
 		permission: 'LIST-TABLE',
 	},
 	{
