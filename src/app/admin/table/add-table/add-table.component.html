@@ -1,1 +1,58 @@
-<p>add-table works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListTable()"></i>
+            <h4 class="card-title mb-4">Add Table</h4>
+        </div>
+        <form (ngSubmit)="addTable()" [formGroup]="tableForm" class="custom-form">
+            <h6 class="mb-2">Table Details</h6>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="tableName">Table Name</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'form-error':showError('tableName'),'form-success':showSuccess('tableName')  }"
+                            formControlName="tableName">
+                        <div *ngIf="formTouched('tableName')">
+                            <div *ngIf="isError('tableName','required')" class="text-danger">
+                                {{errorMessage('tableName','required')}}
+                            </div>
+                            <div *ngIf="isError('tableName','pattern')" class="text-danger">
+                                {{errorMessage('tableName','pattern')}} </div>
+                            <div *ngIf="isError('tableName','maxlength')" class="text-danger">
+                                {{errorMessage('tableName','maxlength')}} </div>
+                            <div *ngIf="isError('tableName','minlength')" class="text-danger">
+                                {{errorMessage('tableName','minlength')}} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList" bindLabel="account.name"
+                        [clearable]="false" bindValue="account.id" (change)="changeAccountData($event?.account?.id)"
+                        [placeholder]="'Account'" formControlName="account" [clearable]="false"></ng-select>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="siteList" [ngModel]="siteList[0]?.id" bindLabel="name" [clearable]="false"
+                        bindValue="id" [placeholder]="'Site'" (change)="changeSiteData($event.id)"
+                        formControlName="site"></ng-select>
+                </div>
+            </div>
+            <h6 class="mb-2">Device Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="deviceList" [ngModel]="deviceList[0]?.id" bindLabel="code" [clearable]="false"
+                        bindValue="id" [placeholder]="'Device'" formControlName="device"></ng-select>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="tableForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

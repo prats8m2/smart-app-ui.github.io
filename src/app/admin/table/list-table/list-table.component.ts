@@ -143,7 +143,7 @@ export class ListTableComponent implements OnInit {
 	}
 	changeSitesData(siteId: any) {
 		this.tableParams.siteId = siteId;
-		this.listTableAPI(this.roomParams);
+		this.listTableAPI(this.tableParams);
 	}
 
 	listTableAPI(params: IParams) {

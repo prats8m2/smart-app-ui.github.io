@@ -79,4 +79,11 @@ export const errorMessages = {
 		minlength: 'Room Name must be at least 3 character long.',
 		pattern: 'Room Name must be alpha numeric only',
 	},
+
+	tableName: {
+		required: 'Table Name is required.',
+		maxlength: 'Maximum length exceeded (10 characters maximum).',
+		minlength: 'Table Name must be at least 5 character long.',
+		pattern: 'Table Name must be alpha numeric only',
+	},
 };

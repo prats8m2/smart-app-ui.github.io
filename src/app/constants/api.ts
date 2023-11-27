@@ -55,8 +55,8 @@ export const DEVICE = {
 
 export const TABLE = {
 	LIST_TABLE: '/table/list',
-	ADD_TABLE: '/room/add',
-	VIEW_TABLE: '/room/get/',
-	DELETE_TABLE: '/room/delete/',
-	UPDATE_TABLE: '/room/update',
+	ADD_TABLE: '/table/add',
+	VIEW_TABLE: '/table/get/',
+	DELETE_TABLE: '/table/delete/',
+	UPDATE_TABLE: '/table/update',
 };

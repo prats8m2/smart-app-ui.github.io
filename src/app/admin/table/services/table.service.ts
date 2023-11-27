@@ -26,17 +26,15 @@ export class TableService {
 			);
 	}
 
-	addSite(siteForm: FormGroup) {
-		const { account, siteName, siteAddress, type, wifiDetails } =
-			siteForm.value;
+	addTable(tableForm: FormGroup) {
+		const { account, site, device, tableName } = tableForm.value;
 
 		return this.http
-			.post(SITE.ADD_SITE, {
+			.post(TABLE.ADD_TABLE, {
 				accountId: account,
-				name: siteName,
-				type: parseInt(type),
-				address: siteAddress,
-				wifiDetails: wifiDetails,
+				name: tableName,
+				siteId: site,
+				deviceId: device,
 			})
 			.toPromise()
 			.then((response) => {
@@ -45,9 +43,9 @@ export class TableService {
 			});
 	}
 
-	viewSite(id: any) {
+	viewTable(id: any) {
 		return this.http
-			.get(SITE.VIEW_SITE + id)
+			.get(TABLE.VIEW_TABLE + id)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));
@@ -55,16 +53,17 @@ export class TableService {
 			});
 	}
 
-	updateSite(userForm: any) {
-		const { id, siteName, siteAddress, type, wifiDetails } = userForm.value;
+	updateTable(tableForm: any, site: any) {
+		const { id, device, status, tableName, occupied } = tableForm.getRawValue();
 
 		return this.http
-			.put(SITE.UPDATE_SITE, {
+			.put(TABLE.UPDATE_TABLE, {
 				id: id,
-				name: siteName,
-				type: parseInt(type),
-				address: siteAddress,
-				wifiDetails: wifiDetails,
+				name: tableName,
+				siteId: site,
+				deviceId: device,
+				status: status ? 1 : 0,
+				occupied: occupied ? 1 : 0,
 			})
 			.toPromise()
 			.then((response) => {

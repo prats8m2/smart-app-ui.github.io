@@ -78,3 +78,10 @@ export const ROOM_NAME_VALIDATION = [
 	Validators.maxLength(10),
 	Validators.minLength(3),
 ];
+
+export const TABLE_NAME_VALIDATION = [
+	Validators.required,
+	Validators.pattern('[a-zA-Z0-9_-]+$'),
+	Validators.maxLength(10),
+	Validators.minLength(5),
+];
