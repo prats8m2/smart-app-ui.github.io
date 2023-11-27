@@ -51,15 +51,17 @@ export class ViewRoomComponent implements OnInit {
 			this.roomService.viewRoom(roomId).then((res) => {
 				if (res.status) {
 					this.roomForm.disable();
-					this.roomForm.get('site').patchValue(res?.data?.site?.name);
-					this.roomForm
-						.get('device')
-						.patchValue(res?.data?.device ? res?.data?.device.code : '-');
-					this.roomForm.get('status').patchValue(res?.data?.status);
-					this.roomForm.get('site').patchValue(res?.data?.site?.name);
-					this.roomForm.get('account').patchValue(res?.data?.account?.name);
-					this.roomForm.get('roomName').patchValue(res?.data?.name);
-					let occupiedStatus = res?.data?.occupied === 1 ? true : false;
+					let data = res.data;
+					this.roomForm.patchValue({
+						site: data.site.name,
+						device: data?.device ? data?.device?.code : '-',
+						status: data?.status,
+						account: data.site.account.name,
+						roomName: data.name,
+						wifi: data.wifi.map((wifi) => wifi?.username),
+					});
+
+					let occupiedStatus = data?.occupied === 1 ? true : false;
 					this.roomForm.get('occupied').patchValue(occupiedStatus);
 				}
 			});

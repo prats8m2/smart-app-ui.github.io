@@ -61,6 +61,8 @@ export class EditRoomComponent implements OnInit {
 	deviceList: any = [];
 	wifiList: any = [];
 	siteList: any = [];
+	selectedDevice: any;
+	roomSiteId: any;
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -87,18 +89,20 @@ export class EditRoomComponent implements OnInit {
 					let roomStatus = data?.status === 1 ? true : false;
 					this.roomForm.patchValue({
 						id: roomId,
-						account: data?.account?.name,
-						site: data?.site?.id,
-						device: data?.device?.id,
+						account: data?.site?.account?.name,
+						site: data?.site?.name,
 						roomName: data?.name,
 						status: roomStatus,
 						occupied: occupiedStatus,
+						device: data?.device?.id,
+						wifi: data.wifi.map((wifi) => wifi?.id),
 					});
 					this.roomForm.get('account').disable();
-
-					// this.listSiteAPI(data.account.id);
-					// this.getSite(data.site.id);
-					// this.listDeviceAPI(data.site.id);
+					this.roomForm.get('site').disable();
+					this.wifiList = data?.site?.wifi;
+					this.roomSiteId = data?.site?.id;
+					this.listDeviceAPI(data?.site?.id);
+					this.selectedDevice = data?.device;
 				}
 			});
 		});
@@ -106,7 +110,6 @@ export class EditRoomComponent implements OnInit {
 
 	listSiteAPI(accountId: any) {
 		this.siteParams.accountId = accountId;
-		console.log(accountId);
 		this.siteService.listSites(this.siteParams).subscribe((res) => {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
@@ -166,22 +169,31 @@ export class EditRoomComponent implements OnInit {
 
 	listDeviceAPI(siteId: any) {
 		this.deviceParams.siteId = siteId;
-		this.deviceService.listDevice(this.deviceParams).subscribe((res: any) => {
-			if (res.status) {
-				console.log(res.data);
-				this.deviceList = res.data.devices;
-			}
-		});
+		this.deviceService
+			.listAvailableDevice(this.deviceParams)
+			.subscribe((res: any) => {
+				if (res.status) {
+					this.deviceList = [...res.data.devices];
+					this.deviceList.push(this.selectedDevice);
+				}
+			});
 	}
 
 	updateRoom() {
-		this.roomService.updateRoom(this.roomForm).then((res: any) => {
-			if (res.status) {
-				this.routeToListRoom();
-			} else {
-				console.log('error');
-			}
-		});
+		const selectedWifiIds = this.roomForm.get('wifi').value;
+		const selectedSiteObjects = selectedWifiIds.map((id: number) => ({
+			id,
+		}));
+		this.roomForm.get('wifi').patchValue(selectedSiteObjects);
+		this.roomService
+			.updateRoom(this.roomForm, this.roomSiteId)
+			.then((res: any) => {
+				if (res.status) {
+					this.routeToListRoom();
+				} else {
+					console.log('error');
+				}
+			});
 	}
 
 	getSite(siteId: any) {

@@ -15,7 +15,6 @@
                     <input type="text" class="form-control"
                         [ngClass]="{ 'form-error':showError('roomName'),'form-success':showSuccess('roomName')  }"
                         formControlName="roomName">
-                    <!-- First Name Validation -->
                     <div *ngIf="formTouched('roomName')">
                         <div *ngIf="isError('roomName','required')" class="text-danger">
                             {{errorMessage('roomName','required')}}
@@ -61,19 +60,16 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteName">Site Name</label>
-                    <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
-                        [placeholder]="'Site'" formControlName="site"></ng-select>
+                    <input type="text" class="form-control" formControlName="site">
                 </div>
             </div>
             <h6 class="mb-2">Device Details</h6>
-            <!-- Site Name -->
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="deviceList" bindLabel="code" [clearable]="true" bindValue="id"
-                        [placeholder]="'Device'" formControlName="device"></ng-select>
+                    <ng-select [items]="deviceList" bindLabel="code" [clearable]="false" bindValue="id"  
+                        [placeholder]="'Device'" formControlName="device" [ngModel]="selectedDevice?.id"></ng-select>
                 </div>
             </div>
-
             <h6 class="mb-2">Wifi Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">

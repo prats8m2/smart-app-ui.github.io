@@ -154,13 +154,11 @@
                 </div>
             </div>
             <!-- Second Row -->
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <h6 class="mb-2">Site Details</h6>
             <!-- Site Name -->
-            <div class="row" *ngIf="showListSite">
+            <div class="row">
                 <div class="col-md-6 mb-4">
-                        <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                        [multiple]="true" formControlName="site">
-                        </ng-select>
+                    <input type="text" class="form-control" formControlName="site">
                 </div>
             </div>
             <!--Third Row -->

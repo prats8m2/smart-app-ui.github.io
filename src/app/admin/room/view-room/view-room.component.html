@@ -71,7 +71,10 @@
             <h6 class="mb-2">Wifi Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <input type="text" class="form-control" formControlName="wifi">
+                    <label for="deviceStatus">Wifi Username</label>
+                    <ng-select [items]="this.roomForm.get('wifi').value" bindLabel="username" [clearable]="false"
+                        bindValue="id" [placeholder]="'Wifi'" [multiple]="true" formControlName="wifi">
+                    </ng-select>
                 </div>
             </div>
         </form>

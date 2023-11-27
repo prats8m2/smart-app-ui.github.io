@@ -64,16 +64,16 @@ export class RoomService {
 			});
 	}
 
-	updateRoom(roomForm: any) {
-		const { id, site, wifi, device, status, roomName, occupied } =
-			roomForm.value;
+	updateRoom(roomForm: any, siteId: any) {
+		const { id, wifi, device, status, roomName, occupied } =
+			roomForm.getRawValue();
 
 		return this.http
 			.put(ROOM.UPDATE_ROOM, {
 				id: id,
 				name: roomName,
 				wifi: wifi,
-				siteId: site,
+				siteId: siteId,
 				deviceId: device,
 				status: status ? 1 : 0,
 				occupied: occupied ? 1 : 0,
