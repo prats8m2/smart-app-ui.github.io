@@ -52,3 +52,11 @@ export const DEVICE = {
 	UPDATE_DEVICE: '/device/update',
 	LIST_AVAILABLE_DEVICE: '/device/list/available',
 };
+
+export const TABLE = {
+	LIST_TABLE: '/table/list',
+	ADD_TABLE: '/room/add',
+	VIEW_TABLE: '/room/get/',
+	DELETE_TABLE: '/room/delete/',
+	UPDATE_TABLE: '/room/update',
+};

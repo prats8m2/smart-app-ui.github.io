@@ -8,6 +8,8 @@ import { TableRoutingModule } from './table-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
 
 @NgModule({
 	declarations: [
@@ -15,6 +17,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 		EditTableComponent,
 		ListTableComponent,
 		ViewTableComponent,
+		StatusPipe,
+		RoomOccupiedPipe,
 	],
 	imports: [
 		CommonModule,

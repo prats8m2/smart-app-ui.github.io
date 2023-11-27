@@ -41,4 +41,10 @@ export const URL_ROUTES = {
 	EDIT_ROOM: 'admin/rooms/edit-room',
 	VIEW_ROOM: 'admin/rooms/view-room',
 	LIST_ROOM: 'admin/rooms/list-rooms',
+
+	//tables
+	ADD_TABLE: 'admin/tables/add-table',
+	EDIT_TABLE: 'admin/tables/edit-table',
+	VIEW_TABLE: 'admin/tables/view-table',
+	LIST_TABLE: 'admin/tables/list-tables',
 };
