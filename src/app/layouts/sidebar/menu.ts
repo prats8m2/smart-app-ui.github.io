@@ -60,7 +60,7 @@ export const MENU: MenuItem[] = [
 		id: 9,
 		label: 'Category',
 		icon: 'bx-spreadsheet',
-		link: '/list-category',
+		link: '/admin/categories/list-categories',
 		permission: 'LIST-CATEGORY',
 	},
 	{
