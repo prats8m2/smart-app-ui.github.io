@@ -60,3 +60,11 @@ export const TABLE = {
 	DELETE_TABLE: '/table/delete/',
 	UPDATE_TABLE: '/table/update',
 };
+
+export const CATEGORY = {
+	LIST_CATEGORY: '/category/list',
+	ADD_CATEGORY: '/category/add',
+	VIEW_CATEGORY: '/category/get/',
+	DELETE_CATEGORY: '/category/delete/',
+	UPDATE_v: '/category/update',
+};

@@ -1,1 +1,90 @@
-<p>list-category works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class=" row col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="search-box me-2 mb-2 d-inline-block">
+                                    <div class="position-relative">
+                                        <input type="search" class="form-control" autocomplete="off" id="searchTableList"
+                                            placeholder="Search..." [(ngModel)]="searchInput" (input)="onSearch()">
+                                        <i class="bx bx-search-alt search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="showListAccount">
+                                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                                    bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                                    (change)="changeAccountData($event?.account?.id)"
+                                    [placeholder]="'Account'"></ng-select>
+                            </div>
+                            <div class="col-sm-4">
+                                <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
+                                    [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
+                                    [placeholder]="'Site'"></ng-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" *ngIf="showAddCategory">
+                            <div class="text-sm-end">
+                                <button type="button" class="btn btn-primary mb-2 me-2"
+                                    (click)="routeToAddCategory()"><i class="mdi mdi-plus mr-1"></i>
+                                    Add Category</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive mb-0">
+                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="device-list">
+                            <thead class="table-light table-fixed-header">
+                                <tr>
+                                    <th class="align-middle">Category ID</th>
+                                    <th class="align-middle">Name</th>
+                                    <th class="align-middle">Type</th>
+                                    <th class="align-middle">Status</th>
+                                    <th class="align-middle" *ngIf="showEditCategory || showDeleteCategory">Action</th>
+                                </tr>
+                                <tr *ngIf="categoryList.length == 0">
+                                    <th class="align-middle" style="text-align: center;" colspan="5">No data available
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of categoryList; let i = index;" id="o_{{data.id}}">
+                                    <td>
+                                        <a class="text-body fw-bold pointer"
+                                            (click)="routeToViewCategory(data.id)">{{data.id}}</a>
+                                    </td>
+                                    <td class="pointer" (click)="routeToViewCategory(data.id)">{{data.name}}</td>
+                                    <td>
+                                        {{ data?.type  }}
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-pill badge-soft-success font-size-11"
+                                            [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
+                                            transformStatus}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <span class="text-success pointer" *ngIf="showEditCategory"><i
+                                                    class="mdi mdi-pencil font-size-18"
+                                                    (click)="routeToEditCategory(data.id)"></i></span>
+                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"
+                                                *ngIf="showDeleteCategory"><i
+                                                    class="mdi mdi-delete font-size-18"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
+                            (pageChanged)="pageChanged($event)">
+                        </pagination>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

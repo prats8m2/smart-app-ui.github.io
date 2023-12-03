@@ -8,6 +8,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 
 @NgModule({
 	declarations: [
@@ -15,6 +16,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 		ListCategoryComponent,
 		ViewCategoryComponent,
 		EditCategoryComponent,
+		StatusPipe,
 	],
 	imports: [
 		FormsModule,

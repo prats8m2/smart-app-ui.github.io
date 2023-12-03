@@ -47,4 +47,10 @@ export const URL_ROUTES = {
 	EDIT_TABLE: 'admin/tables/edit-table',
 	VIEW_TABLE: 'admin/tables/view-table',
 	LIST_TABLE: 'admin/tables/list-tables',
+
+	//tables
+	ADD_CATEGORY: 'admin/categories/add-category',
+	EDIT_CATEGORY: 'admin/categories/edit-category',
+	VIEW_CATEGORY: 'admin/categories/view-category',
+	LIST_CATEGORY: 'admin/categories/list-categories',
 };
