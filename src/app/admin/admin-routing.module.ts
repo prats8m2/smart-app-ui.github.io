@@ -52,6 +52,20 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('./category/category.module').then((m) => m.CategoryModule),
 	},
+	{
+		path: 'products',
+		loadChildren: () =>
+			import('./product/product.module').then((m) => m.ProductModule),
+	},
+	{
+		path: 'menus',
+		loadChildren: () => import('./menu/menu.module').then((m) => m.MenuModule),
+	},
+	{
+		path: 'orders',
+		loadChildren: () =>
+			import('./order/order.module').then((m) => m.OrderModule),
+	},
 ];
 
 @NgModule({
