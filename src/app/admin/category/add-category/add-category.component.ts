@@ -51,6 +51,25 @@ export class AddCategoryComponent implements OnInit {
 		{ id: 2, label: 'Amenities' },
 	];
 
+	scheduleControls: any = {
+		startDate: [null],
+		endDate: [null],
+		sundayStartTime: [null],
+		sundayEndTime: [null],
+		mondayStartTime: [null],
+		mondayEndTime: [null],
+		tuesdayStartTime: [null],
+		tuesdayEndTime: [null],
+		wednesdayStartTime: [null],
+		wednesdayEndTime: [null],
+		thursdayStartTime: [null],
+		thursdayEndTime: [null],
+		fridayStartTime: [null],
+		fridayEndTime: [null],
+		saturdayStartTime: [null],
+		saturdayEndTime: [null],
+	};
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -66,6 +85,7 @@ export class AddCategoryComponent implements OnInit {
 				categoryDesc: [null, CATEGORY_DESC_VALIDATION],
 				categorySeq: [1, Validators.required],
 				type: [null, Validators.required],
+				...this.scheduleControls,
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -76,11 +96,13 @@ export class AddCategoryComponent implements OnInit {
 				categoryDesc: [null, CATEGORY_DESC_VALIDATION],
 				categorySeq: [1, Validators.required],
 				type: [null, Validators.required],
+				...this.scheduleControls,
 			});
 		}
 	}
 
 	ngOnInit(): void {
+		console.log(this.categoryForm.controls);
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
