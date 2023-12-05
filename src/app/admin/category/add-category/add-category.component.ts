@@ -52,7 +52,6 @@ export class AddCategoryComponent implements OnInit {
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
 	];
-	time = { hour: 0, minute: 0 };
 	meridian = true;
 
 	scheduleControls: any = {
@@ -82,7 +81,7 @@ export class AddCategoryComponent implements OnInit {
 		private siteServices: SiteService,
 		private config: NgbTimepickerConfig
 	) {
-		config.spinners = false;
+		this.config.spinners = false;
 		if (this.isProduction) {
 			this.categoryForm = this.formBuilder.group({
 				account: [null],
@@ -91,7 +90,7 @@ export class AddCategoryComponent implements OnInit {
 				categoryDesc: [null, CATEGORY_DESC_VALIDATION],
 				categorySeq: [1, Validators.required],
 				type: [null, Validators.required],
-				...this.scheduleControls,
+				scheduleData: this.formBuilder.group(this.scheduleControls),
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -102,7 +101,7 @@ export class AddCategoryComponent implements OnInit {
 				categoryDesc: [null, CATEGORY_DESC_VALIDATION],
 				categorySeq: [1, Validators.required],
 				type: [null, Validators.required],
-				...this.scheduleControls,
+				scheduleData: this.formBuilder.group(this.scheduleControls),
 			});
 		}
 	}

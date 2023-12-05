@@ -51,6 +51,7 @@
                     <input type="text" class="form-control" formControlName="categorySeq">
                 </div>
             </div>
+            <div formGroupName="scheduleData">
             <h6 class="mb-2">Schedule Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
@@ -169,6 +170,7 @@
                     <ngb-timepicker  [meridian]="meridian" formControlName="saturdayEndTime" />
                 </div>
             </div>
+        </div>
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
