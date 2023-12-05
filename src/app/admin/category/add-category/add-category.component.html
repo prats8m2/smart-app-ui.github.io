@@ -55,21 +55,20 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteType">Start Date</label>
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Category'"></ng-select>
+                    <input type="date" class="form-control" formControlName="startDate">
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="categorySeq">End Date</label>
-                    <input type="text" class="form-control" formControlName="categorySeq">
+                    <input type="date" class="form-control" formControlName="endDate">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2">
                 </div>
-                <div class="col-md-5 mb-4">
+                <div class="col-md-5 mb-4 text-center">
                     <label for="StartTime">Start Time</label>
                 </div>
-                <div class="col-md-5 mb-4">
+                <div class="col-md-5 mb-4 text-center">
                     <label for="EndTime">End Time</label>
                 </div>
             </div>
@@ -79,11 +78,10 @@
                     <label for="forSunday">Sunday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="sundayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="sundayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="sundayEndTime">
+                    <input type="time" class="form-control" formControlName="sundayEndTime">
                 </div>
             </div>
             <!--MONDAY-->
@@ -92,11 +90,10 @@
                     <label for="forMonday">Monday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="mondayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="mondayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="mondayEndTime">
+                    <input type="time" class="form-control" formControlName="mondayEndTime">
                 </div>
             </div>
             <!--TUESDAY-->
@@ -105,11 +102,10 @@
                     <label for="forTuesday">Tuesday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="tuesdayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="tuesdayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="tuesdayEndTime">
+                    <input type="time" class="form-control" formControlName="tuesdayEndTime">
                 </div>
             </div>
             <!--WEDNESDAY-->
@@ -118,11 +114,10 @@
                     <label for="forWednesday">Wednesday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="wednesdayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="wednesdayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="wednesdayEndTime">
+                    <input type="time" class="form-control" formControlName="wednesdayEndTime">
                 </div>
             </div>
             <!--THURSDAY-->
@@ -131,11 +126,10 @@
                     <label for="forThursday">Thursday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="thursdayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="thursdayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="thursdayEndTime">
+                    <input type="time" class="form-control" formControlName="thursdayEndTime">
                 </div>
             </div>
             <!--FRIDAY-->
@@ -144,24 +138,22 @@
                     <label for="forFriday">Friday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="fridayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="fridayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="fridayEndTime">
+                    <input type="time" class="form-control" formControlName="fridayEndTime">
                 </div>
             </div>
             <!--SATURDAY-->
             <div class="row">
                 <div class="col-md-2">
-                    <label for="forSaturda">Saturday</label>
+                    <label for="forSaturday">Saturday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="saturdayStartTime" [placeholder]="'Category'"></ng-select>
+                    <input type="time" class="form-control" formControlName="saturdayStartTime">
                 </div>
                 <div class="col-md-5 mb-4">
-                    <input type="text" class="form-control" formControlName="saturdayEndTime">
+                    <input type="time" class="form-control" formControlName="saturdayEndTime">
                 </div>
             </div>
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>

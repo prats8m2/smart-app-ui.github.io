@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -25,6 +25,7 @@ import { SiteService } from '../../site/service/site.service';
 	styleUrls: ['./add-category.component.scss'],
 })
 export class AddCategoryComponent implements OnInit {
+	@ViewChild('startDateInput') startDateInput: ElementRef;
 	isProduction = environment.production;
 	public categoryForm: FormGroup;
 	accountList: any = [];
