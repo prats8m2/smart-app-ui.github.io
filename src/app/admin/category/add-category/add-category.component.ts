@@ -141,16 +141,6 @@ export class AddCategoryComponent implements OnInit {
 			.patchValue(`CT_${siteId}_${randomNumber}`);
 	}
 
-	// addDevice() {
-	// 	this.deviceService.addDevice(this.categoryForm).then((res) => {
-	// 		if (res.status) {
-	// 			this.router.navigate([URL_ROUTES.LIST_DEVICE]);
-	// 		} else {
-	// 			console.log('error');
-	// 		}
-	// 	});
-	// }
-
 	addCategory() {
 		console.log(this.categoryForm.value);
 	}
