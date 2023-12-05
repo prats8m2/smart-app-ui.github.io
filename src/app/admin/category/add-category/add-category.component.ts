@@ -48,6 +48,11 @@ export class AddCategoryComponent implements OnInit {
 		pageNumber: 1,
 	};
 
+	today: Date = new Date();
+
+	startMinDate: { year: number; month: number; day: number };
+	endMinDate: { year: number; month: number; day: number };
+
 	categoryTypes = [
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
@@ -82,6 +87,11 @@ export class AddCategoryComponent implements OnInit {
 		private config: NgbTimepickerConfig
 	) {
 		this.config.spinners = false;
+		this.startMinDate = {
+			year: this.today.getFullYear(),
+			month: this.today.getMonth() + 1,
+			day: this.today.getDate(),
+		};
 		if (this.isProduction) {
 			this.categoryForm = this.formBuilder.group({
 				account: [null],
