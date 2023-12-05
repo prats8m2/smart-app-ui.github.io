@@ -9,6 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import {
+	NgbDatepickerModule,
+	NgbTimepickerModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -25,6 +29,8 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		CategoryRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		NgbDatepickerModule,
+		NgbTimepickerModule,
 	],
 })
 export class CategoryModule {}

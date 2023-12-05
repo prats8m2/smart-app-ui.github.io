@@ -18,6 +18,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
+import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-add-category',
@@ -51,6 +52,8 @@ export class AddCategoryComponent implements OnInit {
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
 	];
+	time = { hour: 0, minute: 0 };
+	meridian = true;
 
 	scheduleControls: any = {
 		startDate: [null],
@@ -76,8 +79,10 @@ export class AddCategoryComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		public accountService: AccountService,
-		private siteServices: SiteService
+		private siteServices: SiteService,
+		private config: NgbTimepickerConfig
 	) {
+		config.spinners = false;
 		if (this.isProduction) {
 			this.categoryForm = this.formBuilder.group({
 				account: [null],
@@ -103,7 +108,6 @@ export class AddCategoryComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.categoryForm.controls);
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {

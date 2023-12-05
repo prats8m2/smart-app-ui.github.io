@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import {
+	HttpClientModule,
+	HTTP_INTERCEPTORS,
+	HttpClient,
+} from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 
@@ -24,50 +28,52 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpRequestInterceptor } from './core/interceptor/HttpRequestInterceptor';
-
-
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function createTranslateLoader(http: HttpClient): any {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+	return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    LayoutsModule,
-    AppRoutingModule,
-    CarouselModule,
-    AccordionModule.forRoot(),
-    TabsModule.forRoot(),
-    TooltipModule.forRoot(),
-    ScrollToModule.forRoot(),
-    ToastrModule.forRoot(),
-  ],
-  bootstrap: [AppComponent],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpRequestInterceptor,
-      multi: true,
-    },
+	declarations: [AppComponent],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: createTranslateLoader,
+				deps: [HttpClient],
+			},
+		}),
+		LayoutsModule,
+		AppRoutingModule,
+		CarouselModule,
+		AccordionModule.forRoot(),
+		TabsModule.forRoot(),
+		TooltipModule.forRoot(),
+		ScrollToModule.forRoot(),
+		ToastrModule.forRoot(),
+		NgbDatepickerModule,
+	],
+	bootstrap: [AppComponent],
+	providers: [
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: FakeBackendInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: HttpRequestInterceptor,
+			multi: true,
+		},
 
-    // LoaderService,
-    // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
-  ],
+		// LoaderService,
+		// { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
+	],
 })
-export class AppModule { }
+export class AppModule {}
