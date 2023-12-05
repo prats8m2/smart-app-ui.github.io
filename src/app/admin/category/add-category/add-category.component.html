@@ -60,8 +60,10 @@
                         <input ngbDatepicker class="form-control" placeholder="Choose start date" #std="ngbDatepicker"
                             formControlName="startDate" (click)="std.toggle()" 
                             [minDate]="startMinDate"
+                            (dateSelect)="startDateSellected($event)"
+                            (keydown)="onInputKeydown($event)"
                             />
-                        <div class="input-group-append" (click)="std.toggle()">
+                        <div class="input-group-append" >
                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                         </div>
                     </div>
@@ -70,9 +72,9 @@
                     <label for="categorySeq">End Date</label>
                     <div class="input-group clockpicker">
                         <input ngbDatepicker class="form-control" placeholder="Choose end date" #edt="ngbDatepicker"
-                            formControlName="endDate" (click)="edt.toggle()" [minDate]="startMinDate"
+                            formControlName="endDate" (click)="edt.toggle()" [minDate]="endMinDate" (keydown)="onInputKeydown($event)"
                             />
-                        <div class="input-group-append" (click)="edt.toggle()">
+                        <div class="input-group-append">
                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                         </div>
                     </div>

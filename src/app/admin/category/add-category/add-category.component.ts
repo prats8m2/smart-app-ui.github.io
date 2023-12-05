@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+	Component,
+	ElementRef,
+	HostListener,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -60,8 +66,8 @@ export class AddCategoryComponent implements OnInit {
 	meridian = true;
 
 	scheduleControls: any = {
-		startDate: [null],
-		endDate: [null],
+		startDate: [null, Validators.required],
+		endDate: [null, Validators.required],
 		sundayStartTime: [null],
 		sundayEndTime: [null],
 		mondayStartTime: [null],
@@ -117,6 +123,8 @@ export class AddCategoryComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		let fg = this.categoryForm.get('scheduleData') as FormGroup;
+		fg.get('endDate').disable();
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
@@ -179,5 +187,21 @@ export class AddCategoryComponent implements OnInit {
 
 	addCategory() {
 		console.log(this.categoryForm.value);
+	}
+
+	startDateSellected(event: any) {
+		this.endMinDate = {
+			year: event.year,
+			month: event.month,
+			day: event.day,
+		};
+		let fg = this.categoryForm.get('scheduleData') as FormGroup;
+		fg.get('endDate').patchValue({ year: null, month: null, day: null });
+		fg.get('endDate').enable();
+	}
+
+	@HostListener('keydown', ['$event'])
+	onInputKeydown(event: KeyboardEvent) {
+		event.preventDefault();
 	}
 }
