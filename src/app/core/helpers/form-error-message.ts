@@ -86,4 +86,16 @@ export const errorMessages = {
 		minlength: 'Table Name must be at least 5 character long.',
 		pattern: 'Table Name must be alpha numeric only',
 	},
+	categoryName: {
+		required: 'Category name is required.',
+		maxlength: 'Maximum length exceeded (15 characters maximum).',
+		minlength: 'Category name must be at least 5 character long.',
+		pattern: 'Category name must be alpha numeric with "_" or "-"',
+	},
+
+	categoryDesc: {
+		maxlength: 'Maximum length exceeded (100 characters maximum).',
+		minlength: 'Category description must be at least 10 character long.',
+		pattern: 'Category name must be alpha numeric with "_" or "-"',
+	},
 };
