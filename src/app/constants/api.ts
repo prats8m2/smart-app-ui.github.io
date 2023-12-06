@@ -66,5 +66,5 @@ export const CATEGORY = {
 	ADD_CATEGORY: '/category/add',
 	VIEW_CATEGORY: '/category/get/',
 	DELETE_CATEGORY: '/category/delete/',
-	UPDATE_v: '/category/update',
+	UPDATE_CATEGORY: '/category/update',
 };

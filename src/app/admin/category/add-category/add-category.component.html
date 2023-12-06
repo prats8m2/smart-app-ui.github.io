@@ -61,7 +61,6 @@
                             formControlName="startDate" (click)="std.toggle()" 
                             [minDate]="startMinDate"
                             (dateSelect)="startDateSellected($event)"
-                            (keydown)="onInputKeydown($event)"
                             />
                         <div class="input-group-append" >
                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
@@ -72,7 +71,7 @@
                     <label for="categorySeq">End Date</label>
                     <div class="input-group clockpicker">
                         <input ngbDatepicker class="form-control" placeholder="Choose end date" #edt="ngbDatepicker"
-                            formControlName="endDate" (click)="edt.toggle()" [minDate]="endMinDate" (keydown)="onInputKeydown($event)"
+                            formControlName="endDate" (click)="edt.toggle()" [minDate]="endMinDate"
                             />
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
@@ -87,7 +86,7 @@
                     <label for="StartTime">Start Time</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <label for="EndTime">End Time</label>
+                    <label for="endTime">End Time</label>
                 </div>
             </div>
             <!--SUNDAY-->
@@ -96,10 +95,10 @@
                     <label for="forSunday">Sunday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="sundayStartTime"/>
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="sunday_startTime"/>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="sundayEndTime"/>
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="sunday_endTime"/>
                 </div>
             </div>
             <!--MONDAY-->
@@ -108,10 +107,10 @@
                     <label for="forMonday">Monday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="mondayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="monday_startTime" />
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="mondayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="monday_endTime" />
                 </div>
             </div>
             <!--TUESDAY-->
@@ -120,10 +119,10 @@
                     <label for="forTuesday">Tuesday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="tuesdayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="tuesday_startTime" />
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="tuesdayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="tuesday_endTime" />
                 </div>
             </div>
             <!--WEDNESDAY-->
@@ -132,10 +131,10 @@
                     <label for="forWednesday">Wednesday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="wednesdayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="wednesday_startTime" />
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="wednesdayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="wednesday_endTime" />
                 </div>
             </div>
             <!--THURSDAY-->
@@ -144,10 +143,10 @@
                     <label for="forThursday">Thursday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="thursdayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="thursday_startTime" />
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="thursdayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="thursday_endTime" />
                 </div>
             </div>
             <!--FRIDAY-->
@@ -156,11 +155,11 @@
                     <label for="forFriday">Friday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="fridayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="friday_startTime" />
 
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="fridayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="friday_endTime" />
                 </div>
             </div>
             <!--SATURDAY-->
@@ -169,10 +168,10 @@
                     <label for="forSaturday">Saturday</label>
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="saturdayStartTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="saturday_startTime" />
                 </div>
                 <div class="col-md-5 mb-4">
-                    <ngb-timepicker  [meridian]="meridian" formControlName="saturdayEndTime" />
+                    <ngb-timepicker  [meridian]="meridian" [(ngModel)]="defaultTime" formControlName="saturday_endTime" />
                 </div>
             </div>
         </div>

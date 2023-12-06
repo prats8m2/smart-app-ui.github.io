@@ -1,10 +1,4 @@
-import {
-	Component,
-	ElementRef,
-	HostListener,
-	OnInit,
-	ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -25,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryService } from '../service/category.service';
 
 @Component({
 	selector: 'app-add-category',
@@ -32,12 +27,10 @@ import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 	styleUrls: ['./add-category.component.scss'],
 })
 export class AddCategoryComponent implements OnInit {
-	@ViewChild('startDateInput') startDateInput: ElementRef;
 	isProduction = environment.production;
 	public categoryForm: FormGroup;
 	accountList: any = [];
 	siteList: any = [];
-	roomList: any = [];
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
@@ -55,33 +48,33 @@ export class AddCategoryComponent implements OnInit {
 	};
 
 	today: Date = new Date();
-
 	startMinDate: { year: number; month: number; day: number };
 	endMinDate: { year: number; month: number; day: number };
-
+	defaultTime: any = { hour: 0, minute: 0, second: 0 };
 	categoryTypes = [
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
 	];
+
 	meridian = true;
 
 	scheduleControls: any = {
 		startDate: [null, Validators.required],
 		endDate: [null, Validators.required],
-		sundayStartTime: [null],
-		sundayEndTime: [null],
-		mondayStartTime: [null],
-		mondayEndTime: [null],
-		tuesdayStartTime: [null],
-		tuesdayEndTime: [null],
-		wednesdayStartTime: [null],
-		wednesdayEndTime: [null],
-		thursdayStartTime: [null],
-		thursdayEndTime: [null],
-		fridayStartTime: [null],
-		fridayEndTime: [null],
-		saturdayStartTime: [null],
-		saturdayEndTime: [null],
+		sunday_startTime: [null],
+		sunday_endTime: [null],
+		monday_startTime: [null],
+		monday_endTime: [null],
+		tuesday_startTime: [null],
+		tuesday_endTime: [null],
+		wednesday_startTime: [null],
+		wednesday_endTime: [null],
+		thursday_startTime: [null],
+		thursday_endTime: [null],
+		friday_startTime: [null],
+		friday_endTime: [null],
+		saturday_startTime: [null],
+		saturday_endTime: [null],
 	};
 
 	constructor(
@@ -90,7 +83,8 @@ export class AddCategoryComponent implements OnInit {
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private siteServices: SiteService,
-		private config: NgbTimepickerConfig
+		private config: NgbTimepickerConfig,
+		private categoryService: CategoryService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -186,7 +180,54 @@ export class AddCategoryComponent implements OnInit {
 	}
 
 	addCategory() {
+		const scheduleData = this.categoryForm.get('scheduleData');
+		if (scheduleData) {
+			const daysOfWeek = [
+				'sunday',
+				'monday',
+				'tuesday',
+				'wednesday',
+				'thursday',
+				'friday',
+				'saturday',
+			];
+			daysOfWeek.forEach((day) => {
+				scheduleData
+					.get(`${day}_startTime`)
+					?.patchValue(
+						this.convertTimeObjectToString(
+							scheduleData.get(`${day}_startTime`).value
+						)
+					);
+				scheduleData
+					.get(`${day}_endTime`)
+					?.patchValue(
+						this.convertTimeObjectToString(
+							scheduleData.get(`${day}_endTime`).value
+						)
+					);
+			});
+			scheduleData
+				.get('startDate')
+				.patchValue(
+					this.convertDateObjectToString(scheduleData.get('startDate').value)
+				);
+			scheduleData
+				.get('endDate')
+				.patchValue(
+					this.convertDateObjectToString(scheduleData.get('endDate').value)
+				);
+		}
+
+		//call add catgory API
 		console.log(this.categoryForm.value);
+		this.categoryService.addCategory(this.categoryForm).then((res) => {
+			if (res.status) {
+				this.router.navigate([URL_ROUTES.LIST_CATEGORY]);
+			} else {
+				console.log('ERROR');
+			}
+		});
 	}
 
 	startDateSellected(event: any) {
@@ -200,8 +241,19 @@ export class AddCategoryComponent implements OnInit {
 		fg.get('endDate').enable();
 	}
 
-	@HostListener('keydown', ['$event'])
-	onInputKeydown(event: KeyboardEvent) {
-		event.preventDefault();
+	convertTimeObjectToString(timeObject: {
+		hour: number;
+		minute: number;
+		second: number;
+	}) {
+		return `${timeObject.hour}:${timeObject.minute}:${timeObject.second}`;
+	}
+
+	convertDateObjectToString(dateObject: {
+		year: number;
+		month: number;
+		day: number;
+	}) {
+		return `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
 	}
 }

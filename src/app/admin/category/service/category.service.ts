@@ -37,17 +37,26 @@ export class CategoryService {
 			);
 	}
 
-	addDevice(deviceForm: FormGroup) {
-		const { account, site, room, deviceName, status } =
-			deviceForm.getRawValue();
+	addCategory(categoryForm: FormGroup) {
+		const {
+			account,
+			site,
+			categoryName,
+			categoryDesc,
+			categorySeq,
+			type,
+			scheduleData,
+		} = categoryForm.getRawValue();
 
 		return this.http
-			.post(DEVICE.ADD_DEVICE, {
-				accountId: account,
-				code: deviceName,
-				roomId: room,
-				siteId: site,
-				status: status ? 1 : 0,
+			.post(CATEGORY.ADD_CATEGORY, {
+				name: categoryName,
+				description: categoryDesc,
+				type: type,
+				sequence: categorySeq,
+				scheduleData: scheduleData,
+				site: site,
+				account: account,
 			})
 			.toPromise()
 			.then((response) => {
@@ -56,9 +65,9 @@ export class CategoryService {
 			});
 	}
 
-	viewDevice(deviceId: any) {
+	viewCategory(categoryId: any) {
 		return this.http
-			.get(DEVICE.VIEW_DEVICE + deviceId)
+			.get(CATEGORY.VIEW_CATEGORY + categoryId)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));
