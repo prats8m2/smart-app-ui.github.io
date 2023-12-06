@@ -9,13 +9,6 @@ import {
 	USER_NAME_VALIDATION,
 	PASSWORD_VALIDATION,
 } from 'src/app/constants/validations';
-import {
-	hasError,
-	isValid,
-	isTouchedAndValid,
-	isTouched,
-} from 'src/app/core/helpers/form-error';
-import { errorMessages } from 'src/app/core/helpers/form-error-message';
 import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
