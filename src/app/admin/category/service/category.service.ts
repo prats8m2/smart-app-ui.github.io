@@ -75,15 +75,19 @@ export class CategoryService {
 			});
 	}
 
-	updateDevice(deviceForm: any) {
-		const { id, room, deviceName, status } = deviceForm.value;
+	updateCategory(deviceForm: any, siteId: any) {
+		const { id, categoryName, categoryDesc, categorySeq, type, scheduleData } =
+			deviceForm.value;
 
 		return this.http
-			.put(DEVICE.UPDATE_DEVICE, {
+			.put(CATEGORY.UPDATE_CATEGORY, {
 				id: id,
-				code: deviceName,
-				roomId: room,
-				status: status ? 1 : 0,
+				name: categoryName,
+				type: type,
+				sequence: categorySeq,
+				scheduleData: scheduleData,
+				description: categoryDesc,
+				site: siteId,
 			})
 			.toPromise()
 			.then((response) => {

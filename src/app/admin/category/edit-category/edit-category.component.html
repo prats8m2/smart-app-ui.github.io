@@ -1,1 +1,194 @@
-<p>edit-category works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
+                (click)="routeToListCategory()"></i>
+            <h4 class="card-title mb-4">Edit Category</h4>
+        </div>
+        <form (ngSubmit)="updateCategory()" [formGroup]="categoryForm" class="custom-form">
+            <h6 class="mb-2">Category Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="categoryName">Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('categoryName'),'form-success':showSuccess('categoryName') }"
+                        formControlName="categoryName">
+                    <div *ngIf="formTouched('categoryName')">
+                        <div *ngIf="isError('categoryName','required')" class="text-danger">
+                            {{errorMessage('categoryName','required')}}
+                        </div>
+                        <div *ngIf="isError('categoryName','pattern')" class="text-danger">
+                            {{errorMessage('categoryName','pattern')}} </div>
+                        <div *ngIf="isError('categoryName','maxlength')" class="text-danger">
+                            {{errorMessage('categoryName','maxlength')}} </div>
+                        <div *ngIf="isError('categoryName','minlength')" class="text-danger">
+                            {{errorMessage('categoryName','minlength')}} </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="categoryDesc">Description</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('categoryDesc'),'form-success':showSuccess('categoryDesc') }"
+                        formControlName="categoryDesc">
+                    <div *ngIf="formTouched('categoryDesc')">
+                        <div *ngIf="isError('categoryDesc','pattern')" class="text-danger">
+                            {{errorMessage('categoryDesc','pattern')}} </div>
+                        <div *ngIf="isError('categoryDesc','maxlength')" class="text-danger">
+                            {{errorMessage('categoryDesc','maxlength')}} </div>
+                        <div *ngIf="isError('categoryDesc','minlength')" class="text-danger">
+                            {{errorMessage('categoryDesc','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="siteType">Type</label>
+                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
+                        formControlName="type" [placeholder]="'Category'"></ng-select>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="categorySeq">Sequence</label>
+                    <input type="text" class="form-control" formControlName="categorySeq">
+                </div>
+            </div>
+            <div formGroupName="scheduleData">
+                <h6 class="mb-2">Schedule Details</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="siteType">Start Date</label>
+                        <div class="input-group clockpicker">
+                            <input ngbDatepicker class="form-control" placeholder="Choose start date"
+                                #std="ngbDatepicker" formControlName="startDate" (click)="std.toggle()"
+                                [minDate]="startMinDate" (dateSelect)="startDateSellected($event)" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="categorySeq">End Date</label>
+                        <div class="input-group clockpicker">
+                            <input ngbDatepicker class="form-control" placeholder="Choose end date" #edt="ngbDatepicker"
+                                formControlName="endDate" (click)="edt.toggle()" [minDate]="endMinDate" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="StartTime">Start Time</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="endTime">End Time</label>
+                    </div>
+                </div>
+                <!--SUNDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forSunday">Sunday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="sunday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="sunday_endTime" />
+                    </div>
+                </div>
+                <!--MONDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forMonday">Monday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="monday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="monday_endTime" />
+                    </div>
+                </div>
+                <!--TUESDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forTuesday">Tuesday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="tuesday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="tuesday_endTime" />
+                    </div>
+                </div>
+                <!--WEDNESDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forWednesday">Wednesday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="wednesday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="wednesday_endTime" />
+                    </div>
+                </div>
+                <!--THURSDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forThursday">Thursday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="thursday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="thursday_endTime" />
+                    </div>
+                </div>
+                <!--FRIDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forFriday">Friday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="friday_startTime" />
+
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="friday_endTime" />
+                    </div>
+                </div>
+                <!--SATURDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forSaturday">Saturday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="saturday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="saturday_endTime" />
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <div class="col-sm-12" *ngIf="showListAccount">
+                        <input type="text" class="form-control" formControlName="account">
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <input type="text" class="form-control" formControlName="site">
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="categoryForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
