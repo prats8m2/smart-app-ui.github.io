@@ -91,7 +91,7 @@ export class ViewCategoryComponent implements OnInit {
 						account: this.categoryData.site.account.name,
 						site: this.categoryData.site.name,
 						categoryName: this.categoryData.name,
-						categoryDesc: this.categoryData.description,
+						categoryDesc: this.categoryData.description || '-',
 						categorySeq: this.categoryData.sequence,
 						type: type,
 					});
@@ -133,6 +133,7 @@ export class ViewCategoryComponent implements OnInit {
 
 	patchScheduleData() {
 		const scheduleData = this.categoryForm.get('scheduleData');
+
 		if (scheduleData) {
 			scheduleData.patchValue({
 				startDate: this.categoryData.schedule.startDate,
@@ -158,6 +159,7 @@ export class ViewCategoryComponent implements OnInit {
 							this.categoryData.schedule[startTimeControl]
 						)
 					);
+
 				scheduleData
 					.get(endTimeControl)
 					?.patchValue(
@@ -172,9 +174,9 @@ export class ViewCategoryComponent implements OnInit {
 	convertTimeObjectToString(timeString: string) {
 		let time = timeString.split(':');
 		let timeObj = {
-			hour: time[0],
-			minute: time[1],
-			second: time[2],
+			hour: +time[0],
+			minute: +time[1],
+			second: +time[2],
 		};
 		return timeObj;
 	}
