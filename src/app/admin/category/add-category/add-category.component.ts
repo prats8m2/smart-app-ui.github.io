@@ -50,7 +50,8 @@ export class AddCategoryComponent implements OnInit {
 	today: Date = new Date();
 	startMinDate: { year: number; month: number; day: number };
 	endMinDate: { year: number; month: number; day: number };
-	defaultTime: any = { hour: 0, minute: 0, second: 0 };
+	startDefaultTime: any = { hour: 0, minute: 0, second: 0 };
+	endDefaultTime: any = { hour: 23, minute: 59, second: 6 };
 	categoryTypes = [
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
@@ -61,20 +62,20 @@ export class AddCategoryComponent implements OnInit {
 	scheduleControls: any = {
 		startDate: [null, Validators.required],
 		endDate: [null, Validators.required],
-		sunday_startTime: [this.defaultTime],
-		sunday_endTime: [this.defaultTime],
-		monday_startTime: [this.defaultTime],
-		monday_endTime: [this.defaultTime],
-		tuesday_startTime: [this.defaultTime],
-		tuesday_endTime: [this.defaultTime],
-		wednesday_startTime: [this.defaultTime],
-		wednesday_endTime: [this.defaultTime],
-		thursday_startTime: [this.defaultTime],
-		thursday_endTime: [this.defaultTime],
-		friday_startTime: [this.defaultTime],
-		friday_endTime: [this.defaultTime],
-		saturday_startTime: [this.defaultTime],
-		saturday_endTime: [this.defaultTime],
+		sunday_startTime: [this.startDefaultTime],
+		sunday_endTime: [this.endDefaultTime],
+		monday_startTime: [this.startDefaultTime],
+		monday_endTime: [this.endDefaultTime],
+		tuesday_startTime: [this.startDefaultTime],
+		tuesday_endTime: [this.endDefaultTime],
+		wednesday_startTime: [this.startDefaultTime],
+		wednesday_endTime: [this.endDefaultTime],
+		thursday_startTime: [this.startDefaultTime],
+		thursday_endTime: [this.endDefaultTime],
+		friday_startTime: [this.startDefaultTime],
+		friday_endTime: [this.endDefaultTime],
+		saturday_startTime: [this.startDefaultTime],
+		saturday_endTime: [this.endDefaultTime],
 	};
 
 	constructor(
