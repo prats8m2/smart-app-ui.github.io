@@ -56,7 +56,6 @@
 
 
 #sidebar-menu {
-  padding: 10px 0 30px 0;
 
   .mm-active {
     >.has-arrow {
@@ -240,7 +239,6 @@
 
     .simplebar-mask,
     .simplebar-content-wrapper {
-      overflow: visible !important;
     }
 
     .simplebar-scrollbar {
@@ -426,7 +424,6 @@ body[data-sidebar="dark"] {
 
   // Enlarge menu
   &.vertical-collpsed {
-    min-height: 1760px;
 
     // Side menu
     .vertical-menu {
