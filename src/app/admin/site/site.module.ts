@@ -7,8 +7,8 @@ import { ViewSiteComponent } from './view-site/view-site.component';
 import { SitesRoutingModule } from './site-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { SiteTypePipe } from 'src/app/core/pipes/siteType.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -16,7 +16,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		EditSiteComponent,
 		ListSitesComponent,
 		ViewSiteComponent,
-		SiteTypePipe,
 	],
 	imports: [
 		FormsModule,
@@ -25,6 +24,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		SitesRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class SitesModule {}

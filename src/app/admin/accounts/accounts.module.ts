@@ -7,7 +7,7 @@ import { AddAccountComponent } from './add-account/add-account.component';
 import { ViewAccountComponent } from './view-account/view-account.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StatusPipe } from 'src/app/core/pipes/status.pipe';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -15,13 +15,13 @@ import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 		EditAccountComponent,
 		AddAccountComponent,
 		ViewAccountComponent,
-		StatusPipe,
 	],
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
 		CommonModule,
 		AccountsRoutingModule,
+		SharedModule,
 		PaginationModule.forRoot(),
 	],
 })

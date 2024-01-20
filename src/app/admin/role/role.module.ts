@@ -8,9 +8,8 @@ import { ViewRoleComponent } from './view-role/view-role.component';
 import { ListRoleComponent } from './list-role/list-role.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { DefaultRolePipe } from 'src/app/core/pipes/defaultRole.pipe';
-import { KeysPipe } from 'src/app/core/pipes/keys.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -18,8 +17,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		EditRoleComponent,
 		ViewRoleComponent,
 		ListRoleComponent,
-		DefaultRolePipe,
-		KeysPipe,
 	],
 	imports: [
 		FormsModule,
@@ -28,6 +25,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		RoleRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class RoleModule {}

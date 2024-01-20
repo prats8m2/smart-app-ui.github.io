@@ -53,4 +53,10 @@ export const URL_ROUTES = {
 	EDIT_CATEGORY: 'admin/categories/edit-category',
 	VIEW_CATEGORY: 'admin/categories/view-category',
 	LIST_CATEGORY: 'admin/categories/list-categories',
+
+	//products
+	ADD_PRODUCT: 'admin/products/add-product',
+	EDIT_PRODUCT: 'admin/products/edit-product',
+	VIEW_PRODUCT: 'admin/products/view-product',
+	LIST_PRODUCT: 'admin/products/list-products',
 };

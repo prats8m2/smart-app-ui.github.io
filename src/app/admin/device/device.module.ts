@@ -7,8 +7,8 @@ import { AddDeviceComponent } from './add-device/add-device.component';
 import { ListDeviceComponent } from './list-device/list-device.component';
 import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { ViewDeviceComponent } from './view-device/view-device.component';
-import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -16,7 +16,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		ListDeviceComponent,
 		EditDeviceComponent,
 		ViewDeviceComponent,
-		StatusPipe,
 	],
 	imports: [
 		FormsModule,
@@ -25,6 +24,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		DeviceRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class DeviceModule {}

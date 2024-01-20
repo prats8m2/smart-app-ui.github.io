@@ -1,28 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { SimplebarAngularModule } from 'simplebar-angular';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { LightboxModule } from 'ngx-lightbox';
-
-import { WidgetModule } from '../shared/widget/widget.module';
-import { UIModule } from '../shared/ui/ui.module';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 // Emoji Picker
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
-import { DashboardsModule } from './dashboards/dashboards.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
-import { StatusPipe } from '../core/pipes/status.pipe';
+import { DashboardsModule } from './dashboards/dashboards.module';
 
 @NgModule({
 	declarations: [],
@@ -36,8 +32,6 @@ import { StatusPipe } from '../core/pipes/status.pipe';
 		ReactiveFormsModule,
 		DashboardsModule,
 		HttpClientModule,
-		UIModule,
-		WidgetModule,
 		FullCalendarModule,
 		TabsModule.forRoot(),
 		TooltipModule.forRoot(),

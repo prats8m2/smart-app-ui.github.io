@@ -1,14 +1,15 @@
 export interface MenuItem {
-  id?: number;
-  label?: string;
-  icon?: string;
-  link?: string;
-  subItems?: any;
-  isTitle?: boolean;
-  badge?: any;
-  parentId?: number;
-  isLayout?: boolean;
-  name?: string;
-  createdOn?: any;
-  permission?: string;
+	id?: number;
+	label?: string;
+	icon?: string;
+	link?: string;
+	subItems?: any;
+	isTitle?: boolean;
+	badge?: any;
+	parentId?: number;
+	isLayout?: boolean;
+	name?: string;
+	createdOn?: any;
+	permission?: string;
+	isSelected?: any;
 }

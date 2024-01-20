@@ -7,8 +7,8 @@ import { ListStaffComponent } from './list-staff/list-staff.component';
 import { StaffRoutingModule } from './staff-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -24,6 +24,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		ReactiveFormsModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class StaffModule {}

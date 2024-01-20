@@ -8,11 +8,11 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { StatusPipe } from 'src/app/core/pipes/status.pipe';
 import {
 	NgbDatepickerModule,
 	NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -20,7 +20,6 @@ import {
 		ListCategoryComponent,
 		ViewCategoryComponent,
 		EditCategoryComponent,
-		StatusPipe,
 	],
 	imports: [
 		FormsModule,
@@ -31,6 +30,7 @@ import {
 		NgSelectModule,
 		NgbDatepickerModule,
 		NgbTimepickerModule,
+		SharedModule,
 	],
 })
 export class CategoryModule {}

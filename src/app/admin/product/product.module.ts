@@ -8,6 +8,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 		ProductRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class ProductModule {}

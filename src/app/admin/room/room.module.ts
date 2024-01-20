@@ -7,9 +7,8 @@ import { ViewRoomComponent } from './view-room/view-room.component';
 import { RoomRoutingModule } from './room-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { StatusPipe } from 'src/app/core/pipes/status.pipe';
-import { RoomOccupiedPipe } from 'src/app/core/pipes/roomOccupied.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -17,8 +16,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		EditRoomComponent,
 		ListRoomComponent,
 		ViewRoomComponent,
-		RoomOccupiedPipe,
-		StatusPipe,
 	],
 	imports: [
 		FormsModule,
@@ -27,6 +24,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 		RoomRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class RoomModule {}
