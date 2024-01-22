@@ -68,3 +68,11 @@ export const CATEGORY = {
 	DELETE_CATEGORY: '/category/delete/',
 	UPDATE_CATEGORY: '/category/update',
 };
+
+export const PRODUCT = {
+	LIST_PRODUCT: '/product/list',
+	ADD_PRODUCT: '/product/add',
+	VIEW_PRODUCT: '/product/get/',
+	DELETE_PRODUCT: '/product/delete/',
+	UPDATE_PRODUCT: '/product/update',
+};

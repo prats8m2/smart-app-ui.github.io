@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogService } from 'src/app/core/services/dialog.service';
+import { URL_ROUTES } from 'src/app/constants/routing';
+import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { CategoryService } from '../../category/service/category.service';
 import { SiteService } from '../../site/service/site.service';
-import { IParams } from 'src/app/core/interface/params';
-import { URL_ROUTES } from 'src/app/constants/routing';
+import { ProductService } from '../service/product.service';
 
 @Component({
 	selector: 'app-list-product',
@@ -19,15 +18,12 @@ export class ListProductComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private categoryService: CategoryService,
-		private dialogService: DialogService
+		private productService: ProductService
 	) {}
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
-	showListCategory: boolean =
-		this.globalService.checkForPermission('LIST-CATEGORY');
 	showAddProduct: boolean =
 		this.globalService.checkForPermission('ADD-PRODUCT');
 	showViewProduct: boolean =
@@ -43,19 +39,13 @@ export class ListProductComponent implements OnInit {
 		pageNumber: 1,
 	};
 
-	categoryParams: IParams = {
-		siteId: null,
-		limit: 100,
-		pageNumber: 1,
-	};
-
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
 	};
 
 	productParams: IParams = {
-		categoryId: null,
+		siteId: null,
 		limit: 100,
 		pageNumber: 1,
 	};
@@ -63,14 +53,13 @@ export class ListProductComponent implements OnInit {
 	productList: any = [];
 	productListResp: any = [];
 	sitesList: any = [];
-	categoryList: any = [];
 
+	accountList: any = [];
 	total: number;
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
 
-	accountList: any = [];
 	ngOnInit(): void {
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
@@ -117,8 +106,8 @@ export class ListProductComponent implements OnInit {
 	}
 
 	changeSitesData(siteId: any) {
-		this.categoryParams.siteId = siteId;
-		this.listCategoryAPI(this.categoryParams);
+		this.productParams.siteId = siteId;
+		this.listProductsAPI(this.productParams);
 	}
 
 	listSiteAPI(params: IParams) {
@@ -126,20 +115,7 @@ export class ListProductComponent implements OnInit {
 			if (res.status) {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
-					this.categoryParams.siteId = this.sitesList[0]?.id;
-					this.listCategoryAPI(this.categoryParams);
-				}
-			}
-		});
-	}
-
-	listCategoryAPI(params: IParams) {
-		this.categoryService.listCategory(params).subscribe((res) => {
-			if (res.status) {
-				this.categoryList = [...res.data.categories];
-				if (this.categoryList.length) {
-					this.productParams.categoryId = this.categoryList[0]?.id;
-					//call list products API
+					this.productParams.siteId = this.sitesList[0]?.id;
 					this.listProductsAPI(this.productParams);
 				}
 			}
@@ -147,7 +123,12 @@ export class ListProductComponent implements OnInit {
 	}
 
 	listProductsAPI(params: IParams) {
-		console.log(params);
+		this.productService.listProduct(params).subscribe((res) => {
+			if (res.status) {
+				this.productListResp = [...res.data.products];
+				this.updateDisplayedData();
+			}
+		});
 	}
 
 	routeToAddProduct() {
@@ -163,8 +144,4 @@ export class ListProductComponent implements OnInit {
 	}
 
 	openConfirmDialog(productId: any) {}
-
-	changeProductsData(categoryId: any) {
-		console.log('CALL LIST PRODUCTS API');
-	}
 }

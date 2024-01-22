@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class=" row col-sm-6">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="search-box me-2 mb-2 d-inline-block">
                                     <div class="position-relative">
                                         <input type="search" class="form-control" autocomplete="off" id="searchTableList"
@@ -14,21 +14,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3" *ngIf="showListAccount">
+                            <div class="col-sm-4" *ngIf="showListAccount">
                                 <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
                                     bindLabel="account.name" [clearable]="false" bindValue="account.id"
                                     (change)="changeAccountData($event?.account?.id)"
                                     [placeholder]="'Account'"></ng-select>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
                                     [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
                                     [placeholder]="'Site'"></ng-select>
-                            </div>
-                            <div class="col-sm-3">
-                                <ng-select [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
-                                    [ngModel]="categoryList[0]?.id" (change)="changeProductsData($event?.id)"
-                                    [placeholder]="'Category'"></ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6" *ngIf="showAddProduct">
