@@ -1,1 +1,76 @@
-<p>add-product works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListProduct"
+                (click)="routeToListProduct()"></i>
+            <h4 class="card-title mb-4">Add Product</h4>
+        </div>
+        <form (ngSubmit)="addProduct()" [formGroup]="productForm" class="custom-form">
+            <h6 class="mb-2">Product Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="productName">Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('productName'),'form-success':showSuccess('productName') }"
+                        formControlName="productName">
+                    <div *ngIf="formTouched('productName')">
+                        <div *ngIf="isError('productName','required')" class="text-danger">
+                            {{errorMessage('productName','required')}}
+                        </div>
+                        <div *ngIf="isError('productName','pattern')" class="text-danger">
+                            {{errorMessage('productName','pattern')}} </div>
+                        <div *ngIf="isError('productName','maxlength')" class="text-danger">
+                            {{errorMessage('productName','maxlength')}} </div>
+                        <div *ngIf="isError('productName','minlength')" class="text-danger">
+                            {{errorMessage('productName','minlength')}} </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="productDesc">Description</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('productDesc'),'form-success':showSuccess('productDesc') }"
+                        formControlName="productDesc">
+                    <div *ngIf="formTouched('productDesc')">
+                        <div *ngIf="isError('productDesc','pattern')" class="text-danger">
+                            {{errorMessage('productDesc','pattern')}} </div>
+                        <div *ngIf="isError('productDesc','maxlength')" class="text-danger">
+                            {{errorMessage('productDesc','maxlength')}} </div>
+                        <div *ngIf="isError('productDesc','minlength')" class="text-danger">
+                            {{errorMessage('productDesc','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <div class="col-sm-12" *ngIf="showListAccount">
+                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                            formControlName="account" (change)="changeAccountData($event.account.id)"
+                            [placeholder]="'Account'"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
+                        bindValue="id" formControlName="site" (change)="changeSiteData($event.id)"
+                        [placeholder]="'Site'"> </ng-select>
+                </div>
+            </div>
+
+            <h6 class=" mb-2" *ngIf="showListCategory">Category Details</h6>
+            <!-- Category Name -->
+            <div class="row" *ngIf="showListCategory">
+                <div class="col-md-6 mb-4">
+                    <ng-select [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
+                        [placeholder]="'Category'" [multiple]="true" formControlName="categories"></ng-select>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="productForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

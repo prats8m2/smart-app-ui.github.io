@@ -98,4 +98,17 @@ export const errorMessages = {
 		minlength: 'Category description must be at least 10 character long.',
 		pattern: 'Category name must be alpha numeric with "_" or "-"',
 	},
+
+	productName: {
+		required: 'Product name is required.',
+		maxlength: 'Maximum length exceeded (15 characters maximum).',
+		minlength: 'Product name must be at least 5 character long.',
+		pattern: 'Product name must be alpha numeric with "_" or "-"',
+	},
+
+	productDesc: {
+		maxlength: 'Maximum length exceeded (100 characters maximum).',
+		minlength: 'Product description must be at least 10 character long.',
+		pattern: 'Product name must be alpha numeric with "_" or "-"',
+	},
 };
