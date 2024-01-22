@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import {
 	PRODUCT_DESC_VALIDATION,
@@ -19,6 +24,7 @@ import {
 	isTouched,
 } from 'src/app/core/helpers/form-error';
 import { errorMessages } from 'src/app/core/helpers/form-error-message';
+import { ProductService } from '../service/product.service';
 
 @Component({
 	selector: 'app-add-product',
@@ -54,13 +60,19 @@ export class AddProductComponent implements OnInit {
 		pageNumber: 1,
 	};
 
+	productTypes = [
+		{ id: 1, label: 'Food' },
+		{ id: 2, label: 'Amenities' },
+	];
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private siteServices: SiteService,
-		private categoryService: CategoryService
+		private categoryService: CategoryService,
+		private productService: ProductService
 	) {
 		if (this.isProduction) {
 			this.productForm = this.formBuilder.group({
@@ -69,6 +81,11 @@ export class AddProductComponent implements OnInit {
 				productName: ['', PRODUCT_NAME_VALIDATION],
 				productDesc: [null, PRODUCT_DESC_VALIDATION],
 				categories: [[], Validators.required],
+				productPrice: [null, Validators.required],
+				status: [true],
+				isNew: [true],
+				isSpecial: [true],
+				type: [null, Validators.required],
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -78,6 +95,11 @@ export class AddProductComponent implements OnInit {
 				productName: ['PROD_' + randomNumber, PRODUCT_NAME_VALIDATION],
 				productDesc: [null, PRODUCT_DESC_VALIDATION],
 				categories: [[], Validators.required],
+				productPrice: [null, Validators.required],
+				status: [true],
+				isNew: [true],
+				isSpecial: [true],
+				type: [null, Validators.required],
 			});
 		}
 	}
@@ -96,6 +118,8 @@ export class AddProductComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+		this.productForm.get('status').disable();
+		this.productForm.get('isNew').disable();
 	}
 
 	listSiteAPI(params: IParams) {
@@ -111,7 +135,13 @@ export class AddProductComponent implements OnInit {
 	}
 
 	addProduct() {
-		console.log(this.productForm.value);
+		this.productService.addProduct(this.productForm).then((res) => {
+			if (res.status) {
+				this.router.navigate([URL_ROUTES.LIST_PRODUCT]);
+			} else {
+				console.log('ERROR');
+			}
+		});
 	}
 
 	//form validation function
@@ -153,5 +183,10 @@ export class AddProductComponent implements OnInit {
 				this.categoryList = [...res.data.categories];
 			}
 		});
+	}
+
+	toggle(control): void {
+		const statusControl = this.productForm.get(`${control}`) as FormControl;
+		statusControl.setValue(!statusControl.value);
 	}
 }

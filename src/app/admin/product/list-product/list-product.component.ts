@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { ProductService } from '../service/product.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-product',
@@ -18,7 +19,8 @@ export class ListProductComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private productService: ProductService
+		private productService: ProductService,
+		private dialogService: DialogService
 	) {}
 
 	showListAccount: boolean =
@@ -143,5 +145,16 @@ export class ListProductComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_PRODUCT + '/' + productId);
 	}
 
-	openConfirmDialog(productId: any) {}
+	openConfirmDialog(productId: any) {
+		this.dialogService.openConfirmDialog().then((result) => {
+			if (result.value) {
+				//call delete account API
+				this.productService.deleteProduct(productId).then((res: any) => {
+					if (res.status) {
+						this.listProductsAPI(this.productParams);
+					}
+				});
+			}
+		});
+	}
 }

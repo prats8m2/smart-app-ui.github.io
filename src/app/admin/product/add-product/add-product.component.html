@@ -40,37 +40,99 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-            <div class="row" *ngIf="showListAccount">
+            <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="col-sm-12" *ngIf="showListAccount">
-                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
-                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                            formControlName="account" (change)="changeAccountData($event.account.id)"
-                            [placeholder]="'Account'"></ng-select>
+                    <label for="productPrice">Price</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">₹</span>
+                        </div>
+                        <input type="number" class="form-control custom-number-input"
+                            [ngClass]="{ 'form-error': showError('productPrice'), 'form-success': showSuccess('productPrice') }"
+                            formControlName="productPrice" placeholder="999">
+                    </div>
+                    <div *ngIf="formTouched('productPrice')">
+                        <div *ngIf="isError('productPrice','required')" class="text-danger">
+                            {{ errorMessage('productPrice','required') }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
-            <div class="row" *ngIf="showListSite">
-                <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
-                        bindValue="id" formControlName="site" (change)="changeSiteData($event.id)"
-                        [placeholder]="'Site'"> </ng-select>
+
+                <div class="col-lg-6 mb-4">
+                    <label for="productType">Type</label>
+                    <ng-select [items]="productTypes" bindLabel="label" [clearable]="false" bindValue="id"
+                        formControlName="type" [placeholder]="'Type'"></ng-select>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="productNew">Is New?</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                            (click)="toggle('isNew')" formControlName="isNew"
+                            [checked]="this.productForm.get('isNew').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.productForm.get('isNew').value ?
+                            'Yes' : 'No'}}</label>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="productSpecial">Is Special?</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                            (click)="toggle('isSpecial')" formControlName="isSpecial"
+                            [checked]="this.productForm.get('isSpecial').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.productForm.get('isSpecial').value ?
+                            'Yes' : 'No'}}</label>
+                    </div>
+                
+        </div>
             </div>
 
-            <h6 class=" mb-2" *ngIf="showListCategory">Category Details</h6>
-            <!-- Category Name -->
-            <div class="row" *ngIf="showListCategory">
-                <div class="col-md-6 mb-4">
-                    <ng-select [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
-                        [placeholder]="'Category'" [multiple]="true" formControlName="categories"></ng-select>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="productStatus">Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                            (click)="toggle('status')" formControlName="status"
+                            [checked]="this.productForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.productForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
                 </div>
+        
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="productForm.invalid">Submit</button>
+
+    <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+    <div class="row" *ngIf="showListAccount">
+        <div class="col-md-6 mb-4">
+            <div class="col-sm-12" *ngIf="showListAccount">
+                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList" bindLabel="account.name"
+                    [clearable]="false" bindValue="account.id" formControlName="account"
+                    (change)="changeAccountData($event.account.id)" [placeholder]="'Account'"></ng-select>
             </div>
-        </form>
+        </div>
     </div>
+    <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+    <div class="row" *ngIf="showListSite">
+        <div class="col-md-6 mb-4">
+            <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
+                bindValue="id" formControlName="site" (change)="changeSiteData($event.id)" [placeholder]="'Site'">
+            </ng-select>
+        </div>
+    </div>
+
+    <h6 class=" mb-2" *ngIf="showListCategory">Category Details</h6>
+    <!-- Category Name -->
+    <div class="row" *ngIf="showListCategory">
+        <div class="col-md-6 mb-4">
+            <ng-select [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
+                [placeholder]="'Category'" [multiple]="true" formControlName="categories"></ng-select>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary w-md" [disabled]="productForm.invalid">Submit</button>
+    </div>
+    </form>
+</div>
 </div>

@@ -111,4 +111,8 @@ export const errorMessages = {
 		minlength: 'Product description must be at least 10 character long.',
 		pattern: 'Product name must be alpha numeric with "_" or "-"',
 	},
+
+	productPrice: {
+		required: 'Product price is required.',
+	},
 };
