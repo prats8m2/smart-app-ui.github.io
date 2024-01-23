@@ -68,4 +68,14 @@ export class ProductService {
 				return result;
 			});
 	}
+
+	viewProduct(productId: any) {
+		return this.http
+			.get(PRODUCT.VIEW_PRODUCT + productId)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

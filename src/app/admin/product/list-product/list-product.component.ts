@@ -148,7 +148,7 @@ export class ListProductComponent implements OnInit {
 	openConfirmDialog(productId: any) {
 		this.dialogService.openConfirmDialog().then((result) => {
 			if (result.value) {
-				//call delete account API
+				//call delete product API
 				this.productService.deleteProduct(productId).then((res: any) => {
 					if (res.status) {
 						this.listProductsAPI(this.productParams);

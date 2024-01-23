@@ -1,41 +1,40 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
-        <div class="d-flex align-items-start justify-content-start">
-            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
-                (click)="routeToListCategory()"></i>
-            <h4 class="card-title mb-4">Category Details</h4>
-        </div>
-        <div class="text-end">
-            <button type="button" class="btn btn-success mb-2 me-2" *ngIf="showEditCategory"
-                (click)="routeToEditCategory()">
-                <i class="mdi mdi-pencil mr-1"></i>
-                Edit
-            </button>
-            <button type="button" class="btn btn-danger mb-2 me-2" *ngIf="showDeleteCategory" (click)="deleteCategory()">
-                <i class="mdi mdi-delete mr-1"></i>
-                Delete
-            </button>
-        </div>
+            <div class="d-flex align-items-start justify-content-start">
+                <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
+                    (click)="routeToListCategory()"></i>
+                <h4 class="card-title mb-4">Category Details</h4>
+            </div>
+            <div class="text-end">
+                <button type="button" class="btn btn-success mb-2 me-2" *ngIf="showEditCategory"
+                    (click)="routeToEditCategory()">
+                    <i class="mdi mdi-pencil mr-1"></i>
+                    Edit
+                </button>
+                <button type="button" class="btn btn-danger mb-2 me-2" *ngIf="showDeleteCategory"
+                    (click)="deleteCategory()">
+                    <i class="mdi mdi-delete mr-1"></i>
+                    Delete
+                </button>
+            </div>
         </div>
         <form [formGroup]="categoryForm" class="custom-form">
             <h6 class="mb-2">Category Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="categoryName">Name</label>
-                    <input type="text" class="form-control"
-                        formControlName="categoryName">
+                    <input type="text" class="form-control" formControlName="categoryName">
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="categoryDesc">Description</label>
-                    <input type="text" class="form-control"
-                        formControlName="categoryDesc">
+                    <input type="text" class="form-control" formControlName="categoryDesc">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <label for="siteType">Type</label>
-                        <input type="text" class="form-control" formControlName="type">
+                    <label for="categoryType">Type</label>
+                    <input type="text" class="form-control" formControlName="type">
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="categorySeq">Sequence</label>
@@ -43,132 +42,130 @@
                 </div>
             </div>
             <div formGroupName="scheduleData">
-            <h6 class="mb-2">Schedule Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="siteType">Start Date</label>
-                    <div class="input-group clockpicker">
-                        <input class="form-control" placeholder="Choose start date"
-                            formControlName="startDate"
-                            />
+                <h6 class="mb-2">Schedule Details</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="startDate">Start Date</label>
+                        <div class="input-group clockpicker">
+                            <input class="form-control" placeholder="Choose start date" formControlName="startDate" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="categorySeq">End Date</label>
+                        <div class="input-group clockpicker">
+                            <input class="form-control" placeholder="Choose end date" formControlName="endDate" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <label for="categorySeq">End Date</label>
-                    <div class="input-group clockpicker">
-                        <input class="form-control" placeholder="Choose end date"
-                            formControlName="endDate"
-                            />
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="StartTime">Start Time</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="endTime">End Time</label>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
+                <!--SUNDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forSunday">Sunday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="sunday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="sunday_endTime" />
+                    </div>
                 </div>
-                <div class="col-md-5 mb-4">
-                    <label for="StartTime">Start Time</label>
+                <!--MONDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forMonday">Monday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="monday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="monday_endTime" />
+                    </div>
                 </div>
-                <div class="col-md-5 mb-4">
-                    <label for="endTime">End Time</label>
+                <!--TUESDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forTuesday">Tuesday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="tuesday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="tuesday_endTime" />
+                    </div>
                 </div>
-            </div>
-            <!--SUNDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forSunday">Sunday</label>
+                <!--WEDNESDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forWednesday">Wednesday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="wednesday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="wednesday_endTime" />
+                    </div>
                 </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="sunday_startTime"/>
+                <!--THURSDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forThursday">Thursday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="thursday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="thursday_endTime" />
+                    </div>
                 </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="sunday_endTime"/>
-                </div>
-            </div>
-            <!--MONDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forMonday">Monday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"   formControlName="monday_startTime" />
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="monday_endTime" />
-                </div>
-            </div>
-            <!--TUESDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forTuesday">Tuesday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="tuesday_startTime" />
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="tuesday_endTime" />
-                </div>
-            </div>
-            <!--WEDNESDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forWednesday">Wednesday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="wednesday_startTime" />
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="wednesday_endTime" />
-                </div>
-            </div>
-            <!--THURSDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forThursday">Thursday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="thursday_startTime" />
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="thursday_endTime" />
-                </div>
-            </div>
-            <!--FRIDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forFriday">Friday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="friday_startTime" />
+                <!--FRIDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forFriday">Friday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="friday_startTime" />
 
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="friday_endTime" />
+                    </div>
                 </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="friday_endTime" />
+                <!--SATURDAY-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="forSaturday">Saturday</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="saturday_startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="true" formControlName="saturday_endTime" />
+                    </div>
                 </div>
             </div>
-            <!--SATURDAY-->
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="forSaturday">Saturday</label>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="saturday_startTime" />
-                </div>
-                <div class="col-md-5 mb-4">
-                    <ngb-timepicker [meridian]="true"  formControlName="saturday_endTime" />
-                </div>
-            </div>
-        </div>
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <div class="col-sm-12" *ngIf="showListAccount">
-                            <input type="text" class="form-control" formControlName="account">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" class="form-control" formControlName="account">
                     </div>
                 </div>
             </div>
             <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
+                    <label for="siteName">Site Name</label>
                     <input type="text" class="form-control" formControlName="site">
                 </div>
             </div>

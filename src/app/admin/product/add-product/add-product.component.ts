@@ -135,6 +135,15 @@ export class AddProductComponent implements OnInit {
 	}
 
 	addProduct() {
+		const selectedCategoriesID = this.productForm.get('categories').value;
+
+		const selectedCategoriesObjects = selectedCategoriesID.map(
+			(id: number) => ({
+				id,
+			})
+		);
+		this.productForm.get('categories').patchValue(selectedCategoriesObjects);
+
 		this.productService.addProduct(this.productForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_PRODUCT]);
