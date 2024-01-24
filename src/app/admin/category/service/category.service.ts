@@ -75,9 +75,9 @@ export class CategoryService {
 			});
 	}
 
-	updateCategory(deviceForm: any, siteId: any) {
+	updateCategory(categoryForm: any, siteId: any) {
 		const { id, categoryName, categoryDesc, categorySeq, type, scheduleData } =
-			deviceForm.value;
+			categoryForm.value;
 
 		return this.http
 			.put(CATEGORY.UPDATE_CATEGORY, {

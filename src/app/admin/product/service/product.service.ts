@@ -35,7 +35,7 @@ export class ProductService {
 			});
 	}
 
-	addProduct(categoryForm: FormGroup) {
+	addProduct(productForm: FormGroup) {
 		const {
 			account,
 			site,
@@ -47,7 +47,7 @@ export class ProductService {
 			status,
 			isNew,
 			productPrice,
-		} = categoryForm.getRawValue();
+		} = productForm.getRawValue();
 
 		return this.http
 			.post(PRODUCT.ADD_PRODUCT, {
@@ -72,6 +72,40 @@ export class ProductService {
 	viewProduct(productId: any) {
 		return this.http
 			.get(PRODUCT.VIEW_PRODUCT + productId)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
+	updateProduct(productForm: FormGroup) {
+		const {
+			id,
+			site,
+			productName,
+			productDesc,
+			categories,
+			isSpecial,
+			type,
+			status,
+			isNew,
+			productPrice,
+		} = productForm.getRawValue();
+
+		return this.http
+			.put(PRODUCT.UPDATE_PRODUCT, {
+				id: id,
+				name: productName,
+				description: productDesc,
+				isNew: isNew ? 1 : 0,
+				isSpecial: isSpecial ? 1 : 0,
+				status: status ? 1 : 0,
+				price: productPrice,
+				categories: categories,
+				site: site,
+				type: type,
+			})
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));

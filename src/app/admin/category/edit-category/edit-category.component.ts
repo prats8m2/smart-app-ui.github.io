@@ -18,7 +18,6 @@ import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
-import { SiteService } from '../../site/service/site.service';
 import { CategoryService } from '../service/category.service';
 
 @Component({
