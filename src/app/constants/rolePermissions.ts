@@ -1,0 +1,416 @@
+export const ROLE_PERMISSIONS = [
+	{
+		permissionCategoryId: 1,
+		permissionCategory: 'Account',
+		subLabels: [
+			{
+				permissionId: 1,
+				accessPermissionId: 1,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-ACCOUNT',
+			},
+			{
+				permissionId: 2,
+				accessPermissionId: 2,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-ACCOUNT',
+			},
+			{
+				permissionId: 3,
+				accessPermissionId: 3,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-ACCOUNT',
+			},
+			{
+				permissionId: 4,
+				accessPermissionId: 4,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-ACCOUNT',
+			},
+			{
+				permissionId: 5,
+				accessPermissionId: 5,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-ACCOUNT',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 2,
+		permissionCategory: 'Site',
+		subLabels: [
+			{
+				permissionId: 6,
+				accessPermissionId: 6,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-SITE',
+			},
+			{
+				permissionId: 7,
+				accessPermissionId: 7,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-SITE',
+			},
+			{
+				permissionId: 8,
+				accessPermissionId: 8,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-SITE',
+			},
+			{
+				permissionId: 9,
+				accessPermissionId: 9,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-SITE',
+			},
+			{
+				permissionId: 10,
+				accessPermissionId: 10,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-SITE',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 3,
+		permissionCategory: 'Role',
+		subLabels: [
+			{
+				permissionId: 11,
+				accessPermissionId: 11,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-ROLE',
+			},
+			{
+				permissionId: 12,
+				accessPermissionId: 12,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-ROLE',
+			},
+			{
+				permissionId: 13,
+				accessPermissionId: 13,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-ROLE',
+			},
+			{
+				permissionId: 14,
+				accessPermissionId: 14,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-ROLE',
+			},
+			{
+				permissionId: 15,
+				accessPermissionId: 15,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-ROLE',
+			},
+			{
+				permissionId: 16,
+				accessPermissionId: 16,
+				accessPermissionLabel: 'LIST-PERMISSION',
+				permissionLabel: 'LIST',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 4,
+		permissionCategory: 'Staff',
+		subLabels: [
+			{
+				permissionId: 17,
+				accessPermissionId: 17,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-STAFF',
+			},
+			{
+				permissionId: 18,
+				accessPermissionId: 18,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-STAFF',
+			},
+			{
+				permissionId: 19,
+				accessPermissionId: 19,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-STAFF',
+			},
+			{
+				permissionId: 20,
+				accessPermissionId: 20,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-STAFF',
+			},
+			{
+				permissionId: 21,
+				accessPermissionId: 21,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-STAFF',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 5,
+		permissionCategory: 'Device',
+		subLabels: [
+			{
+				permissionId: 22,
+				accessPermissionId: 22,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-DEVICE',
+			},
+			{
+				permissionId: 23,
+				accessPermissionId: 23,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-DEVICE',
+			},
+			{
+				permissionId: 24,
+				accessPermissionId: 24,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-DEVICE',
+			},
+			{
+				permissionId: 25,
+				accessPermissionId: 25,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-DEVICE',
+			},
+			{
+				permissionId: 26,
+				accessPermissionId: 26,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-DEVICE',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 6,
+		permissionCategory: 'Menu',
+		subLabels: [
+			{
+				permissionId: 27,
+				accessPermissionId: 27,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-MENU',
+			},
+			{
+				permissionId: 28,
+				accessPermissionId: 28,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-MENU',
+			},
+			{
+				permissionId: 29,
+				accessPermissionId: 29,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-MENU',
+			},
+			{
+				permissionId: 30,
+				accessPermissionId: 30,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-MENU',
+			},
+			{
+				permissionId: 31,
+				accessPermissionId: 31,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-MENU',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 7,
+		permissionCategory: 'Room',
+		subLabels: [
+			{
+				permissionId: 32,
+				accessPermissionId: 32,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-ROOM',
+			},
+			{
+				permissionId: 33,
+				accessPermissionId: 33,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-ROOM',
+			},
+			{
+				permissionId: 34,
+				accessPermissionId: 34,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-ROOM',
+			},
+			{
+				permissionId: 35,
+				accessPermissionId: 35,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-ROOM',
+			},
+			{
+				permissionId: 36,
+				accessPermissionId: 36,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-ROOM',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 8,
+		permissionCategory: 'Table',
+		subLabels: [
+			{
+				permissionId: 37,
+				accessPermissionId: 37,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-TABLE',
+			},
+			{
+				permissionId: 38,
+				accessPermissionId: 38,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-TABLE',
+			},
+			{
+				permissionId: 39,
+				accessPermissionId: 39,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-TABLE',
+			},
+			{
+				permissionId: 40,
+				accessPermissionId: 40,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-TABLE',
+			},
+			{
+				permissionId: 41,
+				accessPermissionId: 41,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-TABLE',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 9,
+		permissionCategory: 'Product',
+		subLabels: [
+			{
+				permissionId: 42,
+				accessPermissionId: 42,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-PRODUCT',
+			},
+			{
+				permissionId: 43,
+				accessPermissionId: 43,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-PRODUCT',
+			},
+			{
+				permissionId: 44,
+				accessPermissionId: 44,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-PRODUCT',
+			},
+			{
+				permissionId: 45,
+				accessPermissionId: 45,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-PRODUCT',
+			},
+			{
+				permissionId: 46,
+				accessPermissionId: 46,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-PRODUCT',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 10,
+		permissionCategory: 'Category',
+		subLabels: [
+			{
+				permissionId: 47,
+				accessPermissionId: 47,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-CATEGORY',
+			},
+			{
+				permissionId: 48,
+				accessPermissionId: 48,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-CATEGORY',
+			},
+			{
+				permissionId: 49,
+				accessPermissionId: 49,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-CATEGORY',
+			},
+			{
+				permissionId: 50,
+				accessPermissionId: 50,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-CATEGORY',
+			},
+			{
+				permissionId: 51,
+				accessPermissionId: 51,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-CATEGORY',
+			},
+		],
+	},
+	{
+		permissionCategoryId: 11,
+		permissionCategory: 'Order',
+		subLabels: [
+			{
+				permissionId: 52,
+				accessPermissionId: 52,
+				permissionLabel: 'ADD',
+				accessPermissionLabel: 'ADD-ORDER',
+			},
+			{
+				permissionId: 53,
+				accessPermissionId: 53,
+				permissionLabel: 'UPDATE',
+				accessPermissionLabel: 'UPDATE-ORDER',
+			},
+			{
+				permissionId: 54,
+				accessPermissionId: 54,
+				permissionLabel: 'DELETE',
+				accessPermissionLabel: 'DELETE-ORDER',
+			},
+			{
+				permissionId: 55,
+				accessPermissionId: 55,
+				permissionLabel: 'LIST',
+				accessPermissionLabel: 'LIST-ORDER',
+			},
+			{
+				permissionId: 56,
+				accessPermissionId: 56,
+				permissionLabel: 'VIEW',
+				accessPermissionLabel: 'VIEW-ORDER',
+			},
+			{
+				permissionId: 57,
+				accessPermissionId: 57,
+				permissionLabel: 'UPDATE STATUS',
+				accessPermissionLabel: 'UPDATE-ORDER-STATUS',
+			},
+			{
+				permissionId: 58,
+				accessPermissionId: 58,
+				permissionLabel: 'MARK COMPLETE',
+				accessPermissionLabel: 'MARK-ORDER-COMPLETE',
+			},
+		],
+	},
+];
