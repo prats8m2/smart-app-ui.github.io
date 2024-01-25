@@ -126,6 +126,10 @@ export class AddProductComponent implements OnInit {
 		this.siteServices.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
+				if (this.siteList.length) {
+					this.categoryParams.siteId = this.siteList[0].id;
+					this.listCategoryApi(this.categoryParams);
+				}
 			}
 		});
 	}
