@@ -37,46 +37,16 @@
                 <div class="col-container">
                     <div class="col-md-12 mb-4">
                         <h6>Permissions</h6>
-                        <!-- <div formGroupName="userPermissions" class="row">
-                            <div *ngFor="let key of permissionsData | keys" class="col-md-6 mt-3">
-                                <label for="rolePermissions">{{ key }}</label>
-                                <div formArrayName="{{ key }}">
+                        <div formGroupName="userPermissions" class="row">
+                            <div *ngFor="let key of permissionsCheckBoxData" class="col-md-6 mt-3">
+                                <label for="rolePermissions">{{ key.categoryName }}</label>
+                                <div formArrayName="{{ key.categoryName }}">
                                     <div class="form-check form-check-inline"
-                                        *ngFor="let permission of permissionsData[key]; let i = index">
+                                        *ngFor="let permission of key.subLabels; let i = index">
                                         <input class="form-check-input" type="checkbox"
-                                            [formControl]="getFormControl(key, i)" (change)="onCheckboxChange(key, i)">
-                                        {{ getPermissionLabel(permission.name) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <div formGroupName="userPermissions" *ngFor="let category of permissionsCheckBoxData"
-                            class="category-section">
-                            <h2>{{ category.categoryName }}</h2>
-
-                            <div class="checkbox-column">
-                                <div *ngFor="let permission of category.subLabels; let i = index">
-                                    <div class="checkbox" *ngIf="i % 2 === 0">
-                                        <input type="checkbox" [id]="'permission-' + permission.permissionId"
-                                            [value]="permission.permissionId"
-                                            [formControlName]="'category_' + category.categoryId + '_permission_' + permission.permissionId"
-                                            (change)="onCheckboxChange($event, category.categoryId, permission.permissionId)">
-                                        <label [for]="'permission-' + permission.permissionId">{{
-                                            permission.permissionText }}</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="checkbox-column">
-                                <div *ngFor="let permission of category.subLabels; let i = index">
-                                    <div class="checkbox" *ngIf="i % 2 !== 0">
-                                        <input type="checkbox" [id]="'permission-' + permission.permissionId"
-                                            [value]="permission.permissionId"
-                                            [formControlName]="'category_' + category.categoryId + '_permission_' + permission.permissionId"
-                                            (change)="onCheckboxChange($event, category.categoryId, permission.permissionId)">
-                                        <label [for]="'permission-' + permission.permissionId">{{
-                                            permission.permissionText }}</label>
+                                            (change)="onCheckboxChange(key.categoryName, i)"
+                                            value="{{permission.permissionId}}">
+                                        {{ permission.permissionText }}
                                     </div>
                                 </div>
                             </div>

@@ -92,99 +92,15 @@ export class AddRoleComponent implements OnInit {
 		}
 	}
 
-	initialisePermissions() {
-		this.roleForm.get('userPermissions').setValidators(Validators.required);
-		this.roleForm.get('userPermissions').updateValueAndValidity();
-		Object.keys(this.permissionsData).forEach((key) => {
-			const formArray = this.permissionsData[key].map((permission) => {
-				return this.formBuilder.group({
-					[permission.name]: new FormControl(false),
-					id: permission.id,
-				});
-			});
-
-			(this.roleForm.get('userPermissions') as FormGroup).addControl(
-				key,
-				this.formBuilder.array(formArray)
-			);
-		});
-	}
-
-	getFormControl(category: string, index: number): FormControl {
+	getFormControl(category: string, index: number) {
 		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
 			category
 		) as FormArray;
+
 		const formGroup = formArray.controls[index] as FormGroup;
-		return formGroup.get(Object.keys(formGroup.controls)[0]) as FormControl;
+		console.log(formGroup);
+		return formGroup.get(Object.keys(formGroup)) as FormControl;
 	}
-
-	getPermissionLabel(permissionName: string): string {
-		return permissionName.split('-')[0];
-	}
-
-	// onCheckboxChange(category: string, index: number) {
-	// 	let isCategoryExist = this.categoryDropdowncounter.filter(
-	// 		(x) => x.category === category
-	// 	);
-	// 	if (!isCategoryExist.length) {
-	// 		let obj = {
-	// 			category: category,
-	// 			value: 1,
-	// 		};
-	// 		this.categoryDropdowncounter.push(obj);
-	// 	}
-	// 	const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
-	// 		category
-	// 	) as FormArray;
-	// 	const formGroup = formArray.controls[index] as FormGroup;
-	// 	if (this.getPermissionLabel(Object.keys(formGroup.controls)[0]) != 'LIST') {
-	// 		const checkboxControl = formGroup.get(
-	// 			Object.keys(formGroup.controls)[0]
-	// 		) as FormControl;
-	// 		const listCheckbox: any = formArray.controls.find(
-	// 			(control: FormGroup) => {
-	// 				const permissionName = Object.keys(control.controls)[0];
-	// 				const label = this.getPermissionLabel(permissionName);
-	// 				return label === 'LIST';
-	// 			}
-	// 		);
-	// 		if (isCategoryExist.length) {
-	// 			if (checkboxControl.value) {
-	// 				let selectedCategoryCheckboxs = this.categoryDropdowncounter.filter(
-	// 					(x) => x.category === category
-	// 				);
-	// 				selectedCategoryCheckboxs[0].value =
-	// 					selectedCategoryCheckboxs[0].value + 1;
-	// 			}
-	// 			if (!checkboxControl.value) {
-	// 				let unselectedCategoryCheckboxs = this.categoryDropdowncounter.filter(
-	// 					(x) => x.category === category
-	// 				);
-	// 				unselectedCategoryCheckboxs[0].value =
-	// 					unselectedCategoryCheckboxs[0].value - 1;
-	// 			}
-	// 		}
-	// 		if (checkboxControl.value) {
-	// 			if (listCheckbox) {
-	// 				const listCheckboxControl = listCheckbox.get(
-	// 					Object.keys(listCheckbox.controls)[0]
-	// 				) as FormControl;
-	// 				listCheckbox.disable();
-	// 				listCheckboxControl.setValue(true);
-	// 			}
-	// 		}
-	// 		if (isCategoryExist[0]?.value == 0) {
-	// 			if (listCheckbox) {
-	// 				const listCheckboxControl = listCheckbox.get(
-	// 					Object.keys(listCheckbox.controls)[0]
-	// 				) as FormControl;
-	// 				listCheckbox.enable();
-	// 				listCheckboxControl.setValue(false);
-	// 			}
-	// 			this.roleForm.setErrors({ invalid: true });
-	// 		}
-	// 	}
-	// }
 
 	routeToListRole() {
 		this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
@@ -211,51 +127,53 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	addRole() {
-		const selectedPermissions = {};
-		const transformedPermissionsData: any[] = [];
-		const originalPermissionsData = this.roleForm
-			.get('userPermissions')
-			.getRawValue();
+		// const selectedPermissions = {};
+		// const transformedPermissionsData: any[] = [];
+		// const originalPermissionsData = this.roleForm
+		// 	.get('userPermissions')
+		// 	.getRawValue();
 
-		Object.keys(originalPermissionsData).forEach((key) => {
-			selectedPermissions[key] = this.roleForm.value.userPermissions[key]
-				.filter((permission) => permission[Object.keys(permission)[0]])
-				.map((permission) => permission[Object.keys(permission)[0]]);
-		});
+		// Object.keys(originalPermissionsData).forEach((key) => {
+		// 	selectedPermissions[key] = this.roleForm.value.userPermissions[key]
+		// 		.filter((permission) => permission[Object.keys(permission)[0]])
+		// 		.map((permission) => permission[Object.keys(permission)[0]]);
+		// });
 
-		Object.keys(originalPermissionsData).forEach((category) => {
-			originalPermissionsData[category].forEach(() => {
-				originalPermissionsData[category]
-					.filter((obj) => obj[Object.keys(obj)[0]] === true)
-					.forEach((obj) => {
-						const secondKey = Object.keys(obj)[1];
-						const newObj = {
-							category,
-							id: obj[secondKey],
-						};
-						const exists = transformedPermissionsData.some(
-							(item) =>
-								item.category === newObj.category && item.id === newObj.id
-						);
-						if (!exists) {
-							transformedPermissionsData.push(newObj);
-						}
-					});
-			});
-		});
+		// Object.keys(originalPermissionsData).forEach((category) => {
+		// 	originalPermissionsData[category].forEach(() => {
+		// 		originalPermissionsData[category]
+		// 			.filter((obj) => obj[Object.keys(obj)[0]] === true)
+		// 			.forEach((obj) => {
+		// 				const secondKey = Object.keys(obj)[1];
+		// 				const newObj = {
+		// 					category,
+		// 					id: obj[secondKey],
+		// 				};
+		// 				const exists = transformedPermissionsData.some(
+		// 					(item) =>
+		// 						item.category === newObj.category && item.id === newObj.id
+		// 				);
+		// 				if (!exists) {
+		// 					transformedPermissionsData.push(newObj);
+		// 				}
+		// 			});
+		// 	});
+		// });
 
-		this.roleForm.setControl(
-			'permissions',
-			new FormControl(transformedPermissionsData)
-		);
+		// this.roleForm.setControl(
+		// 	'permissions',
+		// 	new FormControl(transformedPermissionsData)
+		// );
 
-		this.roleService.addRole(this.roleForm).then((res) => {
-			if (res.status) {
-				this.router.navigate([URL_ROUTES.LIST_ROLE]);
-			} else {
-				console.log('error');
-			}
-		});
+		// this.roleService.addRole(this.roleForm).then((res) => {
+		// 	if (res.status) {
+		// 		this.router.navigate([URL_ROUTES.LIST_ROLE]);
+		// 	} else {
+		// 		console.log('error');
+		// 	}
+		// });
+
+		console.log(this.roleForm.value);
 	}
 
 	changeAccountData(accountId: any) {
@@ -300,27 +218,28 @@ export class AddRoleComponent implements OnInit {
 					.flat(),
 			};
 		});
-
 		console.log(this.permissionsCheckBoxData);
+
+		this.roleForm.get('userPermissions').setValidators(Validators.required);
+		this.roleForm.get('userPermissions').updateValueAndValidity();
+		this.permissionsCheckBoxData.forEach((key) => {
+			const formArray = key.subLabels.map((permission) => {
+				return this.formBuilder.group({
+					[permission.permissionText]: new FormControl(false),
+					id: permission.permissionId,
+				});
+			});
+
+			(this.roleForm.get('userPermissions') as FormGroup).addControl(
+				key.categoryName,
+				this.formBuilder.array(formArray)
+			);
+		});
+
+		console.log(this.roleForm.get('userPermissions') as FormGroup);
 	}
 
-	createCheckbox(permission) {
-		return {
-			id: `permission-${permission.permissionId}`,
-			text: permission.permissionText,
-			value: permission.permissionId,
-		};
-	}
-
-	onCheckboxChange(event, categoryId, permissionId) {
-		const userPermissions = this.roleForm.get('userPermissions') as FormGroup;
-
-		if (event.target.checked) {
-			const controlName = `category_${categoryId}_permission_${permissionId}`;
-			userPermissions.addControl(controlName, this.formBuilder.control(true));
-		} else {
-			const controlName = `category_${categoryId}_permission_${permissionId}`;
-			userPermissions.removeControl(controlName);
-		}
+	onCheckboxChange(category: string, permissionId: number) {
+		console.log(category, permissionId);
 	}
 }
