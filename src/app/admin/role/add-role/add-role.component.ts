@@ -76,7 +76,6 @@ export class AddRoleComponent implements OnInit {
 				userPermissions: this.formBuilder.group({}),
 			});
 
-			// this.listPermissionsAPI(this.permissionParams);
 			this.getpermissionsToShow();
 		}
 	}
@@ -90,16 +89,6 @@ export class AddRoleComponent implements OnInit {
 				}
 			});
 		}
-	}
-
-	getFormControl(category: string, index: number) {
-		const formArray = (this.roleForm.get('userPermissions') as FormGroup).get(
-			category
-		) as FormArray;
-
-		const formGroup = formArray.controls[index] as FormGroup;
-		console.log(formGroup);
-		return formGroup.get(Object.keys(formGroup)) as FormControl;
 	}
 
 	routeToListRole() {
@@ -127,52 +116,6 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	addRole() {
-		// const selectedPermissions = {};
-		// const transformedPermissionsData: any[] = [];
-		// const originalPermissionsData = this.roleForm
-		// 	.get('userPermissions')
-		// 	.getRawValue();
-
-		// Object.keys(originalPermissionsData).forEach((key) => {
-		// 	selectedPermissions[key] = this.roleForm.value.userPermissions[key]
-		// 		.filter((permission) => permission[Object.keys(permission)[0]])
-		// 		.map((permission) => permission[Object.keys(permission)[0]]);
-		// });
-
-		// Object.keys(originalPermissionsData).forEach((category) => {
-		// 	originalPermissionsData[category].forEach(() => {
-		// 		originalPermissionsData[category]
-		// 			.filter((obj) => obj[Object.keys(obj)[0]] === true)
-		// 			.forEach((obj) => {
-		// 				const secondKey = Object.keys(obj)[1];
-		// 				const newObj = {
-		// 					category,
-		// 					id: obj[secondKey],
-		// 				};
-		// 				const exists = transformedPermissionsData.some(
-		// 					(item) =>
-		// 						item.category === newObj.category && item.id === newObj.id
-		// 				);
-		// 				if (!exists) {
-		// 					transformedPermissionsData.push(newObj);
-		// 				}
-		// 			});
-		// 	});
-		// });
-
-		// this.roleForm.setControl(
-		// 	'permissions',
-		// 	new FormControl(transformedPermissionsData)
-		// );
-
-		// this.roleService.addRole(this.roleForm).then((res) => {
-		// 	if (res.status) {
-		// 		this.router.navigate([URL_ROUTES.LIST_ROLE]);
-		// 	} else {
-		// 		console.log('error');
-		// 	}
-		// });
-
 		console.log(this.roleForm.value);
 	}
 
@@ -185,8 +128,6 @@ export class AddRoleComponent implements OnInit {
 		this.roleService.listPermissions(params).subscribe((res) => {
 			if (res.status) {
 				this.permissionsData = res.data.permissions;
-				// this.initialisePermissions();
-				console.log(this.permissionsData);
 			}
 		});
 	}
@@ -213,12 +154,13 @@ export class AddRoleComponent implements OnInit {
 						return matchingSubLabels.map((a: any) => ({
 							permissionText: a.permissionLabel,
 							permissionId: a.permissionId,
+							isSelected: false,
+							val: 'val',
 						}));
 					})
 					.flat(),
 			};
 		});
-		console.log(this.permissionsCheckBoxData);
 
 		this.roleForm.get('userPermissions').setValidators(Validators.required);
 		this.roleForm.get('userPermissions').updateValueAndValidity();
@@ -227,6 +169,7 @@ export class AddRoleComponent implements OnInit {
 				return this.formBuilder.group({
 					[permission.permissionText]: new FormControl(false),
 					id: permission.permissionId,
+					val: false,
 				});
 			});
 
@@ -235,11 +178,30 @@ export class AddRoleComponent implements OnInit {
 				this.formBuilder.array(formArray)
 			);
 		});
-
-		console.log(this.roleForm.get('userPermissions') as FormGroup);
 	}
 
-	onCheckboxChange(category: string, permissionId: number) {
-		console.log(category, permissionId);
+	get userPermissions() {
+		return this.roleForm.get('userPermissions') as FormGroup;
+	}
+
+	userPermissionsControls() {
+		let fg = this.roleForm.get('userPermissions') as FormGroup;
+		return Object.keys(fg?.controls) as string[];
+	}
+
+	getFg(formArrayName: string) {
+		let fa = this.userPermissions.get(formArrayName) as FormArray;
+		return fa?.controls as FormGroup[];
+	}
+
+	getKeyName(object: any) {
+		const keys: string[] = Object.keys(object);
+		return keys[0];
+	}
+
+	getSectionName(index: number) {
+		let fg = this.roleForm.get('userPermissions') as FormGroup;
+		let keys = Object.keys(fg?.controls);
+		return keys[index];
 	}
 }
