@@ -76,3 +76,11 @@ export const PRODUCT = {
 	DELETE_PRODUCT: '/product/delete/',
 	UPDATE_PRODUCT: '/product/update',
 };
+
+export const MENU = {
+	LIST_MENU: '/menu/list',
+	ADD_MENU: '/menu/add',
+	VIEW_MENU: '/menu/get/',
+	DELETE_MENU: '/menu/delete/',
+	UPDATE_MENU: '/menu/update',
+};

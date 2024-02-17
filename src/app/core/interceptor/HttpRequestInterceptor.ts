@@ -54,7 +54,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 					this.loadingService.hideLoader();
 					Swal.fire({
 						icon: 'error',
-						title: 'Error',
 						text: 'Some error occurred',
 						toast: true,
 						position: 'top-end',

@@ -25,7 +25,6 @@ export class GlobalService {
 			if (result.status) {
 				Swal.fire({
 					icon: 'success',
-					title: 'Success',
 					text: result.message,
 					toast: true,
 					position: 'top-end',
@@ -38,7 +37,6 @@ export class GlobalService {
 		if (!result.status) {
 			Swal.fire({
 				icon: 'error',
-				title: 'Error',
 				text: result.message,
 				toast: true,
 				position: 'top-end',

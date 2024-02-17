@@ -48,7 +48,7 @@ export const URL_ROUTES = {
 	VIEW_TABLE: 'admin/tables/view-table',
 	LIST_TABLE: 'admin/tables/list-tables',
 
-	//tables
+	//category
 	ADD_CATEGORY: 'admin/categories/add-category',
 	EDIT_CATEGORY: 'admin/categories/edit-category',
 	VIEW_CATEGORY: 'admin/categories/view-category',
@@ -59,4 +59,10 @@ export const URL_ROUTES = {
 	EDIT_PRODUCT: 'admin/products/edit-product',
 	VIEW_PRODUCT: 'admin/products/view-product',
 	LIST_PRODUCT: 'admin/products/list-products',
+
+	//menu
+	ADD_MENU: 'admin/menu/add-menu',
+	EDIT_MENU: 'admin/menu/edit-menu',
+	VIEW_MENU: 'admin/menu/view-menu',
+	LIST_MENU: 'admin/menu/list-menu',
 };

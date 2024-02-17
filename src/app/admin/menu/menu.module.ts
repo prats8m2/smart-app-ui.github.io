@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { MenuRoutingModule } from './menu-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { MenuRoutingModule } from './menu-routing.module';
 		MenuRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		SharedModule,
 	],
 })
 export class MenuModule {}

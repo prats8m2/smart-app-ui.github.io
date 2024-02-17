@@ -74,7 +74,7 @@ export const MENU: MenuItem[] = [
 		id: 11,
 		label: 'Menu',
 		icon: 'bx-food-menu',
-		link: '/admin/menus/list-menus',
+		link: '/admin/menu/list-menus',
 		permission: 'LIST-MENU',
 	},
 	{
