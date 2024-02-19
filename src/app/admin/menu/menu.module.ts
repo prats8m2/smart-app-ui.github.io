@@ -13,6 +13,7 @@ import {
 	NgbDatepickerModule,
 	NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import {
 		SharedModule,
 		NgbDatepickerModule,
 		NgbTimepickerModule,
+		TreeSelectModule,
 	],
 })
 export class MenuModule {}
