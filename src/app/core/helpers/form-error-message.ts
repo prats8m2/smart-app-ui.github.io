@@ -115,4 +115,17 @@ export const errorMessages = {
 	productPrice: {
 		required: 'Product price is required.',
 	},
+
+	menuName: {
+		required: 'Menu name is required.',
+		maxlength: 'Maximum length exceeded (15 characters maximum).',
+		minlength: 'Menu name must be at least 5 character long.',
+		pattern: 'Menu name must be alpha numeric with "_" or "-"',
+	},
+
+	menuDesc: {
+		maxlength: 'Maximum length exceeded (100 characters maximum).',
+		minlength: 'Menu description must be at least 10 character long.',
+		pattern: 'Menu name must be alpha numeric with "_" or "-"',
+	},
 };
