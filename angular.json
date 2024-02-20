@@ -60,9 +60,7 @@
               "src/assets/scss/app.scss",
               "src/assets/scss/icons.scss",
               "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/ngx-toastr/toastr-old.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "./node_modules/ngx-toastr/toastr-old.css"
             ],
             "scripts": []
           },
