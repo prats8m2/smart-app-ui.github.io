@@ -73,11 +73,7 @@ export class AddMenuComponent implements OnInit {
 		{ id: 2, label: 'Amenities' },
 	];
 
-	//--------POC STARTS------------
-	selectedProductCategory: any = [];
 	categoryProductDropdownList: any[] = [];
-
-	//--------------POC ENDS------------
 
 	meridian = true;
 
