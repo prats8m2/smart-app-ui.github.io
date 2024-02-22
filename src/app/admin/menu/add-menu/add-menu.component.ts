@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -22,6 +27,7 @@ import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { CategoryService } from '../../category/service/category.service';
+import { MenuService } from '../service/menu.service';
 
 @Component({
 	selector: 'app-add-menu',
@@ -66,80 +72,8 @@ export class AddMenuComponent implements OnInit {
 	];
 
 	//--------POC STARTS------------
-
-	people: any[] = [
-		{
-			index: 2,
-			name: 'Karyn Wright',
-			gender: 'Female',
-		},
-		{
-			index: 4,
-			name: 'Mendoza Ruiz',
-			gender: 'Male',
-		},
-		{
-			index: 5,
-			name: 'Rosales Russell',
-			gender: 'Male',
-		},
-		{
-			index: 7,
-			name: 'Franklin James',
-			gender: 'Male',
-		},
-		{
-			index: 8,
-			name: 'Elsa Bradley',
-			gender: 'Female',
-		},
-		{
-			index: 9,
-			name: 'Pearson Thompson',
-			gender: 'Male',
-		},
-		{
-			index: 10,
-			name: 'Ina Pugh',
-			gender: 'Female',
-		},
-		{
-			index: 11,
-			name: 'Nguyen Elliott',
-			gender: 'Male',
-		},
-		{
-			index: 12,
-			name: 'Mills Barnett',
-			gender: 'Male',
-		},
-		{
-			index: 13,
-			name: 'Margaret Reynolds',
-			gender: 'Female',
-		},
-		{
-			index: 14,
-			name: 'Yvette Navarro',
-			gender: 'Female',
-		},
-		{
-			index: 15,
-			name: 'Elisa Guzman',
-			gender: 'Female',
-		},
-		{
-			index: 16,
-			name: 'Jodie Bowman',
-			gender: 'Female',
-		},
-		{
-			index: 17,
-			name: 'Diann Booker',
-			gender: 'Female',
-		},
-	];
-	selectedPeople = [];
+	selectedProductCategory: any = [];
+	categoryProductDropdownList: any[] = [];
 
 	//--------------POC ENDS------------
 
@@ -171,7 +105,8 @@ export class AddMenuComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private config: NgbTimepickerConfig,
-		private categortService: CategoryService
+		private categortService: CategoryService,
+		private menuService: MenuService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -188,22 +123,25 @@ export class AddMenuComponent implements OnInit {
 				type: [null, Validators.required],
 				scheduleData: this.formBuilder.group(this.scheduleControls),
 				menuItemsData: [Validators.required],
+				status: [true],
 			});
 		} else {
 			const randomNumber = Math.floor(1000 + Math.random() * 9000);
 			this.menuForm = this.formBuilder.group({
 				account: [null],
 				site: [null, Validators.required],
-				menuName: ['CT_' + randomNumber, CATEGORY_NAME_VALIDATION],
+				menuName: ['MN_' + randomNumber, CATEGORY_NAME_VALIDATION],
 				menuDesc: [null, CATEGORY_DESC_VALIDATION],
 				type: [null, Validators.required],
 				scheduleData: this.formBuilder.group(this.scheduleControls),
 				menuItemsData: [null, Validators.required],
+				status: [true],
 			});
 		}
 	}
 
 	ngOnInit(): void {
+		this.menuForm.get('status').disable();
 		let fg = this.menuForm.get('scheduleData') as FormGroup;
 		fg.get('endDate').disable();
 		if (this.showListAccount) {
@@ -236,6 +174,23 @@ export class AddMenuComponent implements OnInit {
 		this.categortService.listCategory(params).subscribe((res) => {
 			if (res.status) {
 				this.categoriesList = [...res.data.categories];
+				if (this.categoriesList.length) {
+					let categoryProductList: any = [];
+					this.categoriesList.forEach((category: any) => {
+						if (category.products.length) {
+							category.products.forEach((product: any) => {
+								let x = {
+									category: category.id,
+									categoryName: category.name,
+									product: product.id,
+									productName: product.name,
+								};
+								categoryProductList.push(x);
+							});
+						}
+					});
+					this.categoryProductDropdownList = categoryProductList;
+				}
 			}
 		});
 	}
@@ -268,63 +223,69 @@ export class AddMenuComponent implements OnInit {
 	changeAccountData(accountId: any) {
 		this.siteParams.accountId = accountId;
 		this.menuForm.get('account').patchValue(accountId);
+		this.clearProductListData();
 		this.listSiteAPI(this.siteParams);
 	}
 
 	changeSiteData(siteId: any) {
 		this.categoryParams.siteId = siteId;
+		this.clearProductListData();
 		this.listCategoryAPI(this.categoryParams);
 	}
 
+	clearProductListData() {
+		this.categoryProductDropdownList = [];
+		this.menuForm.get('menuItemsData').patchValue([]);
+	}
+
 	addMenu() {
-		console.log(this.menuForm.get('menuItemsData').value);
-		// const scheduleData = this.menuForm.get('scheduleData');
-		// if (scheduleData) {
-		// 	const daysOfWeek = [
-		// 		'sunday',
-		// 		'monday',
-		// 		'tuesday',
-		// 		'wednesday',
-		// 		'thursday',
-		// 		'friday',
-		// 		'saturday',
-		// 	];
-		// 	daysOfWeek.forEach((day) => {
-		// 		scheduleData
-		// 			.get(`${day}_startTime`)
-		// 			?.patchValue(
-		// 				this.convertTimeObjectToString(
-		// 					scheduleData.get(`${day}_startTime`).value
-		// 				)
-		// 			);
-		// 		scheduleData
-		// 			.get(`${day}_endTime`)
-		// 			?.patchValue(
-		// 				this.convertTimeObjectToString(
-		// 					scheduleData.get(`${day}_endTime`).value
-		// 				)
-		// 			);
-		// 	});
-		// 	scheduleData
-		// 		.get('startDate')
-		// 		.patchValue(
-		// 			this.convertDateObjectToString(scheduleData.get('startDate').value)
-		// 		);
-		// 	scheduleData
-		// 		.get('endDate')
-		// 		.patchValue(
-		// 			this.convertDateObjectToString(scheduleData.get('endDate').value)
-		// 		);
-		// }
+		const scheduleData = this.menuForm.get('scheduleData');
+		if (scheduleData) {
+			const daysOfWeek = [
+				'sunday',
+				'monday',
+				'tuesday',
+				'wednesday',
+				'thursday',
+				'friday',
+				'saturday',
+			];
+			daysOfWeek.forEach((day) => {
+				scheduleData
+					.get(`${day}_startTime`)
+					?.patchValue(
+						this.convertTimeObjectToString(
+							scheduleData.get(`${day}_startTime`).value
+						)
+					);
+				scheduleData
+					.get(`${day}_endTime`)
+					?.patchValue(
+						this.convertTimeObjectToString(
+							scheduleData.get(`${day}_endTime`).value
+						)
+					);
+			});
+			scheduleData
+				.get('startDate')
+				.patchValue(
+					this.convertDateObjectToString(scheduleData.get('startDate').value)
+				);
+			scheduleData
+				.get('endDate')
+				.patchValue(
+					this.convertDateObjectToString(scheduleData.get('endDate').value)
+				);
+		}
 
 		//call add catgory API
-		// this.categoryService.addMenu(this.menuForm).then((res) => {
-		// 	if (res.status) {
-		// 		this.router.navigate([URL_ROUTES.LIST_CATEGORY]);
-		// 	} else {
-		// 		console.log('ERROR');
-		// 	}
-		// });
+		this.menuService.addMenu(this.menuForm).then((res) => {
+			if (res.status) {
+				this.router.navigate([URL_ROUTES.LIST_MENU]);
+			} else {
+				console.log('ERROR');
+			}
+		});
 	}
 
 	startDateSellected(event: any) {
@@ -354,17 +315,8 @@ export class AddMenuComponent implements OnInit {
 		return `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
 	}
 
-	onModelChange(selectedItems: any[]) {
-		if (selectedItems.length > 0) {
-			let selectedCategoryAndProduct = selectedItems
-				.map((item) => {
-					const person = this.people.find((i) => i.index === item);
-					return {
-						id: item,
-						cat: person ? person.gender : null,
-					};
-				})
-				.filter((item) => item.cat !== null);
-		}
+	toggle(): void {
+		const statusControl = this.menuForm.get('status') as FormControl;
+		statusControl.setValue(!statusControl.value);
 	}
 }

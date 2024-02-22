@@ -180,6 +180,7 @@ export class AddProductComponent implements OnInit {
 
 	changeAccountData(accountId: any) {
 		this.siteParams.accountId = accountId;
+		this.productForm.get('categories').patchValue([]);
 		this.productForm.get('account').patchValue(accountId);
 		this.listSiteAPI(this.siteParams);
 	}
@@ -187,6 +188,7 @@ export class AddProductComponent implements OnInit {
 	changeSiteData(siteId: any) {
 		//list categories
 		this.categoryParams.siteId = siteId;
+		this.productForm.get('categories').patchValue([]);
 		this.listCategoryApi(this.categoryParams);
 	}
 

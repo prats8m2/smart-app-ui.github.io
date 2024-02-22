@@ -174,12 +174,16 @@ export class AddStaffComponent implements OnInit {
 		this.siteParams.accountId = accountId;
 		this.roleParams.accountId = accountId;
 		this.staffForm.get('account').patchValue(accountId);
+		this.clearSiteData();
 		this.listSiteAPI(this.siteParams);
-		this.listRoleAPI(this.roleParams);
 	}
 
 	changeRoleData(roleId: any) {
 		this.staffForm.get('role').patchValue(roleId);
+	}
+
+	clearSiteData() {
+		this.staffForm.get('site').patchValue([]);
 	}
 
 	addStaff() {

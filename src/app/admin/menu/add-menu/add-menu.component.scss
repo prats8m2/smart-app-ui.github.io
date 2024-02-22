@@ -103,22 +103,3 @@
 .card-body{
   height: calc(100vh - 180px);
 }
-
-.optgroup-header {
-  color: #fff; /* Change to the color you desire */
-}
-
-  .ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup {
-    -webkit-user-select: none;
-    user-select: none;
-    padding: 8px 10px;
-    font-weight: 500;
-    color: rgb(255 255 255 / 54%);
-    cursor: pointer;
-}
-
-.input-box{
-  .ng-select .ng-option input[type="checkbox"] {
-    background-color: #fff;
-  }
-}

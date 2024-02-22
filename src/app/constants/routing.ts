@@ -64,5 +64,5 @@ export const URL_ROUTES = {
 	ADD_MENU: 'admin/menu/add-menu',
 	EDIT_MENU: 'admin/menu/edit-menu',
 	VIEW_MENU: 'admin/menu/view-menu',
-	LIST_MENU: 'admin/menu/list-menu',
+	LIST_MENU: 'admin/menu/list-menus',
 };

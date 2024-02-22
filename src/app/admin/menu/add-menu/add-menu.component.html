@@ -45,6 +45,16 @@
                     <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
                         formControlName="type" [placeholder]="'Type'"></ng-select>
                 </div>
+                <div class="col-md-6 mb-4">
+                    <label for="menuStatus">Status</label>
+                    <div class="form-check form-switch form-switch-lg mb-3">
+                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                            formControlName="status" [checked]="this.menuForm.get('status').value">
+                        <label class="form-check-label" for="SwitchCheckSizelg">{{this.menuForm.get('status').value ?
+                            'Active' : 'In
+                            Active'}}</label>
+                    </div>
+                </div>
             </div>
             <div formGroupName="scheduleData">
                 <h6 class="mb-2">Schedule Details</h6>
@@ -177,7 +187,6 @@
                             [placeholder]="'Account'"></ng-select>
                     </div>
                 </div>
-
             </div>
             <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
             <div class="row" *ngIf="showListSite">
@@ -189,18 +198,17 @@
                 </div>
             </div>
             <h6 class="mb-2">Product Details</h6>
-            <!-- CATEGORY & PRODUCTS-->
-            <!--TREE SELECT-->
-            <div class="col-md-6 mb-4">
-                <label for="siteType">Products</label>
-                <ng-select class="text-color" [items]="people" [multiple]="true" bindLabel="name" groupBy="gender"
-                    [selectableGroup]="true" [selectableGroupAsModel]="false" [closeOnSelect]="false" bindValue="index"
-                    [(ngModel)]="selectedPeople" formControlName="menuItemsData"
-                    (ngModelChange)="onModelChange($event)">
-                </ng-select>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <ng-select class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
+                        bindLabel="productName" groupBy="categoryName" [selectableGroup]="true"
+                        [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData"
+                        [placeholder]="'Select Products'">
+                    </ng-select>
+                </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md">Submit</button>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="menuForm.invalid ">Submit</button>
             </div>
         </form>
     </div>
