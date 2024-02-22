@@ -44,6 +44,8 @@ export class AddMenuComponent implements OnInit {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListMenu: boolean = this.globalService.checkForPermission('LIST-MENU');
+	showListCategory: boolean =
+		this.globalService.checkForPermission('LIST-CATEGORY');
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
