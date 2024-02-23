@@ -173,21 +173,15 @@ export class AddMenuComponent implements OnInit {
 			if (res.status) {
 				this.categoriesList = [...res.data.categories];
 				if (this.categoriesList.length) {
-					let categoryProductList: any = [];
-					this.categoriesList.forEach((category: any) => {
-						if (category.products.length) {
-							category.products.forEach((product: any) => {
-								let x = {
-									category: category.id,
-									categoryName: category.name,
-									product: product.id,
-									productName: product.name,
-								};
-								categoryProductList.push(x);
-							});
-						}
-					});
-					this.categoryProductDropdownList = categoryProductList;
+					this.categoryProductDropdownList = this.categoriesList.flatMap(
+						(category) =>
+							category.products.map((product) => ({
+								category: category.id,
+								categoryName: category.name,
+								product: product.id,
+								productName: product.name,
+							}))
+					);
 				}
 			}
 		});
