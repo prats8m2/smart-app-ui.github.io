@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { URL_ROUTES } from 'src/app/constants/routing';
-import {
-	CATEGORY_NAME_VALIDATION,
-	CATEGORY_DESC_VALIDATION,
-} from 'src/app/constants/validations';
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { CategoryService } from '../service/category.service';
-import { DialogService } from 'src/app/core/services/dialog.service';
-import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-view-category',
