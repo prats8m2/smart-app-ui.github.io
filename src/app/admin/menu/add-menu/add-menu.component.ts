@@ -68,7 +68,7 @@ export class AddMenuComponent implements OnInit {
 	endMinDate: { year: number; month: number; day: number };
 	startDefaultTime: any = { hour: 0, minute: 0, second: 0 };
 	endDefaultTime: any = { hour: 23, minute: 59, second: 6 };
-	categoryTypes = [
+	menuTypes = [
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
 	];

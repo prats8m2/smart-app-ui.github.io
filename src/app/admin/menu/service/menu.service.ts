@@ -72,4 +72,33 @@ export class MenuService {
 				return result;
 			});
 	}
+
+	updateMenu(menuForm: any, siteId: any) {
+		const {
+			id,
+			menuName,
+			menuDesc,
+			type,
+			scheduleData,
+			menuItemsData,
+			status,
+		} = menuForm.value;
+
+		return this.http
+			.put(MENU.UPDATE_MENU, {
+				id: id,
+				name: menuName,
+				type: type,
+				scheduleData: scheduleData,
+				description: menuDesc,
+				site: siteId,
+				menuItemsData: menuItemsData,
+				status: status ? 1 : 0,
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
