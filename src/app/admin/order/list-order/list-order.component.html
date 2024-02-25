@@ -1,1 +1,52 @@
-<p>list-order works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class=" row col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="search-box me-2 mb-2 d-inline-block">
+                                    <div class="position-relative">
+                                        <input type="search" class="form-control" autocomplete="off"
+                                            id="searchTableList" placeholder="Search..." [(ngModel)]="searchInput"
+                                            (input)="onSearch()">
+                                        <i class="bx bx-search-alt search-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="showListAccount">
+                                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                                    bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                                    (change)="changeAccountData($event?.account?.id)"
+                                    [placeholder]="'Account'"></ng-select>
+                            </div>
+                            <div class="col-sm-4">
+                                <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
+                                    [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
+                                    [placeholder]="'Site'"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive mb-0">
+                        <div class="card-row">
+                            <ng-container *ngIf="orderList.length > 0; else noData">
+                                <!--KANBAN TO BE START-->
+                            </ng-container>
+                            <ng-template #noData>
+                                <div class="col-12 text-center mt-5">
+                                    <p>No Data Found</p>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                        <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
+                            (pageChanged)="pageChanged($event)">
+                        </pagination>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
