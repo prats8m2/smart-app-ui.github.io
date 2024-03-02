@@ -1,10 +1,7 @@
 <div id="layout-wrapper">
-
     <app-topbar (settingsButtonClicked)="onSettingsButtonClicked()" (mobileMenuButtonClicked)="onToggleMobileMenu()">
     </app-topbar>
-
     <app-order-sidebar></app-order-sidebar>
-
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -18,6 +15,7 @@
                                         <span
                                             class="avatar-title rounded-circle bg-primary">{{product.discount}}%</span>
                                     </div>
+                                    <img src="{{product.images[0]}}" alt="" class="img-fluid mx-auto d-block">
                                 </div>
                                 <div class="mt-4 d-flex align-items-center">
                                     <div class="flex-grow-1">
@@ -38,5 +36,4 @@
         </div>
     </div>
 </div>
-
 <app-rightsidebar></app-rightsidebar>

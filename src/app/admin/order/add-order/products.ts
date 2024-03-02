@@ -192,18 +192,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-5.png',
-			'assets/images/product/img-5a.png',
-			'assets/images/product/img-5b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'pink',
-				value: 'assets/images/product/img-5b.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'green',
-				value: 'assets/images/product/img-5a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -233,18 +233,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-6.png',
-			'assets/images/product/img-6a.png',
-			'assets/images/product/img-6b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'black',
-				value: 'assets/images/product/img-6.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'yellow',
-				value: 'assets/images/product/img-6a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -441,18 +441,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-5.png',
-			'assets/images/product/img-5a.png',
-			'assets/images/product/img-5b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'pink',
-				value: 'assets/images/product/img-5b.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'green',
-				value: 'assets/images/product/img-5a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -482,18 +482,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-6.png',
-			'assets/images/product/img-6a.png',
-			'assets/images/product/img-6b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'black',
-				value: 'assets/images/product/img-6.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'yellow',
-				value: 'assets/images/product/img-6a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -690,18 +690,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-5.png',
-			'assets/images/product/img-5a.png',
-			'assets/images/product/img-5b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'pink',
-				value: 'assets/images/product/img-5b.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'green',
-				value: 'assets/images/product/img-5a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -731,18 +731,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-6.png',
-			'assets/images/product/img-6a.png',
-			'assets/images/product/img-6b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'black',
-				value: 'assets/images/product/img-6.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'yellow',
-				value: 'assets/images/product/img-6a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -939,18 +939,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-5.png',
-			'assets/images/product/img-5a.png',
-			'assets/images/product/img-5b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'pink',
-				value: 'assets/images/product/img-5b.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'green',
-				value: 'assets/images/product/img-5a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -980,18 +980,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-6.png',
-			'assets/images/product/img-6a.png',
-			'assets/images/product/img-6b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'black',
-				value: 'assets/images/product/img-6.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'yellow',
-				value: 'assets/images/product/img-6a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -1188,18 +1188,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-5.png',
-			'assets/images/product/img-5a.png',
-			'assets/images/product/img-5b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'pink',
-				value: 'assets/images/product/img-5b.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'green',
-				value: 'assets/images/product/img-5a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},
@@ -1229,18 +1229,18 @@ export const productList = [
 			},
 		],
 		images: [
-			'assets/images/product/img-6.png',
-			'assets/images/product/img-6a.png',
-			'assets/images/product/img-6b.png',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
+			'assets/images/users/avatar-3.jpg',
 		],
 		colorVariant: [
 			{
 				key: 'black',
-				value: 'assets/images/product/img-6.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 			{
 				key: 'yellow',
-				value: 'assets/images/product/img-6a.png',
+				value: 'assets/images/users/avatar-3.jpg',
 			},
 		],
 	},

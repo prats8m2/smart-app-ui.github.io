@@ -18,16 +18,35 @@ import { LanguageService } from '../core/services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  // tslint:disable-next-line: max-line-length
-  declarations: [LayoutComponent, SidebarComponent, TopbarComponent, FooterComponent, RightsidebarComponent, HorizontalComponent, VerticalComponent, HorizontaltopbarComponent],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    RouterModule,
-    BsDropdownModule.forRoot(),
-    UIModule,
-    SimplebarAngularModule
-  ],
-  providers: [LanguageService]
+	// tslint:disable-next-line: max-line-length
+	declarations: [
+		LayoutComponent,
+		SidebarComponent,
+		TopbarComponent,
+		FooterComponent,
+		RightsidebarComponent,
+		HorizontalComponent,
+		VerticalComponent,
+		HorizontaltopbarComponent,
+	],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		RouterModule,
+		BsDropdownModule.forRoot(),
+		UIModule,
+		SimplebarAngularModule,
+	],
+	exports: [
+		LayoutComponent,
+		SidebarComponent,
+		TopbarComponent,
+		FooterComponent,
+		RightsidebarComponent,
+		HorizontalComponent,
+		VerticalComponent,
+		HorizontaltopbarComponent,
+	],
+	providers: [LanguageService],
 })
-export class LayoutsModule { }
+export class LayoutsModule {}
