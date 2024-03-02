@@ -7,6 +7,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { MenuService } from '../../menu/service/menu.service';
 import { SiteService } from '../../site/service/site.service';
+import { DndDropEvent } from 'ngx-drag-drop';
 
 @Component({
 	selector: 'app-list-order',
@@ -132,5 +133,23 @@ export class ListOrderComponent implements OnInit {
 				// });
 			}
 		});
+	}
+
+	//KANBAN BOARD CODE
+
+	onDragged(item: any, list: any[]) {
+		const index = list.indexOf(item);
+		list.splice(index, 1);
+	}
+	onDrop(event: DndDropEvent, filteredList?: any[], targetStatus?: string) {
+		if (filteredList && event.dropEffect === 'move') {
+			let index = event.index;
+
+			if (typeof index === 'undefined') {
+				index = filteredList.length;
+			}
+
+			filteredList.splice(index, 0, event.data);
+		}
 	}
 }

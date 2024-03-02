@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { ListOrderComponent } from './list-order/list-order.component';
@@ -7,9 +7,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AddOrderComponent } from './add-order/add-order.component';
+import { DndModule } from 'ngx-drag-drop';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { LayoutsModule } from 'src/app/layouts/layouts.module';
+import { OrderSidebarComponent } from './order-sidebar/order-sidebar.component';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @NgModule({
-	declarations: [ViewOrderComponent, ListOrderComponent, AddOrderComponent],
+	declarations: [
+		ViewOrderComponent,
+		ListOrderComponent,
+		AddOrderComponent,
+		OrderSidebarComponent,
+	],
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,
@@ -17,6 +27,10 @@ import { AddOrderComponent } from './add-order/add-order.component';
 		OrderRoutingModule,
 		PaginationModule.forRoot(),
 		NgSelectModule,
+		DndModule,
+		CKEditorModule,
+		LayoutsModule,
+		SimplebarAngularModule,
 	],
 })
 export class OrderModule {}
