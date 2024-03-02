@@ -22,6 +22,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { RoomService } from '../../room/services/room.service';
 import { DeviceService } from '../service/device.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-device',
@@ -62,7 +63,8 @@ export class AddDeviceComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private roomService: RoomService,
-		private deviceService: DeviceService
+		private deviceService: DeviceService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.deviceForm = this.formBuilder.group({
@@ -125,7 +127,15 @@ export class AddDeviceComponent implements OnInit {
 	}
 
 	routeToListDevice() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+		if (!this.deviceForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+				}
+			});
+		}
 	}
 
 	//form validation function

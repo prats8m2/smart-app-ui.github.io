@@ -29,6 +29,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { RoleService } from '../../role/service/role.service';
 import { SiteService } from '../../site/service/site.service';
 import { StaffService } from '../service/staff.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-staff',
@@ -76,7 +77,8 @@ export class EditStaffComponent implements OnInit {
 		private siteServices: SiteService,
 		private roleService: RoleService,
 		private staffService: StaffService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.staffForm = this.formBuilder.group({
@@ -165,7 +167,15 @@ export class EditStaffComponent implements OnInit {
 	}
 
 	routeToListStaff() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+		if (!this.staffForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+				}
+			});
+		}
 	}
 
 	//form validation function

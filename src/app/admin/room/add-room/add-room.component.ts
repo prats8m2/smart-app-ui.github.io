@@ -22,6 +22,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { DeviceService } from '../../device/service/device.service';
 import { RoomService } from '../services/room.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-room',
@@ -70,7 +71,8 @@ export class AddRoomComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private deviceService: DeviceService,
-		private roomService: RoomService
+		private roomService: RoomService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.roomForm = this.formBuilder.group({
@@ -120,7 +122,15 @@ export class AddRoomComponent implements OnInit {
 	}
 
 	routeToListRoom() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+		if (!this.roomForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+				}
+			});
+		}
 	}
 
 	//form validation function

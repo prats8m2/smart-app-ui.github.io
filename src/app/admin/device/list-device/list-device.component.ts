@@ -144,8 +144,8 @@ export class ListDeviceComponent implements OnInit {
 		});
 	}
 
-	openConfirmDialog(deviceId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(deviceId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete device API
 				this.deviceService.deleteDevice(deviceId).then((res: any) => {

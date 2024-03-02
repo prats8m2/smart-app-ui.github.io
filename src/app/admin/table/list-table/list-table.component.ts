@@ -155,8 +155,8 @@ export class ListTableComponent implements OnInit {
 		});
 	}
 
-	openConfirmDialog(tableId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(tableId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				this.tableService.deleteTable(tableId).then((res: any) => {
 					if (res.status) {

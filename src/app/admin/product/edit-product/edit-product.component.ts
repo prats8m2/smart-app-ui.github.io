@@ -25,6 +25,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { CategoryService } from '../../category/service/category.service';
 import { SiteService } from '../../site/service/site.service';
 import { ProductService } from '../service/product.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-product',
@@ -72,7 +73,8 @@ export class EditProductComponent implements OnInit {
 		private siteServices: SiteService,
 		private categoryService: CategoryService,
 		private productService: ProductService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.productForm = this.formBuilder.group({
@@ -151,7 +153,15 @@ export class EditProductComponent implements OnInit {
 	}
 
 	routeToListProduct() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+		if (!this.productForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+				}
+			});
+		}
 	}
 
 	updateProduct() {

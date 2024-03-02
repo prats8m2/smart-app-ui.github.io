@@ -155,8 +155,8 @@ export class ListStaffComponent implements OnInit {
 		});
 	}
 
-	openConfirmDialog(deviceId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(deviceId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete device API
 				this.staffService.deleteStaff(deviceId).then((res: any) => {

@@ -145,8 +145,8 @@ export class ListCategoryComponent implements OnInit {
 		});
 	}
 
-	openConfirmDialog(categoryId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(categoryId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete device API
 				this.categoryService.deleteCategory(categoryId).then((res: any) => {

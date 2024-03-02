@@ -19,6 +19,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { CategoryService } from '../service/category.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-category',
@@ -87,7 +88,8 @@ export class EditCategoryComponent implements OnInit {
 		public accountService: AccountService,
 		private config: NgbTimepickerConfig,
 		private categoryService: CategoryService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -126,7 +128,15 @@ export class EditCategoryComponent implements OnInit {
 	}
 
 	routeToListCategory() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
+		if (!this.categoryForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+				}
+			});
+		}
 	}
 
 	//form validation function

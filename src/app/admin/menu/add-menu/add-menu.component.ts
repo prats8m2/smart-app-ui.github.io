@@ -28,6 +28,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { CategoryService } from '../../category/service/category.service';
 import { MenuService } from '../service/menu.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-menu',
@@ -104,7 +105,8 @@ export class AddMenuComponent implements OnInit {
 		private siteServices: SiteService,
 		private config: NgbTimepickerConfig,
 		private categortService: CategoryService,
-		private menuService: MenuService
+		private menuService: MenuService,
+		private dialogService: DialogService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -188,7 +190,15 @@ export class AddMenuComponent implements OnInit {
 	}
 
 	routeToListMenu() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+		if (!this.menuForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+				}
+			});
+		}
 	}
 
 	//form validation function

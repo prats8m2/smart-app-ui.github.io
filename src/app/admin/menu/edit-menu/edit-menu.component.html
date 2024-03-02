@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-start">
-            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
-                (click)="routeToListCategory()"></i>
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListMenu" (click)="routeToListMenu()"></i>
             <h4 class="card-title mb-4">Edit Menu</h4>
         </div>
         <form (ngSubmit)="updateCategory()" [formGroup]="menuForm" class="custom-form">
@@ -192,9 +191,9 @@
                     <input type="text" class="form-control" formControlName="site">
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListCategory">Product Details</h6>
+            <h6 class="mb-2" *ngIf="showListMenu">Product Details</h6>
             <div class="row">
-                <div class="col-md-6 mb-4" *ngIf="showListCategory">
+                <div class="col-md-6 mb-4" *ngIf="showListMenu">
                     <ng-select class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
                         bindLabel="productName" groupBy="menuName" [selectableGroup]="true"
                         [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData"

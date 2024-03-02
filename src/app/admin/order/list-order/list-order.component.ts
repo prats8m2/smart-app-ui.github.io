@@ -117,8 +117,8 @@ export class ListOrderComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.VIEW_MENU + '/' + orderId);
 	}
 
-	openConfirmDialog(orderId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(orderId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete order API
 				// this.menuService.deleteMenu(orderId).then((res: any) => {

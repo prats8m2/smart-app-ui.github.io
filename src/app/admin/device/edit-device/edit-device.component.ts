@@ -22,6 +22,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { RoomService } from '../../room/services/room.service';
 import { SiteService } from '../../site/service/site.service';
 import { DeviceService } from '../service/device.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-device',
@@ -63,7 +64,8 @@ export class EditDeviceComponent implements OnInit {
 		private siteServices: SiteService,
 		private roomService: RoomService,
 		private deviceService: DeviceService,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.deviceForm = this.formBuilder.group({
@@ -110,7 +112,15 @@ export class EditDeviceComponent implements OnInit {
 	}
 
 	routeToListDevice() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+		if (!this.deviceForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+				}
+			});
+		}
 	}
 
 	isError(formControlName: string, errorType: string): boolean {

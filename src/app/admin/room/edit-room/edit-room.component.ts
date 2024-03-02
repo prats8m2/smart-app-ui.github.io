@@ -139,32 +139,15 @@ export class EditRoomComponent implements OnInit {
 	}
 
 	routeToListRoom() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
-	}
-
-	deleteRoom() {
-		let roomId: any;
-		this.activatedRoute.params.subscribe((params) => {
-			roomId = params['id'];
-		});
-		this.dialogService.openConfirmDialog().then((result) => {
-			if (result.value) {
-				//call delete site API
-				this.roomService.deleteRoom(roomId).then((res: any) => {
-					if (res.status) {
-						this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
-					}
-				});
-			}
-		});
-	}
-
-	routeToEditRoom() {
-		let roomId: any;
-		this.activatedRoute.params.subscribe((params) => {
-			roomId = params['id'];
-		});
-		this.router.navigateByUrl(URL_ROUTES.EDIT_ROOM + '/' + roomId);
+		if (!this.roomForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+				}
+			});
+		}
 	}
 
 	listDeviceAPI(siteId: any) {

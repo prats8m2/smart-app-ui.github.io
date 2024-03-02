@@ -26,6 +26,7 @@ import { DeviceService } from '../../device/service/device.service';
 import { RoomService } from '../../room/services/room.service';
 import { SiteService } from '../../site/service/site.service';
 import { TableService } from '../services/table.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-table',
@@ -74,7 +75,8 @@ export class AddTableComponent implements OnInit {
 		private siteServices: SiteService,
 		private deviceService: DeviceService,
 		private roomService: RoomService,
-		private tableService: TableService
+		private tableService: TableService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.tableForm = this.formBuilder.group({
@@ -122,7 +124,15 @@ export class AddTableComponent implements OnInit {
 	}
 
 	routeToListTable() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+		if (!this.tableForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+				}
+			});
+		}
 	}
 
 	//form validation function

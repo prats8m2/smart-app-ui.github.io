@@ -128,7 +128,7 @@ export class ViewRoleComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			roleId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				this.roleService.deleteRole(roleId).then((res: any) => {
 					if (res.status) {

@@ -20,6 +20,7 @@ import { AccountService } from '../service/account.service';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from '../../../constants/routing';
 import { environment } from 'src/environments/environment';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-account',
@@ -33,7 +34,8 @@ export class AddAccountComponent {
 	constructor(
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
-		private router: Router
+		private router: Router,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.userForm = this.formBuilder.group({
@@ -96,7 +98,15 @@ export class AddAccountComponent {
 	}
 
 	routeToListAccount() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+		if (!this.userForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+				}
+			});
+		}
 	}
 
 	toggle(): void {

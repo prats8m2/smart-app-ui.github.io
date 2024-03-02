@@ -100,8 +100,8 @@ export class ListAccountsComponent {
 		this.updateDisplayedData();
 	}
 
-	openConfirmDialog(accountId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(accountId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete account API
 				this.accountService.deleteAccount(accountId).then((res: any) => {

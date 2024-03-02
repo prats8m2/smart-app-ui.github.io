@@ -19,6 +19,7 @@ import { errorMessages } from '../../../core/helpers/form-error-message';
 import { AccountService } from '../service/account.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_ROUTES } from '../../../constants/routing';
+import { DialogService } from 'src/app/core/services/dialog.service';
 @Component({
 	selector: 'app-edit-account',
 	templateUrl: './edit-account.component.html',
@@ -29,7 +30,8 @@ export class EditAccountComponent {
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private router: Router,
-		private activatedRoute: ActivatedRoute
+		private activatedRoute: ActivatedRoute,
+		private dialogService: DialogService
 	) {}
 	public userForm: FormGroup = this.formBuilder.group({
 		id: [''],
@@ -93,7 +95,15 @@ export class EditAccountComponent {
 	}
 
 	routeToListAccount() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+		if (!this.userForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+				}
+			});
+		}
 	}
 
 	toggle(): void {

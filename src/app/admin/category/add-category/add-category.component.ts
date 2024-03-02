@@ -20,6 +20,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../service/category.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-category',
@@ -85,7 +86,8 @@ export class AddCategoryComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private config: NgbTimepickerConfig,
-		private categoryService: CategoryService
+		private categoryService: CategoryService,
+		private dialogService: DialogService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -143,7 +145,15 @@ export class AddCategoryComponent implements OnInit {
 	}
 
 	routeToListCategory() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
+		if (!this.categoryForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+				}
+			});
+		}
 	}
 
 	//form validation function

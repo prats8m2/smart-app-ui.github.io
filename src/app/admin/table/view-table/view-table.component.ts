@@ -76,7 +76,7 @@ export class ViewTableComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			tableId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete table API
 				this.tableService.deleteTable(tableId).then((res: any) => {

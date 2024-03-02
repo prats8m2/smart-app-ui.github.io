@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export class DialogService {
 	constructor() {}
 
-	openConfirmDialog() {
+	openDeleteConfirmDialog() {
 		const result = Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert!",
@@ -16,6 +16,21 @@ export class DialogService {
 			confirmButtonColor: '#34c38f',
 			cancelButtonColor: '#f46a6a',
 			confirmButtonText: 'Yes, delete!',
+			allowOutsideClick: false,
+			showCloseButton: true,
+		});
+		return result;
+	}
+
+	openBackConfirmDialog() {
+		const result = Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#34c38f',
+			cancelButtonColor: '#f46a6a',
+			confirmButtonText: 'Yes',
 			allowOutsideClick: false,
 			showCloseButton: true,
 		});

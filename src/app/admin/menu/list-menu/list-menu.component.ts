@@ -143,8 +143,8 @@ export class ListMenuComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_MENU + '/' + menuId);
 	}
 
-	openConfirmDialog(menuId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(menuId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete menu API
 				this.menuService.deleteMenu(menuId).then((res: any) => {

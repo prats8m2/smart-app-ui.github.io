@@ -81,7 +81,7 @@ export class ViewRoomComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			roomId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete site API
 				this.roomService.deleteRoom(roomId).then((res: any) => {

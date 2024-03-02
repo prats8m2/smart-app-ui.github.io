@@ -25,6 +25,7 @@ import {
 } from 'src/app/core/helpers/form-error';
 import { errorMessages } from 'src/app/core/helpers/form-error-message';
 import { ProductService } from '../service/product.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-product',
@@ -72,7 +73,8 @@ export class AddProductComponent implements OnInit {
 		public accountService: AccountService,
 		private siteServices: SiteService,
 		private categoryService: CategoryService,
-		private productService: ProductService
+		private productService: ProductService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.productForm = this.formBuilder.group({
@@ -135,7 +137,15 @@ export class AddProductComponent implements OnInit {
 	}
 
 	routeToListProduct() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+		if (!this.productForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+				}
+			});
+		}
 	}
 
 	addProduct() {

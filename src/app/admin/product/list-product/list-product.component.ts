@@ -145,8 +145,8 @@ export class ListProductComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.EDIT_PRODUCT + '/' + productId);
 	}
 
-	openConfirmDialog(productId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(productId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete product API
 				this.productService.deleteProduct(productId).then((res: any) => {

@@ -132,7 +132,15 @@ export class EditTableComponent implements OnInit {
 	}
 
 	routeToListTable() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+		if (!this.tableForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+				}
+			});
+		}
 	}
 
 	listDeviceAPI(siteId: any) {

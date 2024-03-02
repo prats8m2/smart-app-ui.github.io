@@ -86,7 +86,7 @@ export class ViewAccountComponent {
 		this.activatedRoute.params.subscribe((params) => {
 			accountId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete account API
 				this.accountService.deleteAccount(accountId).then((res: any) => {

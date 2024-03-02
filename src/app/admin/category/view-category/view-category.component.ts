@@ -106,7 +106,7 @@ export class ViewCategoryComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			categoryId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete category API
 				this.categoryService.deleteCategory(categoryId).then((res: any) => {

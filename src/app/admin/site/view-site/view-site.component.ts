@@ -118,7 +118,7 @@ export class ViewSiteComponent {
 		this.activatedRoute.params.subscribe((params) => {
 			siteId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete site API
 				this.siteService.deleteSite(siteId).then((res: any) => {

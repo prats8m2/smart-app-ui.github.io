@@ -114,7 +114,7 @@ export class ViewMenuComponent implements OnInit {
 		this.activatedRoute.params.subscribe((params) => {
 			menuId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete category API
 				this.menuService.deleteMenu(menuId).then((res: any) => {

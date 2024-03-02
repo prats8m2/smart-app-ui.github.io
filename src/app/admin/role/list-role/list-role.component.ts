@@ -112,8 +112,8 @@ export class ListRoleComponent {
 		});
 	}
 
-	openConfirmDialog(roleId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(roleId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete role API
 				this.roleService.deleteRole(roleId).then((res: any) => {

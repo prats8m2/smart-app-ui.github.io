@@ -25,6 +25,7 @@ import {
 } from 'src/app/constants/validations';
 import { IParams } from 'src/app/core/interface/params';
 import { RoleService } from '../service/role.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-role',
@@ -54,7 +55,8 @@ export class AddRoleComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		public accountService: AccountService,
-		private roleService: RoleService
+		private roleService: RoleService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.roleForm = this.formBuilder.group({
@@ -180,7 +182,15 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	routeToListRole() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+		if (!this.roleForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+				}
+			});
+		}
 	}
 
 	isError(formControlName: string, errorType: string): boolean {

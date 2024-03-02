@@ -76,7 +76,7 @@ export class ViewDeviceComponent {
 		this.activatedRoute.params.subscribe((params) => {
 			deviceId = params['id'];
 		});
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete site API
 				this.deviceService.deleteDevice(deviceId).then((res: any) => {

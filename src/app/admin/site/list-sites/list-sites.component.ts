@@ -115,8 +115,8 @@ export class ListSitesComponent {
 			}
 		});
 	}
-	openConfirmDialog(siteId: any) {
-		this.dialogService.openConfirmDialog().then((result) => {
+	openDeleteConfirmDialog(siteId: any) {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete site API
 				this.siteServices.deleteSite(siteId).then((res: any) => {

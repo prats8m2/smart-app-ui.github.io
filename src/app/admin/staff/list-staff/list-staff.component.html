@@ -8,8 +8,9 @@
                             <div class="col-sm-4">
                                 <div class="search-box me-2 mb-2 d-inline-block">
                                     <div class="position-relative">
-                                        <input type="search" class="form-control" autocomplete="off" id="searchTableList"
-                                            placeholder="Search..." [(ngModel)]="searchInput" (input)="onSearch()">
+                                        <input type="search" class="form-control" autocomplete="off"
+                                            id="searchTableList" placeholder="Search..." [(ngModel)]="searchInput"
+                                            (input)="onSearch()">
                                         <i class="bx bx-search-alt search-icon"></i>
                                     </div>
                                 </div>
@@ -28,8 +29,8 @@
                         </div>
                         <div class="col-sm-6" *ngIf="showAddStaff">
                             <div class="text-sm-end">
-                                <button type="button" class="btn btn-primary mb-2 me-2"
-                                    (click)="routeToAddStaff()"><i class="mdi mdi-plus mr-1"></i>
+                                <button type="button" class="btn btn-primary mb-2 me-2" (click)="routeToAddStaff()"><i
+                                        class="mdi mdi-plus mr-1"></i>
                                     Add Staff</button>
                             </div>
                         </div>
@@ -68,7 +69,7 @@
                                             <span class="text-success pointer" *ngIf="showEditStaff"><i
                                                     class="mdi mdi-pencil font-size-18"
                                                     (click)="routeToEditStaff(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="openConfirmDialog(data.id)"
+                                            <span class="text-danger pointer" (click)="openDeleteConfirmDialog(data.id)"
                                                 *ngIf="showDeleteStaff"><i
                                                     class="mdi mdi-delete font-size-18"></i></span>
                                         </div>

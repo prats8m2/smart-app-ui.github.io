@@ -6,6 +6,7 @@ import { ROLE_NAME_VALIDATION } from 'src/app/constants/validations';
 import { IParams } from 'src/app/core/interface/params';
 import { AccountService } from '../../accounts/service/account.service';
 import { RoleService } from '../service/role.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-role',
@@ -36,7 +37,8 @@ export class EditRoleComponent implements OnInit {
 		private router: Router,
 		public accountService: AccountService,
 		private activatedRoute: ActivatedRoute,
-		private roleService: RoleService
+		private roleService: RoleService,
+		private dialogService: DialogService
 	) {}
 	ngOnInit(): void {
 		this.getRole();
@@ -44,7 +46,15 @@ export class EditRoleComponent implements OnInit {
 	}
 
 	routeToListRole() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+		if (!this.roleForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+				}
+			});
+		}
 	}
 
 	getRole() {

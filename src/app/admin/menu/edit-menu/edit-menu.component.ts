@@ -25,6 +25,7 @@ import { environment } from 'src/environments/environment';
 import { AccountService } from '../../accounts/service/account.service';
 import { CategoryService } from '../../category/service/category.service';
 import { MenuService } from '../service/menu.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-edit-menu',
@@ -39,8 +40,7 @@ export class EditMenuComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
-	showListCategory: boolean =
-		this.globalService.checkForPermission('LIST-CATEGORY');
+	showListMenu: boolean = this.globalService.checkForPermission('LIST-MENU');
 
 	accountParams: IParams = {
 		limit: 100,
@@ -103,7 +103,8 @@ export class EditMenuComponent implements OnInit {
 		private categoryService: CategoryService,
 		private activatedRoute: ActivatedRoute,
 		private menuService: MenuService,
-		private categortService: CategoryService
+		private categortService: CategoryService,
+		private dialogService: DialogService
 	) {
 		this.config.spinners = false;
 		this.startMinDate = {
@@ -143,8 +144,16 @@ export class EditMenuComponent implements OnInit {
 		this.getCategory();
 	}
 
-	routeToListCategory() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+	routeToListMenu() {
+		if (!this.menuForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+				}
+			});
+		}
 	}
 
 	//form validation function

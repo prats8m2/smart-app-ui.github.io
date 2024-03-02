@@ -91,7 +91,7 @@ export class ViewProductComponent implements OnInit {
 	}
 
 	deleteProduct() {
-		this.dialogService.openConfirmDialog().then((result) => {
+		this.dialogService.openDeleteConfirmDialog().then((result) => {
 			if (result.value) {
 				//call delete product API
 				this.productService.deleteProduct(this.productId).then((res: any) => {

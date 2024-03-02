@@ -21,6 +21,7 @@ import { SiteService } from '../service/site.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { IParams } from 'src/app/core/interface/params';
 import { environment } from 'src/environments/environment';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-add-site',
@@ -41,7 +42,8 @@ export class AddSiteComponent {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteService: SiteService,
-		public accountService: AccountService
+		public accountService: AccountService,
+		private dialogService: DialogService
 	) {
 		if (this.isProduction) {
 			this.siteForm = this.formBuilder.group({
@@ -127,7 +129,15 @@ export class AddSiteComponent {
 	}
 
 	routeToListSite() {
-		this.router.navigateByUrl(URL_ROUTES.LIST_SITE);
+		if (!this.siteForm.dirty) {
+			this.router.navigateByUrl(URL_ROUTES.LIST_SITE);
+		} else {
+			this.dialogService.openBackConfirmDialog().then((result) => {
+				if (result.value) {
+					this.router.navigateByUrl(URL_ROUTES.LIST_SITE);
+				}
+			});
+		}
 	}
 
 	get formData(): FormArray {
