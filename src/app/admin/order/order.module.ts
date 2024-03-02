@@ -6,9 +6,10 @@ import { OrderRoutingModule } from './order-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { AddOrderComponent } from './add-order/add-order.component';
 
 @NgModule({
-	declarations: [ViewOrderComponent, ListOrderComponent],
+	declarations: [ViewOrderComponent, ListOrderComponent, AddOrderComponent],
 	imports: [
 		FormsModule,
 		ReactiveFormsModule,

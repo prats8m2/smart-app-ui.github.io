@@ -69,4 +69,5 @@ export const URL_ROUTES = {
 	//order
 	VIEW_ORDER: 'admin/orders/view-order',
 	LIST_ORDER: 'admin/orders/list-orders',
+	ADD_ORDER: 'admin/orders/add-order',
 };
