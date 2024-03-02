@@ -7,12 +7,35 @@
 
     <div class="main-content">
         <div class="page-content">
-            <!-- content -->
-            <router-outlet></router-outlet>
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Show List Of Products -->
+                    <div class="col-lg-4" *ngFor="let product of products">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="product-img position-relative">
+                                    <div class="avatar-sm product-ribbon" *ngIf="product.discount">
+                                        <span
+                                            class="avatar-title rounded-circle bg-primary">{{product.discount}}%</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-1 text-truncate"><a href="javascript:void(0);"
+                                                class="text-dark">{{product.name}}</a></h5>
+                                        <div class="badge bg-success font-size-11"><i
+                                                class="bx bxs-star me-1"></i>{{product.ratings}}</div>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <h5 class="my-0"><b>${{product.oriRate}}</b></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- footer -->
-        <app-footer></app-footer>
     </div>
 </div>
 

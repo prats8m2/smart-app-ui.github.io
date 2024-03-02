@@ -33,6 +33,7 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 	@ViewChild('sideMenu') sideMenu: ElementRef;
 
 	constructor(private router: Router, private globalService: GlobalService) {
+		document.body.setAttribute('data-bs-theme', 'dark');
 		router.events.forEach((event) => {
 			if (event instanceof NavigationEnd) {
 				this._activateMenuDropdown();
@@ -42,7 +43,6 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 	}
 
 	ngOnInit() {
-		console.log('HI');
 		this.initialize();
 		this._scrollElement();
 	}
