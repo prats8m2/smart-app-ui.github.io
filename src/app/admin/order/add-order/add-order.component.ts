@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LAYOUT_VERTICAL } from 'src/app/layouts/layouts.model';
 import { productList } from './products';
+import { OrderService } from '../service/order.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -10,12 +11,10 @@ import { productList } from './products';
 export class AddOrderComponent implements OnInit {
 	isCondensed = false;
 	public products = [];
-	productTypes = [
-		{ id: 1, label: 'Food' },
-		{ id: 2, label: 'Amenities' },
-	];
 
-	constructor() {
+	categoryProductList: any[] = [];
+
+	constructor(private orderService: OrderService) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
 
@@ -37,6 +36,11 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		let x: any = [];
+		this.orderService.productsDetails.subscribe((res) => {
+			this.categoryProductList = res;
+		});
+		console.log(this.categoryProductList);
 		this.products = Object.assign([], productList);
 	}
 }

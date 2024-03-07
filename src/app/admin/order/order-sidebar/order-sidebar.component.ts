@@ -15,6 +15,7 @@ import { MenuItem } from 'src/app/layouts/sidebar/menu.model';
 import { AccountService } from '../../accounts/service/account.service';
 import { CategoryService } from '../../category/service/category.service';
 import { SiteService } from '../../site/service/site.service';
+import { OrderService } from '../service/order.service';
 
 @Component({
 	selector: 'app-order-sidebar',
@@ -63,7 +64,8 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		private globalService: GlobalService,
 		private siteServices: SiteService,
 		private accountService: AccountService,
-		private categoryService: CategoryService
+		private categoryService: CategoryService,
+		private orderService: OrderService
 	) {
 		document.body.setAttribute('data-sidebar', 'dark');
 		router.events.forEach((event) => {
@@ -76,6 +78,7 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
 	ngOnInit() {
 		document.body.setAttribute('data-bs-theme', 'dark');
+		this.orderService.productsDetails.next(null);
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
 				if (res.status) {
@@ -226,7 +229,15 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
 	initialize(categories: any): void {
 		categories.forEach((item: any) => {
-			this.menuItems.push({ id: item.id, label: item.name });
+			this.menuItems.push({
+				id: item.id,
+				label: item.name,
+				products: item.products,
+			});
 		});
+	}
+
+	changeCategoryData(categoryId: any) {
+		this.orderService.productsDetails.next(categoryId);
 	}
 }
