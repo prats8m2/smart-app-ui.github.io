@@ -1,30 +1,25 @@
-<!-- ========== Left Sidebar Start ========== -->
-
 <ng-template #contentTemplate>
-
-    <!--- Sidemenu -->
+    <div class="col-sm-12 options p-2">
+        <ng-select *ngIf="showListAccount" [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+            bindLabel="account.name" [clearable]="false" bindValue="account.id"
+            (change)="changeAccountData($event?.account?.id)" [placeholder]="'Account'"></ng-select>
+    </div>
+    <div *ngIf="showListSite" class="col-sm-12 options p-2">
+        <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
+            (change)="changeSitesData($event?.id)" [placeholder]="'Site'"></ng-select>
+    </div>
     <div id="sidebar-menu">
-        <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
-            <!-- {{menuItems | json}} -->
             <ng-container *ngFor="let item of menuItems">
-                <li class="menu-title" *ngIf="item.isTitle">{{ item.label }}</li>
                 <li>
-                    <a *ngIf="hasItems(item)" href="javascript:void(0);" class="is-parent"
-                        [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}">
-                        <span> {{ item.label }}</span>
-                    </a>
-
-                    <a *ngIf="!hasItems(item)" class="side-nav-link-ref">
-                        <span> {{ item.label }}</span>
+                    <a class="side-nav-link-ref">
+                        <span style="display: block; text-align: center; font-size: 18px;"> {{ item.label }}</span>
                     </a>
                 </li>
             </ng-container>
         </ul>
     </div>
 </ng-template>
-<!-- Sidebar -->
-
 <div class="vertical-menu">
     <ngx-simplebar class="h-100" #componentRef>
         <div *ngIf="!isCondensed">
@@ -35,4 +30,3 @@
         </div>
     </ngx-simplebar>
 </div>
-<!-- Left Sidebar End -->

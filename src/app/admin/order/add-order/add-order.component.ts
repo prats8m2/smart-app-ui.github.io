@@ -10,6 +10,10 @@ import { productList } from './products';
 export class AddOrderComponent implements OnInit {
 	isCondensed = false;
 	public products = [];
+	productTypes = [
+		{ id: 1, label: 'Food' },
+		{ id: 2, label: 'Amenities' },
+	];
 
 	constructor() {
 		document.body.setAttribute('data-bs-theme', 'dark');
@@ -34,6 +38,5 @@ export class AddOrderComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.products = Object.assign([], productList);
-		console.log(this.products);
 	}
 }

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import {
 	AfterViewInit,
 	Component,
@@ -8,12 +7,14 @@ import {
 	OnInit,
 	ViewChild,
 } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import MetisMenu from 'metismenujs';
-import { EventService } from 'src/app/core/services/event.service';
+import { IParams } from 'src/app/core/interface/params';
 import { GlobalService } from 'src/app/core/services/global.service';
-import { MENU } from 'src/app/layouts/sidebar/menu';
 import { MenuItem } from 'src/app/layouts/sidebar/menu.model';
+import { AccountService } from '../../accounts/service/account.service';
+import { CategoryService } from '../../category/service/category.service';
+import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-order-sidebar',
@@ -21,19 +22,50 @@ import { MenuItem } from 'src/app/layouts/sidebar/menu.model';
 	styleUrls: ['./order-sidebar.component.scss'],
 })
 export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	@ViewChild('componentRef') scrollRef;
 	@Input() isCondensed = false;
 	menu: any;
 	data: any;
 	permissions: any;
 	selectedMenuItem: MenuItem;
+	accountList: any = [];
+	sitesList: any = [];
+	categoryList: any = [];
 
 	menuItems = [];
+	productTypes = [
+		{ id: 1, label: 'Food' },
+		{ id: 2, label: 'Amenities' },
+	];
+
+	siteParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
+	accountParams: IParams = {
+		limit: 100,
+		pageNumber: 1,
+	};
+	categoryParams: IParams = {
+		siteId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
 
 	@ViewChild('sideMenu') sideMenu: ElementRef;
 
-	constructor(private router: Router, private globalService: GlobalService) {
-		document.body.setAttribute('data-bs-theme', 'dark');
+	constructor(
+		private router: Router,
+		private globalService: GlobalService,
+		private siteServices: SiteService,
+		private accountService: AccountService,
+		private categoryService: CategoryService
+	) {
+		document.body.setAttribute('data-sidebar', 'dark');
 		router.events.forEach((event) => {
 			if (event instanceof NavigationEnd) {
 				this._activateMenuDropdown();
@@ -43,12 +75,23 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 	}
 
 	ngOnInit() {
-		this.initialize();
-		this._scrollElement();
+		document.body.setAttribute('data-bs-theme', 'dark');
+		if (this.showListAccount) {
+			this.accountService.listUser(this.accountParams).subscribe((res) => {
+				if (res.status) {
+					this.accountList = [...res.data.users];
+					if (this.accountList.length) {
+						this.siteParams.accountId = this.accountList[0]?.account.id;
+						this.listSiteAPI(this.siteParams);
+					}
+				}
+			});
+		} else {
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	ngAfterViewInit() {
-		console.log(this.sideMenu);
 		this.menu = new MetisMenu(this.sideMenu.nativeElement);
 		this._activateMenuDropdown();
 	}
@@ -79,9 +122,6 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}, 300);
 	}
 
-	/**
-	 * remove active and mm-active class
-	 */
 	_removeAllClass(className) {
 		const els = document.getElementsByClassName(className);
 		while (els[0]) {
@@ -89,15 +129,12 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}
 	}
 
-	/**
-	 * Activate the parent dropdown
-	 */
 	_activateMenuDropdown() {
 		this._removeAllClass('mm-active');
 		this._removeAllClass('mm-show');
 		const links = document.getElementsByClassName('side-nav-link-ref');
 		let menuItemEl = null;
-		// tslint:disable-next-line: prefer-for-of
+
 		const paths = [];
 		for (let i = 0; i < links.length; i++) {
 			paths.push(links[i]['pathname']);
@@ -147,29 +184,49 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}
 	}
 
-	/**
-	 * Initialize
-	 */
-	initialize(): void {
-		this.permissions = this.globalService.getUserRole('permissions');
-
-		let permissionArray: any[] = [];
-		this.permissions.forEach((item: any) => {
-			permissionArray.push(item.name);
-		});
-
-		for (const item of MENU) {
-			if (permissionArray.includes(item.permission)) {
-				this.menuItems.push(item);
-			}
-		}
-	}
-
-	/**
-	 * Returns true or false if given menu item has child or not
-	 * @param item menuItem
-	 */
 	hasItems(item: MenuItem) {
 		return item.subItems !== undefined ? item.subItems.length > 0 : false;
+	}
+
+	changeAccountData(accountId: any) {
+		this.menuItems = [];
+		this.siteParams.accountId = accountId;
+		this.listSiteAPI(this.siteParams);
+	}
+
+	listSiteAPI(params: IParams) {
+		this.siteServices.listSites(params).subscribe((res) => {
+			if (res.status) {
+				this.sitesList = [...res.data.sites];
+				if (this.sitesList.length) {
+					this.categoryParams.siteId = this.sitesList[0].id;
+					this.listCategoryAPI(this.categoryParams);
+				}
+			}
+		});
+	}
+
+	changeSitesData(siteId: any) {
+		this.menuItems = [];
+		this.categoryParams.siteId = siteId;
+		this.listCategoryAPI(this.categoryParams);
+	}
+
+	listCategoryAPI(params: IParams) {
+		this.categoryService.listCategory(params).subscribe((res) => {
+			if (res.status) {
+				this.categoryList = [...res.data.categories];
+
+				if (this.categoryList.length) {
+					this.initialize(this.categoryList);
+				}
+			}
+		});
+	}
+
+	initialize(categories: any): void {
+		categories.forEach((item: any) => {
+			this.menuItems.push({ id: item.id, label: item.name });
+		});
 	}
 }

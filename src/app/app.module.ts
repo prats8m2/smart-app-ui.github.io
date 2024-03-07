@@ -26,6 +26,7 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { HttpRequestInterceptor } from './core/interceptor/HttpRequestInterceptor';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function createTranslateLoader(http: HttpClient): any {
 	return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -53,6 +54,7 @@ export function createTranslateLoader(http: HttpClient): any {
 		ScrollToModule.forRoot(),
 		ToastrModule.forRoot(),
 		NgbDatepickerModule,
+		NgSelectModule,
 	],
 	bootstrap: [AppComponent],
 	providers: [
