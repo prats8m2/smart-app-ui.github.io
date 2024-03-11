@@ -5,8 +5,6 @@ import { IParams } from 'src/app/core/interface/params';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { DeviceService } from '../../device/service/device.service';
-import { RoomService } from '../../room/services/room.service';
 import { SiteService } from '../../site/service/site.service';
 import { TableService } from '../services/table.service';
 
@@ -22,9 +20,7 @@ export class ListTableComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private deviceService: DeviceService,
 		private dialogService: DialogService,
-		private roomService: RoomService,
 		private tableService: TableService
 	) {}
 

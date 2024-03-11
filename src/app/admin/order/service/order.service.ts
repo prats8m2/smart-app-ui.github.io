@@ -6,5 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class OrderService {
 	public productsDetails = new BehaviorSubject<any>(null);
+	public changeDetector = new BehaviorSubject<any>(false);
 	constructor() {}
 }

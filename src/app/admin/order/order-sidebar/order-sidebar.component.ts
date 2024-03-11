@@ -203,6 +203,10 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					this.categoryParams.siteId = this.sitesList[0].id;
+					this.orderService.changeDetector.next({
+						isChanged: true,
+						siteId: this.sitesList[0].id,
+					});
 					this.listCategoryAPI(this.categoryParams);
 				}
 			}
@@ -213,15 +217,16 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		this.menuItems = [];
 		this.categoryParams.siteId = siteId;
 		this.listCategoryAPI(this.categoryParams);
+		this.orderService.changeDetector.next({ isChanged: true, siteId: siteId });
 	}
 
 	listCategoryAPI(params: IParams) {
 		this.categoryService.listCategory(params).subscribe((res) => {
 			if (res.status) {
 				this.categoryList = [...res.data.categories];
-
 				if (this.categoryList.length) {
 					this.initialize(this.categoryList);
+					this.changeCategoryData(this.categoryList[0]?.products);
 				}
 			}
 		});
@@ -238,7 +243,9 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 	}
 
 	changeCategoryData(cateoryProducts: any) {
-		console.log(cateoryProducts);
-		this.orderService.productsDetails.next(cateoryProducts);
+		this.orderService.productsDetails.next({
+			cateoryProducts: cateoryProducts,
+			siteId: this.categoryParams.siteId,
+		});
 	}
 }

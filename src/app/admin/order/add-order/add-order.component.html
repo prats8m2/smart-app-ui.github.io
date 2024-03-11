@@ -3,12 +3,51 @@
     </app-topbar>
     <app-order-sidebar></app-order-sidebar>
 
-
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class=" row col-sm-6">
+                                        <div class="col-sm-4" *ngIf="showListRoom">
+                                            <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name"
+                                                [clearable]="false" bindValue="id" (change)="changeRoomData($event?.id)"
+                                                [placeholder]="'Room'" [clearable]="false"></ng-select>
+                                        </div>
+                                        <div class="col-sm-4" *ngIf="showListTable">
+                                            <ng-select [ngModel]="tableList[0]?.id" [items]="tableList" bindLabel="name"
+                                                [clearable]="false" bindValue="id" (change)="changeRoomData($event?.id)"
+                                                [placeholder]="'Table'" [clearable]="false"></ng-select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <ng-select [items]="productTypes" bindLabel="label" [clearable]="false"
+                                                bindValue="id" (change)="changeTypeData($event?.id)"
+                                                [placeholder]="'Type'" [ngModel]="productTypes[0]?.id"></ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 text-sm-end">
+                                        <div class="search-box me-2 mb-2 d-inline-block">
+                                            <div class="position-relative">
+                                                <input type="search" class="form-control" autocomplete="off"
+                                                    id="searchTableList" placeholder="Search..."
+                                                    [(ngModel)]="searchInput" (input)="onSearch()">
+                                                <i class="bx bx-search-alt search-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
                     <!-- Show List Of Products -->
+                    <!-- {{updateCategoryProductList | json}} -->
                     <div class="col-lg-4" *ngFor="let product of products">
                         <div class="card mb-4">
                             <div class="card-body">
