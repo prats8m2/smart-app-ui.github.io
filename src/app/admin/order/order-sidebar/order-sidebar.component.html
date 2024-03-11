@@ -13,8 +13,7 @@
             <ng-container *ngFor="let item of menuItems">
                 <li>
                     <a class="side-nav-link-ref">
-                        <span style="display: block; text-align: center; font-size: 18px;"
-                            (click)="changeCategoryData(item.products)"> {{ item.label }}</span>
+                        <span class="rounded-box" (click)="changeCategoryData(item.products)">{{ item.label }}</span>
                     </a>
                 </li>
             </ng-container>

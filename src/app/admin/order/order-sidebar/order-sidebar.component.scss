@@ -1,0 +1,11 @@
+.rounded-box {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 10px; /* Adjust the radius to your preference */
+    padding: 10px; /* Adjust padding as needed */
+    background-color: #2a3042; /* Background color of the box */
+    cursor: pointer; /* Show cursor as pointer on hover */
+    border-color: red;
+    border: 1px solid #ccc
+}
