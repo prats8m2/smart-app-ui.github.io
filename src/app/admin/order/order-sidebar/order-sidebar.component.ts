@@ -237,7 +237,8 @@ export class OrderSidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		});
 	}
 
-	changeCategoryData(categoryId: any) {
-		this.orderService.productsDetails.next(categoryId);
+	changeCategoryData(cateoryProducts: any) {
+		console.log(cateoryProducts);
+		this.orderService.productsDetails.next(cateoryProducts);
 	}
 }

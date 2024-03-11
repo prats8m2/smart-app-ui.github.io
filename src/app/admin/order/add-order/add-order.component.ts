@@ -16,6 +16,12 @@ export class AddOrderComponent implements OnInit {
 
 	constructor(private orderService: OrderService) {
 		document.body.setAttribute('data-bs-theme', 'dark');
+		let x: any = [];
+		this.orderService.productsDetails.subscribe((res) => {
+			console.log(res);
+			this.categoryProductList = res;
+		});
+		console.log(this.categoryProductList);
 	}
 
 	onSettingsButtonClicked() {
@@ -36,11 +42,6 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		let x: any = [];
-		this.orderService.productsDetails.subscribe((res) => {
-			this.categoryProductList = res;
-		});
-		console.log(this.categoryProductList);
-		this.products = Object.assign([], productList);
+		// this.products = Object.assign([], productList);
 	}
 }
