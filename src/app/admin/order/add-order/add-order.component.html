@@ -11,31 +11,39 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-2">
-                                    <div class=" row col-sm-6">
-                                        <div class="col-sm-4" *ngIf="showListRoom">
+                                    <div class="row col-sm-8">
+                                        <div class="col-sm-3">
+                                            <div class="search-box me-2 mb-2 d-inline-block">
+                                                <div class="position-relative">
+                                                    <input type="search" class="form-control" autocomplete="off"
+                                                        id="searchTableList" placeholder="Search..."
+                                                        [(ngModel)]="searchInput" (input)="onSearch()">
+                                                    <i class="bx bx-search-alt search-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3" *ngIf="showListRoom">
                                             <ng-select [ngModel]="roomList[0]?.id" [items]="roomList" bindLabel="name"
                                                 [clearable]="false" bindValue="id" (change)="changeRoomData($event?.id)"
                                                 [placeholder]="'Room'" [clearable]="false"></ng-select>
                                         </div>
-                                        <div class="col-sm-4" *ngIf="showListTable">
+                                        <div class="col-sm-3" *ngIf="showListTable">
                                             <ng-select [ngModel]="tableList[0]?.id" [items]="tableList" bindLabel="name"
                                                 [clearable]="false" bindValue="id" (change)="changeRoomData($event?.id)"
                                                 [placeholder]="'Table'" [clearable]="false"></ng-select>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <ng-select [items]="productTypes" bindLabel="label" [clearable]="false"
                                                 bindValue="id" (change)="changeTypeData($event?.id)"
                                                 [placeholder]="'Type'" [ngModel]="productTypes[0]?.id"></ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 text-sm-end">
-                                        <div class="search-box me-2 mb-2 d-inline-block">
-                                            <div class="position-relative">
-                                                <input type="search" class="form-control" autocomplete="off"
-                                                    id="searchTableList" placeholder="Search..."
-                                                    [(ngModel)]="searchInput" (input)="onSearch()">
-                                                <i class="bx bx-search-alt search-icon"></i>
-                                            </div>
+                                    <div class="col-sm-4" *ngIf="showAddOrderButton">
+                                        <div class="text-sm-end">
+                                            <button type="button" class="btn btn-primary mb-2 me-2"
+                                                [disabled]="disableAddOrderButton" (click)="routeToAddOrder()"><i
+                                                    class="mdi mdi-plus mr-1"></i>
+                                                Create Order</button>
                                         </div>
                                     </div>
                                 </div>
@@ -47,26 +55,29 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- Show List Of Products -->
-                    <!-- {{updateCategoryProductList | json}} -->
-                    <div class="col-lg-4" *ngFor="let product of products">
+                    <div class="col-lg-2" *ngFor="let product of updateCategoryProductList; let i = index">
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="product-img position-relative">
-                                    <div class="avatar-sm product-ribbon" *ngIf="product.discount">
-                                        <span
-                                            class="avatar-title rounded-circle bg-primary">{{product.discount}}%%</span>
-                                    </div>
-                                    <img src="{{product.images[0]}}" alt="" class="img-fluid mx-auto d-block">
+                                    <img src="assets/images/product/img-2.png" alt="" class="img-fluid mx-auto d-block">
                                 </div>
-                                <div class="mt-4 d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <h5 class="mb-1 text-truncate"><a href="javascript:void(0);"
-                                                class="text-dark">{{product.name}}</a></h5>
-                                        <div class="badge bg-success font-size-11"><i
-                                                class="bx bxs-star me-1"></i>{{product.ratings}}</div>
+                                <div class=" row mt-4 d-flex align-items-center">
+                                    <div class="flex-grow-1 text-center">
+                                        <h5 class="mb-1 text-truncate">{{product.name}}</h5>
                                     </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="my-0"><b>${{product.oriRate}}</b></h5>
+                                    <div class="mt-2">
+                                        <div class="text-center">
+                                            <h5><b>${{product.price}}</b></h5>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="button" class="btn btn-outline-primary btn-sm"
+                                                (click)="calculateQty('0',product.qty,i)">-</button>
+                                            <input name="demo_vertical" value="{{product.qty}}" type="text"
+                                                class="form-control form-control-sm text-center" min="0" max="10"
+                                                readonly>
+                                            <button type="button" class="btn btn-outline-primary btn-sm"
+                                                (click)="calculateQty('1',product.qty, i)">+</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -15,6 +15,7 @@ import { TableService } from '../../table/services/table.service';
 export class AddOrderComponent implements OnInit {
 	isCondensed = false;
 	public products = [];
+	qty: number = 0;
 
 	categoryProductList: any[] = [];
 	updateCategoryProductList: any[] = [];
@@ -26,9 +27,12 @@ export class AddOrderComponent implements OnInit {
 	currentPage: number = 1;
 	selectedType: number = 1;
 	selectedSiteId: string;
+	selectedProductsToAdd: any[] = [];
+	disableAddOrderButton: boolean = true;
 
 	showListRoom = this.globalService.checkForPermission('LIST-ROOM');
 	showListTable = this.globalService.checkForPermission('LIST-TABLE');
+	showAddOrderButton = this.globalService.checkForPermission('ADD-ORDER');
 
 	roomParams: IParams = {
 		siteId: null,
@@ -63,6 +67,11 @@ export class AddOrderComponent implements OnInit {
 				this.selectedSiteId = res.siteId;
 				this.changeDropdownData(this.selectedSiteId);
 				this.categoryProductList = res.cateoryProducts;
+				this.categoryProductList.forEach((product: any, index: number) => {
+					this.categoryProductList[index].qty = 0;
+				});
+
+				console.log(this.categoryProductList);
 				this.updateDisplayedData();
 			}
 		});
@@ -130,5 +139,28 @@ export class AddOrderComponent implements OnInit {
 				this.tableList = [...res.data.tables];
 			}
 		});
+	}
+
+	calculateQty(id: any, qty: any, i: any) {
+		if (id == '0' && qty >= 1) {
+			//removing the products
+			qty--;
+			this.updateCategoryProductList[i].qty = qty;
+		}
+		if (id == '1' && qty < 10) {
+			//maximun 10 products added
+			//adding the products
+			qty++;
+			this.updateCategoryProductList[i].qty = qty;
+		}
+		this.disableAddOrderButton = !this.updateCategoryProductList.some(
+			(e) => e.qty > 0
+		);
+	}
+
+	routeToAddOrder() {
+		this.selectedProductsToAdd = this.updateCategoryProductList.filter(
+			(product: any) => product.qty > 0
+		);
 	}
 }
