@@ -29,6 +29,7 @@ export class AddOrderComponent implements OnInit {
 	selectedSiteId: string;
 	selectedProductsToAdd: any[] = [];
 	disableAddOrderButton: boolean = true;
+	categorySelectedProducts: any[] = [];
 
 	showListRoom = this.globalService.checkForPermission('LIST-ROOM');
 	showListTable = this.globalService.checkForPermission('LIST-TABLE');
@@ -71,7 +72,8 @@ export class AddOrderComponent implements OnInit {
 					this.categoryProductList[index].qty = 0;
 				});
 
-				console.log(this.categoryProductList);
+				// this.fetchCategorySelectedProducts();
+
 				this.updateDisplayedData();
 			}
 		});
@@ -99,7 +101,6 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.products = Object.assign([], productList);
 		this.updateDisplayedData();
 	}
 
@@ -141,26 +142,49 @@ export class AddOrderComponent implements OnInit {
 		});
 	}
 
-	calculateQty(id: any, qty: any, i: any) {
+	calculateQty(id: any, qty: any, i: any, productId: any) {
 		if (id == '0' && qty >= 1) {
 			//removing the products
 			qty--;
 			this.updateCategoryProductList[i].qty = qty;
+			if (qty == 0) {
+				this.removeCategorySelectedProducts(productId);
+			}
 		}
 		if (id == '1' && qty < 10) {
 			//maximun 10 products added
 			//adding the products
 			qty++;
 			this.updateCategoryProductList[i].qty = qty;
+			this.addCategorySelectedProducts();
 		}
 		this.disableAddOrderButton = !this.updateCategoryProductList.some(
 			(e) => e.qty > 0
 		);
 	}
 
-	routeToAddOrder() {
-		this.selectedProductsToAdd = this.updateCategoryProductList.filter(
-			(product: any) => product.qty > 0
+	createorder() {
+		const output = this.selectedProductsToAdd.filter(
+			(obj, index, array) => index === array.findIndex((o) => o.id === obj.id)
 		);
+		console.log(output);
+	}
+
+	addCategorySelectedProducts() {
+		this.updateCategoryProductList.forEach((p: any) => {
+			this.selectedProductsToAdd.push(p);
+		});
+		console.log(this.selectedProductsToAdd);
+	}
+
+	removeCategorySelectedProducts(id: any) {
+		// this.categorySelectedProducts = this.updateCategoryProductList.filter(
+		// 	(product: any) => product.qty > 0
+		// );
+		// console.log(this.categorySelectedProducts);
+		this.selectedProductsToAdd = this.updateCategoryProductList.filter(
+			(p) => p.id !== id
+		);
+		console.log(this.selectedProductsToAdd);
 	}
 }

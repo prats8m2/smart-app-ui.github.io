@@ -41,7 +41,7 @@
                                     <div class="col-sm-4" *ngIf="showAddOrderButton">
                                         <div class="text-sm-end">
                                             <button type="button" class="btn btn-primary mb-2 me-2"
-                                                [disabled]="disableAddOrderButton" (click)="routeToAddOrder()"><i
+                                                [disabled]="disableAddOrderButton" (click)="createorder()"><i
                                                     class="mdi mdi-plus mr-1"></i>
                                                 Create Order</button>
                                         </div>
@@ -71,12 +71,12 @@
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <button type="button" class="btn btn-outline-primary btn-sm"
-                                                (click)="calculateQty('0',product.qty,i)">-</button>
+                                                (click)="calculateQty('0',product.qty,i, product.id)">-</button>
                                             <input name="demo_vertical" value="{{product.qty}}" type="text"
                                                 class="form-control form-control-sm text-center" min="0" max="10"
                                                 readonly>
                                             <button type="button" class="btn btn-outline-primary btn-sm"
-                                                (click)="calculateQty('1',product.qty, i)">+</button>
+                                                (click)="calculateQty('1',product.qty, i, product.id)">+</button>
                                         </div>
                                     </div>
                                 </div>
