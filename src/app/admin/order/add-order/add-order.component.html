@@ -38,12 +38,12 @@
                                                 [placeholder]="'Type'" [ngModel]="productTypes[0]?.id"></ng-select>
                                         </div>
                                     </div>
+                                    <!-- [disabled]="disableAddOrderButton" -->
                                     <div class="col-sm-4" *ngIf="showAddOrderButton">
                                         <div class="text-sm-end">
                                             <button type="button" class="btn btn-primary mb-2 me-2"
-                                                [disabled]="disableAddOrderButton" (click)="createorder()"><i
-                                                    class="mdi mdi-plus mr-1"></i>
-                                                Create Order</button>
+                                                (click)="createorder()"><i class="mdi mdi-eye mr-1"></i>
+                                                View Order</button>
                                         </div>
                                     </div>
                                 </div>

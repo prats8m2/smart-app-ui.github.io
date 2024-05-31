@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { IParams } from 'src/app/core/interface/params';
 import { RoomService } from '../../room/services/room.service';
 import { TableService } from '../../table/services/table.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-add-order',
@@ -35,6 +36,9 @@ export class AddOrderComponent implements OnInit {
 	showListTable = this.globalService.checkForPermission('LIST-TABLE');
 	showAddOrderButton = this.globalService.checkForPermission('ADD-ORDER');
 
+	//form
+	orderForm: FormGroup;
+
 	roomParams: IParams = {
 		siteId: null,
 		limit: 100,
@@ -55,7 +59,8 @@ export class AddOrderComponent implements OnInit {
 		private orderService: OrderService,
 		private globalService: GlobalService,
 		private roomService: RoomService,
-		private tableService: TableService
+		private tableService: TableService,
+		private formBuilder: FormBuilder
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.changeDetector.subscribe((res) => {
@@ -68,15 +73,32 @@ export class AddOrderComponent implements OnInit {
 				this.selectedSiteId = res.siteId;
 				this.changeDropdownData(this.selectedSiteId);
 				this.categoryProductList = res.cateoryProducts;
-				this.categoryProductList.forEach((product: any, index: number) => {
-					this.categoryProductList[index].qty = 0;
-				});
-
-				// this.fetchCategorySelectedProducts();
-
+				console.log(this.categoryProductList);
+				this.createForm();
 				this.updateDisplayedData();
 			}
 		});
+	}
+
+	createForm() {
+		const formGroup = {};
+		this.categoryProductList.forEach((product) => {
+			formGroup[product.qty] = new FormControl(0);
+		});
+		this.orderForm = this.formBuilder.group(formGroup);
+		console.log(this.orderForm.value);
+	}
+
+	incrementQuantity(productName: string) {
+		const control = this.orderForm.get(productName);
+		control.setValue(control.value + 1);
+	}
+
+	decrementQuantity(productName: string) {
+		const control = this.orderForm.get(productName);
+		if (control.value > 0) {
+			control.setValue(control.value - 1);
+		}
 	}
 
 	changeDropdownData(siteId: any) {
@@ -164,10 +186,12 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	createorder() {
-		const output = this.selectedProductsToAdd.filter(
-			(obj, index, array) => index === array.findIndex((o) => o.id === obj.id)
-		);
-		console.log(output);
+		// const output = this.selectedProductsToAdd.filter(
+		// 	(obj, index, array) => index === array.findIndex((o) => o.id === obj.id)
+		// );
+		// console.log(output);
+
+		console.log(this.orderForm.value);
 	}
 
 	addCategorySelectedProducts() {
