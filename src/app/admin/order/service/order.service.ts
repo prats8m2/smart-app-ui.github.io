@@ -12,6 +12,7 @@ interface Product {
 })
 export class OrderService {
 	public productsDetails = new BehaviorSubject<any>(null);
-	public changeDetector = new BehaviorSubject<any>(false);
+	public productsChange = new BehaviorSubject<any>(null);
+	public categoryChange = new BehaviorSubject<any>(false);
 	constructor() {}
 }

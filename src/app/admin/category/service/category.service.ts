@@ -26,6 +26,19 @@ export class CategoryService {
 			);
 	}
 
+	listCategoryPromise(params: IParams) {
+		return this.http
+			.get(
+				CATEGORY.LIST_CATEGORY +
+					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
+			)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
 	listAvailableDevice(params: IParams): Observable<any> {
 		return this.http
 			.get(DEVICE.LIST_AVAILABLE_DEVICE + `/${params.siteId}`)

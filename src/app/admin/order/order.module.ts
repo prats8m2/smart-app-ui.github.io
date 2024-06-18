@@ -12,6 +12,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { LayoutsModule } from 'src/app/layouts/layouts.module';
 import { OrderSidebarComponent } from './order-sidebar/order-sidebar.component';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { OrderHeaderComponent } from './order-header/order-header.component';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 		ListOrderComponent,
 		AddOrderComponent,
 		OrderSidebarComponent,
+  OrderHeaderComponent,
 	],
 	imports: [
 		FormsModule,

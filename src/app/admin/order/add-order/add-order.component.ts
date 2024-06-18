@@ -6,7 +6,8 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { IParams } from 'src/app/core/interface/params';
 import { RoomService } from '../../room/services/room.service';
 import { TableService } from '../../table/services/table.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -15,27 +16,18 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class AddOrderComponent implements OnInit {
 	isCondensed = false;
-	public products = [];
-	qty: number = 0;
-
-	categoryProductList: any[] = [];
-	updateCategoryProductList: any[] = [];
-	roomList: any[] = [];
-	tableList: any[] = [];
-	searchInput: string = '';
-	total: number;
-	perPage: number = 10;
-	currentPage: number = 1;
-	selectedType: number = 1;
-	selectedSiteId: string;
-	selectedProductsToAdd: any[] = [];
-	disableAddOrderButton: boolean = true;
-	categorySelectedProducts: any[] = [];
+	public products;
+	public filteredProducts;
+	public order = [];
 
 	showListRoom = this.globalService.checkForPermission('LIST-ROOM');
 	showListTable = this.globalService.checkForPermission('LIST-TABLE');
 	showAddOrderButton = this.globalService.checkForPermission('ADD-ORDER');
-
+	rooms: any = [];
+	tables: any = [];
+	selectedRoom: number;
+	selectedTable: number;
+	selectedSite: number;
 	//form
 	orderForm: FormGroup;
 
@@ -55,58 +47,125 @@ export class AddOrderComponent implements OnInit {
 		{ id: 1, label: 'Food' },
 		{ id: 2, label: 'Amenities' },
 	];
+
 	constructor(
 		private orderService: OrderService,
 		private globalService: GlobalService,
 		private roomService: RoomService,
 		private tableService: TableService,
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private siteService: SiteService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
-		this.orderService.changeDetector.subscribe((res) => {
-			if (res.isChanged) {
-				this.changeDropdownData(res.siteId);
-			}
-		});
+
 		this.orderService.productsDetails.subscribe((res) => {
 			if (res) {
-				this.selectedSiteId = res.siteId;
-				this.changeDropdownData(this.selectedSiteId);
-				this.categoryProductList = res.cateoryProducts;
-				console.log(this.categoryProductList);
-				this.createForm();
-				this.updateDisplayedData();
+				this.products = res.products;
+				this.filteredProducts = this.products;
+				if (this.selectedSite !== res.siteId) {
+					//list rooms and tables
+					if (this.showListRoom) {
+						this.listRooms(res.siteId);
+					}
+
+					if (this.showListTable) {
+						this.listTables(res.siteId)
+					}
+				}
+				this.selectedSite = res.siteId;
+			}
+		});
+
+		this.orderService.productsChange.subscribe((res) => {
+			if (res) {
+				switch (res.action) {
+					case 1:
+						{
+							const searchTerm = res.data;
+							if (searchTerm) {
+								this.filteredProducts = this.products.filter((product) =>
+									product.name.toLowerCase().includes(searchTerm.toLowerCase())
+								);
+							} else {
+								this.filteredProducts = this.products; // Reset to all products if the search term is empty
+							}
+						}
+						break;
+				}
 			}
 		});
 	}
 
-	createForm() {
-		const formGroup = {};
-		this.categoryProductList.forEach((product) => {
-			formGroup[product.qty] = new FormControl(0);
-		});
-		this.orderForm = this.formBuilder.group(formGroup);
-		console.log(this.orderForm.value);
+	addProductToOrder(product) {
+		const existingProduct = this.order.find((item) => item.id === product.id);
+		if (!existingProduct) {
+			const productOrder = {
+				id: product.id,
+				qty: 1,
+				price: product.price,
+				name: product.name,
+				total: product.price,
+			};
+			this.order.push(productOrder);
+		} else {
+		}
+		console.log(this.order);
 	}
 
-	incrementQuantity(productName: string) {
-		const control = this.orderForm.get(productName);
-		control.setValue(control.value + 1);
+	isAddedinOrder(id) {
+		return this.order.find((item) => item.id === id);
 	}
 
-	decrementQuantity(productName: string) {
-		const control = this.orderForm.get(productName);
-		if (control.value > 0) {
-			control.setValue(control.value - 1);
+	calculateQty(operation: string, currentQty: number, index: number): void {
+		if (operation === '1') {
+			this.order[index].qty += 1;
+		} else if (operation === '0' && this.order[index].qty > 0) {
+			this.order[index].qty -= 1;
+		}
+		this.order[index].total = this.order[index].qty * this.order[index].price;
+		console.log(this.order);
+	}
+
+	delete(index): void {
+		if (index !== -1) {
+			this.order.splice(index, 1);
+		}
+		console.log(this.order);
+	}
+
+	async listRooms(siteId) {
+		this.roomParams.siteId = siteId;
+		const res = await this.roomService.listRoomsPromise(this.roomParams);
+		if (res.status) {
+			this.rooms = res.data.rooms;
+		} else {
+			return null;
 		}
 	}
 
-	changeDropdownData(siteId: any) {
-		this.roomParams.siteId = siteId;
+	async listTables(siteId) {
 		this.tableParams.siteId = siteId;
-		this.listRoomAPI(this.roomParams);
-		this.listTableAPI(this.tableParams);
+		const res = await this.tableService.listTablePromise(this.tableParams);
+		if (res.status) {
+			this.tables = res.data.tables;
+		} else {
+			return null;
+		}
 	}
+
+	updateRoom(selectedRoomId: number): void {
+		this.selectedRoom = selectedRoomId;
+		this.selectedTable = null; // Clear the table selection
+		console.log('Selected Room ID:', this.selectedRoom);
+	}
+
+	updateTable(selectedTableId: number): void {
+		this.selectedTable = selectedTableId;
+		this.selectedRoom = null; // Clear the room selection
+		console.log('Selected Table ID:', this.selectedTable);
+	}
+
+	ngOnInit(): void {}
 
 	onSettingsButtonClicked() {
 		document.body.classList.toggle('right-bar-enabled');
@@ -120,95 +179,5 @@ export class AddOrderComponent implements OnInit {
 		if (window.screen.width <= 768) {
 			document.body.classList.remove('vertical-collpsed');
 		}
-	}
-
-	ngOnInit(): void {
-		this.updateDisplayedData();
-	}
-
-	changeRoomData(roomId: any) {}
-
-	changeTypeData(type: any) {
-		this.selectedType = type;
-		this.updateCategoryProductList = this.categoryProductList.filter(
-			(product) => product.type == type
-		);
-	}
-
-	onSearch(): void {
-		this.currentPage = 1;
-		this.updateDisplayedData();
-	}
-
-	updateDisplayedData(): void {
-		this.updateCategoryProductList = this.categoryProductList.filter(
-			(item) =>
-				item.name.toLowerCase().includes(this.searchInput.toLowerCase()) &&
-				item.type === this.selectedType
-		);
-	}
-
-	listRoomAPI(params: IParams) {
-		this.roomService.listRooms(params).subscribe((res) => {
-			if (res.status) {
-				this.roomList = [...res.data.rooms];
-			}
-		});
-	}
-
-	listTableAPI(params: IParams) {
-		this.tableService.listTable(params).subscribe((res) => {
-			if (res.status) {
-				this.tableList = [...res.data.tables];
-			}
-		});
-	}
-
-	calculateQty(id: any, qty: any, i: any, productId: any) {
-		if (id == '0' && qty >= 1) {
-			//removing the products
-			qty--;
-			this.updateCategoryProductList[i].qty = qty;
-			if (qty == 0) {
-				this.removeCategorySelectedProducts(productId);
-			}
-		}
-		if (id == '1' && qty < 10) {
-			//maximun 10 products added
-			//adding the products
-			qty++;
-			this.updateCategoryProductList[i].qty = qty;
-			this.addCategorySelectedProducts();
-		}
-		this.disableAddOrderButton = !this.updateCategoryProductList.some(
-			(e) => e.qty > 0
-		);
-	}
-
-	createorder() {
-		// const output = this.selectedProductsToAdd.filter(
-		// 	(obj, index, array) => index === array.findIndex((o) => o.id === obj.id)
-		// );
-		// console.log(output);
-
-		console.log(this.orderForm.value);
-	}
-
-	addCategorySelectedProducts() {
-		this.updateCategoryProductList.forEach((p: any) => {
-			this.selectedProductsToAdd.push(p);
-		});
-		console.log(this.selectedProductsToAdd);
-	}
-
-	removeCategorySelectedProducts(id: any) {
-		// this.categorySelectedProducts = this.updateCategoryProductList.filter(
-		// 	(product: any) => product.qty > 0
-		// );
-		// console.log(this.categorySelectedProducts);
-		this.selectedProductsToAdd = this.updateCategoryProductList.filter(
-			(p) => p.id !== id
-		);
-		console.log(this.selectedProductsToAdd);
 	}
 }

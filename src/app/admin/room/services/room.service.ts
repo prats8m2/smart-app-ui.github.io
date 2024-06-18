@@ -25,6 +25,19 @@ export class RoomService {
 			);
 	}
 
+	listRoomsPromise(params: IParams) {
+		return this.http
+			.get(
+				ROOM.LIST_ROOM +
+					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+			)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
 	deleteRoom(id: number) {
 		return this.http
 			.delete(ROOM.DELETE_ROOM + id.toString())

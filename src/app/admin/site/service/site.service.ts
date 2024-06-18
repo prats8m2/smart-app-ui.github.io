@@ -26,6 +26,19 @@ export class SiteService {
 			);
 	}
 
+	listSitesPromise(params: IParams) {
+		return this.http
+			.get(
+				SITE.LIST_SITE +
+					`/${params.accountId}/${params.pageNumber}/${params.limit}`
+			)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
 	addSite(siteForm: FormGroup) {
 		const { account, siteName, siteAddress, type, wifiDetails } =
 			siteForm.value;

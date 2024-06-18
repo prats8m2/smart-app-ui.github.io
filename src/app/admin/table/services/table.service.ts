@@ -26,6 +26,18 @@ export class TableService {
 			);
 	}
 
+	listTablePromise(params: IParams) {
+		return this.http
+			.get(
+				TABLE.LIST_TABLE +
+					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+			)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});	}
+
 	addTable(tableForm: FormGroup) {
 		const { account, site, device, tableName } = tableForm.value;
 

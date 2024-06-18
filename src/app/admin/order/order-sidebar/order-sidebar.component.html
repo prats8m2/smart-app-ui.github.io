@@ -1,19 +1,10 @@
 <ng-template #contentTemplate>
-    <div class="col-sm-12 options p-2">
-        <ng-select *ngIf="showListAccount" [ngModel]="accountList[0]?.account?.id" [items]="accountList"
-            bindLabel="account.name" [clearable]="false" bindValue="account.id"
-            (change)="changeAccountData($event?.account?.id)" [placeholder]="'Account'"></ng-select>
-    </div>
-    <div *ngIf="showListSite" class="col-sm-12 options p-2">
-        <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
-            (change)="changeSitesData($event?.id)" [placeholder]="'Site'"></ng-select>
-    </div>
     <div id="sidebar-menu">
         <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
-            <ng-container *ngFor="let item of menuItems">
+            <ng-container *ngFor="let item of categoryList">
                 <li>
                     <a class="side-nav-link-ref">
-                        <span class="rounded-box" (click)="changeCategoryData(item.products)">{{ item.label }}</span>
+                        <span class="rounded-box" (click)="listProducts(item.products)">{{ item.name }}</span>
                     </a>
                 </li>
             </ng-container>
