@@ -70,4 +70,5 @@ export const URL_ROUTES = {
 	VIEW_ORDER: 'admin/orders/view-order',
 	LIST_ORDER: 'admin/orders/list-orders',
 	ADD_ORDER: 'add-order',
+	KANBAN: 'kanban',
 };

@@ -84,3 +84,11 @@ export const MENU = {
 	DELETE_MENU: '/menu/delete/',
 	UPDATE_MENU: '/menu/update',
 };
+
+export const ORDER = {
+	LIST_ORDER: '/order/list',
+	ADD_MENU: '/menu/add',
+	VIEW_MENU: '/menu/get/',
+	DELETE_MENU: '/menu/delete/',
+	UPDATE_MENU: '/menu/update',
+};

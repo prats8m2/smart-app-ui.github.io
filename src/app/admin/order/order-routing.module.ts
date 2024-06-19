@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListOrderComponent } from './list-order/list-order.component';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { AddOrderComponent } from './add-order/add-order.component';
+import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [
 	{
@@ -16,6 +17,10 @@ const routes: Routes = [
 	{
 		path: 'add-order',
 		component: AddOrderComponent,
+	},
+	{
+		path: 'kanban',
+		component: KanbanComponent,
 	},
 ];
 

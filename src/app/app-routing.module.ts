@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layouts/layout.component';
 import { AddOrderComponent } from './admin/order/add-order/add-order.component';
+import { KanbanComponent } from './admin/order/kanban/kanban.component';
 const routes: Routes = [
 	{
 		path: '',
@@ -20,6 +21,10 @@ const routes: Routes = [
 	{
 		path: 'add-order',
 		component: AddOrderComponent,
+	},
+	{
+		path: 'kanban',
+		component: KanbanComponent,
 	},
 ];
 

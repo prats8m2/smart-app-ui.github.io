@@ -117,6 +117,10 @@ export class ListOrderComponent implements OnInit {
 	routeToAddOrder() {
 		this.router.navigateByUrl(URL_ROUTES.ADD_ORDER);
 	}
+
+	routeToKanban() {
+		this.router.navigateByUrl(URL_ROUTES.KANBAN);
+	}
 	routeToViewMenu(orderId: number) {
 		this.router.navigateByUrl(URL_ROUTES.VIEW_MENU + '/' + orderId);
 	}
