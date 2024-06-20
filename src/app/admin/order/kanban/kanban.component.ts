@@ -1,27 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { OrderService } from '../service/order.service';
 import { IParams } from 'src/app/core/interface/params';
+import { io, Socket } from 'socket.io-client';
+import { Observable } from 'rxjs';
+import { SocketService } from '../service/socket.service';
 
 @Component({
 	selector: 'app-kanban',
 	templateUrl: './kanban.component.html',
 	styleUrls: ['./kanban.component.scss'],
 })
-export class KanbanComponent {
+export class KanbanComponent implements OnInit {
 	orders: any = [];
 
 	newOrders: any = [];
 	inProgresOrders: any = [];
 	completedOrders: any = [];
 
-	constructor(private orderService: OrderService) {
+	constructor(
+		private orderService: OrderService,
+		private socketService: SocketService
+	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
-
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {
 				this.listOrders(res.siteId);
 			}
+		});
+	}
+
+	ngOnInit(): void {
+		this.socketService.onNewOrder().subscribe((order) => {
+			console.log('New order received:', order);
+			this.orders.push(order);
+			this.filterForKanban();
 		});
 	}
 
