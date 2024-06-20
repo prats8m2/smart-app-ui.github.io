@@ -12,11 +12,11 @@
                   
     
                     <h4 class="card-title mb-4">New</h4>
-                    <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, newOrders,'Progress-task')"
+                    <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, newOrders,1)"
                        >
                         <div class="dndPlaceholder" dndPlaceholderRef></div>
                         <ng-container *ngFor="let order of newOrders; let i = index">
-                            <div [dndDraggable]="order" dndEffectAllowed="move" (dndMoved)="onDragged(order, newOrders)">
+                            <div [dndDraggable]="order" dndEffectAllowed="move">
                                 <ng-template [ngTemplateOutlet]="TaskContent" [ngTemplateOutletContext]="{order:order, index: i}">
                                 </ng-template>
                             </div>
@@ -34,10 +34,10 @@
             
 
             <h4 class="card-title mb-4">In Progress</h4>
-            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, inProgresOrders,'Progress-task')">
+            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, inProgresOrders,2)">
                 <div class="dndPlaceholder" dndPlaceholderRef></div>
                 <ng-container *ngFor="let order of inProgresOrders; let i = index">
-                    <div [dndDraggable]="order" dndEffectAllowed="move" (dndMoved)="onDragged(order, inProgresOrders)">
+                    <div [dndDraggable]="order" dndEffectAllowed="move" >
                         <ng-template [ngTemplateOutlet]="TaskContent"
                             [ngTemplateOutletContext]="{order:order, index: i}">
                         </ng-template>
@@ -55,10 +55,10 @@
           
 
             <h4 class="card-title mb-4">Completed</h4>
-            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, completedOrders,'Progress-task')">
+            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move" (dndDrop)="onDrop($event, completedOrders,3)">
                 <div class="dndPlaceholder" dndPlaceholderRef></div>
                 <ng-container *ngFor="let order of completedOrders; let i = index">
-                    <div [dndDraggable]="order" dndEffectAllowed="move" (dndMoved)="onDragged(order, completedOrders)">
+                    <div [dndDraggable]="order" dndEffectAllowed="move">
                         <ng-template [ngTemplateOutlet]="TaskContent"
                             [ngTemplateOutletContext]="{order:order, index: i}">
                         </ng-template>

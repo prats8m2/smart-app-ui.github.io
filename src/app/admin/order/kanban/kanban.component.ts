@@ -59,17 +59,21 @@ export class KanbanComponent implements OnInit {
 		this.completedOrders = this.orders.filter((t) => t.status === 3);
 	}
 
-	onDrop(event: DndDropEvent, filteredList?: any[], targetStatus?: string) {
+	onDrop(event: DndDropEvent, filteredList?: any[], targetStatus?: number) {
 		console.log('Drop', event);
-		if (filteredList && event.dropEffect === 'move') {
+		console.log('targetStatus', targetStatus);
+		const order = event.data;
+		if (
+			filteredList &&
+			event.dropEffect === 'move' &&
+			targetStatus != order.status &&
+			this.updateOrderStatus(order.id, targetStatus)
+		) {
 			let index = event.index;
-
 			if (typeof index === 'undefined') {
 				index = filteredList.length;
 			}
-			console.log(filteredList);
 			filteredList.splice(index, 0, event.data);
-			console.log(filteredList);
 		}
 	}
 
@@ -79,13 +83,13 @@ export class KanbanComponent implements OnInit {
 		list.splice(index, 1);
 	}
 
-	// add new tak
-	addnewTask(status: any) {
-		// this.status = status;
-		// this.assigneeMember = [];
-		// this.memberLists.forEach((element) => {
-		// 	element.checked = false;
-		// });
-		// this.modalForm.show();
+	// update order status
+	async updateOrderStatus(id: number, status: number) {
+		const res = await this.orderService.updateOrderStatus(id, status);
+		if (res.status) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

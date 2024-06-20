@@ -32,4 +32,18 @@ export class OrderService {
 				return result;
 			});
 	}
+
+	updateOrderStatus(id: number, status: number) {
+		
+		return this.http
+			.put(ORDER.UPDATE_ORDER_STATUS, {
+				id,
+				status
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
