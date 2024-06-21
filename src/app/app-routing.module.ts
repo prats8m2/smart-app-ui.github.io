@@ -5,11 +5,13 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layouts/layout.component';
 import { AddOrderComponent } from './admin/order/add-order/add-order.component';
 import { KanbanComponent } from './admin/order/kanban/kanban.component';
+import { RedirectGuard } from './core/guards/redirect.guard';
 const routes: Routes = [
 	{
 		path: '',
 		loadChildren: () =>
 			import('./account/account.module').then((m) => m.AccountModule),
+		canActivate: [RedirectGuard],
 	},
 	{
 		path: 'admin',
