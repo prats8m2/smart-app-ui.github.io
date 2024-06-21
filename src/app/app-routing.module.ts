@@ -21,11 +21,11 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 	},
 	{
-		path: 'add-order',
+		path: 'order/add',
 		component: AddOrderComponent,
 	},
 	{
-		path: 'kanban',
+		path: 'order/kanban',
 		component: KanbanComponent,
 	},
 ];

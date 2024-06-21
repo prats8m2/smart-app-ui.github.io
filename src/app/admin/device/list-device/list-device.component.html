@@ -41,7 +41,7 @@
                                 <tr>
                                     <th class="align-middle">Device ID</th>
                                     <th class="align-middle">Code</th>
-                                    <th class="align-middle">Room</th>
+                                    <th class="align-middle">Assigned</th>
                                     <th class="align-middle">Status</th>
                                     <th class="align-middle" *ngIf="showEditDevice || showDeleteDevice">Action</th>
                                 </tr>
@@ -58,7 +58,9 @@
                                     </td>
                                     <td class="pointer" (click)="routeToViewDevice(data.id)">{{data.code}}</td>
                                     <td>
-                                        {{ data?.room?.name ? data?.room?.name : '-' }}
+                                        <span class="badge badge-soft-success me-1" *ngIf="data?.room">{{data?.room?.name}}</span>
+                                        <span class="badge badge-soft-info me-1" *ngIf="data?.table">{{data?.table?.name}}</span>
+                                        <span class="badge badge-soft-warning me-1" *ngIf="!data?.room && !data?.table">Available</span>
                                     </td>
                                     <td>
                                         <span class="badge badge-pill badge-soft-success font-size-11"
