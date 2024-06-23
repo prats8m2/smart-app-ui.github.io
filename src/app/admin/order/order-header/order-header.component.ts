@@ -59,12 +59,12 @@ export class OrderHeaderComponent {
 		const siteParams: IParams = {
 			limit: 100,
 			pageNumber: 1,
-			accountId: account.id,
+			accountId: account?.id,
 		};
 		const res = await this.siteService.listSitesPromise(siteParams);
 		if (res.status) {
 			this.sitesList = res.data.sites;
-      this.selectedSiteId = this.sitesList[0].id;
+      		this.selectedSiteId = this.sitesList[0].id;
 			this.listCategory(this.selectedSiteId);
 		} else {
 			return null;

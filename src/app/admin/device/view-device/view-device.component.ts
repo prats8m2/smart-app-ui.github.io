@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -6,13 +6,16 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
 import { DeviceService } from '../service/device.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import * as QRCodeStyling from 'qr-code-styling';
+
 
 @Component({
 	selector: 'app-view-device',
 	templateUrl: './view-device.component.html',
 	styleUrls: ['./view-device.component.scss'],
 })
-export class ViewDeviceComponent {
+export class ViewDeviceComponent implements OnInit {
+	@ViewChild('canvas', { static: true }) canvas: ElementRef;
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
@@ -44,6 +47,31 @@ export class ViewDeviceComponent {
 
 	ngOnInit(): void {
 		this.getDevice();
+		console.log(QRCodeStyling);
+		if (!QRCodeStyling) {
+			return;
+		}
+		// const qrCode = new QRCodeStyling({
+		// 	width: 232,
+		// 	height: 232,
+		// 	margin: 14,
+		// 	data: 'https://www.facebook.com/',
+		// 	image:
+		// 		'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
+		// 	dotsOptions: {
+		// 		color: '#4267b2',
+		// 		type: 'rounded',
+		// 	},
+		// 	backgroundOptions: {
+		// 		color: '#e9ebee',
+		// 	},
+		// 	imageOptions: {
+		// 		crossOrigin: 'anonymous',
+		// 		margin: 14,
+		// 	},
+		// });
+
+		// qrCode.append(this.canvas.nativeElement);
 	}
 
 	getDevice() {

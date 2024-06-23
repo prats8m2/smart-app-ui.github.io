@@ -9,6 +9,7 @@ import { EditDeviceComponent } from './edit-device/edit-device.component';
 import { ViewDeviceComponent } from './view-device/view-device.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 		PaginationModule.forRoot(),
 		NgSelectModule,
 		SharedModule,
+		NgxQrcodeStylingModule,
 	],
 })
 export class DeviceModule {}

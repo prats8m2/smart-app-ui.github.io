@@ -19,6 +19,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardsModule } from './dashboards/dashboards.module';
+import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 @NgModule({
 	declarations: [],

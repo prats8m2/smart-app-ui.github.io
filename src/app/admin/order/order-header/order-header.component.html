@@ -37,7 +37,7 @@
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                        <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
+                        <ng-select [items]="sitesList" *ngIf="sitesList.length>2" bindLabel="name" [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
                             (change)="listCategory($event?.id)" [placeholder]="'Site'" style="width: 190px;"></ng-select>
                         </div>
                     </div>
