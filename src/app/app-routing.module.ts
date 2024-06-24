@@ -6,6 +6,7 @@ import { LayoutComponent } from './layouts/layout.component';
 import { AddOrderComponent } from './admin/order/add-order/add-order.component';
 import { KanbanComponent } from './admin/order/kanban/kanban.component';
 import { RedirectGuard } from './core/guards/redirect.guard';
+import { HomeComponent } from './user/home/home.component';
 const routes: Routes = [
 	{
 		path: '',
@@ -27,6 +28,13 @@ const routes: Routes = [
 	{
 		path: 'order/kanban',
 		component: KanbanComponent,
+	},
+	{
+		path: 'app',
+		component: HomeComponent,
+		loadChildren: () =>
+			import('./user/user.module').then((m) => m.UserModule),
+		canActivate: [AuthGuard],
 	},
 ];
 

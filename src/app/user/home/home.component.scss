@@ -1,0 +1,43 @@
+
+
+.my-icon {
+  width: 30px;
+  height: 30px;
+}
+
+
+.mt-cs-5{
+    margin-top: 5rem !important;
+}
+
+.mt-cs-3{
+    margin-top: 3rem !important;
+}
+
+.box-shadow{
+    box-shadow: 0px 0px 1px 2px #556ee6;
+
+}
+
+.home-background {
+  background-image: url('../../../assets/bg/night-blue.jpg');
+  background-size: cover; /* Make the background cover the entire element */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background from repeating */
+  height: 100vh; /* Make the background cover the full viewport height */
+  width: 100%; /* Make the background cover the full width */
+}
+
+.fixed-rounded-div {
+    width: 80px !important; /* Set fixed width */
+    height: 80px; /* Set fixed height */
+    border-radius: 50%; /* Make the div rounded */
+    display: flex; /* Enable flexbox for centering */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    padding: 10px; /* Add padding for internal spacing */
+    background-color: var(--bs-primary-subtle); /* Bootstrap primary subtle background color */
+}
+
+
