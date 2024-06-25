@@ -71,4 +71,10 @@ export const URL_ROUTES = {
 	LIST_ORDER: 'admin/orders/list-orders',
 	ADD_ORDER: 'order/add',
 	KANBAN: 'order/kanban',
+
+	//user app
+	HOME: 'app',
+	MENU: 'app/menu',
+	ORDER_HISTORY: 'app/order/history',
+	ORDER_DETAILS: 'app/order/details',
 };
