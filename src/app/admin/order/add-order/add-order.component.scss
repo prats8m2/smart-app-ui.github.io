@@ -2,3 +2,23 @@
     margin-top: 100px;
     padding-left: 18px;
 }
+
+.card1 {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 154px);
+}
+.card-body1 {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+.table-container {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 275px);
+}
+.card-footer {
+    flex-shrink: 0;
+}
+  

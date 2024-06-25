@@ -1,16 +1,15 @@
 <div id="layout-wrapper">
-    <!-- <app-topbar (settingsButtonClicked)="onSettingsButtonClicked()" (mobileMenuButtonClicked)="onToggleMobileMenu()">
-    </app-topbar> -->
+
     <app-order-header></app-order-header>
     <app-order-sidebar></app-order-sidebar>
 
     <div class="main-content">
         <div class="page-content">
-            <div class="container-fluid">
+            <div>
                 <div class="row">
                     <div class="col-xl-7 col-lg-6 col-md-6">
                         <!-- Show List Of Products -->
-                        <div class="row">
+                        <div class="row container-fluid">
 
                             <div class="col-md-6 col-xl-3" *ngFor="let product of filteredProducts; let i = index">
                                 <div class="card mb-4">
@@ -28,7 +27,8 @@
                                                     <h5><b>${{product.price}}</b></h5>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button class="btn btn-soft-primary w-100" (click)="addProductToOrder(product)"
+                                                    <button class="btn btn-soft-primary w-100"
+                                                        (click)="addProductToOrder(product)"
                                                         [disabled]="isAddedinOrder(product.id)"
                                                         type="submit">Add</button>
                                                 </div>
@@ -41,70 +41,89 @@
                     </div>
                     <div class="col-xl-5  col-lg-5 col-md-6">
                         <div class="row">
-                        <!-- Show Order Details-->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-centered mb-0 table-nowrap align-middle">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th colspan="2">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="product" *ngFor="let product of order; let i = index">
-                                                <td>
-                                                    <h5 class="font-size-14 text-truncate"><a routerLink="/ecommerce/product-detail/1" class="text-dark">{{ product.name
-                                                }}</a></h5>
-                                                </td>
-                                               
-                                                <td>$<span class="product-price"> {{ product.price }}</span></td>
-                                                <td>
-                                                    <div class="me-3" style="width: 120px;">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend"><button type="button" class="btn btn-primary"
-                                                                    (click)="calculateQty('1',product.qty,i)">+</button></div>
-                                                            <input name="demo_vertical" value="{{product.qty}}" type="text" class="form-control" min="0" max="100"
-                                                                readonly>
-                                                            <div class="input-group-append"><button type="button" class="btn btn-primary"
-                                                                    (click)="calculateQty('0',product.qty,i)">-</button></div>
+                            <!-- Show Order Details-->
+                            <div class="card1">
+                                <div class="card-body1">
+                                    <div class="table-container">
+                                        <table class="table table-centered mb-0 table-nowrap align-middle">
+                                            <thead class="table-light">
+                                                <tr p>
+                                                    <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th colspan="2">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="product" *ngFor="let product of order; let i = index">
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a class="text-dark">{{
+                                                                product.name
+                                                                }}</a></h5>
+                                                    </td>
+
+                                                    <td>$<span class="product-price"> {{ product.price }}</span></td>
+                                                    <td>
+                                                        <div class="me-3" style="width: 120px;">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend"><button type="button"
+                                                                        class="btn btn-primary"
+                                                                        (click)="calculateQty('1',product.qty,i)">+</button>
+                                                                </div>
+                                                                <input name="demo_vertical" value="{{product.qty}}"
+                                                                    type="text" class="form-control text-center" min="0"
+                                                                    readonly>
+                                                                <div class="input-group-append"><button type="button"
+                                                                        class="btn btn-primary"
+                                                                        (click)="calculateQty('0',product.qty,i)">-</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>$<span class="product-line-price">{{ product.total }}</span></td>
-                                                <td>
-                                                    <div class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
-                                                        <a href="javascript:void(0);" class="action-icon text-danger" (click)="delete(i)"> <i
-                                                                class="mdi mdi-trash-can font-size-18"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <!-- Table body for order -->
-                                        </tbody>
-                                    </table>
+                                                    </td>
+                                                    <td>$<span class="product-line-price">{{ product.total }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-inline-block" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title="Remove">
+                                                            <a class="action-icon text-danger" (click)="delete(i)"> <i
+                                                                    class="mdi mdi-trash-can font-size-18"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
-                                <div class="row mt-4">
-                                    <div class="col-sm-4" *ngIf="showListRoom">
-                                        <ng-select  [ngModel]="rooms[0]?.id" [items]="rooms" bindLabel="name"  bindLabel="name"
-                                            [clearable]="false" bindValue="id" [placeholder]="'Room'"  (change)="updateRoom($event)"
-                                            style="width: 190px;"></ng-select>
-                                    </div> <!-- end col -->
-                                    <div class="col-sm-4" *ngIf="showListTable">
-                                        <ng-select [ngModel]="tables[0]?.id" [items]="tables" bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Table'"  (change)="updateTable($event)"
-                                            style="width: 190px;"></ng-select>
-                                    </div> <!-- end col -->
-                                    <div class="col-sm-4">
-                                        <div class="text-sm-end mt-2 mt-sm-0">
-                                            <a routerLink="/ecommerce/checkout" class="btn btn-success">
-                                                <i class="mdi mdi-cart-arrow-right me-1"></i> Create Order </a>
+                                <div class="card-footer ">
+                                    <div class="row mt-4">
+                                        <div class="col-sm-6" *ngIf="showListRoom">
+                                            <ng-select [ngModel]="rooms[0]?.id" [items]="rooms" bindLabel="name"
+                                                bindLabel="name" [clearable]="false" bindValue="id"
+                                                [placeholder]="'Room'" (change)="updateRoom($event)"></ng-select>
                                         </div>
-                                    </div> <!-- end col -->
-                                </div> <!-- end row-->
+                                        <div class="col-sm-6" *ngIf="showListTable">
+                                            <ng-select [ngModel]="tables[0]?.id" [items]="tables" bindLabel="name"
+                                                [clearable]="false" bindValue="id" [placeholder]="'Table'"
+                                                (change)="updateTable($event)"></ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-6">
+                                            <h5 class="mt-2">Price : <span class="text-muted me-2"></span> <b>$
+                                                    {{totalAmountOfProduct}}
+                                                    USD</b></h5>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="text-sm-end mt-2 mt-sm-0" (click)="addOrder()">
+                                                <a class="btn btn-success">
+                                                    <i class="mdi mdi-cart-arrow-right me-1"></i> Create Order </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
                         </div>
                     </div>
 

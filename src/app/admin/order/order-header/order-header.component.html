@@ -21,7 +21,7 @@
                     </span>
                 </a>
             </div>
-            
+
             <div class=" d-inline-block">
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
@@ -37,8 +37,10 @@
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                        <ng-select [items]="sitesList" *ngIf="sitesList.length>2" bindLabel="name" [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
-                            (change)="listCategory($event?.id)" [placeholder]="'Site'" style="width: 190px;"></ng-select>
+                            <ng-select [items]="sitesList" *ngIf="sitesList.length>2" bindLabel="name"
+                                [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
+                                (change)="listCategory($event?.id)" [placeholder]="'Site'"
+                                style="width: 190px;"></ng-select>
                         </div>
                     </div>
                 </div>
@@ -48,8 +50,8 @@
                     <div class="search-box me-2 d-inline-block">
                         <div class="position-relative">
                             <div class="form-check form-radio-outline form-radio-primary">
-                                <input class="form-check-input" type="radio" name="orderType" id="formRadioFood" value="1"
-                                    (change)="onOrderTypeChange(1)" checked>
+                                <input class="form-check-input" type="radio" name="orderType" id="formRadioFood"
+                                    value="1" (change)="onOrderTypeChange(1)" checked>
                                 <label class="form-check-label" for="formRadioFood">
                                     Food
                                 </label>
@@ -58,14 +60,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="d-inline-block">
                 <div class="col-lg-10 mt-4 ms-2">
                     <div class="search-box me-2 d-inline-block">
                         <div class="position-relative">
                             <div class="form-check form-radio-outline form-radio-success">
-                                <input class="form-check-input" type="radio" name="orderType" id="formRadioAmenities" value="2"
-                                    (change)="onOrderTypeChange(2)">
+                                <input class="form-check-input" type="radio" name="orderType" id="formRadioAmenities"
+                                    value="2" (change)="onOrderTypeChange(2)">
                                 <label class="form-check-label" for="formRadioAmenities">
                                     Amenities
                                 </label>
@@ -85,7 +87,7 @@
                     </div>
                 </div>
             </div>
-       
+
 
 
         </div>

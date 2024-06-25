@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LAYOUT_VERTICAL } from 'src/app/layouts/layouts.model';
-import { productList } from './products';
 import { OrderService } from '../service/order.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { IParams } from 'src/app/core/interface/params';
 import { RoomService } from '../../room/services/room.service';
 import { TableService } from '../../table/services/table.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -28,8 +24,7 @@ export class AddOrderComponent implements OnInit {
 	selectedRoom: number;
 	selectedTable: number;
 	selectedSite: number;
-	//form
-	orderForm: FormGroup;
+	totalAmountOfProduct: number = 0;
 
 	roomParams: IParams = {
 		siteId: null,
@@ -52,9 +47,7 @@ export class AddOrderComponent implements OnInit {
 		private orderService: OrderService,
 		private globalService: GlobalService,
 		private roomService: RoomService,
-		private tableService: TableService,
-		private formBuilder: FormBuilder,
-		private siteService: SiteService
+		private tableService: TableService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 
@@ -69,7 +62,7 @@ export class AddOrderComponent implements OnInit {
 					}
 
 					if (this.showListTable) {
-						this.listTables(res.siteId)
+						this.listTables(res.siteId);
 					}
 				}
 				this.selectedSite = res.siteId;
@@ -107,9 +100,9 @@ export class AddOrderComponent implements OnInit {
 				total: product.price,
 			};
 			this.order.push(productOrder);
+			this.totalAmountOfProduct += product.price;
 		} else {
 		}
-		console.log(this.order);
 	}
 
 	isAddedinOrder(id) {
@@ -119,11 +112,12 @@ export class AddOrderComponent implements OnInit {
 	calculateQty(operation: string, currentQty: number, index: number): void {
 		if (operation === '1') {
 			this.order[index].qty += 1;
+			this.totalAmountOfProduct += this.order[index].price;
 		} else if (operation === '0' && this.order[index].qty > 0) {
 			this.order[index].qty -= 1;
+			this.totalAmountOfProduct -= this.order[index].price;
 		}
 		this.order[index].total = this.order[index].qty * this.order[index].price;
-		console.log(this.order);
 	}
 
 	delete(index): void {
@@ -179,5 +173,9 @@ export class AddOrderComponent implements OnInit {
 		if (window.screen.width <= 768) {
 			document.body.classList.remove('vertical-collpsed');
 		}
+	}
+
+	addOrder() {
+		console.log(1);
 	}
 }
