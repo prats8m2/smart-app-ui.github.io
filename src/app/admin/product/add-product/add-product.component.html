@@ -60,7 +60,7 @@
                 <div class="col-lg-6 mb-4">
                     <label for="productType">Type</label>
                     <ng-select [items]="productTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Type'"></ng-select>
+                        formControlName="type" [placeholder]="'Type'" (change)="changeType($event.id)"></ng-select>
                 </div>
             </div>
             <div class="row">

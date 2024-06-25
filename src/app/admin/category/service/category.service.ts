@@ -4,7 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { CATEGORY, DEVICE } from 'src/app/constants/api';
 import { IParams } from 'src/app/core/interface/params';
-import { GlobalService } from 'src/app/core/services/global.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -16,7 +15,7 @@ export class CategoryService {
 		return this.http
 			.get(
 				CATEGORY.LIST_CATEGORY +
-					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
 			)
 			.pipe(
 				map((response: any) => {
