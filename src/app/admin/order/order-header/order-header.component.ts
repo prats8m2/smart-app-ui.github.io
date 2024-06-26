@@ -64,7 +64,7 @@ export class OrderHeaderComponent {
 		const res = await this.siteService.listSitesPromise(siteParams);
 		if (res.status) {
 			this.sitesList = res.data.sites;
-      		this.selectedSiteId = this.sitesList[0].id;
+			this.selectedSiteId = this.sitesList[0].id;
 			this.listCategory(this.selectedSiteId);
 		} else {
 			return null;
@@ -73,12 +73,11 @@ export class OrderHeaderComponent {
 
 	onOrderTypeChange(orderType: number): void {
 		this.selectedOrderType = orderType;
-		console.log('Selected Order Type:', this.selectedOrderType);
-		this.listCategory(null)
+		this.listCategory(null);
 	}
 
 	listCategory(siteId) {
-    if(siteId)  this.selectedSiteId = siteId
+		if (siteId) this.selectedSiteId = siteId;
 		this.orderService.categoryChange.next({
 			siteId: this.selectedSiteId,
 			orderType: this.selectedOrderType,

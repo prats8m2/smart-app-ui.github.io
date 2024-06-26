@@ -24,7 +24,11 @@ export class AddOrderComponent implements OnInit {
 	selectedRoom: number;
 	selectedTable: number;
 	selectedSite: number;
+	selectedType: number;
 	totalAmountOfProduct: number = 0;
+	showRoomDropdown: boolean = true;
+	showTableDropdown: boolean = false;
+	disableSaveButton: boolean = true;
 
 	roomParams: IParams = {
 		siteId: null,
@@ -80,7 +84,7 @@ export class AddOrderComponent implements OnInit {
 									product.name.toLowerCase().includes(searchTerm.toLowerCase())
 								);
 							} else {
-								this.filteredProducts = this.products; // Reset to all products if the search term is empty
+								this.filteredProducts = this.products;
 							}
 						}
 						break;
@@ -94,7 +98,7 @@ export class AddOrderComponent implements OnInit {
 		if (!existingProduct) {
 			const productOrder = {
 				id: product.id,
-				qty: 1,
+				quantity: 1,
 				price: product.price,
 				name: product.name,
 				total: product.price,
@@ -111,20 +115,20 @@ export class AddOrderComponent implements OnInit {
 
 	calculateQty(operation: string, currentQty: number, index: number): void {
 		if (operation === '1') {
-			this.order[index].qty += 1;
+			this.order[index].quantity += 1;
 			this.totalAmountOfProduct += this.order[index].price;
-		} else if (operation === '0' && this.order[index].qty > 0) {
-			this.order[index].qty -= 1;
+		} else if (operation === '0' && this.order[index].quantity > 0) {
+			this.order[index].quantity -= 1;
 			this.totalAmountOfProduct -= this.order[index].price;
 		}
-		this.order[index].total = this.order[index].qty * this.order[index].price;
+		this.order[index].total =
+			this.order[index].quantity * this.order[index].price;
 	}
 
 	delete(index): void {
 		if (index !== -1) {
 			this.order.splice(index, 1);
 		}
-		console.log(this.order);
 	}
 
 	async listRooms(siteId) {
@@ -149,14 +153,16 @@ export class AddOrderComponent implements OnInit {
 
 	updateRoom(selectedRoomId: number): void {
 		this.selectedRoom = selectedRoomId;
-		this.selectedTable = null; // Clear the table selection
-		console.log('Selected Room ID:', this.selectedRoom);
+		this.selectedTable = 0;
+		this.disableSaveButton = false;
+		this.selectedType = 2;
 	}
 
 	updateTable(selectedTableId: number): void {
 		this.selectedTable = selectedTableId;
-		this.selectedRoom = null; // Clear the room selection
-		console.log('Selected Table ID:', this.selectedTable);
+		this.selectedRoom = 0;
+		this.disableSaveButton = false;
+		this.selectedType = 1;
 	}
 
 	ngOnInit(): void {}
@@ -175,7 +181,34 @@ export class AddOrderComponent implements OnInit {
 		}
 	}
 
+	onChangeRadio(value: number) {
+		this.showRoomDropdown = value === 1;
+		this.showTableDropdown = !this.showRoomDropdown;
+	}
+
+	resetData() {
+		this.order = null;
+		this.totalAmountOfProduct = 0;
+		this.showRoomDropdown = true;
+		this.showTableDropdown = false;
+	}
+
 	addOrder() {
-		console.log(1);
+		//create order API
+		this.orderService
+			.addOrder(
+				this.selectedType,
+				this.selectedTable,
+				this.selectedRoom,
+				this.selectedSite,
+				this.order
+			)
+			.then((res) => {
+				if (res.status) {
+					window.location.reload();
+				} else {
+					console.log('error');
+				}
+			});
 	}
 }
