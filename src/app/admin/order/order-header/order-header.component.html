@@ -28,7 +28,7 @@
                         <div class="position-relative">
                             <ng-select *ngIf="showListAccount" [ngModel]="accountList[0]?.id" [items]="accountList"
                                 bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Account'"
-                                (change)="listSites($event)" style="width: 190px;"></ng-select>
+                                (change)="listSites($event)"></ng-select>
                         </div>
                     </div>
                 </div>
@@ -39,19 +39,7 @@
                         <div class="position-relative">
                             <ng-select *ngIf="showListSite" [ngModel]="sitesList[0]?.id" [items]="sitesList"
                                 bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                                (change)="listCategory($event.id)" style="width: 190px;"></ng-select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" d-inline-block">
-                <div class="col-lg-15 mt-3 ms-2">
-                    <div class="search-box me-2 mb-2 d-inline-block">
-                        <div class="position-relative">
-                            <ng-select [items]="sitesList" *ngIf="sitesList.length>2" bindLabel="name"
-                                [clearable]="false" bindValue="id" [ngModel]="sitesList[0]?.id"
-                                (change)="listCategory($event?.id)" [placeholder]="'Site'"
-                                style="width: 190px;"></ng-select>
+                                (change)="listCategory($event.id)"></ng-select>
                         </div>
                     </div>
                 </div>
