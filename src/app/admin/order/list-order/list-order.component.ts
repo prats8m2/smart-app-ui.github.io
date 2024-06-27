@@ -49,7 +49,6 @@ export class ListOrderComponent implements OnInit {
 	};
 
 	orderList: any = [];
-	orderListResp: any = [];
 	sitesList: any = [];
 	selectedSite: number;
 	accountList: any = [];
@@ -91,15 +90,9 @@ export class ListOrderComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		this.orderList = this.orderListResp
-			.slice(startIndex, endIndex)
-			.filter((item) =>
-				item.name.toLowerCase().includes(this.searchInput.toLowerCase())
-			);
+		this.orderList = this.orders.slice(startIndex, endIndex);
 
-		this.total = this.searchInput
-			? this.orderList.length
-			: this.orderListResp.length;
+		this.total = this.searchInput ? this.orderList.length : this.orders.length;
 	}
 
 	onSearch(): void {
@@ -139,7 +132,6 @@ export class ListOrderComponent implements OnInit {
 	}
 
 	async listOrderAPI(siteId: any, type: any) {
-		console.log('List Order API');
 		const orderParams: IParams = {
 			siteId,
 			type: type,
@@ -149,6 +141,7 @@ export class ListOrderComponent implements OnInit {
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
 			this.orders = res.data.orders;
+			this.updateDisplayedData();
 		} else {
 			return null;
 		}
