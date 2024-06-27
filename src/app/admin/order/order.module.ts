@@ -15,6 +15,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { OrderHeaderComponent } from './order-header/order-header.component';
 import { KanbanComponent } from './kanban/kanban.component';
 import { KanbanHeaderComponent } from './kanban-header/kanban-header.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -22,9 +23,9 @@ import { KanbanHeaderComponent } from './kanban-header/kanban-header.component';
 		ListOrderComponent,
 		AddOrderComponent,
 		OrderSidebarComponent,
-  OrderHeaderComponent,
-  KanbanComponent,
-  KanbanHeaderComponent,
+		OrderHeaderComponent,
+		KanbanComponent,
+		KanbanHeaderComponent,
 	],
 	imports: [
 		FormsModule,
@@ -35,6 +36,7 @@ import { KanbanHeaderComponent } from './kanban-header/kanban-header.component';
 		NgSelectModule,
 		DndModule,
 		CKEditorModule,
+		SharedModule,
 		LayoutsModule,
 		SimplebarAngularModule,
 	],

@@ -24,7 +24,7 @@ export class OrderService {
 		return this.http
 			.get(
 				ORDER.LIST_ORDER +
-					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
 			)
 			.toPromise()
 			.then((response) => {
@@ -46,11 +46,19 @@ export class OrderService {
 			});
 	}
 
-	addOrder(type: any = 1, table: any, room: any, site: any, products: any) {
+	addOrder(
+		type: any = 1,
+		categoryType: number,
+		table: any,
+		room: any,
+		site: any,
+		products: any
+	) {
 		let obj: any = {
 			type: type,
 			site: site,
 			products: products,
+			categoryType,
 		};
 
 		if (table != 0) {

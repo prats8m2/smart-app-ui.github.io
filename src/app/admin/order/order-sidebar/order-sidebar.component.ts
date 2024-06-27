@@ -3,18 +3,10 @@ import {
 	Component,
 	ElementRef,
 	Input,
-	OnChanges,
-	OnInit,
 	ViewChild,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import MetisMenu from 'metismenujs';
 import { IParams } from 'src/app/core/interface/params';
-import { GlobalService } from 'src/app/core/services/global.service';
-import { MenuItem } from 'src/app/layouts/sidebar/menu.model';
-import { AccountService } from '../../accounts/service/account.service';
 import { CategoryService } from '../../category/service/category.service';
-import { SiteService } from '../../site/service/site.service';
 import { OrderService } from '../service/order.service';
 
 @Component({
@@ -27,6 +19,7 @@ export class OrderSidebarComponent implements AfterViewInit {
 	@Input() isCondensed = false;
 	permissions: any;
 	categoryList: any = [];
+	selectedCategoryType: number;
 
 	productTypes = [
 		{ id: 1, label: 'Food' },
@@ -43,7 +36,6 @@ export class OrderSidebarComponent implements AfterViewInit {
 	@ViewChild('sideMenu') sideMenu: ElementRef;
 
 	constructor(
-		private router: Router,
 		private categoryService: CategoryService,
 		private orderService: OrderService
 	) {
@@ -51,6 +43,7 @@ export class OrderSidebarComponent implements AfterViewInit {
 		this.orderService.categoryChange.subscribe((res) => {
 			if (res) {
 				this.listCategory(res.siteId, res.orderType);
+				this.selectedCategoryType = res.categoryType;
 			}
 		});
 	}
@@ -65,7 +58,7 @@ export class OrderSidebarComponent implements AfterViewInit {
 			this.categoryList = res.data.categories;
 			if (this.categoryList[0] && this.categoryList[0].products)
 				this.listProducts(this.categoryList[0].products);
-			else{
+			else {
 				this.listProducts([]);
 			}
 		}
@@ -75,6 +68,7 @@ export class OrderSidebarComponent implements AfterViewInit {
 		this.orderService.productsDetails.next({
 			products,
 			siteId: this.categoryParams.siteId,
+			categoryType: this.selectedCategoryType,
 		});
 	}
 	ngAfterViewInit() {

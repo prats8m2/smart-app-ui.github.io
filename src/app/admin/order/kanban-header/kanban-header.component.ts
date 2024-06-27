@@ -63,8 +63,10 @@ export class KanbanHeaderComponent {
 		const res = await this.siteService.listSitesPromise(siteParams);
 		if (res.status) {
 			this.sitesList = res.data.sites;
-			this.selectedSiteId = this.sitesList[0].id;
-			this.listOrders(this.selectedSiteId);
+			if (this.sitesList.length) {
+				this.selectedSiteId = this.sitesList[0]?.id;
+				this.listOrders(this.selectedSiteId);
+			}
 		} else {
 			return null;
 		}
@@ -72,7 +74,6 @@ export class KanbanHeaderComponent {
 
 	onOrderTypeChange(orderType: number): void {
 		this.selectedOrderType = orderType;
-		console.log('Selected Order Type:', this.selectedOrderType);
 		this.listOrders(null);
 	}
 
@@ -80,7 +81,7 @@ export class KanbanHeaderComponent {
 		if (siteId) this.selectedSiteId = siteId;
 		this.orderService.ordersChange.next({
 			siteId: this.selectedSiteId,
-			// orderType: this.selectedOrderType,
+			orderType: this.selectedOrderType,
 		});
 	}
 

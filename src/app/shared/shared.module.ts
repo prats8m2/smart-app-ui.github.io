@@ -9,8 +9,10 @@ import { RoomOccupiedPipe } from '../core/pipes/roomOccupied.pipe';
 import { SiteTypePipe } from '../core/pipes/siteType.pipe';
 import { DefaultRolePipe } from '../core/pipes/defaultRole.pipe';
 import { KeysPipe } from '../core/pipes/keys.pipe';
-import { TopbarComponent } from '../layouts/topbar/topbar.component';
 import { LayoutsModule } from '../layouts/layouts.module';
+import { TimeAgoPipe } from '../core/pipes/time-ago.pipe';
+import { OrderStatusPipe } from '../core/pipes/order-status.pipe';
+import { OrderTypePipe } from '../core/pipes/order-type.pipe';
 
 @NgModule({
 	declarations: [
@@ -18,7 +20,10 @@ import { LayoutsModule } from '../layouts/layouts.module';
 		RoomOccupiedPipe,
 		SiteTypePipe,
 		DefaultRolePipe,
+		TimeAgoPipe,
 		KeysPipe,
+		OrderStatusPipe,
+		OrderTypePipe,
 	],
 	imports: [CommonModule, UIModule, WidgetModule, LayoutsModule],
 	exports: [
@@ -26,7 +31,10 @@ import { LayoutsModule } from '../layouts/layouts.module';
 		RoomOccupiedPipe,
 		SiteTypePipe,
 		DefaultRolePipe,
+		TimeAgoPipe,
 		KeysPipe,
+		OrderStatusPipe,
+		OrderTypePipe,
 	],
 })
 export class SharedModule {}

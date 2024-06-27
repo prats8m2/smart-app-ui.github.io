@@ -29,6 +29,7 @@ export class AddOrderComponent implements OnInit {
 	showRoomDropdown: boolean = true;
 	showTableDropdown: boolean = false;
 	disableSaveButton: boolean = true;
+	categoryType: number = 1;
 
 	roomParams: IParams = {
 		siteId: null,
@@ -59,6 +60,7 @@ export class AddOrderComponent implements OnInit {
 			if (res) {
 				this.products = res.products;
 				this.filteredProducts = this.products;
+				this.categoryType = res.categoryType;
 				if (this.selectedSite !== res.siteId) {
 					//list rooms and tables
 					if (this.showListRoom) {
@@ -195,9 +197,11 @@ export class AddOrderComponent implements OnInit {
 
 	addOrder() {
 		//create order API
+		console.log(this.categoryType);
 		this.orderService
 			.addOrder(
 				this.selectedType,
+				this.categoryType,
 				this.selectedTable,
 				this.selectedRoom,
 				this.selectedSite,
