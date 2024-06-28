@@ -1,0 +1,33 @@
+<div id="layout-wrapper">
+    <app-user-header></app-user-header>
+    <div class="main-content home-background">
+        <div class="page-content">
+            <h5 class="display-6 mb-4"><i (click)="routeTo('HOME')"
+                    class="bx bx-left-arrow-alt me-1 text-muted"></i>Order Summary</h5>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-bottom text-uppercase">
+                                Order #342335
+                            </div>
+                            <div class="card-body">
+                                <app-order-timeline></app-order-timeline>
+                            </div>
+                            <div class="card-footer text-muted">
+                            <div class=" d-flex">
+                                <p class="fw-light me-2">
+                                    <i class="bx bx-calendar me-1 text-muted"></i>
+                                    24 May 2024 at 1:57PM
+                                </p>
+                                <p><small>(6 min ago)</small></p>
+                               
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

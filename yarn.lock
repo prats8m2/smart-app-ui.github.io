@@ -160,7 +160,7 @@
     "symbol-observable" "4.0.0"
     "yargs" "17.7.2"
 
-"@angular/common@ ^16.0.0-rc.0 || ^16.0.0", "@angular/common@*", "@angular/common@^12.0.0", "@angular/common@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/common@^14.0.0", "@angular/common@^14.1.0", "@angular/common@^15.0.0", "@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.0.0 || ^17.0.0 || ^18.0.0", "@angular/common@>=10.0.0", "@angular/common@>=12.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=16.0.0", "@angular/common@>=16.0.0-0", "@angular/common@>=6.0.0", "@angular/common@>=9.0.0", "@angular/common@>8.0.0", "@angular/common@12 - 16", "@angular/common@16", "@angular/common@16.1.4":
+"@angular/common@ ^16.0.0-rc.0 || ^16.0.0", "@angular/common@*", "@angular/common@^12.0.0", "@angular/common@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/common@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/common@^14.0.0", "@angular/common@^14.1.0", "@angular/common@^15.0.0", "@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.0.0 || ^17.0.0 || ^18.0.0", "@angular/common@>=10.0.0", "@angular/common@>=12.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=16.0.0", "@angular/common@>=16.0.0-0", "@angular/common@>=6.0.0", "@angular/common@>=9.0.0", "@angular/common@>8.0.0", "@angular/common@12 - 16", "@angular/common@16", "@angular/common@16.1.4":
   "integrity" "sha512-SDA8GZVY0nXCJaNUy13L22jAKuk1LZgQ6QzqOpqQc50C25bfBQbYv68PKjHCjQ62VxGKnDSTT85xCMNx+y/U4g=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-16.1.4.tgz"
   "version" "16.1.4"
@@ -193,7 +193,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@*", "@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/core@^14.0.0", "@angular/core@^14.1.0", "@angular/core@^15.0.0", "@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.0.0 || ^17.0.0 || ^18.0.0", "@angular/core@^16.0.0-rc.0 || ^16.0.0", "@angular/core@>=10.0.0", "@angular/core@>=12.0.0", "@angular/core@>=13.0.0", "@angular/core@>=14.0.0", "@angular/core@>=15.0.0-0", "@angular/core@>=16.0.0", "@angular/core@>=16.0.0-0", "@angular/core@>=5.0.0", "@angular/core@>=6.0.0", "@angular/core@>=9.0.0", "@angular/core@>8.0.0", "@angular/core@12 - 16", "@angular/core@16", "@angular/core@16.1.4":
+"@angular/core@*", "@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/core@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/core@^14.0.0", "@angular/core@^14.1.0", "@angular/core@^15.0.0", "@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.0.0 || ^17.0.0 || ^18.0.0", "@angular/core@^16.0.0-rc.0 || ^16.0.0", "@angular/core@>=10.0.0", "@angular/core@>=12.0.0", "@angular/core@>=13.0.0", "@angular/core@>=14.0.0", "@angular/core@>=15.0.0-0", "@angular/core@>=16.0.0", "@angular/core@>=16.0.0-0", "@angular/core@>=5.0.0", "@angular/core@>=6.0.0", "@angular/core@>=9.0.0", "@angular/core@>8.0.0", "@angular/core@12 - 16", "@angular/core@16", "@angular/core@16.1.4":
   "integrity" "sha512-eWs++peAp+Lm2SHGfMsHAye2IOmlDKkVJ4dFf4TaZXW+AEev3FXKXLFp+dBUq8YkCKly7iAV26NXEUBOFFtplQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-16.1.4.tgz"
   "version" "16.1.4"
@@ -205,7 +205,7 @@
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/forms@^14.1.0", "@angular/forms@^15.0.0", "@angular/forms@^16.0.0", "@angular/forms@>=10.0.0", "@angular/forms@>=13.0.0", "@angular/forms@>=14.0.0", "@angular/forms@>=5.0.0", "@angular/forms@>=9.0.0", "@angular/forms@16.1.4":
+"@angular/forms@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "@angular/forms@^14.1.0", "@angular/forms@^15.0.0", "@angular/forms@^16.0.0", "@angular/forms@>=10.0.0", "@angular/forms@>=13.0.0", "@angular/forms@>=14.0.0", "@angular/forms@>=5.0.0", "@angular/forms@>=9.0.0", "@angular/forms@16.1.4":
   "integrity" "sha512-JLhO7gM0WyTfr6tEWZMiCGikWLgaC/a2+tuxWsSlXUjlrbE4DyLzSAA6JqyDCFTvm9B/QzRPDfgExLTTZJY4eQ=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-16.1.4.tgz"
   "version" "16.1.4"
@@ -6076,6 +6076,13 @@
     "qr-code-styling" "^1.6.0-rc.1"
     "tslib" "^2.3.0"
 
+"ngx-slick-carousel@^15.0.0":
+  "integrity" "sha512-4di69uKcA+cDsb3w7411rmGH2cTaTCT98SFD1qqxDhIInNpV2qga7dkXLCdgxHMYraPg8JrnGZus7uHL0lj7lw=="
+  "resolved" "https://registry.npmjs.org/ngx-slick-carousel/-/ngx-slick-carousel-15.0.0.tgz"
+  "version" "15.0.0"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "ngx-slider-v2@^16.0.2":
   "integrity" "sha512-Lpl7SlErL+tJJvTRZYdyZoXTThKN8Ro1z3vscJQ1O5azHXwvbv3pnTcsOwY4ltfaP+dpzY27KL1QXyDr6QMaxQ=="
   "resolved" "https://registry.npmjs.org/ngx-slider-v2/-/ngx-slider-v2-16.0.2.tgz"
@@ -7064,7 +7071,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^6.5.3 || ^7.6.0", "rxjs@^6.5.5 || ^7.4.0", "rxjs@^7.4.0", "rxjs@^7.5.5", "rxjs@^7.8.1", "rxjs@>=6.0.0", "rxjs@7.8.1":
+"rxjs@^6.0.0 || ^7.0.0", "rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^6.5.3 || ^7.6.0", "rxjs@^6.5.5 || ^7.4.0", "rxjs@^7.4.0", "rxjs@^7.5.5", "rxjs@^7.8.1", "rxjs@>=6.0.0", "rxjs@7.8.1":
   "integrity" "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   "version" "7.8.1"
@@ -8513,7 +8520,7 @@
   "resolved" "https://registry.npmjs.org/yn/-/yn-3.1.1.tgz"
   "version" "3.1.1"
 
-"zone.js@^0.13.1", "zone.js@~0.13.0":
+"zone.js@^0.13.1", "zone.js@>=0.10.2", "zone.js@~0.13.0":
   "integrity" "sha512-+bIeDAFEBYuXRuU3qGQvzdPap+N1zjM4KkBAiiQuVVCrHrhjDuY6VkUhNa5+U27+9w0q3fbKiMCbpJ0XzMmSWA=="
   "resolved" "https://registry.npmjs.org/zone.js/-/zone.js-0.13.1.tgz"
   "version" "0.13.1"
