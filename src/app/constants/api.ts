@@ -87,6 +87,7 @@ export const MENU = {
 
 export const ORDER = {
 	LIST_ORDER: '/order/list',
+	ADD_ORDER: '/order/add',
 	UPDATE_ORDER_STATUS: '/order/update/status',
 	ADD_MENU: '/menu/add',
 	VIEW_MENU: '/menu/get/',

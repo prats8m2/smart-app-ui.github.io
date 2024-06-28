@@ -24,7 +24,7 @@ export class OrderService {
 		return this.http
 			.get(
 				ORDER.LIST_ORDER +
-					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
 			)
 			.toPromise()
 			.then((response) => {
@@ -34,12 +34,41 @@ export class OrderService {
 	}
 
 	updateOrderStatus(id: number, status: number) {
-		
 		return this.http
 			.put(ORDER.UPDATE_ORDER_STATUS, {
 				id,
-				status
+				status,
 			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
+	addOrder(
+		type: any = 1,
+		categoryType: number,
+		table: any,
+		room: any,
+		site: any,
+		products: any
+	) {
+		let obj: any = {
+			type: type,
+			site: site,
+			products: products,
+			categoryType,
+		};
+
+		if (table != 0) {
+			obj.table = table;
+		}
+		if (room != 0) {
+			obj.room = room;
+		}
+		return this.http
+			.post(ORDER.ADD_ORDER, obj)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));

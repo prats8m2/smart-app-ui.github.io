@@ -130,7 +130,7 @@ export class AddProductComponent implements OnInit {
 				this.siteList = [...res.data.sites];
 				if (this.siteList.length) {
 					this.categoryParams.siteId = this.siteList[0].id;
-					this.listCategoryApi(this.categoryParams);
+					// this.listCategoryApi(this.categoryParams);
 				}
 			}
 		});
@@ -198,11 +198,11 @@ export class AddProductComponent implements OnInit {
 	changeSiteData(siteId: any) {
 		//list categories
 		this.categoryParams.siteId = siteId;
-		this.productForm.get('categories').patchValue([]);
 		this.listCategoryApi(this.categoryParams);
 	}
 
 	listCategoryApi(params: IParams) {
+		this.productForm.get('categories').patchValue([]);
 		this.categoryService.listCategory(params).subscribe((res) => {
 			if (res.status) {
 				this.categoryList = [...res.data.categories];
@@ -213,5 +213,12 @@ export class AddProductComponent implements OnInit {
 	toggle(control): void {
 		const statusControl = this.productForm.get(`${control}`) as FormControl;
 		statusControl.setValue(!statusControl.value);
+	}
+
+	changeType(typeId: any) {
+		if (typeId) {
+			this.categoryParams.type = typeId;
+			this.listCategoryApi(this.categoryParams);
+		}
 	}
 }

@@ -27,7 +27,6 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { HttpRequestInterceptor } from './core/interceptor/HttpRequestInterceptor';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 
 export function createTranslateLoader(http: HttpClient): any {
 	return new TranslateHttpLoader(http, 'assets/i18n/', '.json');

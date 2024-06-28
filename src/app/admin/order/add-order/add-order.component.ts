@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LAYOUT_VERTICAL } from 'src/app/layouts/layouts.model';
-import { productList } from './products';
 import { OrderService } from '../service/order.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { IParams } from 'src/app/core/interface/params';
 import { RoomService } from '../../room/services/room.service';
 import { TableService } from '../../table/services/table.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -28,8 +24,12 @@ export class AddOrderComponent implements OnInit {
 	selectedRoom: number;
 	selectedTable: number;
 	selectedSite: number;
-	//form
-	orderForm: FormGroup;
+	selectedType: number;
+	totalAmountOfProduct: number = 0;
+	showRoomDropdown: boolean = true;
+	showTableDropdown: boolean = false;
+	disableSaveButton: boolean = true;
+	categoryType: number = 1;
 
 	roomParams: IParams = {
 		siteId: null,
@@ -52,9 +52,7 @@ export class AddOrderComponent implements OnInit {
 		private orderService: OrderService,
 		private globalService: GlobalService,
 		private roomService: RoomService,
-		private tableService: TableService,
-		private formBuilder: FormBuilder,
-		private siteService: SiteService
+		private tableService: TableService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 
@@ -62,6 +60,7 @@ export class AddOrderComponent implements OnInit {
 			if (res) {
 				this.products = res.products;
 				this.filteredProducts = this.products;
+				this.categoryType = res.categoryType;
 				if (this.selectedSite !== res.siteId) {
 					//list rooms and tables
 					if (this.showListRoom) {
@@ -69,7 +68,7 @@ export class AddOrderComponent implements OnInit {
 					}
 
 					if (this.showListTable) {
-						this.listTables(res.siteId)
+						this.listTables(res.siteId);
 					}
 				}
 				this.selectedSite = res.siteId;
@@ -87,7 +86,7 @@ export class AddOrderComponent implements OnInit {
 									product.name.toLowerCase().includes(searchTerm.toLowerCase())
 								);
 							} else {
-								this.filteredProducts = this.products; // Reset to all products if the search term is empty
+								this.filteredProducts = this.products;
 							}
 						}
 						break;
@@ -101,15 +100,15 @@ export class AddOrderComponent implements OnInit {
 		if (!existingProduct) {
 			const productOrder = {
 				id: product.id,
-				qty: 1,
+				quantity: 1,
 				price: product.price,
 				name: product.name,
 				total: product.price,
 			};
 			this.order.push(productOrder);
+			this.totalAmountOfProduct += product.price;
 		} else {
 		}
-		console.log(this.order);
 	}
 
 	isAddedinOrder(id) {
@@ -118,19 +117,20 @@ export class AddOrderComponent implements OnInit {
 
 	calculateQty(operation: string, currentQty: number, index: number): void {
 		if (operation === '1') {
-			this.order[index].qty += 1;
-		} else if (operation === '0' && this.order[index].qty > 0) {
-			this.order[index].qty -= 1;
+			this.order[index].quantity += 1;
+			this.totalAmountOfProduct += this.order[index].price;
+		} else if (operation === '0' && this.order[index].quantity > 0) {
+			this.order[index].quantity -= 1;
+			this.totalAmountOfProduct -= this.order[index].price;
 		}
-		this.order[index].total = this.order[index].qty * this.order[index].price;
-		console.log(this.order);
+		this.order[index].total =
+			this.order[index].quantity * this.order[index].price;
 	}
 
 	delete(index): void {
 		if (index !== -1) {
 			this.order.splice(index, 1);
 		}
-		console.log(this.order);
 	}
 
 	async listRooms(siteId) {
@@ -155,14 +155,16 @@ export class AddOrderComponent implements OnInit {
 
 	updateRoom(selectedRoomId: number): void {
 		this.selectedRoom = selectedRoomId;
-		this.selectedTable = null; // Clear the table selection
-		console.log('Selected Room ID:', this.selectedRoom);
+		this.selectedTable = 0;
+		this.disableSaveButton = false;
+		this.selectedType = 2;
 	}
 
 	updateTable(selectedTableId: number): void {
 		this.selectedTable = selectedTableId;
-		this.selectedRoom = null; // Clear the room selection
-		console.log('Selected Table ID:', this.selectedTable);
+		this.selectedRoom = 0;
+		this.disableSaveButton = false;
+		this.selectedType = 1;
 	}
 
 	ngOnInit(): void {}
@@ -179,5 +181,38 @@ export class AddOrderComponent implements OnInit {
 		if (window.screen.width <= 768) {
 			document.body.classList.remove('vertical-collpsed');
 		}
+	}
+
+	onChangeRadio(value: number) {
+		this.showRoomDropdown = value === 1;
+		this.showTableDropdown = !this.showRoomDropdown;
+	}
+
+	resetData() {
+		this.order = null;
+		this.totalAmountOfProduct = 0;
+		this.showRoomDropdown = true;
+		this.showTableDropdown = false;
+	}
+
+	addOrder() {
+		//create order API
+		console.log(this.categoryType);
+		this.orderService
+			.addOrder(
+				this.selectedType,
+				this.categoryType,
+				this.selectedTable,
+				this.selectedRoom,
+				this.selectedSite,
+				this.order
+			)
+			.then((res) => {
+				if (res.status) {
+					window.location.reload();
+				} else {
+					console.log('error');
+				}
+			});
 	}
 }

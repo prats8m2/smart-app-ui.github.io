@@ -56,6 +56,7 @@ export class ListCategoryComponent implements OnInit {
 	searchInput: string = '';
 	categoryParams: IParams = {
 		siteId: null,
+		type: 1,
 		limit: 100,
 		pageNumber: 1,
 	};
@@ -156,5 +157,10 @@ export class ListCategoryComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	changeCategoryType(type: any) {
+		this.categoryParams.type = type;
+		this.listCategoryAPI(this.categoryParams);
 	}
 }

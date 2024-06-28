@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, interval } from 'rxjs';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { MenuService } from '../../menu/service/menu.service';
 import { SiteService } from '../../site/service/site.service';
-import { DndDropEvent } from 'ngx-drag-drop';
+import { OrderService } from '../service/order.service';
+import { SocketService } from '../service/socket.service';
 
 @Component({
 	selector: 'app-list-order',
@@ -20,7 +21,10 @@ export class ListOrderComponent implements OnInit {
 		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private socketService: SocketService,
+		private cdr: ChangeDetectorRef,
+		private orderService: OrderService
 	) {}
 
 	showListAccount: boolean =
@@ -45,14 +49,16 @@ export class ListOrderComponent implements OnInit {
 	};
 
 	orderList: any = [];
-	orderListResp: any = [];
 	sitesList: any = [];
-
+	selectedSite: number;
 	accountList: any = [];
 	total: number;
 	perPage: number = 10;
 	currentPage: number = 1;
 	searchInput: string = '';
+	orderType: number = 1;
+	private subscription: Subscription;
+	orders: any = [];
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -64,6 +70,12 @@ export class ListOrderComponent implements OnInit {
 						this.listSiteAPI(this.siteParams);
 					}
 				}
+			});
+			this.subscription = interval(60000).subscribe(() => {
+				this.cdr.markForCheck();
+			});
+			this.socketService.onNewOrder().subscribe((order) => {
+				this.orders.push(order);
 			});
 		} else {
 			this.listSiteAPI(this.siteParams);
@@ -78,15 +90,9 @@ export class ListOrderComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		this.orderList = this.orderListResp
-			.slice(startIndex, endIndex)
-			.filter((item) =>
-				item.name.toLowerCase().includes(this.searchInput.toLowerCase())
-			);
+		this.orderList = this.orders.slice(startIndex, endIndex);
 
-		this.total = this.searchInput
-			? this.orderList.length
-			: this.orderListResp.length;
+		this.total = this.searchInput ? this.orderList.length : this.orders.length;
 	}
 
 	onSearch(): void {
@@ -101,6 +107,8 @@ export class ListOrderComponent implements OnInit {
 
 	changeSitesData(siteId: any) {
 		// call list order API
+		this.selectedSite = siteId;
+		this.listOrderAPI(this.selectedSite, this.orderType);
 	}
 
 	listSiteAPI(params: IParams) {
@@ -109,6 +117,7 @@ export class ListOrderComponent implements OnInit {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					//call list order API
+					this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
 				}
 			}
 		});
@@ -121,38 +130,28 @@ export class ListOrderComponent implements OnInit {
 	routeToKanban() {
 		this.router.navigateByUrl(URL_ROUTES.KANBAN);
 	}
-	routeToViewMenu(orderId: number) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_MENU + '/' + orderId);
-	}
 
-	openDeleteConfirmDialog(orderId: any) {
-		this.dialogService.openDeleteConfirmDialog().then((result) => {
-			if (result.value) {
-				//call delete order API
-				// this.menuService.deleteMenu(orderId).then((res: any) => {
-				// 	if (res.status) {
-				// 		// call list order API
-				// 	}
-				// });
-			}
-		});
+	async listOrderAPI(siteId: any, type: any) {
+		const orderParams: IParams = {
+			siteId,
+			type: type,
+			limit: 100,
+			pageNumber: 1,
+		};
+		const res = await this.orderService.listOrderPromise(orderParams);
+		if (res.status) {
+			this.orders = res.data.orders;
+			this.updateDisplayedData();
+		} else {
+			return null;
+		}
 	}
 
 	//KANBAN BOARD CODE
-
-	onDragged(item: any, list: any[]) {
-		const index = list.indexOf(item);
-		list.splice(index, 1);
-	}
-	onDrop(event: DndDropEvent, filteredList?: any[], targetStatus?: string) {
-		if (filteredList && event.dropEffect === 'move') {
-			let index = event.index;
-
-			if (typeof index === 'undefined') {
-				index = filteredList.length;
-			}
-
-			filteredList.splice(index, 0, event.data);
+	changeCategoryType(type: any) {
+		this.orderType = type;
+		if (this.sitesList.length) {
+			this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
 		}
 	}
 }
