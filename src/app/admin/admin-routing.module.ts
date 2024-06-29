@@ -48,6 +48,11 @@ const routes: Routes = [
 			import('./table/table.module').then((m) => m.TableModule),
 	},
 	{
+		path: 'events',
+		loadChildren: () =>
+			import('./events/events.module').then((m) => m.EventsModule),
+	},
+	{
 		path: 'categories',
 		loadChildren: () =>
 			import('./category/category.module').then((m) => m.CategoryModule),
