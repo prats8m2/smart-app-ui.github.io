@@ -12,8 +12,18 @@ export class HomeComponent {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
 
-	routeToMenu() {
-		console.log(URL_ROUTES.MENU);
-		this.router.navigateByUrl(URL_ROUTES.MENU);
+	routeTo(page: string) {
+		switch (page) {
+			case 'MENU':
+				{
+					this.router.navigateByUrl(URL_ROUTES.MENU);
+				}
+				break;
+			case 'ORDERS':
+				{
+					this.router.navigateByUrl(URL_ROUTES.ORDER_HISTORY);
+				}
+				break;
+		}
 	}
 }

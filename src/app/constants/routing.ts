@@ -75,6 +75,6 @@ export const URL_ROUTES = {
 	//user app
 	HOME: 'app',
 	MENU: 'app/menu',
-	ORDER_HISTORY: 'app/order/history',
-	ORDER_DETAILS: 'app/order/details',
+	ORDER_HISTORY: 'app/orders',
+	ORDER_DETAILS: 'app/order',
 };

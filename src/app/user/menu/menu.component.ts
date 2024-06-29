@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { URL_ROUTES } from 'src/app/constants/routing';
 
 @Component({
 	selector: 'app-menu',
@@ -16,8 +18,17 @@ export class MenuComponent {
 	public bothColleaps: boolean = false;
 	isFirstOpen: boolean = false;
 
-
-	constructor() {
+	constructor(private router: Router) {
 		document.body.setAttribute('data-bs-theme', 'dark');
+	}
+
+	routeTo(page: string) {
+		switch (page) {
+			case 'HOME':
+				{
+					this.router.navigateByUrl(URL_ROUTES.HOME);
+				}
+				break;
+		}
 	}
 }

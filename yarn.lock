@@ -6076,6 +6076,13 @@
     "qr-code-styling" "^1.6.0-rc.1"
     "tslib" "^2.3.0"
 
+"ngx-slick-carousel@^15.0.0":
+  "integrity" "sha512-4di69uKcA+cDsb3w7411rmGH2cTaTCT98SFD1qqxDhIInNpV2qga7dkXLCdgxHMYraPg8JrnGZus7uHL0lj7lw=="
+  "resolved" "https://registry.npmjs.org/ngx-slick-carousel/-/ngx-slick-carousel-15.0.0.tgz"
+  "version" "15.0.0"
+  dependencies:
+    "tslib" "^2.3.0"
+
 "ngx-slider-v2@^16.0.2":
   "integrity" "sha512-Lpl7SlErL+tJJvTRZYdyZoXTThKN8Ro1z3vscJQ1O5azHXwvbv3pnTcsOwY4ltfaP+dpzY27KL1QXyDr6QMaxQ=="
   "resolved" "https://registry.npmjs.org/ngx-slider-v2/-/ngx-slider-v2-16.0.2.tgz"
