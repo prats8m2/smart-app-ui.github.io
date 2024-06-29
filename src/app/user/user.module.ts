@@ -17,8 +17,6 @@ import { OrderTimelineComponent } from './order-timeline/order-timeline.componen
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-
-
 @NgModule({
 	declarations: [
 		HomeComponent,
@@ -26,12 +24,12 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 		MenuComponent,
 		UserOrderHistoryComponent,
 		TipsComponent,
-  ProductComponent,
-  MenuFooterComponent,
-  OrderSummaryComponent,
-  OrderComponent,
-  OrderTimelineComponent,
-  OrderDetailsComponent,
+		ProductComponent,
+		MenuFooterComponent,
+		OrderSummaryComponent,
+		OrderComponent,
+		OrderTimelineComponent,
+		OrderDetailsComponent,
 	],
 	imports: [
 		CommonModule,

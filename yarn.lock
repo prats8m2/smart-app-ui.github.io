@@ -6076,10 +6076,10 @@
     "qr-code-styling" "^1.6.0-rc.1"
     "tslib" "^2.3.0"
 
-"ngx-slick-carousel@^15.0.0":
-  "integrity" "sha512-4di69uKcA+cDsb3w7411rmGH2cTaTCT98SFD1qqxDhIInNpV2qga7dkXLCdgxHMYraPg8JrnGZus7uHL0lj7lw=="
-  "resolved" "https://registry.npmjs.org/ngx-slick-carousel/-/ngx-slick-carousel-15.0.0.tgz"
-  "version" "15.0.0"
+"ngx-slick-carousel@^17.0.0":
+  "integrity" "sha512-4GS13vjbfEUzQR6St9tq9ms69ODSxkPR0HhXJ97YhDlOlbirk9wHxnSKNneutitlKIt9G/MCrIV4u0L3wiC8rQ=="
+  "resolved" "https://registry.npmjs.org/ngx-slick-carousel/-/ngx-slick-carousel-17.0.0.tgz"
+  "version" "17.0.0"
   dependencies:
     "tslib" "^2.3.0"
 

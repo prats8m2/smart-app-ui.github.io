@@ -19,6 +19,14 @@ export const SITE = {
 	DELETE_SITE: '/site/delete/',
 };
 
+export const EVENT = {
+	ADD_EVENT: '/event/add',
+	LIST_EVENT: '/event/list',
+	VIEW_EVENT: '/event/get/',
+	UPDATE_EVENT: '/event/update',
+	DELETE_EVENT: '/event/delete/',
+};
+
 export const ROLE = {
 	LIST_ROLE: '/role/list',
 	ADD_ROLE: '/role/add',

@@ -48,6 +48,12 @@ export const URL_ROUTES = {
 	VIEW_TABLE: 'admin/tables/view-table',
 	LIST_TABLE: 'admin/tables/list-tables',
 
+	//events
+	ADD_EVENTS: 'admin/events/add-event',
+	EDIT_EVENTS: 'admin/events/edit-event',
+	VIEW_EVENTS: 'admin/events/view-event',
+	LIST_EVENTS: 'admin/events/list-events',
+
 	//category
 	ADD_CATEGORY: 'admin/categories/add-category',
 	EDIT_CATEGORY: 'admin/categories/edit-category',
