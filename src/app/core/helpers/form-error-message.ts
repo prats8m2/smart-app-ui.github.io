@@ -126,6 +126,21 @@ export const errorMessages = {
 	menuDesc: {
 		maxlength: 'Maximum length exceeded (100 characters maximum).',
 		minlength: 'Menu description must be at least 10 character long.',
-		pattern: 'Menu name must be alpha numeric with "_" or "-"',
+		pattern: 'Menu description must be alpha numeric with "_" or "-"',
+	},
+	eventName: {
+		required: 'Event name is required.',
+		maxlength: 'Maximum length exceeded (15 characters maximum).',
+		minlength: 'Event name must be at least 5 character long.',
+		pattern: 'Event name must be alpha numeric with "_" or "-"',
+	},
+	eventDesc: {
+		maxlength: 'Maximum length exceeded (100 characters maximum).',
+		minlength: 'Event description must be at least 10 character long.',
+		pattern: 'Event name must be alpha numeric with "_" or "-"',
+	},
+
+	eventPrice: {
+		required: 'Event fees is required.',
 	},
 };

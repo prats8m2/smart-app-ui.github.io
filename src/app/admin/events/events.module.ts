@@ -10,6 +10,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxQrcodeStylingModule } from 'ngx-qrcode-styling';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EventRoutingModule } from './events-routing.module';
+import {
+	NgbDatepickerModule,
+	NgbTimepickerModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -28,6 +32,8 @@ import { EventRoutingModule } from './events-routing.module';
 		SharedModule,
 		NgxQrcodeStylingModule,
 		EventRoutingModule,
+		NgbDatepickerModule,
+		NgbTimepickerModule,
 	],
 })
 export class EventsModule {}

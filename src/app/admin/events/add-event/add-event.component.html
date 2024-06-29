@@ -1,1 +1,155 @@
-<p>add-event works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-start">
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
+                (click)="routeToListEvent()"></i>
+            <h4 class="card-title mb-4">Add Event</h4>
+        </div>
+        <form (ngSubmit)="addEvent()" [formGroup]="eventForm" class="custom-form">
+            <h6 class="mb-2">Event Details</h6>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="eventName">Name</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('eventName'),'form-success':showSuccess('eventName') }"
+                        formControlName="eventName">
+                    <div *ngIf="formTouched('eventName')">
+                        <div *ngIf="isError('eventName','required')" class="text-danger">
+                            {{errorMessage('eventName','required')}}
+                        </div>
+                        <div *ngIf="isError('eventName','pattern')" class="text-danger">
+                            {{errorMessage('eventName','pattern')}} </div>
+                        <div *ngIf="isError('eventName','maxlength')" class="text-danger">
+                            {{errorMessage('eventName','maxlength')}} </div>
+                        <div *ngIf="isError('eventName','minlength')" class="text-danger">
+                            {{errorMessage('eventName','minlength')}} </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="eventDesc">Description</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{ 'form-error':showError('eventDesc'),'form-success':showSuccess('eventDesc') }"
+                        formControlName="eventDesc">
+                    <div *ngIf="formTouched('eventDesc')">
+                        <div *ngIf="isError('eventDesc','pattern')" class="text-danger">
+                            {{errorMessage('eventDesc','pattern')}} </div>
+                        <div *ngIf="isError('eventDesc','maxlength')" class="text-danger">
+                            {{errorMessage('eventDesc','maxlength')}} </div>
+                        <div *ngIf="isError('eventDesc','minlength')" class="text-danger">
+                            {{errorMessage('eventDesc','minlength')}} </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label for="siteType">Type</label>
+                    <ng-select [items]="eventTypes" bindLabel="label" [clearable]="false" bindValue="id"
+                        formControlName="type" [placeholder]="'Type'"></ng-select>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="eventPrice">Entry Fees</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control custom-number-input"
+                            [ngClass]="{ 'form-error': showError('eventPrice'), 'form-success': showSuccess('eventPrice') }"
+                            formControlName="eventPrice" placeholder="0">
+                    </div>
+                    <div *ngIf="formTouched('eventPrice')">
+                        <div *ngIf="isError('eventPrice','required')" class="text-danger">
+                            {{ errorMessage('eventPrice','required') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div formGroupName="scheduleData">
+                <h6 class="mb-2">Schedule Details</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="siteType">Start Date</label>
+                        <div class="input-group clockpicker">
+                            <input ngbDatepicker class="form-control" placeholder="Choose start date"
+                                #std="ngbDatepicker" formControlName="startDate" (click)="std.toggle()"
+                                [minDate]="startMinDate" (dateSelect)="startDateSellected($event)" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="categorySeq">End Date</label>
+                        <div class="input-group clockpicker">
+                            <input ngbDatepicker class="form-control" placeholder="Choose end date" #edt="ngbDatepicker"
+                                formControlName="endDate" (click)="edt.toggle()" [minDate]="endMinDate" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="StartTime">Start Time</label>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <label for="endTime">End Time</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="startTime" />
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <ngb-timepicker [meridian]="meridian" formControlName="endTime" />
+                    </div>
+                </div>
+                <h6 class="mb-2">Location Details</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="venue">Address</label>
+                        <input type="text" class="form-control" formControlName="location">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="geoLocation">Geo Location</label>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" formControlName="geoLocation">
+                            </div>
+                            <div class="col-md-2 mt-2">
+                                <a class="text-body pointer text-decoration-underline">Find in Map</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                    <div class="col-sm-12" *ngIf="showListAccount">
+                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                            bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                            formControlName="account" (change)="changeAccountData($event.account.id)"
+                            [placeholder]="'Account'"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <div class="row" *ngIf="showListSite">
+                <div class="col-md-6 mb-4">
+                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
+                        bindValue="id" (change)="changeSiteData($event.id)" formControlName="site"
+                        [placeholder]="'Site'">
+                    </ng-select>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="eventForm.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

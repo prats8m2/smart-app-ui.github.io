@@ -45,19 +45,19 @@
                                                 <div class="icon-container text-center"
                                                     (click)="routeToViewEvent(data.id)">
                                                     <i class="bx"
-                                                        [ngClass]="{'bx-building-house': data.type === 1, 'bx-restaurant': data.type === 2}"></i>
+                                                        [ngClass]="{'bx-home': data.inHouse === 1, 'bxs-ship': data.inHouse === 2}"></i>
                                                 </div>
                                                 <div class="site-card-body text-center">
                                                     <h4 class="card-title mt-2 "><a
                                                             class="text-body fw-bold site-name-text">{{data.name}}</a>
                                                     </h4>
-                                                    <p class="card-text site-name-text">{{data.address}}</p>
-                                                    <p class="card-text">{{data.type | siteTypePipe}}</p>
+                                                    <p class="card-text site-name-text">{{data.description}}</p>
+                                                    <p class="card-text">{{data.inHouse | eventType}}</p>
                                                     <div class="d-flex justify-content-center gap-3 mb-3">
                                                         <span class="text-success pointer" *ngIf="showEditEvent"><i
                                                                 class="mdi mdi-pencil font-size-24"
                                                                 (click)="routeToEditEvent(data.id)"></i></span>
-                                                        <span class="text-danger pointer" *ngIf="showDeleteSite"
+                                                        <span class="text-danger pointer" *ngIf="showDeleteEvent"
                                                             (click)="openDeleteConfirmDialog(data.id)"><i
                                                                 class="mdi mdi-delete font-size-24"></i></span>
                                                     </div>

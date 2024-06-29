@@ -1,12 +1,19 @@
 .form-select {
   border-radius: 22px;
 }
+.site-cal-row{ //show 5 cards in each row
+  flex: 0 0 auto;
+  width: 20%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
 
-.table-responsive {
-height: 84%;
-overflow-y: scroll;
-scrollbar-width: thin;
-scrollbar-color: #556080; 
+.card-body{
+height: calc(100vh - 180px);
+}
+
+.site-card-body{
+height: max-content;
 }
 
 .table-fixed-header {
@@ -19,8 +26,43 @@ z-index: 1;
 @extend .table-fixed-header;
 }
 
+.text-body {
+--bs-text-opacity: 1;
+color: white !important;
+}
+
+.icon-container {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100px; 
+}
+
+.icon-container i {
+font-size: 48px; 
+}
+
+
+.table-responsive {
+height: 84%;
+width: 100%;
+overflow-y: scroll;
+scrollbar-width: thin;
+scrollbar-color: #556080; 
+padding-bottom: 2%;
+}
+
 .table-responsive::-webkit-scrollbar {
 width: 5px; 
+}
+
+.site-card {
+transition: transform 0.3s ease-in-out;
+border-width: thin;
+}
+
+.site-card:hover {
+transform: scale(1.1);
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
@@ -44,7 +86,6 @@ border-radius: 10px;
 .ng-dropdown-panel .scroll-host::-webkit-scrollbar-track {
 background-color: transparent; 
 }
-
 
 .ng-dropdown-panel .scroll-host {
 background: #2a3042;
@@ -71,6 +112,22 @@ border-radius: 22px;
 color: #a6b0cf;
 }
 
-.card-body{
-height: calc(100vh - 180px);
+.card-row {
+--bs-gutter-x: 24px;
+--bs-gutter-y: 0;
+display: flex;
+flex-wrap: wrap;
+margin-top: calc(-1 * var(--bs-gutter-y));
+margin-right: 0px;
+margin-left: 0px; 
+}
+
+.site-name-text {
+display: inline-block;
+max-width: 100%;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+padding-left: 10%; 
+padding-right: 10%; 
 }
