@@ -21,7 +21,7 @@
                                     (change)="changeAccountData($event?.account?.id)"
                                     [placeholder]="'Account'"></ng-select>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" *ngIf="showListSite && sitesList.length > 1">
                                 <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
                                     [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
                                     [placeholder]="'Site'"></ng-select>
@@ -58,9 +58,12 @@
                                     </td>
                                     <td class="pointer" (click)="routeToViewDevice(data.id)">{{data.code}}</td>
                                     <td>
-                                        <span class="badge badge-soft-success me-1" *ngIf="data?.room">{{data?.room?.name}}</span>
-                                        <span class="badge badge-soft-info me-1" *ngIf="data?.table">{{data?.table?.name}}</span>
-                                        <span class="badge badge-soft-warning me-1" *ngIf="!data?.room && !data?.table">Available</span>
+                                        <span class="badge badge-soft-success me-1"
+                                            *ngIf="data?.room">{{data?.room?.name}}</span>
+                                        <span class="badge badge-soft-info me-1"
+                                            *ngIf="data?.table">{{data?.table?.name}}</span>
+                                        <span class="badge badge-soft-warning me-1"
+                                            *ngIf="!data?.room && !data?.table">Available</span>
                                     </td>
                                     <td>
                                         <span class="badge badge-pill badge-soft-success font-size-11"

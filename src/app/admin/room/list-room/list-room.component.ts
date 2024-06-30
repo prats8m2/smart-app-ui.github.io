@@ -28,6 +28,7 @@ export class ListRoomComponent implements OnInit {
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showAddRoom: boolean = this.globalService.checkForPermission('ADD-ROOM');
 	showEditRoom: boolean = this.globalService.checkForPermission('UPDATE-ROOM');
 	showViewRoom: boolean = this.globalService.checkForPermission('VIEW-ROOM');
