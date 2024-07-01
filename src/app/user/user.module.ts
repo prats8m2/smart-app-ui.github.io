@@ -1,21 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
-import { UserHeaderComponent } from './user-header/user-header.component';
-import { MenuComponent } from './menu/menu.component';
-import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
-import { CarouselComponent, CarouselModule } from 'ngx-bootstrap/carousel';
-import { TipsComponent } from './tips/tips.component';
-import { UserRoutingModule } from './user-routing.module';
+import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { ProductComponent } from './product/product.component';
-import { MenuFooterComponent } from './menu-footer/menu-footer.component';
-import { OrderSummaryComponent } from './order-summary/order-summary.component';
-import { OrderComponent } from './order/order.component';
-import { OrderTimelineComponent } from './order-timeline/order-timeline.component';
-import { OrderDetailsComponent } from './order-details/order-details.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { UIModule } from '../shared/ui/ui.module';
+import { HomeComponent } from './home/home.component';
+import { MenuFooterComponent } from './menu-footer/menu-footer.component';
+import { MenuComponent } from './menu/menu.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { OrderTimelineComponent } from './order-timeline/order-timeline.component';
+import { TipsComponent } from '../shared/ui/tips/tips.component';
+import { UserHeaderComponent } from './user-header/user-header.component';
+import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
 	declarations: [
@@ -23,11 +22,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 		UserHeaderComponent,
 		MenuComponent,
 		UserOrderHistoryComponent,
-		TipsComponent,
-		ProductComponent,
 		MenuFooterComponent,
 		OrderSummaryComponent,
-		OrderComponent,
 		OrderTimelineComponent,
 		OrderDetailsComponent,
 	],
@@ -37,6 +33,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 		UserRoutingModule,
 		NgSelectModule,
 		SlickCarouselModule,
+		UIModule,
 		AccordionModule.forRoot(),
 	],
 })
