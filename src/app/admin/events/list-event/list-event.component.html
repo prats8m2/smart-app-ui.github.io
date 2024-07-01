@@ -21,7 +21,7 @@
                                     (change)="changeAccountData($event.account.id)"
                                     [placeholder]="'Account'"></ng-select>
                             </div>
-                            <div class="col-sm-4" *ngIf="showListSite">
+                            <div class="col-sm-4" *ngIf="showListSite && sitesList.length > 1">
                                 <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
                                     [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event.id)"
                                     [placeholder]="'Site'"></ng-select>

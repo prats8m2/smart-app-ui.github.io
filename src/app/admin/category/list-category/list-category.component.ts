@@ -26,6 +26,7 @@ export class ListCategoryComponent implements OnInit {
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showAddCategory: boolean =
 		this.globalService.checkForPermission('ADD-CATEGORY');
 	showViewDevice: boolean =

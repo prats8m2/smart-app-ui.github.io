@@ -26,6 +26,7 @@ export class ListDeviceComponent implements OnInit {
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showAddDevice: boolean = this.globalService.checkForPermission('ADD-DEVICE');
 	showViewDevice: boolean =
 		this.globalService.checkForPermission('VIEW-DEVICE');

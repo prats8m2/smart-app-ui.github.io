@@ -26,6 +26,7 @@ export class ListTableComponent implements OnInit {
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showAddTable: boolean = this.globalService.checkForPermission('ADD-TABLE');
 	showEditTable: boolean =
 		this.globalService.checkForPermission('UPDATE-TABLE');
