@@ -91,4 +91,11 @@ export const MENU: MenuItem[] = [
 		link: '/admin/orders/list-orders',
 		permission: 'LIST-ORDER',
 	},
+	{
+		id: 14,
+		label: 'Feedback',
+		icon: 'bx-book',
+		link: '/admin/feedback/list-feedbacks',
+		permission: 'LIST-FEEDBACK',
+	},
 ];

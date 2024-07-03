@@ -71,6 +71,11 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('./order/order.module').then((m) => m.OrderModule),
 	},
+	{
+		path: 'feedback',
+		loadChildren: () =>
+			import('./feedback/feedback.module').then((m) => m.FeedbackModule),
+	},
 ];
 
 @NgModule({
