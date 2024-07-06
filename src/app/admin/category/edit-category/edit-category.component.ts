@@ -133,7 +133,7 @@ export class EditCategoryComponent implements OnInit {
 		} else {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
-					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+					this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
 				}
 			});
 		}

@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-start">
-            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListCategory"
-                (click)="routeToListEvent()"></i>
+            <i class="bx bx-left-arrow-alt font-size-18 pointer" *ngIf="showListEvent" (click)="routeToListEvent()"></i>
             <h4 class="card-title mb-4">Add Event</h4>
         </div>
         <form (ngSubmit)="addEvent()" [formGroup]="eventForm" class="custom-form">

@@ -93,6 +93,11 @@ export class ViewEventComponent implements OnInit {
 	patchScheduleData() {
 		const scheduleData = this.eventForm.get('scheduleData');
 
+		console.log(
+			this.convertDateToJSON(this.eventData.schedule.startDate),
+			this.convertDateToJSON(this.eventData.schedule.endDate)
+		);
+
 		if (scheduleData) {
 			scheduleData.patchValue({
 				startDate: this.eventData.schedule.startDate,
@@ -104,17 +109,13 @@ export class ViewEventComponent implements OnInit {
 			scheduleData
 				.get(startTimeControl)
 				?.patchValue(
-					this.convertTimeObjectToString(
-						this.eventData.schedule[startTimeControl]
-					)
+					this.convertTimeToJSON(this.eventData.schedule[startTimeControl])
 				);
 
 			scheduleData
 				.get(endTimeControl)
 				?.patchValue(
-					this.convertTimeObjectToString(
-						this.eventData.schedule[endTimeControl]
-					)
+					this.convertTimeToJSON(this.eventData.schedule[endTimeControl])
 				);
 
 			scheduleData.patchValue({
@@ -128,19 +129,23 @@ export class ViewEventComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.LIST_EVENTS);
 	}
 
-	convertTimeObjectToString(timeObject: {
-		hour: number;
-		minute: number;
-		second: number;
-	}) {
-		return `${timeObject.hour}:${timeObject.minute}:${timeObject.second}`;
+	convertTimeToJSON(timeString: string) {
+		let time = timeString.split(':');
+		let timeObj = {
+			hour: +time[0],
+			minute: +time[1],
+			second: +time[2],
+		};
+		return timeObj;
 	}
 
-	convertDateObjectToString(dateObject: {
-		year: number;
-		month: number;
-		day: number;
-	}) {
-		return `${dateObject.year}-${dateObject.month}-${dateObject.day}`;
+	convertDateToJSON(dateObject: string) {
+		let date = dateObject.split('-');
+		let dateObj = {
+			year: +date[0],
+			month: +date[1],
+			day: +date[2],
+		};
+		return dateObj;
 	}
 }

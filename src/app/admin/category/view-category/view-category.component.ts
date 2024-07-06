@@ -41,7 +41,7 @@ export class ViewCategoryComponent implements OnInit {
 		friday_startTime: [null],
 		friday_endTime: [null],
 		saturday_startTime: [null],
-		saturday_endTime: [{ hour: 1, minute: 1, second: 1 }],
+		saturday_endTime: [null],
 	};
 
 	public categoryForm: FormGroup = this.formBuilder.group({

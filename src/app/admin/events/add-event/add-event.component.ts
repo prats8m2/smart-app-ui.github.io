@@ -35,8 +35,7 @@ export class AddEventComponent implements OnInit {
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
-	showListCategory: boolean =
-		this.globalService.checkForPermission('LIST-CATEGORY');
+	showListEvent: boolean = this.globalService.checkForPermission('LIST-EVENT');
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
@@ -53,6 +52,7 @@ export class AddEventComponent implements OnInit {
 	endMinDate: { year: number; month: number; day: number };
 	startDefaultTime: any = { hour: 0, minute: 0, second: 0 };
 	endDefaultTime: any = { hour: 23, minute: 59, second: 6 };
+	defaultTime: any = { hour: 0, minute: 0, second: 0 };
 	eventTypes = [
 		{ id: 1, label: 'In House' },
 		{ id: 2, label: 'Bash' },
@@ -63,8 +63,8 @@ export class AddEventComponent implements OnInit {
 	scheduleControls: any = {
 		startDate: [null, Validators.required],
 		endDate: [null, Validators.required],
-		startTime: [this.startDefaultTime],
-		endTime: [this.endDefaultTime],
+		startTime: [this.defaultTime, Validators.required],
+		endTime: [this.defaultTime, Validators.required],
 		location: [null, Validators.required],
 		geoLocation: [null, Validators.required],
 	};

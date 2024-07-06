@@ -71,4 +71,32 @@ export class EventService {
 				return result;
 			});
 	}
+
+	updateEvent(eventForm: FormGroup, siteId: any) {
+		const { id, eventName, eventDesc, type, eventPrice, scheduleData } =
+			eventForm.getRawValue();
+
+		const config = {
+			id,
+			name: eventName,
+			description: eventDesc,
+			inHouse: type,
+			location: scheduleData.location,
+			googleLocation: scheduleData.geoLocation,
+			entryFee: eventPrice,
+			site: siteId,
+			startDate: scheduleData.startDate,
+			endDate: scheduleData.endDate,
+			startTime: scheduleData.startTime,
+			endTime: scheduleData.endTime,
+		};
+
+		return this.http
+			.put(EVENT.UPDATE_EVENT, config)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }
