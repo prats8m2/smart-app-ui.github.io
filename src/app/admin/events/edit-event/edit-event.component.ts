@@ -91,6 +91,11 @@ export class EditEventComponent implements OnInit {
 				scheduleData: this.formBuilder.group(this.scheduleControls),
 			});
 		}
+		this.startMinDate = {
+			year: this.today.getFullYear(),
+			month: this.today.getMonth() + 1,
+			day: this.today.getDate(),
+		};
 	}
 
 	ngOnInit(): void {
