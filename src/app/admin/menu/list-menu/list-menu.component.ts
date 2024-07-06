@@ -5,7 +5,6 @@ import { IParams } from 'src/app/core/interface/params';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { ProductService } from '../../product/service/product.service';
 import { SiteService } from '../../site/service/site.service';
 import { MenuService } from '../service/menu.service';
 
