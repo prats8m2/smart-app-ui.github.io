@@ -69,16 +69,9 @@
     <div id="{{order.id}}" class="card task-box">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
-                <div class="dropdown float-end" dropdown>
-                    <a class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false"
-                        dropdownToggle>
-                        <i class="mdi mdi-dots-vertical m-0 text-muted h5"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
-                        <a class="dropdown-item edittask-details" id="taskedit" data-id="#uptask-2"
-                            (click)="updateTask(i)">Edit</a>
-                        <a class="dropdown-item deletetask" data-id="#uptask-2" (click)="delete($event)">Delete</a>
-                    </div>
+                <div class="float-end">
+                    <span class="pointer" (click)="viewOrderDialog(order.id)"><i
+                            class="mdi mdi-eye font-size-18"></i></span>
                 </div>
                 <h5 class="font-size-15">Order ID : {{ order.id }}
                 </h5>

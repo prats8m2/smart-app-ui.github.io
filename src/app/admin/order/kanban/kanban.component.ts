@@ -96,4 +96,8 @@ export class KanbanComponent implements OnInit {
 			this.subscription.unsubscribe();
 		}
 	}
+
+	viewOrderDialog(orderId) {
+		console.log(orderId);
+	}
 }
