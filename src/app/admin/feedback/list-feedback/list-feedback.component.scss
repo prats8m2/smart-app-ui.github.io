@@ -5,6 +5,7 @@
 .table-responsive {
   height: 84%;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #556080; 
 }
@@ -74,4 +75,35 @@
 
 .card-body{
   height: calc(100vh - 180px);
+}
+.list-inline {
+  display: flex;
+  padding-left: 0;
+  margin-left: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+}
+
+.comment-text{
+  --bs-text-opacity: 1;
+    color: var(--bs-secondary-color) !important;
+    text-align:justify; 
+}
+
+.small-text {
+  font-size: 12px;
+  margin: 0; 
+  width: 120px;
+}
+
+.d-flex .align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.rating-container .star.filled {
+  color: yellow; /* Change the color to yellow */
 }

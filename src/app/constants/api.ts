@@ -102,3 +102,7 @@ export const ORDER = {
 	DELETE_MENU: '/menu/delete/',
 	UPDATE_MENU: '/menu/update',
 };
+
+export const FEEDBACK = {
+	LIST_FEEDBACK: '/feedback/list',
+};

@@ -5,16 +5,6 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class=" row col-sm-6">
-                            <div class="col-sm-4">
-                                <div class="search-box me-2 mb-2 d-inline-block">
-                                    <div class="position-relative">
-                                        <input type="search" class="form-control" autocomplete="off"
-                                            id="searchTableList" placeholder="Search..." [(ngModel)]="searchInput"
-                                            (input)="onSearch()">
-                                        <i class="bx bx-search-alt search-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-sm-4" *ngIf="showListAccount">
                                 <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
                                     bindLabel="account.name" [clearable]="false" bindValue="account.id"
@@ -27,54 +17,67 @@
                                     [placeholder]="'Site'"></ng-select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                        </div>
                     </div>
-                    <!-- FEEDACK CARDS-->
-                    <div class="table-responsive mb-0">
-                        <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="device-list">
-                            <thead class="table-light table-fixed-header">
-                                <tr>
-                                    <th class="align-middle">Menu ID</th>
-                                    <th class="align-middle">Name</th>
-                                    <th class="align-middle">Type</th>
-                                    <th class="align-middle">Status</th>
-                                    <th class="align-middle" *ngIf="showEditMenu || showDeleteMenu">Action</th>
-                                </tr>
-                                <tr *ngIf="menuList.length == 0">
-                                    <th class="align-middle" style="text-align: center;" colspan="5">No data available
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let data of menuList; let i = index;" id="o_{{data.id}}">
-                                    <td>
-                                        <a class="text-body fw-bold pointer"
-                                            (click)="routeToViewMenu(data.id)">{{data.id}}</a>
-                                    </td>
-                                    <td class="pointer" (click)="routeToViewMenu(data.id)">{{data.name}}</td>
-                                    <td>
-                                        {{ data?.type === 1 ? 'Food' : (data?.type === 2 ? 'Amenities' : 'Unknown Type')
-                                        }}
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-pill badge-soft-success font-size-11"
-                                            [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
-                                            transformStatus}}</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex gap-3">
-                                            <span class="text-success pointer" *ngIf="showEditMenu"><i
-                                                    class="mdi mdi-pencil font-size-18"
-                                                    (click)="routeToEditMenu(data.id)"></i></span>
-                                            <span class="text-danger pointer" (click)="openDeleteConfirmDialog(data.id)"
-                                                *ngIf="showDeleteMenu"><i
-                                                    class="mdi mdi-delete font-size-18"></i></span>
+                    <div class="table-responsive mb-0 px-2 mt-2">
+                        <div *ngFor="let feedback of feedbackList" class="d-flex py-3 border-bottom">
+                            <div class="flex-shrink-0 me-3">
+                                <img src="assets/images/users/avatar-4.jpg" class="avatar-xs me-3 rounded-circle"
+                                    alt="img" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="font-size-15 mb-1">{{feedback.name}}</h5>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <p class="comment-text">
+                                            {{feedback.review}}
+                                        </p>
+                                    </div>
+                                    <div class="row col-4">
+                                        <div class="row col-6">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <h5 class="font-size-4 me-2 small-text">Cleanliness</h5>
+                                                <progressbar [max]="5" height="5px" [value]="feedback.cleanlinessRating"
+                                                    class="flex-grow-1">
+                                                </progressbar>
+                                            </div>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <h5 class="font-size-4 me-2 small-text">Facility</h5>
+                                                <progressbar [max]="5" height="5px" [value]="feedback.facilitiesRating"
+                                                    class="flex-grow-1">
+                                                </progressbar>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <div class="row col-6">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <h5 class="font-size-4 me-2 small-text">Food</h5>
+                                                <progressbar [max]="5" height="5px" [value]="feedback.foodRating"
+                                                    class="flex-grow-1">
+                                                </progressbar>
+                                            </div>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <h5 class="font-size-4 me-2 small-text">Service</h5>
+                                                <progressbar [max]="5" height="5px"
+                                                    [value]="feedback.serviceQualityRating" class="flex-grow-1">
+                                                </progressbar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-8 text-muted font-size-12">
+                                        <i class="far fa-calendar-alt text-primary me-1"></i> {{feedback.createdOn}}
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-center align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="small-text me-2 mt-2">Overall Quality</h5>
+                                            <rating [(ngModel)]="feedback.overallRating" [readonly]="readonly"
+                                                class="stars rating-container" [max]="5"></rating>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <ul class="pagination pagination-rounded justify-content-end mb-2">
                         <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"

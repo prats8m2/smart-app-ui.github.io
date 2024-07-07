@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
-import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
-import { MenuService } from '../../menu/service/menu.service';
 import { SiteService } from '../../site/service/site.service';
+import { FeedbackService } from '../service/feedback.service';
 
 @Component({
 	selector: 'app-list-feedback',
@@ -16,21 +13,14 @@ import { SiteService } from '../../site/service/site.service';
 export class ListFeedbackComponent implements OnInit {
 	constructor(
 		public accountService: AccountService,
-		private router: Router,
 		private globalService: GlobalService,
 		private siteServices: SiteService,
-		private menuService: MenuService,
-		private dialogService: DialogService
+		private feedbackService: FeedbackService
 	) {}
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
-	showAddMenu: boolean = this.globalService.checkForPermission('ADD-MENU');
-	showViewMenu: boolean = this.globalService.checkForPermission('VIEW-MENU');
-	showEditMenu: boolean = this.globalService.checkForPermission('UPDATE-MENU');
-	showDeleteMenu: boolean =
-		this.globalService.checkForPermission('DELETE-MENU');
 
 	siteParams: IParams = {
 		accountId: null,
@@ -43,16 +33,16 @@ export class ListFeedbackComponent implements OnInit {
 		pageNumber: 1,
 	};
 
-	menuParams: IParams = {
+	feedbackParams: IParams = {
 		siteId: null,
 		limit: 100,
 		pageNumber: 1,
 	};
 
-	menuList: any = [];
-	menuListResp: any = [];
+	feedbackList: any = [];
+	feedbackListResp: any = [];
 	sitesList: any = [];
-
+	readonly: boolean = true;
 	accountList: any = [];
 	total: number;
 	perPage: number = 10;
@@ -83,20 +73,15 @@ export class ListFeedbackComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		this.menuList = this.menuListResp
+		this.feedbackList = this.feedbackListResp
 			.slice(startIndex, endIndex)
 			.filter((item) =>
 				item.name.toLowerCase().includes(this.searchInput.toLowerCase())
 			);
 
 		this.total = this.searchInput
-			? this.menuList.length
-			: this.menuListResp.length;
-	}
-
-	onSearch(): void {
-		this.currentPage = 1;
-		this.updateDisplayedData();
+			? this.feedbackList.length
+			: this.feedbackListResp.length;
 	}
 
 	changeAccountData(accountId: any) {
@@ -105,8 +90,8 @@ export class ListFeedbackComponent implements OnInit {
 	}
 
 	changeSitesData(siteId: any) {
-		this.menuParams.siteId = siteId;
-		this.listMenuAPI(this.menuParams);
+		this.feedbackParams.siteId = siteId;
+		this.listFeedbackAPI(this.feedbackParams);
 	}
 
 	listSiteAPI(params: IParams) {
@@ -114,43 +99,18 @@ export class ListFeedbackComponent implements OnInit {
 			if (res.status) {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
-					this.menuParams.siteId = this.sitesList[0]?.id;
-					this.listMenuAPI(this.menuParams);
+					this.feedbackParams.siteId = this.sitesList[0]?.id;
+					this.listFeedbackAPI(this.feedbackParams);
 				}
 			}
 		});
 	}
 
-	listMenuAPI(params: IParams) {
-		this.menuService.listMenu(params).subscribe((res) => {
+	listFeedbackAPI(params: IParams) {
+		this.feedbackService.listFeedback(params).subscribe((res) => {
 			if (res.status) {
-				this.menuListResp = [...res.data.menus];
+				this.feedbackListResp = [...res.data.feedbacks];
 				this.updateDisplayedData();
-			}
-		});
-	}
-
-	routeToAddMenu() {
-		this.router.navigateByUrl(URL_ROUTES.ADD_MENU);
-	}
-
-	routeToViewMenu(menuId: number) {
-		this.router.navigateByUrl(URL_ROUTES.VIEW_MENU + '/' + menuId);
-	}
-
-	routeToEditMenu(menuId: any) {
-		this.router.navigateByUrl(URL_ROUTES.EDIT_MENU + '/' + menuId);
-	}
-
-	openDeleteConfirmDialog(menuId: any) {
-		this.dialogService.openDeleteConfirmDialog().then((result) => {
-			if (result.value) {
-				//call delete menu API
-				this.menuService.deleteMenu(menuId).then((res: any) => {
-					if (res.status) {
-						this.listMenuAPI(this.menuParams);
-					}
-				});
 			}
 		});
 	}

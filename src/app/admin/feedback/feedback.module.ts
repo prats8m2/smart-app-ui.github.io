@@ -10,6 +10,8 @@ import {
 	NgbTimepickerModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ListFeedbackComponent } from './list-feedback/list-feedback.component';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
 	declarations: [ListFeedbackComponent],
@@ -21,8 +23,10 @@ import { ListFeedbackComponent } from './list-feedback/list-feedback.component';
 		PaginationModule.forRoot(),
 		NgSelectModule,
 		SharedModule,
+		RatingModule,
 		NgbDatepickerModule,
 		NgbTimepickerModule,
+		ProgressbarModule,
 	],
 })
 export class FeedbackModule {}
