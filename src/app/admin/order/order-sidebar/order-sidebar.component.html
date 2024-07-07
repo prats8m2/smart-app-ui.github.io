@@ -8,10 +8,15 @@
                     </a>
                 </li>
             </ng-container>
+            <ng-container *ngIf="categoryList.length == 0">
+                <li class="text-center">
+                    <span class=" text-center">No Catogies to display</span>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </ng-template>
-<div class="vertical-menu">
+<div class=" vertical-menu">
     <ngx-simplebar class="h-100" #componentRef>
         <div *ngIf="!isCondensed">
             <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>

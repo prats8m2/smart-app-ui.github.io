@@ -7,158 +7,173 @@
         <div class="page-content">
             <div>
                 <div class="row">
-                    
+
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-body">
-                        <!-- Show List Of Products -->
-                        <div class="row container-fluid">
-                            <div class="col-md-6 col-xl-3" *ngFor="let product of filteredProducts; let i = index">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <div class="product-img position-relative">
-                                            <img src="assets/images/product/img-2.png" alt=""
-                                                class="img-fluid mx-auto d-block">
-                                        </div>
-                                        <div class=" row mt-4 d-flex align-items-center">
-                                            <div class="flex-grow-1 text-center">
-                                                <h5 class="mb-1 text-truncate">{{product.name}}</h5>
-                                            </div>
-                                            <div class="mt-2">
-                                                <div class="text-center">
-                                                    <h5><b>${{product.price}}</b></h5>
+                                <!-- Show List Of Products -->
+                                <div class="row container-fluid">
+                                    <div class="col-md-6 col-xl-3"
+                                        *ngFor="let product of filteredProducts; let i = index">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <div class="product-img position-relative">
+                                                    <img src="assets/images/product/img-2.png" alt=""
+                                                        class="img-fluid mx-auto d-block">
                                                 </div>
-                                                <div class="text-center">
-                                                    <button class="btn btn-soft-primary w-100"
-                                                        (click)="addProductToOrder(product)"
-                                                        [disabled]="isAddedinOrder(product.id)"
-                                                        type="submit">Add</button>
+                                                <div class=" row mt-4 d-flex align-items-center">
+                                                    <div class="flex-grow-1 text-center">
+                                                        <h5 class="mb-1 text-truncate">{{product.name}}</h5>
+                                                    </div>
+                                                    <div class="mt-2">
+                                                        <div class="text-center">
+                                                            <h5><b>${{product.price}}</b></h5>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button class="btn btn-soft-primary w-100"
+                                                                (click)="addProductToOrder(product)"
+                                                                [disabled]="isAddedinOrder(product.id)"
+                                                                type="submit">Add</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="text-center" *ngIf="filteredProducts?.length == 0">
+                                    <span class="text-center">No Product to display</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        </div></div>
 
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
-                        <div class="row">
-                            <!-- Show Order Details-->
-                            <div class="card1">
-                                <div class="card-body1">
-                                    <div class="table-container">
-                                        <table class="table table-centered mb-0 table-nowrap align-middle">
-                                            <thead class="table-light">
-                                                <tr p>
-                                                    <th>Product</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th colspan="2">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="product" *ngFor="let product of order; let i = index">
-                                                    <td>
-                                                        <h5 class="font-size-14 text-truncate"><a class="text-dark">{{
-                                                                product.name
-                                                                }}</a></h5>
-                                                    </td>
-                                                    <td>$<span class="product-price"> {{ product.price }}</span></td>
-                                                    <td>
-                                                        <div class="me-3" style="width: 120px;">
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend"><button type="button"
-                                                                        class="btn btn-primary"
-                                                                        (click)="calculateQty('1',product.quantity,i)">+</button>
+                                <div class="row">
+                                    <!-- Show Order Details-->
+                                    <div class="card1">
+                                        <div class="card-body1">
+                                            <div class="table-container">
+                                                <table class="table table-centered mb-0 table-nowrap align-middle">
+                                                    <thead class="table-light">
+                                                        <tr p>
+                                                            <th>Product</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th colspan="2">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="product"
+                                                            *ngFor="let product of order; let i = index">
+                                                            <td>
+                                                                <h5 class="font-size-14 text-truncate"><a
+                                                                        class="text-dark">{{
+                                                                        product.name
+                                                                        }}</a></h5>
+                                                            </td>
+                                                            <td>$<span class="product-price"> {{ product.price }}</span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="me-3" style="width: 120px;">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend"><button
+                                                                                type="button" class="btn btn-primary"
+                                                                                (click)="calculateQty('1',product.quantity,i)">+</button>
+                                                                        </div>
+                                                                        <input name="demo_vertical"
+                                                                            value="{{product.quantity}}" type="text"
+                                                                            class="form-control text-center" min="0"
+                                                                            readonly>
+                                                                        <div class="input-group-append"><button
+                                                                                type="button" class="btn btn-primary"
+                                                                                (click)="calculateQty('0',product.quantity,i)">-</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <input name="demo_vertical" value="{{product.quantity}}"
-                                                                    type="text" class="form-control text-center" min="0"
-                                                                    readonly>
-                                                                <div class="input-group-append"><button type="button"
-                                                                        class="btn btn-primary"
-                                                                        (click)="calculateQty('0',product.quantity,i)">-</button>
+                                                            </td>
+                                                            <td>$<span class="product-line-price">{{ product.total
+                                                                    }}</span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-inline-block" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="Remove">
+                                                                    <a class="action-icon text-danger"
+                                                                        (click)="delete(i)"> <i
+                                                                            class="mdi mdi-trash-can font-size-18"></i></a>
                                                                 </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row col-12">
+                                                <div class="col-6 mt-2">
+                                                    <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListRoom">
+                                                        <div class="position-relative">
+                                                            <div
+                                                                class="form-check form-radio-outline form-radio-primary">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="orderType1" id="formRoomRadio" value="1"
+                                                                    (change)="onChangeRadio(1)" checked>
+                                                                <label class="form-check-label" for="formRoomRadio">
+                                                                    Room
+                                                                </label>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td>$<span class="product-line-price">{{ product.total }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-inline-block" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="Remove">
-                                                            <a class="action-icon text-danger" (click)="delete(i)"> <i
-                                                                    class="mdi mdi-trash-can font-size-18"></i></a>
+                                                    </div>
+                                                    <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListTable">
+                                                        <div class="position-relative">
+                                                            <div
+                                                                class="form-check form-radio-outline form-radio-success">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="orderType1" id="formTableRadio" value="2"
+                                                                    (change)="onChangeRadio(2)">
+                                                                <label class="form-check-label" for="formTableRadio">
+                                                                    Table
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row col-12">
-                                        <div class="col-6 mt-2">
-                                            <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListRoom">
-                                                <div class="position-relative">
-                                                    <div class="form-check form-radio-outline form-radio-primary">
-                                                        <input class="form-check-input" type="radio" name="orderType1"
-                                                            id="formRoomRadio" value="1" (change)="onChangeRadio(1)"
-                                                            checked>
-                                                        <label class="form-check-label" for="formRoomRadio">
-                                                            Room
-                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="col-sm-12" *ngIf="showRoomDropdown">
+                                                        <ng-select [items]="rooms" bindLabel="name" bindLabel="name"
+                                                            [clearable]="false" bindValue="id" [placeholder]="'Room'"
+                                                            (change)="updateRoom($event)"></ng-select>
+                                                    </div>
+                                                    <div class="col-sm-12" *ngIf="showTableDropdown">
+                                                        <ng-select [items]="tables" bindLabel="name" [clearable]="false"
+                                                            bindValue="id" [placeholder]="'Table'"
+                                                            (change)="updateTable($event)"></ng-select>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListTable">
-                                                <div class="position-relative">
-                                                    <div class="form-check form-radio-outline form-radio-success">
-                                                        <input class="form-check-input" type="radio" name="orderType1"
-                                                            id="formTableRadio" value="2" (change)="onChangeRadio(2)">
-                                                        <label class="form-check-label" for="formTableRadio">
-                                                            Table
-                                                        </label>
+                                            <div class="row mt-4">
+                                                <div class="col-sm-6">
+                                                    <h5 class="mt-2">Price : <span class="text-muted me-2"></span> <b>$
+                                                            {{totalAmountOfProduct}}
+                                                            USD</b></h5>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="text-sm-end mt-2 mt-sm-0">
+                                                        <button type="submit" class="btn btn-primary w-md"
+                                                            [disabled]="order?.length == 0 || disableSaveButton"
+                                                            (click)="addOrder()">
+                                                            <i
+                                                                class=" mdi mdi-cart-arrow-right me-1"></i>Submit</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="col-sm-12" *ngIf="showRoomDropdown">
-                                                <ng-select [items]="rooms" bindLabel="name" bindLabel="name"
-                                                    [clearable]="false" bindValue="id" [placeholder]="'Room'"
-                                                    (change)="updateRoom($event)"></ng-select>
-                                            </div>
-                                            <div class="col-sm-12" *ngIf="showTableDropdown">
-                                                <ng-select [items]="tables" bindLabel="name" [clearable]="false"
-                                                    bindValue="id" [placeholder]="'Table'"
-                                                    (change)="updateTable($event)"></ng-select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="col-sm-6">
-                                            <h5 class="mt-2">Price : <span class="text-muted me-2"></span> <b>$
-                                                    {{totalAmountOfProduct}}
-                                                    USD</b></h5>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="text-sm-end mt-2 mt-sm-0">
-                                                <button type="submit" class="btn btn-primary w-md"
-                                                    [disabled]="order.length==0 || disableSaveButton"
-                                                    (click)="addOrder()">
-                                                    <i class=" mdi mdi-cart-arrow-right me-1"></i>Submit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                </div>
                     </div>
                 </div>
             </div>
