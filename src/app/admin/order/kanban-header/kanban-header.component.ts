@@ -58,7 +58,7 @@ export class KanbanHeaderComponent {
 		const siteParams: IParams = {
 			limit: 100,
 			pageNumber: 1,
-			accountId: account.id,
+			accountId: account?.id,
 		};
 		const res = await this.siteService.listSitesPromise(siteParams);
 		if (res.status) {

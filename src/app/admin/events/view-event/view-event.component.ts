@@ -93,11 +93,6 @@ export class ViewEventComponent implements OnInit {
 	patchScheduleData() {
 		const scheduleData = this.eventForm.get('scheduleData');
 
-		console.log(
-			this.convertDateToJSON(this.eventData.schedule.startDate),
-			this.convertDateToJSON(this.eventData.schedule.endDate)
-		);
-
 		if (scheduleData) {
 			scheduleData.patchValue({
 				startDate: this.eventData.schedule.startDate,
@@ -147,5 +142,12 @@ export class ViewEventComponent implements OnInit {
 			day: +date[2],
 		};
 		return dateObj;
+	}
+
+	routeToLocation() {
+		const scheduleData = this.eventForm.get('scheduleData');
+		const url = scheduleData.get('geoLocation').value;
+		console.log(url);
+		window.open(url, '_blank');
 	}
 }
