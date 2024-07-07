@@ -78,6 +78,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center mt-4" *ngIf="feedbackList?.length == 0">
+                            <span class="text-center">No feedback to display.</span>
+                        </div>
                     </div>
                     <ul class="pagination pagination-rounded justify-content-end mb-2">
                         <pagination [totalItems]="total" [(ngModel)]="currentPage" [itemsPerPage]="perPage"
