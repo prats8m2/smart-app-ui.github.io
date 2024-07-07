@@ -55,6 +55,7 @@ export class EditMenuComponent implements OnInit {
 
 	categoryParams: IParams = {
 		siteId: null,
+		type: null,
 		limit: 100,
 		pageNumber: 1,
 	};
@@ -197,6 +198,10 @@ export class EditMenuComponent implements OnInit {
 		});
 	}
 
+	changeCategoryType(id: number) {
+		this.categoryParams.type = id;
+		this.listCategoryAPI(this.categoryParams);
+	}
 	updateCategory() {
 		const scheduleData = this.menuForm.get('scheduleData');
 		if (scheduleData) {
@@ -298,6 +303,7 @@ export class EditMenuComponent implements OnInit {
 					this.menuForm.get('account').disable();
 					this.menuForm.get('site').disable();
 					this.categoryParams.siteId = '' + this.selectedSiteId;
+					this.categoryParams.type = type;
 					this.listCategoryAPI(this.categoryParams);
 					this.patchScheduleData();
 				}

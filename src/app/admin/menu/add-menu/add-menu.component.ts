@@ -60,6 +60,7 @@ export class AddMenuComponent implements OnInit {
 
 	categoryParams: IParams = {
 		siteId: null,
+		type: 1,
 		limit: 100,
 		pageNumber: 1,
 	};
@@ -288,6 +289,11 @@ export class AddMenuComponent implements OnInit {
 				console.log('ERROR');
 			}
 		});
+	}
+
+	changeCategoryType(id: number) {
+		this.categoryParams.type = id;
+		this.listCategoryAPI(this.categoryParams);
 	}
 
 	startDateSellected(event: any) {

@@ -43,7 +43,8 @@
                 <div class="col-md-6 mb-4">
                     <label for="siteType">Type</label>
                     <ng-select [items]="menuTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Type'"></ng-select>
+                        [ngModel]="menuTypes[0]?.id" (change)="changeCategoryType($event.id)" formControlName="type"
+                        [placeholder]="'Type'"></ng-select>
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="menuStatus">Status</label>
