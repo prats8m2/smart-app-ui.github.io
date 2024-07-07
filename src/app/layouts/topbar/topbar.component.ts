@@ -27,6 +27,7 @@ export class TopbarComponent implements OnInit {
 	flagvalue;
 	countryName;
 	valueset;
+	today = Date.now();
 
 	constructor(
 		@Inject(DOCUMENT) private document: any,
@@ -37,7 +38,11 @@ export class TopbarComponent implements OnInit {
 		public translate: TranslateService,
 		public _cookiesService: CookieService,
 		private globalService: GlobalService
-	) {}
+	) {
+		setInterval(() => {
+			this.today = Date.now();
+		}, 100);
+	}
 
 	listLang = [
 		{ text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
