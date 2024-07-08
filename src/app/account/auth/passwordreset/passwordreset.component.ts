@@ -1,62 +1,44 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { AuthenticationService } from '../../../core/services/auth.service';
-import { environment } from '../../../../environments/environment';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+	UntypedFormBuilder,
+	UntypedFormGroup,
+	Validators,
+} from '@angular/forms';
 
 @Component({
-  selector: 'app-passwordreset',
-  templateUrl: './passwordreset.component.html',
-  styleUrls: ['./passwordreset.component.scss']
+	selector: 'app-passwordreset',
+	templateUrl: './passwordreset.component.html',
+	styleUrls: ['./passwordreset.component.scss'],
 })
-
-/**
- * Reset-password component
- */
 export class PasswordresetComponent implements OnInit, AfterViewInit {
+	resetForm: UntypedFormGroup;
+	submitted: boolean = false;
+	error: string = '';
+	success: string = '';
+	loading: boolean = false;
 
-  resetForm: UntypedFormGroup;
-  submitted:boolean = false;
-  error:string = '';
-  success:string = '';
-  loading:boolean  = false;
+	year: number = new Date().getFullYear();
 
-  // set the currenr year
-  year: number = new Date().getFullYear();
+	constructor(private formBuilder: UntypedFormBuilder) {}
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
+	ngOnInit() {
+		document.body.setAttribute('data-bs-theme', 'dark');
 
-  ngOnInit() {
+		this.resetForm = this.formBuilder.group({
+			email: ['', [Validators.required, Validators.email]],
+		});
+	}
 
-    this.resetForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
-  }
+	ngAfterViewInit() {}
 
-  ngAfterViewInit() {
-  }
-
-  // convenience getter for easy access to form fields
-  get f() { return this.resetForm.controls; }
-
-  /**
-   * On submit form
-   */
-  onSubmit() {
-    this.success = '';
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.resetForm.invalid) {
-      return;
-    }
-    // if (environment.defaultauth === 'firebase') {
-    //   this.authenticationService.resetPassword(this.f.email.value)
-    //     .catch(error => {
-    //       this.error = error ? error : '';
-    //     });
-    // }
-  }
+	get f() {
+		return this.resetForm.controls;
+	}
+	onSubmit() {
+		this.success = '';
+		this.submitted = true;
+		if (this.resetForm.invalid) {
+			return;
+		}
+	}
 }
