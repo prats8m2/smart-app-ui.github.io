@@ -29,7 +29,8 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-center flex-grow-1">
-      <span class="current-time">{{ today | date:'HH:mm:ss' }} IST</span>
+      <span class="current-time">{{ today | date:'HH:mm:ss' }} IST </span>&nbsp;
+      <span class="current-time" *ngIf="userInfo.role != 'Super-Admin'">| {{userInfo.account}}</span>
     </div>
 
     <div class="d-flex">
