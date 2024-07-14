@@ -8,6 +8,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { SiteService } from '../../site/service/site.service';
 import { OrderService } from '../service/order.service';
 import { SocketService } from '../service/socket.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
 	selector: 'app-list-order',
@@ -22,7 +23,8 @@ export class ListOrderComponent implements OnInit {
 		private siteServices: SiteService,
 		private socketService: SocketService,
 		private cdr: ChangeDetectorRef,
-		private orderService: OrderService
+		private orderService: OrderService,
+		private modalService: BsModalService
 	) {}
 
 	showListAccount: boolean =
@@ -57,6 +59,7 @@ export class ListOrderComponent implements OnInit {
 	orderType: number = 1;
 	private subscription: Subscription;
 	orders: any = [];
+	modalRef?: BsModalRef;
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -151,5 +154,9 @@ export class ListOrderComponent implements OnInit {
 		if (this.sitesList.length) {
 			this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
 		}
+	}
+
+	openViewModal(content: any) {
+		this.modalRef = this.modalService.show(content);
 	}
 }

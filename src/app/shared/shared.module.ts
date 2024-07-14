@@ -14,6 +14,7 @@ import { TimeAgoPipe } from '../core/pipes/time-ago.pipe';
 import { OrderStatusPipe } from '../core/pipes/order-status.pipe';
 import { OrderTypePipe } from '../core/pipes/order-type.pipe';
 import { EventTypePipe } from '../core/pipes/eventType.pipe';
+import { PaymentTypePipe } from '../core/pipes/payment-type.pipe';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { EventTypePipe } from '../core/pipes/eventType.pipe';
 		OrderStatusPipe,
 		OrderTypePipe,
 		EventTypePipe,
+		PaymentTypePipe,
 	],
 	imports: [CommonModule, UIModule, WidgetModule, LayoutsModule],
 	exports: [
@@ -38,6 +40,7 @@ import { EventTypePipe } from '../core/pipes/eventType.pipe';
 		OrderStatusPipe,
 		OrderTypePipe,
 		EventTypePipe,
+		PaymentTypePipe,
 	],
 })
 export class SharedModule {}

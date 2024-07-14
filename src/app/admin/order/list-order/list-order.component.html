@@ -73,12 +73,13 @@
                                     <th class="align-middle">Order ID</th>
                                     <th class="align-middle">Location</th>
                                     <th class="align-middle">Amount</th>
+                                    <th class="align-middle">Payment Method</th>
                                     <th class="align-middle">Status</th>
                                     <th class="align-middle">Created</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                                 <tr *ngIf="orderList.length == 0">
-                                    <th class="align-middle" style="text-align: center;" colspan="6">No data available
+                                    <th class="align-middle" style="text-align: center;" colspan="7">No data available
                                     </th>
                                 </tr>
                             </thead>
@@ -89,6 +90,7 @@
                                     </td>
                                     <td>{{order.type | orderType}}</td>
                                     <td>$ {{order.payment.total}} USD</td>
+                                    <td>{{order.payment.type | paymentType}}</td>
                                     <td>
                                         <span class="badge badge-pill font-size-11" [ngClass]="{
                                                 'badge-soft-info': order.status == 1,
@@ -101,7 +103,8 @@
                                     <td>{{order.createdOn | timeAgo}}
                                     </td>
                                     <td>
-                                        <a class="text-body fw-bold pointer text-decoration-underline">view</a>
+                                        <a class="text-body fw-bold pointer text-decoration-underline"
+                                            (click)="openViewModal(ViewContent)">view</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -117,3 +120,82 @@
         </div>
     </div>
 </div>
+
+<ng-template #ViewContent role="document" let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <p class="mb-2" id="orderlist-overview">
+            Product id:
+            <span class="list-id text-primary">#SK2540</span>
+        </p>
+        <p class="mb-4">
+            Billing Name:
+            <span class="orderlist-customer text-primary">Neal Matthews</span>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-centered table-nowrap">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <div>
+                                <img src="assets/images/product/img-7.png" alt class="avatar-sm" />
+                            </div>
+                        </th>
+                        <td>
+                            <div>
+                                <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                <p class="text-muted mb-0">$ 225 x 1</p>
+                            </div>
+                        </td>
+                        <td>$ 255</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <div>
+                                <img src="assets/images/product/img-4.png" alt class="avatar-sm" />
+                            </div>
+                        </th>
+                        <td>
+                            <div>
+                                <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
+                                <p class="text-muted mb-0">$ 145 x 1</p>
+                            </div>
+                        </td>
+                        <td>$ 145</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Sub Total:</h6>
+                        </td>
+                        <td>$ 400</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Shipping:</h6>
+                        </td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Total:</h6>
+                        </td>
+                        <td>$ 400</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
+    </div>
+</ng-template>
