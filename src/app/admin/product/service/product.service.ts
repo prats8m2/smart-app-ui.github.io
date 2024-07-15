@@ -15,7 +15,7 @@ export class ProductService {
 		return this.http
 			.get(
 				PRODUCT.LIST_PRODUCT +
-					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
 			)
 			.pipe(
 				map((response: any) => {

@@ -50,6 +50,7 @@ export class ListProductComponent implements OnInit {
 		siteId: null,
 		limit: 100,
 		pageNumber: 1,
+		type: 1,
 	};
 
 	productList: any = [];
@@ -156,5 +157,10 @@ export class ListProductComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	changeCategoryType(type: any) {
+		this.productParams.type = type;
+		this.listProductsAPI(this.productParams);
 	}
 }
