@@ -70,7 +70,7 @@
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <div class="float-end">
-                    <span class="pointer" (click)="viewOrderDialog(order.id)"><i
+                    <span class="pointer" (click)="openViewModal(ViewContent, order.id)"><i
                             class="mdi mdi-eye font-size-18"></i></span>
                 </div>
                 <h5 class="font-size-15">Order ID : {{ order.id }}
@@ -88,5 +88,91 @@
                 </div>
             </div>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #ViewContent role="document" let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <p class="mb-2" id="orderlist-overview">
+            Order id:
+            <span class="list-id text-primary">{{orderDetails.id}}</span>
+        </p>
+        <p class="mb-4">
+            Billing Name:
+            <span class="orderlist-customer text-primary">{{orderDetails.user}}</span>
+        </p>
+        <p class="mb-4">
+            Location:
+            <span *ngIf="orderDetails.table && !orderDetails.room"
+                class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
+            <span *ngIf="orderDetails.room && !orderDetails.table "
+                class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-centered table-nowrap">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <div>
+                                <img src="assets/images/product/img-7.png" alt class="avatar-sm" />
+                            </div>
+                        </th>
+                        <td>
+                            <div>
+                                <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                <p class="text-muted mb-0">$ 225 x 1</p>
+                            </div>
+                        </td>
+                        <td>$ 255</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            <div>
+                                <img src="assets/images/product/img-4.png" alt class="avatar-sm" />
+                            </div>
+                        </th>
+                        <td>
+                            <div>
+                                <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
+                                <p class="text-muted mb-0">$ 145 x 1</p>
+                            </div>
+                        </td>
+                        <td>$ 145</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Sub Total:</h6>
+                        </td>
+                        <td>$ {{orderDetails.payment.total}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Service charges:</h6>
+                        </td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Total:</h6>
+                        </td>
+                        <td>$ {{orderDetails.payment.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>
 </ng-template>

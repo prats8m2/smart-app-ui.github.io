@@ -97,10 +97,8 @@ export const ORDER = {
 	LIST_ORDER: '/order/list',
 	ADD_ORDER: '/order/add',
 	UPDATE_ORDER_STATUS: '/order/update/status',
-	ADD_MENU: '/menu/add',
-	VIEW_MENU: '/menu/get/',
-	DELETE_MENU: '/menu/delete/',
-	UPDATE_MENU: '/menu/update',
+	VIEW_ORDER: '/order/get/',
+	ASSIGN_USER_LISR: '/user/assign/list',
 };
 
 export const FEEDBACK = {

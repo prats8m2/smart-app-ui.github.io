@@ -4,6 +4,7 @@ import { OrderService } from '../service/order.service';
 import { IParams } from 'src/app/core/interface/params';
 import { SocketService } from '../service/socket.service';
 import { Subscription, interval } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
 	selector: 'app-kanban',
@@ -17,12 +18,15 @@ export class KanbanComponent implements OnInit {
 	inProgresOrders: any = [];
 	completedOrders: any = [];
 	private subscription: Subscription;
+	orderDetails: any;
+	// modalRef?: BsModalRef;
 
 	constructor(
 		private orderService: OrderService,
 		private socketService: SocketService,
 		private cdr: ChangeDetectorRef
-	) {
+	) // private modalService: BsModalService
+	{
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {
@@ -97,7 +101,15 @@ export class KanbanComponent implements OnInit {
 		}
 	}
 
-	viewOrderDialog(orderId) {
-		console.log(orderId);
+	openViewModal(content: any, orderId: number) {
+		//call get order api
+		this.orderService.viewOrder(orderId).then((res) => {
+			if (res.status && res.data) {
+				this.orderDetails = res.data;
+			} else {
+				this.orderDetails = null;
+			}
+			// this.modalRef = this.modalService.show(content);
+		});
 	}
 }

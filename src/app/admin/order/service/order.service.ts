@@ -75,4 +75,27 @@ export class OrderService {
 				return result;
 			});
 	}
+
+	viewOrder(id: any) {
+		return this.http
+			.get(ORDER.VIEW_ORDER + id)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
+	listAssignUsersList(params: any) {
+		return this.http
+			.get(
+				ORDER.ASSIGN_USER_LISR +
+					`/${params.siteId}/${params.pageNumber}/${params.limit}`
+			)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

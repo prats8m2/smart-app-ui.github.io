@@ -86,10 +86,10 @@
                             <tbody>
                                 <tr *ngFor="let order of orderList; let i = index;" id="o_{{order.id}}">
                                     <td>
-                                        <a class="text-body fw-bold pointer">{{order.id}}</a>
+                                        <a class="text-body">{{order.id}}</a>
                                     </td>
                                     <td>{{order.type | orderType}}</td>
-                                    <td>$ {{order.payment.total}} USD</td>
+                                    <td>$ {{order.payment.total}}</td>
                                     <td>{{order.payment.type | paymentType}}</td>
                                     <td>
                                         <span class="badge badge-pill font-size-11" [ngClass]="{
@@ -103,8 +103,14 @@
                                     <td>{{order.createdOn | timeAgo}}
                                     </td>
                                     <td>
-                                        <a class="text-body fw-bold pointer text-decoration-underline"
-                                            (click)="openViewModal(ViewContent)">view</a>
+                                        <div class="d-flex gap-3">
+                                            <span *ngIf="showViewOrder" class="pointer"
+                                                (click)="openViewModal(ViewContent, order.id)"><i
+                                                    class="mdi mdi-eye font-size-18"></i></span>
+                                            <span *ngIf="showAssignOrder" class="pointer"
+                                                (click)="openAssignModal(ViewContent, order.id)"><i
+                                                    class="mdi mdi-account-plus font-size-18"></i></span>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -128,12 +134,19 @@
     </div>
     <div class="modal-body">
         <p class="mb-2" id="orderlist-overview">
-            Product id:
-            <span class="list-id text-primary">#SK2540</span>
+            Order id:
+            <span class="list-id text-primary">{{orderDetails.id}}</span>
         </p>
         <p class="mb-4">
             Billing Name:
-            <span class="orderlist-customer text-primary">Neal Matthews</span>
+            <span class="orderlist-customer text-primary">{{orderDetails.user}}</span>
+        </p>
+        <p class="mb-4">
+            Location:
+            <span *ngIf="orderDetails.table && !orderDetails.room"
+                class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
+            <span *ngIf="orderDetails.room && !orderDetails.table "
+                class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
         </p>
         <div class="table-responsive">
             <table class="table table-centered table-nowrap">
@@ -177,11 +190,11 @@
                         <td colspan="2">
                             <h6 class="m-0">Sub Total:</h6>
                         </td>
-                        <td>$ 400</td>
+                        <td>$ {{orderDetails.payment.total}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6 class="m-0">Shipping:</h6>
+                            <h6 class="m-0">Service charges:</h6>
                         </td>
                         <td>Free</td>
                     </tr>
@@ -189,7 +202,7 @@
                         <td colspan="2">
                             <h6 class="m-0">Total:</h6>
                         </td>
-                        <td>$ 400</td>
+                        <td>$ {{orderDetails.payment.total}}</td>
                     </tr>
                 </tbody>
             </table>

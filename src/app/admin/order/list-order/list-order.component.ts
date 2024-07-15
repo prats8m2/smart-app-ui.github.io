@@ -36,6 +36,8 @@ export class ListOrderComponent implements OnInit {
 		this.globalService.checkForPermission('UPDATE-ORDER');
 	showDeleteOrder: boolean =
 		this.globalService.checkForPermission('DELETE-ORDER');
+	showAssignOrder: boolean =
+		this.globalService.checkForPermission('LIST-STAFF');
 
 	siteParams: IParams = {
 		accountId: null,
@@ -46,6 +48,12 @@ export class ListOrderComponent implements OnInit {
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,
+	};
+
+	assignUsersParams: IParams = {
+		limit: 100,
+		pageNumber: 1,
+		siteId: null,
 	};
 
 	orderList: any = [];
@@ -60,6 +68,8 @@ export class ListOrderComponent implements OnInit {
 	private subscription: Subscription;
 	orders: any = [];
 	modalRef?: BsModalRef;
+	orderDetails: any;
+	assignUsersList: any[] = [];
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -118,6 +128,7 @@ export class ListOrderComponent implements OnInit {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					//call list order API
+					this.assignUsersParams.siteId = this.sitesList[0]?.id;
 					this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
 				}
 			}
@@ -156,7 +167,29 @@ export class ListOrderComponent implements OnInit {
 		}
 	}
 
-	openViewModal(content: any) {
-		this.modalRef = this.modalService.show(content);
+	openViewModal(content: any, orderId: number) {
+		//call get order api
+		this.orderService.viewOrder(orderId).then((res) => {
+			if (res.status && res.data) {
+				this.orderDetails = res.data;
+			} else {
+				this.orderDetails = null;
+			}
+			this.modalRef = this.modalService.show(content);
+		});
+	}
+
+	openAssignModal(content: any) {
+		//call get order api
+		this.orderService
+			.listAssignUsersList(this.assignUsersParams)
+			.then((res) => {
+				if (res.status && res.data.length) {
+					this.assignUsersList = [...res.data];
+				} else {
+					this.assignUsersList = null;
+				}
+				// this.modalRef = this.modalService.show(content);
+			});
 	}
 }
