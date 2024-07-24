@@ -59,6 +59,7 @@ export class AddProductComponent implements OnInit {
 		siteId: null,
 		limit: 100,
 		pageNumber: 1,
+		type: null,
 	};
 
 	productTypes = [
@@ -216,8 +217,8 @@ export class AddProductComponent implements OnInit {
 	}
 
 	changeType(typeId: any) {
-		if (typeId) {
-			this.categoryParams.type = typeId;
+		this.categoryParams.type = typeId;
+		if (this.categoryParams.siteId && typeId) {
 			this.listCategoryApi(this.categoryParams);
 		}
 	}

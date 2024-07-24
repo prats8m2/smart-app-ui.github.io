@@ -12,6 +12,7 @@ export class CategoryService {
 	constructor(private http: HttpClient) {}
 
 	listCategory(params: IParams): Observable<any> {
+		console.log(params);
 		return this.http
 			.get(
 				CATEGORY.LIST_CATEGORY +
