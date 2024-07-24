@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
@@ -36,6 +36,8 @@ export class AddSiteComponent {
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
 	];
+	selectedTab: number = 0;
+	selectTabIndex: number = 0;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -114,7 +116,9 @@ export class AddSiteComponent {
 		//call add site API
 		this.siteService.addSite(this.siteForm).then((res) => {
 			if (res.status) {
-				this.router.navigate([URL_ROUTES.LIST_SITE]);
+				this.selectTabIndex = 1;
+				this.selectedTab = 1;
+				this.siteForm.reset();
 			} else {
 				console.log('error');
 			}
@@ -150,5 +154,24 @@ export class AddSiteComponent {
 
 	addField() {
 		this.formData.push(this.field());
+	}
+
+	stepClicked(index: number) {
+		if (index === 1) {
+			if (this.siteForm.dirty) {
+				this.dialogService.enterSiteDetailsConfirmDialog().then((res) => {
+					if (res.value) {
+						this.selectTabIndex = 0;
+						this.selectedTab = 0;
+					}
+				});
+			} else {
+				this.selectTabIndex = index;
+				this.selectedTab = index;
+			}
+		} else if (index === 0) {
+			this.selectTabIndex = index;
+			this.selectedTab = index;
+		}
 	}
 }

@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { NgStepperModule } from 'angular-ng-stepper';
 
 @NgModule({
 	declarations: [
@@ -25,6 +27,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 		PaginationModule.forRoot(),
 		NgSelectModule,
 		SharedModule,
+		CdkStepperModule,
+		NgStepperModule,
 	],
 })
 export class SitesModule {}

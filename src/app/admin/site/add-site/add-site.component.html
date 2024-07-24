@@ -4,95 +4,171 @@
       <i class="bx bx-left-arrow-alt font-size-18 pointer" (click)="routeToListSite()"></i>
       <h4 class="card-title mb-4">Add Site</h4>
     </div>
-    <form (ngSubmit)="addSite()" [formGroup]="siteForm" class="custom-form">
-      <h6 class="mb-2">Site Details</h6>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <label for="siteName">Site Name</label>
-          <input type="text" class="form-control"
-            [ngClass]="{ 'form-error':showError('siteName'),'form-success':showSuccess('siteName') }"
-            formControlName="siteName">
-          <div *ngIf="formTouched('siteName')">
-            <div *ngIf="isError('siteName','required')" class="text-danger">
-              {{errorMessage('siteName','required')}}
+    <div id="site-wizard">
+      <ng-stepper [linear]="true" class="wizard" [selectedIndex]="selectTabIndex">
+        <cdk-step [optional]="false" class="step-box">
+          <ng-template cdkStepLabel>
+            <div (click)="stepClicked(0)" class="hover-pointer">
+              <span class="number">1.</span>
+              <span class="step-text">Basic Details</span>
             </div>
-            <div *ngIf="isError('siteName','pattern')" class="text-danger">
-              {{errorMessage('siteName','pattern')}} </div>
-            <div *ngIf="isError('siteName','maxlength')" class="text-danger">
-              {{errorMessage('siteName','maxlength')}} </div>
-            <div *ngIf="isError('siteName','minlength')" class="text-danger">
-              {{errorMessage('siteName','minlength')}} </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <label for="siteAddress">Site Address</label>
-          <input type="text" class="form-control"
-            [ngClass]="{ 'form-error':showError('siteAddress'),'form-success':showSuccess('siteAddress') }"
-            formControlName="siteAddress">
-          <div *ngIf="formTouched('siteAddress')">
-            <div *ngIf="isError('siteAddress','required')" class="text-danger">
-              {{errorMessage('siteAddress','required')}}
-            </div>
-            <div *ngIf="isError('siteAddress','pattern')" class="text-danger">
-              {{errorMessage('siteAddress','pattern')}} </div>
-            <div *ngIf="isError('siteAddress','maxlength')" class="text-danger">
-              {{errorMessage('siteAddress','maxlength')}} </div>
-            <div *ngIf="isError('siteAddress','minlength')" class="text-danger">
-              {{errorMessage('siteAddress','minlength')}} </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <label for="siteType">Site Type</label>
-          <ng-select [items]="siteTypes" bindLabel="label" [clearable]="false" bindValue="id" formControlName="type"
-            [placeholder]="'Site'"></ng-select>
-        </div>
-      </div>
-      <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
-      <div class="row" *ngIf="showListAccount">
-        <div class="col-md-6 mb-4">
-          <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
-            formControlName="account" [ngModel]="accountList[0]?.account?.id" [placeholder]="'Account'"></ng-select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="mb-3">
-            <h4 class="card-title mb-4">Wifi Details</h4>
-            <form class="repeater" [formGroup]="siteForm">
-              <div formArrayName="wifiDetails">
-                <div *ngFor="
-                              let data1 of formData.controls;
-                              let i = index
-                            ">
-                  <div [formGroupName]="i" class="row">
-                    <div class="mb-3 col-lg-5">
-                      <label for="username">Username</label>
-                      <input type="text" formControlName="username" placeholder="Username" class="form-control" />
+          </ng-template>
+          <section *ngIf="selectedTab === 0" class="step-section">
+            <form (ngSubmit)="addSite()" [formGroup]="siteForm" class="custom-form">
+              <h6 class="mb-2">Site Details</h6>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="siteName">Site Name</label>
+                  <input type="text" class="form-control"
+                    [ngClass]="{ 'form-error':showError('siteName'),'form-success':showSuccess('siteName') }"
+                    formControlName="siteName">
+                  <div *ngIf="formTouched('siteName')">
+                    <div *ngIf="isError('siteName','required')" class="text-danger">
+                      {{errorMessage('siteName','required')}}
                     </div>
-                    <div class="mb-3 col-lg-5">
-                      <label for="password">Password</label>
-                      <input type="password" formControlName="password" class="form-control" placeholder="Password" />
-                    </div>
-                    <div class="col-lg-2 mt-1 align-self-center">
-                      <div class="d-grid">
-                        <input type="button" class="btn btn-primary" value="Delete" (click)="removeField(i)" />
-                      </div>
-                    </div>
+                    <div *ngIf="isError('siteName','pattern')" class="text-danger">
+                      {{errorMessage('siteName','pattern')}} </div>
+                    <div *ngIf="isError('siteName','maxlength')" class="text-danger">
+                      {{errorMessage('siteName','maxlength')}} </div>
+                    <div *ngIf="isError('siteName','minlength')" class="text-danger">
+                      {{errorMessage('siteName','minlength')}} </div>
                   </div>
                 </div>
-                <div class="col-md-12 d-flex justify-content-end">
-                  <input type="button" class="btn btn-success mt-3 mt-lg-0 ml-auto" value="Add" (click)="addField()" />
+                <div class="col-md-6 mb-4">
+                  <label for="siteAddress">Site Address</label>
+                  <input type="text" class="form-control"
+                    [ngClass]="{ 'form-error':showError('siteAddress'),'form-success':showSuccess('siteAddress') }"
+                    formControlName="siteAddress">
+                  <div *ngIf="formTouched('siteAddress')">
+                    <div *ngIf="isError('siteAddress','required')" class="text-danger">
+                      {{errorMessage('siteAddress','required')}}
+                    </div>
+                    <div *ngIf="isError('siteAddress','pattern')" class="text-danger">
+                      {{errorMessage('siteAddress','pattern')}} </div>
+                    <div *ngIf="isError('siteAddress','maxlength')" class="text-danger">
+                      {{errorMessage('siteAddress','maxlength')}} </div>
+                    <div *ngIf="isError('siteAddress','minlength')" class="text-danger">
+                      {{errorMessage('siteAddress','minlength')}} </div>
+                  </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="siteType">Site Type</label>
+                  <ng-select [items]="siteTypes" bindLabel="label" [clearable]="false" bindValue="id"
+                    formControlName="type" [placeholder]="'Site'"></ng-select>
+                </div>
+              </div>
+              <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+              <div class="row" *ngIf="showListAccount">
+                <div class="col-md-6 mb-4">
+                  <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
+                    formControlName="account" [ngModel]="accountList[0]?.account?.id"
+                    [placeholder]="'Account'"></ng-select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <h4 class="card-title mb-4">Wifi Details</h4>
+                    <form class="repeater" [formGroup]="siteForm">
+                      <div formArrayName="wifiDetails">
+                        <div *ngFor="
+                                      let data1 of formData.controls;
+                                      let i = index
+                                    ">
+                          <div [formGroupName]="i" class="row">
+                            <div class="mb-3 col-lg-5">
+                              <label for="username">Username</label>
+                              <input type="text" formControlName="username" placeholder="Username"
+                                class="form-control" />
+                            </div>
+                            <div class="mb-3 col-lg-5">
+                              <label for="password">Password</label>
+                              <input type="password" formControlName="password" class="form-control"
+                                placeholder="Password" />
+                            </div>
+                            <div class="col-lg-2 mt-1 align-self-center">
+                              <div class="d-grid">
+                                <input type="button" class="btn btn-primary" value="Delete" (click)="removeField(i)" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end mr-2">
+                          <input type="button" class="btn btn-success mt-3 mt-lg-0 ml-auto" value="Add"
+                            (click)="addField()" />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary w-md" [disabled]="siteForm.invalid">Submit</button>
+              </div>
             </form>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button type="submit" class="btn btn-primary w-md" [disabled]="siteForm.invalid">Submit</button>
-      </div>
-    </form>
+          </section>
+        </cdk-step>
+        <cdk-step [optional]="true">
+          <ng-template cdkStepLabel>
+            <div (click)="stepClicked(1)" class="hover-pointer">
+              <span class="number">2.</span>
+              <span class="step-text">Site Configuration</span>
+            </div>
+          </ng-template>
+          <section *ngIf="selectedTab === 1" class="step-section">
+            <form>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-pancard-input">PAN Card</label>
+                    <input type="text" class="form-control" id="basicpill-pancard-input">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-vatno-input">VAT/TIN No.</label>
+                    <input type="text" class="form-control" id="basicpill-vatno-input">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-cstno-input">CST No.</label>
+                    <input type="text" class="form-control" id="basicpill-cstno-input">
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-servicetax-input">Service Tax No.</label>
+                    <input type="text" class="form-control" id="basicpill-servicetax-input">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-companyuin-input">Company UIN</label>
+                    <input type="text" class="form-control" id="basicpill-companyuin-input">
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="mb-3">
+                    <label for="basicpill-declaration-input">Declaration</label>
+                    <input type="text" class="form-control" id="basicpill-declaration-input">
+                  </div>
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-primary w-md" (click)="addSite()">Submit</button>
+            </form>
+          </section>
+        </cdk-step>
+      </ng-stepper>
+    </div>
   </div>
 </div>

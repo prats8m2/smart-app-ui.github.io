@@ -36,4 +36,18 @@ export class DialogService {
 		});
 		return result;
 	}
+
+	enterSiteDetailsConfirmDialog() {
+		const result = Swal.fire({
+			title: 'Site Details Required!',
+			text: 'Enter site details to proceed!',
+			icon: 'warning',
+			showCancelButton: false,
+			confirmButtonColor: '#34c38f',
+			confirmButtonText: 'Okay',
+			allowOutsideClick: false,
+			showCloseButton: false,
+		});
+		return result;
+	}
 }
