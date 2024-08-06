@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import { StorageService } from './storage.service';
-
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { StorageType } from 'src/app/constants/storage-type';
-import { DecodedTokenI } from '../interface/decode-token';
-import { IAPIResponse } from '../interface/api-response';
 import { URL_ROUTES } from 'src/app/constants/routing';
+import { StorageType } from 'src/app/constants/storage-type';
 import Swal from 'sweetalert2';
-import { AccountService } from 'src/app/admin/accounts/service/account.service';
-import { IParams } from '../interface/params';
-import { SiteService } from 'src/app/admin/site/service/site.service';
+import { IAPIResponse } from '../interface/api-response';
+import { DecodedTokenI } from '../interface/decode-token';
 @Injectable({
 	providedIn: 'root',
 })
@@ -22,6 +18,10 @@ export class GlobalService {
 	reportUrl!: string;
 	public isSidenavOpened: BehaviorSubject<boolean> =
 		new BehaviorSubject<boolean>(false);
+	public allowSideNavRoute: BehaviorSubject<any> = new BehaviorSubject<any>(
+		true
+	);
+
 	constructor(private router: Router) {}
 	handleSuccessService(result: IAPIResponse, showToast = true) {
 		if (showToast) {
@@ -121,5 +121,14 @@ export class GlobalService {
 		let email = decodeToken.email;
 
 		return { role, userName, name, account, email };
+	}
+
+	formControlValuesChanged(form: FormGroup) {
+		Object.keys(form.controls).forEach((controlName) => {
+			const control = form.get(controlName);
+			control.valueChanges.subscribe((value) => {
+				this.allowSideNavRoute.next(false);
+			});
+		});
 	}
 }

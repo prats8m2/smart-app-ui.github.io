@@ -101,6 +101,7 @@ export class AddDeviceComponent implements OnInit {
 			this.listSiteAPI(this.siteParams);
 		}
 		this.deviceForm.get('status').disable();
+		this.globalService.formControlValuesChanged(this.deviceForm);
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {

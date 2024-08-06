@@ -108,6 +108,7 @@ export class AddRoomComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+		this.globalService.formControlValuesChanged(this.roomForm);
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {

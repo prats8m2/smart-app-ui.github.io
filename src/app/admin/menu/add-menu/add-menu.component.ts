@@ -158,6 +158,8 @@ export class AddMenuComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+
+		this.globalService.formControlValuesChanged(this.menuForm);
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {

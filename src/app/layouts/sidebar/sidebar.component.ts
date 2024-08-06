@@ -1,22 +1,20 @@
 import {
-	Component,
-	OnInit,
 	AfterViewInit,
+	Component,
 	ElementRef,
-	ViewChild,
 	Input,
 	OnChanges,
+	OnInit,
+	ViewChild,
 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import MetisMenu from 'metismenujs';
-import { EventService } from '../../core/services/event.service';
-import { Router, NavigationEnd } from '@angular/router';
-
-import { HttpClient } from '@angular/common/http';
-
-import { MENU } from './menu';
-import { MenuItem } from './menu.model';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../core/services/global.service';
+import { MENU } from './menu';
+import { MenuItem } from './menu.model';
+import { DialogService } from 'src/app/core/services/dialog.service';
+import { take } from 'rxjs';
 
 @Component({
 	selector: 'app-sidebar',
@@ -40,11 +38,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 	@ViewChild('sideMenu') sideMenu: ElementRef;
 
 	constructor(
-		private eventService: EventService,
 		private router: Router,
 		public translate: TranslateService,
-		private http: HttpClient,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private dialogService: DialogService
 	) {
 		router.events.forEach((event) => {
 			if (event instanceof NavigationEnd) {
@@ -89,10 +86,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 			}
 		}, 300);
 	}
-
-	/**
-	 * remove active and mm-active class
-	 */
 	_removeAllClass(className) {
 		const els = document.getElementsByClassName(className);
 		while (els[0]) {
@@ -100,9 +93,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}
 	}
 
-	/**
-	 * Activate the parent dropdown
-	 */
 	_activateMenuDropdown() {
 		this._removeAllClass('mm-active');
 		this._removeAllClass('mm-show');
@@ -158,9 +148,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}
 	}
 
-	/**
-	 * Initialize
-	 */
 	initialize(): void {
 		this.permissions = this.globalService.getUserRole('permissions');
 
@@ -176,11 +163,23 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 		}
 	}
 
-	/**
-	 * Returns true or false if given menu item has child or not
-	 * @param item menuItem
-	 */
 	hasItems(item: MenuItem) {
 		return item.subItems !== undefined ? item.subItems.length > 0 : false;
+	}
+
+	navigateToModule(routerLink: string) {
+		this.globalService.allowSideNavRoute.pipe(take(1)).subscribe((res) => {
+			if (res) {
+				this.router.navigateByUrl(routerLink);
+			}
+			if (!res) {
+				this.dialogService.openBackConfirmDialog().then((result) => {
+					if (result.value) {
+						this.router.navigateByUrl(routerLink);
+						this.globalService.allowSideNavRoute.next(true);
+					}
+				});
+			}
+		});
 	}
 }

@@ -123,6 +123,7 @@ export class AddProductComponent implements OnInit {
 		}
 		this.productForm.get('status').disable();
 		this.productForm.get('isNew').disable();
+		this.globalService.formControlValuesChanged(this.productForm);
 	}
 
 	listSiteAPI(params: IParams) {

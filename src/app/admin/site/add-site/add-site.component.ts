@@ -90,6 +90,7 @@ export class AddSiteComponent {
 				}
 			});
 		}
+		this.globalService.formControlValuesChanged(this.siteForm);
 	}
 	//form validation function
 	isError(formControlName: string, errorType: string): boolean {

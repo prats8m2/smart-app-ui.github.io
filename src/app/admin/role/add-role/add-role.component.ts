@@ -85,6 +85,7 @@ export class AddRoleComponent implements OnInit {
 				}
 			});
 		}
+		this.globalService.formControlValuesChanged(this.roleForm);
 	}
 
 	initialisePermissions() {

@@ -110,6 +110,7 @@ export class AddTableComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+		this.globalService.formControlValuesChanged(this.tableForm);
 	}
 	listSiteAPI(params: IParams) {
 		this.siteServices.listSites(params).subscribe((res) => {

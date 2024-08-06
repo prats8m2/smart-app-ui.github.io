@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { URL_ROUTES } from '../../../constants/routing';
 import { environment } from 'src/environments/environment';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 @Component({
 	selector: 'app-add-account',
@@ -35,7 +36,8 @@ export class AddAccountComponent {
 		private formBuilder: FormBuilder,
 		private accountService: AccountService,
 		private router: Router,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private globalService: GlobalService
 	) {
 		if (this.isProduction) {
 			this.userForm = this.formBuilder.group({
@@ -65,6 +67,7 @@ export class AddAccountComponent {
 
 	ngOnInit() {
 		this.userForm.get('status').disable();
+		this.globalService.formControlValuesChanged(this.userForm);
 	}
 	//form validation function
 	isError(formControlName: string, errorType: string): boolean {
