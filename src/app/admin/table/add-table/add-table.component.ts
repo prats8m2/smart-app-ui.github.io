@@ -131,6 +131,7 @@ export class AddTableComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -166,6 +167,7 @@ export class AddTableComponent implements OnInit {
 		this.tableService.addTable(this.tableForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_TABLE]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}

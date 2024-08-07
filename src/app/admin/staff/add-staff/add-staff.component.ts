@@ -155,6 +155,7 @@ export class AddStaffComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_STAFF);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -207,6 +208,7 @@ export class AddStaffComponent implements OnInit {
 		this.staffService.addStaff(this.staffForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_STAFF]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}

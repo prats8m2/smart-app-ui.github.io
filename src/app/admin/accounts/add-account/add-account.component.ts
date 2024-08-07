@@ -94,6 +94,7 @@ export class AddAccountComponent {
 		this.accountService.addUser(this.userForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ACCOUNT]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}
@@ -107,6 +108,7 @@ export class AddAccountComponent {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_ACCOUNT);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}

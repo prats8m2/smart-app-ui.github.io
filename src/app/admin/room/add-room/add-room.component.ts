@@ -129,6 +129,7 @@ export class AddRoomComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -173,6 +174,7 @@ export class AddRoomComponent implements OnInit {
 		this.roomService.addRoom(this.roomForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ROOM]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}

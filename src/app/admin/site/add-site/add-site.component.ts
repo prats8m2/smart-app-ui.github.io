@@ -140,6 +140,7 @@ export class AddSiteComponent {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_SITE);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}

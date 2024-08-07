@@ -145,6 +145,7 @@ export class AddProductComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_PRODUCT);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -163,6 +164,7 @@ export class AddProductComponent implements OnInit {
 		this.productService.addProduct(this.productForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_PRODUCT]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('ERROR');
 			}
