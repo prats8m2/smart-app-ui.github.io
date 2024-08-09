@@ -68,8 +68,8 @@ export class SiteService {
 			});
 	}
 
-	updateSite(userForm: any) {
-		const { id, siteName, siteAddress, type, wifiDetails } = userForm.value;
+	updateSite(siteForm: any) {
+		const { id, siteName, siteAddress, type, wifiDetails } = siteForm.value;
 
 		return this.http
 			.put(SITE.UPDATE_SITE, {
@@ -89,6 +89,20 @@ export class SiteService {
 	deleteSite(id: number) {
 		return this.http
 			.delete(SITE.DELETE_SITE + id.toString())
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
+	updateSiteSetting(siteId: number, key: string, value: number) {
+		return this.http
+			.put(SITE.UPDATE_SITE_SETTING, {
+				id: siteId,
+				key,
+				value,
+			})
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));

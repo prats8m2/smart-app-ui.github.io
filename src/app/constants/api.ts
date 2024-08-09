@@ -17,6 +17,7 @@ export const SITE = {
 	VIEW_SITE: '/site/get/',
 	UPDATE_SITE: '/site/update',
 	DELETE_SITE: '/site/delete/',
+	UPDATE_SITE_SETTING: '/site/update/settings',
 };
 
 export const EVENT = {

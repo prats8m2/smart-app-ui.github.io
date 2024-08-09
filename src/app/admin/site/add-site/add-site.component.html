@@ -6,14 +6,14 @@
     </div>
     <div id="site-wizard">
       <ng-stepper [linear]="true" class="wizard" [selectedIndex]="selectTabIndex">
-        <cdk-step [optional]="false" class="step-box">
+        <cdk-step [optional]="false">
           <ng-template cdkStepLabel>
             <div (click)="stepClicked(0)" class="hover-pointer">
-              <span class="number">1.</span>
+              <span class="number">1</span>
               <span class="step-text">Basic Details</span>
             </div>
           </ng-template>
-          <section *ngIf="selectedTab === 0" class="step-section">
+          <section *ngIf="selectedTab == 0">
             <form (ngSubmit)="addSite()" [formGroup]="siteForm" class="custom-form">
               <h6 class="mb-2">Site Details</h6>
               <div class="row">
@@ -89,13 +89,13 @@
                                 placeholder="Password" />
                             </div>
                             <div class="col-lg-2 mt-1 align-self-center">
-                              <div class="d-grid">
+                              <div class="d-grid" *ngIf="allowAddSite">
                                 <input type="button" class="btn btn-primary" value="Delete" (click)="removeField(i)" />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-12 d-flex justify-content-end mr-2">
+                        <div class="col-md-12 d-flex justify-content-end mr-2" *ngIf="allowAddSite">
                           <input type="button" class="btn btn-success mt-3 mt-lg-0 ml-auto" value="Add"
                             (click)="addField()" />
                         </div>
@@ -104,7 +104,7 @@
                   </div>
                 </div>
               </div>
-              <div>
+              <div *ngIf="allowAddSite">
                 <button type="submit" class="btn btn-primary w-md" [disabled]="siteForm.invalid">Submit</button>
               </div>
             </form>
@@ -113,58 +113,193 @@
         <cdk-step [optional]="true">
           <ng-template cdkStepLabel>
             <div (click)="stepClicked(1)" class="hover-pointer">
-              <span class="number">2.</span>
+              <span class="number">2</span>
               <span class="step-text">Site Configuration</span>
             </div>
           </ng-template>
-          <section *ngIf="selectedTab === 1" class="step-section">
-            <form>
+          <section *ngIf="selectedTab === 1">
+            <form [formGroup]="siteSettingForm" class="custom-form">
+              <h6 class="mb-2">Theming</h6>
+              <div class="col-md-4 mb-4">
+                <label for="theme">Theme</label>
+                <ng-select [items]="themes" bindLabel="label" [clearable]="false" bindValue="id" formControlName="theme"
+                  [placeholder]="'Theme'" (change)="updateMiscConfig('theme')"></ng-select>
+              </div>
+
+              <h6 class="mb-2">Tax Details</h6>
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-pancard-input">PAN Card</label>
-                    <input type="text" class="form-control" id="basicpill-pancard-input">
+                <div class="col-md-4 mb-4">
+                  <label for="sgst">SGST</label>
+                  <div class="row">
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" formControlName="sgst">
+                    </div>
+                    <div class="col-md-2 mt-2">
+                      <a class="text-body pointer text-decoration-underline"
+                        (click)="updateMiscConfig('sgst')">Update</a>
+                    </div>
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-vatno-input">VAT/TIN No.</label>
-                    <input type="text" class="form-control" id="basicpill-vatno-input">
+                <div class="col-md-4 mb-4">
+                  <label for="cgst">CGST</label>
+                  <div class="row">
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" formControlName="cgst">
+                    </div>
+                    <div class="col-md-2 mt-2">
+                      <a class="text-body pointer text-decoration-underline"
+                        (click)="updateMiscConfig('cgst')">Update</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="serviceTax">Service Tax</label>
+                  <div class="row">
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" formControlName="serviceTax">
+                    </div>
+                    <div class="col-md-2 mt-2">
+                      <a class="text-body pointer text-decoration-underline"
+                        (click)="updateMiscConfig('serviceTax')">Update</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h6 class="mb-2">Service Acceptance Settings</h6>
+              <div class="row">
+                <div class="col-md-4 mb-4">
+                  <label for="acceptingOrders">Orders</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('orders')" formControlName="orders"
+                      [checked]="this.siteSettingForm.get('orders').value">
+                    <label class="form-check-label" for="SwitchCheckSizelg">{{this.siteSettingForm.get('orders').value ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="foodOrder">Food Orders</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('foodOrder')" formControlName="foodOrder"
+                      [checked]="this.siteSettingForm.get('foodOrder').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('foodOrder').value ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="amenitiesOrder">Amenities Orders</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('amenitiesOrder')" formControlName="amenitiesOrder"
+                      [checked]="this.siteSettingForm.get('amenitiesOrder').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('amenitiesOrder').value ?
+                      'Active' : 'In
+                      Active'}}</label>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-cstno-input">CST No.</label>
-                    <input type="text" class="form-control" id="basicpill-cstno-input">
+                <div class="col-md-4 mb-4">
+                  <label for="roomService">Room Service</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('roomService')" formControlName="roomService"
+                      [checked]="this.siteSettingForm.get('roomService').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('roomService').value ?
+                      'Active' : 'In
+                      Active'}}</label>
                   </div>
                 </div>
-
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-servicetax-input">Service Tax No.</label>
-                    <input type="text" class="form-control" id="basicpill-servicetax-input">
+                <div class="col-md-4 mb-4">
+                  <label for="cleaningService">Cleaning Service</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('cleaningService')" formControlName="cleaningService"
+                      [checked]="this.siteSettingForm.get('cleaningService').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('cleaningService').value ?
+                      'Active' : 'In
+                      Active'}}</label>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-companyuin-input">Company UIN</label>
-                    <input type="text" class="form-control" id="basicpill-companyuin-input">
+                <div class="col-md-4 mb-4">
+                  <label for="orderHistory">Order History</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('orderHistory')" formControlName="orderHistory"
+                      [checked]="this.siteSettingForm.get('orderHistory').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('orderHistory').value ?
+                      'Active' : 'In
+                      Active'}}</label>
                   </div>
                 </div>
-
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label for="basicpill-declaration-input">Declaration</label>
-                    <input type="text" class="form-control" id="basicpill-declaration-input">
+                <div class="col-md-4 mb-4">
+                  <label for="callReception">Call Reception</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('callReception')" formControlName="callReception"
+                      [checked]="this.siteSettingForm.get('callReception').value">
+                    <label class="form-check-label"
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('callReception').value ?
+                      'Active' : 'In
+                      Active'}}</label>
                   </div>
                 </div>
-
+                <div class="col-md-4 mb-4">
+                  <label for="sos">SOS</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle('sos')"
+                      formControlName="sos" [checked]="this.siteSettingForm.get('sos').value">
+                    <label class="form-check-label" for="SwitchCheckSizelg">{{this.siteSettingForm.get('sos').value ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary w-md" (click)="addSite()">Submit</button>
+              <div class="row">
+                <div class="col-md-4 mb-4">
+                  <label for="wifiSerive">Wi-Fi</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle('wifi')"
+                      formControlName="wifi" [checked]="this.siteSettingForm.get('wifi').value">
+                    <label class="form-check-label" for="SwitchCheckSizelg">{{this.siteSettingForm.get('wifi').value ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="events">Events</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('events')" formControlName="events"
+                      [checked]="this.siteSettingForm.get('events').value">
+                    <label class="form-check-label" for="SwitchCheckSizelg">{{this.siteSettingForm.get('events').value ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="feedback">Feedback</label>
+                  <div class="form-check form-switch form-switch-lg mb-3">
+                    <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                      (click)="toggle('feedback')" formControlName="feedback"
+                      [checked]="this.siteSettingForm.get('feedback').value">
+                    <label class="form-check-label" for="SwitchCheckSizelg">{{this.siteSettingForm.get('feedback').value
+                      ?
+                      'Active' : 'In
+                      Active'}}</label>
+                  </div>
+                </div>
+              </div>
             </form>
           </section>
         </cdk-step>

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import {
@@ -31,6 +31,7 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 export class AddSiteComponent {
 	isProduction = environment.production;
 	public siteForm: FormGroup;
+	public siteSettingForm: FormGroup;
 	accountList: any = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
@@ -38,6 +39,15 @@ export class AddSiteComponent {
 	];
 	selectedTab: number = 0;
 	selectTabIndex: number = 0;
+	allowAddSite: boolean = true;
+	createdSiteId: number;
+
+	themes = [
+		{ id: 1, label: 'DEFAULT' },
+		{ id: 2, label: 'CUSTOM 1' },
+		{ id: 3, label: 'CUSTOM 2' },
+		{ id: 4, label: 'CUSTOM 3' },
+	];
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -117,9 +127,10 @@ export class AddSiteComponent {
 		//call add site API
 		this.siteService.addSite(this.siteForm).then((res) => {
 			if (res.status) {
-				this.selectTabIndex = 1;
-				this.selectedTab = 1;
-				this.siteForm.reset();
+				this.createdSiteId = res.data.id;
+				const createdSiteSettings = res.data.settings;
+				this.routeToSiteSetingsStep();
+				this.patchSiteSettingsData(createdSiteSettings);
 			} else {
 				console.log('error');
 			}
@@ -130,6 +141,51 @@ export class AddSiteComponent {
 		return this.formBuilder.group({
 			username: ['', USER_NAME_VALIDATION],
 			password: ['', PASSWORD_VALIDATION],
+		});
+	}
+
+	routeToSiteSetingsStep() {
+		this.selectTabIndex = 1;
+		this.selectedTab = 1;
+		this.allowAddSite = false;
+		this.siteForm.markAsPristine();
+	}
+
+	patchSiteSettingsData(siteSettings: any) {
+		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
+		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
+		const amenitiesOrder = this.getStatusOfSiteConfig(
+			siteSettings.amenitiesOrder
+		);
+		const orderHistory = this.getStatusOfSiteConfig(siteSettings.orderHistory);
+		const callReception = this.getStatusOfSiteConfig(
+			siteSettings.callReception
+		);
+		const roomService = this.getStatusOfSiteConfig(siteSettings.roomService);
+		const cleaningService = this.getStatusOfSiteConfig(
+			siteSettings.cleaningService
+		);
+		const wifi = this.getStatusOfSiteConfig(siteSettings.wifi);
+		const sos = this.getStatusOfSiteConfig(siteSettings.sos);
+		const events = this.getStatusOfSiteConfig(siteSettings.events);
+		const feedback = this.getStatusOfSiteConfig(siteSettings.feedback);
+		this.siteSettingForm = this.formBuilder.group({
+			theme: [theme],
+			serviceTax: [serviceTax],
+			sgst: [sgst],
+			cgst: [cgst],
+			orders: [orders],
+			foodOrder: [foodOrder],
+			amenitiesOrder: [amenitiesOrder],
+			orderHistory: [orderHistory],
+			callReception: [callReception],
+			roomService: [roomService],
+			cleaningService: [cleaningService],
+			wifi: [wifi],
+			sos: [sos],
+			events: [events],
+			feedback: [feedback],
 		});
 	}
 
@@ -146,6 +202,18 @@ export class AddSiteComponent {
 		}
 	}
 
+	toggle(control): void {
+		const statusControl = this.siteSettingForm.get(control) as FormControl;
+		statusControl.setValue(!statusControl.value);
+		//update site setting configuration
+		const controlValue = this.siteSettingForm.get(control).value ? 1 : 0;
+		this.siteService.updateSiteSetting(
+			this.createdSiteId,
+			control,
+			controlValue
+		);
+	}
+
 	get formData(): FormArray {
 		return this.siteForm.get('wifiDetails') as FormArray;
 	}
@@ -160,7 +228,7 @@ export class AddSiteComponent {
 
 	stepClicked(index: number) {
 		if (index === 1) {
-			if (this.siteForm.dirty) {
+			if (this.siteForm.dirty || this.allowAddSite) {
 				this.dialogService.enterSiteDetailsConfirmDialog().then((res) => {
 					if (res.value) {
 						this.selectTabIndex = 0;
@@ -171,9 +239,23 @@ export class AddSiteComponent {
 				this.selectTabIndex = index;
 				this.selectedTab = index;
 			}
-		} else if (index === 0) {
+		} else if (index === 0 && this.allowAddSite == false) {
+			this.siteForm.disable();
 			this.selectTabIndex = index;
 			this.selectedTab = index;
 		}
+	}
+
+	getStatusOfSiteConfig(value: number) {
+		return value === 1;
+	}
+
+	updateMiscConfig(control: string) {
+		const controlValue = this.siteSettingForm.get(control).value;
+		this.siteService.updateSiteSetting(
+			this.createdSiteId,
+			control,
+			controlValue
+		);
 	}
 }
