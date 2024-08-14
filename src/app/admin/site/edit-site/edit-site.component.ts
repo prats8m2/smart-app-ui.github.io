@@ -79,7 +79,6 @@ export class EditSiteComponent {
 		}
 	}
 	siteWifiDetails: any = [];
-
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	siteData: any = [];
@@ -94,6 +93,8 @@ export class EditSiteComponent {
 		limit: 100,
 		pageNumber: 1,
 	};
+
+	allowToStep = true;
 
 	ngOnInit() {
 		this.getSite();
@@ -143,6 +144,7 @@ export class EditSiteComponent {
 	}
 
 	removeField(i: number) {
+		this.siteForm.markAsDirty();
 		this.formData.removeAt(i);
 	}
 
@@ -177,10 +179,17 @@ export class EditSiteComponent {
 		});
 	}
 
+	routeToSiteSetingsStep() {
+		this.selectTabIndex = 1;
+		this.selectedTab = 1;
+		this.siteForm.markAsPristine();
+		this.siteForm.markAsUntouched();
+	}
+
 	updateSite() {
 		this.siteService.updateSite(this.siteForm).then((res) => {
 			if (res.status) {
-				this.router.navigate([URL_ROUTES.LIST_SITE]);
+				this.routeToSiteSetingsStep();
 			} else {
 				console.log('error');
 			}
@@ -244,8 +253,22 @@ export class EditSiteComponent {
 	}
 
 	stepClicked(index: number) {
-		this.selectTabIndex = index;
-		this.selectedTab = index;
+		if (index === 1) {
+			if (this.siteForm.dirty) {
+				this.dialogService.saveSiteDetailsFirst().then((res) => {
+					if (res.value) {
+						this.selectTabIndex = 0;
+						this.selectedTab = 0;
+					}
+				});
+			} else {
+				this.selectTabIndex = index;
+				this.selectedTab = index;
+			}
+		} else if (index === 0) {
+			this.selectTabIndex = index;
+			this.selectedTab = index;
+		}
 	}
 
 	toggle(control): void {
