@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import {
@@ -31,12 +31,22 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 export class EditSiteComponent {
 	isProduction = environment.production;
 	public siteForm: FormGroup;
+	public siteSettingForm: FormGroup;
 	accountList: any = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
 	];
+
+	themes = [
+		{ id: 1, label: 'DEFAULT' },
+		{ id: 2, label: 'CUSTOM 1' },
+		{ id: 3, label: 'CUSTOM 2' },
+		{ id: 4, label: 'CUSTOM 3' },
+	];
 	showNoSiteAvailable: boolean = true;
+	selectedTab: number = 0;
+	selectTabIndex: number = 0;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -161,6 +171,7 @@ export class EditSiteComponent {
 					});
 					this.siteWifiDetails = [...res.data.wifi];
 					this.initializeWifiDetails(wifi);
+					this.patchSiteSettingsData(res.data.settings);
 				}
 			});
 		});
@@ -188,5 +199,64 @@ export class EditSiteComponent {
 			username: [data.username],
 			password: ['Pass@1234'],
 		});
+	}
+
+	patchSiteSettingsData(siteSettings: any) {
+		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
+		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
+		const amenitiesOrder = this.getStatusOfSiteConfig(
+			siteSettings.amenitiesOrder
+		);
+		const orderHistory = this.getStatusOfSiteConfig(siteSettings.orderHistory);
+		const callReception = this.getStatusOfSiteConfig(
+			siteSettings.callReception
+		);
+		const roomService = this.getStatusOfSiteConfig(siteSettings.roomService);
+		const cleaningService = this.getStatusOfSiteConfig(
+			siteSettings.cleaningService
+		);
+		const wifi = this.getStatusOfSiteConfig(siteSettings.wifi);
+		const sos = this.getStatusOfSiteConfig(siteSettings.sos);
+		const events = this.getStatusOfSiteConfig(siteSettings.events);
+		const feedback = this.getStatusOfSiteConfig(siteSettings.feedback);
+		this.siteSettingForm = this.formBuilder.group({
+			theme: [theme],
+			serviceTax: [serviceTax],
+			sgst: [sgst],
+			cgst: [cgst],
+			orders: [orders],
+			foodOrder: [foodOrder],
+			amenitiesOrder: [amenitiesOrder],
+			orderHistory: [orderHistory],
+			callReception: [callReception],
+			roomService: [roomService],
+			cleaningService: [cleaningService],
+			wifi: [wifi],
+			sos: [sos],
+			events: [events],
+			feedback: [feedback],
+		});
+	}
+
+	getStatusOfSiteConfig(value: number) {
+		return value === 1;
+	}
+
+	stepClicked(index: number) {
+		this.selectTabIndex = index;
+		this.selectedTab = index;
+	}
+
+	toggle(control): void {
+		const statusControl = this.siteSettingForm.get(control) as FormControl;
+		statusControl.setValue(!statusControl.value);
+		//update site setting configuration
+		const controlValue = this.siteSettingForm.get(control).value ? 1 : 0;
+		this.siteService.updateSiteSetting(
+			this.siteData?.id,
+			control,
+			controlValue
+		);
 	}
 }

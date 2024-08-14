@@ -25,16 +25,15 @@
   overflow-y: auto;
   padding-right: 10px; /* Optional: To avoid content getting hidden behind the scrollbar */
 }
-
-.scrollable-step::-webkit-scrollbar {
-  width: 8px; /* Optional: Custom scrollbar width */
+.site-stepper::-webkit-scrollbar {
+  width: 5px; 
 }
 
-.scrollable-step::-webkit-scrollbar-thumb {
-  background-color: #888; /* Optional: Custom scrollbar color */
-  border-radius: 4px;
+.custom-form::-webkit-scrollbar-thumb {
+background-color: #556080; 
+border-radius: 10px;
 }
 
-.scrollable-step::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Optional: Custom scrollbar hover color */
+.custom-form::-webkit-scrollbar-track {
+background-color: transparent; 
 }

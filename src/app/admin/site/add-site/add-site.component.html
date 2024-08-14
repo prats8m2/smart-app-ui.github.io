@@ -5,7 +5,7 @@
       <h4 class="card-title mb-4">Add Site</h4>
     </div>
     <div id="site-wizard">
-      <ng-stepper [linear]="true" class="wizard" [selectedIndex]="selectTabIndex">
+      <ng-stepper [linear]="true" class="wizard site-stepper" [selectedIndex]="selectTabIndex">
         <cdk-step [optional]="false">
           <ng-template cdkStepLabel>
             <div (click)="stepClicked(0)" class="hover-pointer">

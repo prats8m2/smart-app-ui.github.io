@@ -19,7 +19,7 @@
             </div>
         </div>
         <div id="site-wizard">
-            <ng-stepper [linear]="true" class="wizard" [selectedIndex]="selectTabIndex">
+            <ng-stepper [linear]="true" class="wizard site-stepper" [selectedIndex]="selectTabIndex">
                 <!--SITE DETAILS-->
                 <cdk-step [optional]="false">
                     <ng-template cdkStepLabel>
@@ -90,7 +90,7 @@
                     </div>
                 </cdk-step>
                 <!--SITE CONFIGURATION-->
-                <cdk-step [optional]="true" class="scrollable-step">
+                <cdk-step [optional]="true">
                     <ng-template cdkStepLabel>
                         <div (click)="stepClicked(1)" class="hover-pointer">
                             <span class="number">2</span>
@@ -98,7 +98,7 @@
                         </div>
                     </ng-template>
                     <section *ngIf="selectedTab === 1">
-                        <form [formGroup]="siteSettingForm" class="custom-form">
+                        <form [formGroup]="siteSettingForm">
                             <h6 class="mb-2">Theming</h6>
                             <div class="col-md-4 mb-4">
                                 <label for="theme">Theme</label>
