@@ -282,4 +282,13 @@ export class EditSiteComponent {
 			controlValue
 		);
 	}
+
+	updateMiscConfig(control: string) {
+		const controlValue = this.siteSettingForm.get(control).value;
+		this.siteService.updateSiteSetting(
+			this.siteData?.id,
+			control,
+			controlValue
+		);
+	}
 }
