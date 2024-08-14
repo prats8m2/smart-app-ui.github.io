@@ -18,54 +18,254 @@
                 </button>
             </div>
         </div>
-        <form [formGroup]="siteForm" class="custom-form">
-            <h6 class="mb-2">Site Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="siteName">Site Name</label>
-                    <input type="text" class="form-control" formControlName="siteName">
-                </div>
-                <div class="col-md-6 mb-4">
-                    <label for="siteAddress">Site Address</label>
-                    <input type="text" class="form-control" formControlName="siteAddress">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="type">Site Type</label>
-                    <input type="text" class="form-control" formControlName="type">
-                </div>
-            </div>
-            <h6 class="mb-2">Account Details</h6>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <label for="siteName">Account Name</label>
-                    <input type="text" class="form-control" formControlName="account">
-                </div>
-            </div>
-            <h6 class="mb-2">Wifi Details</h6>
-            <div class="mb-2" *ngIf="siteWifiDetails.length == 0">
-                <label for="wifiUserName">No details available.</label>
-            </div>
-            <div *ngIf="siteWifiDetails.length > 0">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="wifiUserName">Username</label>
+        <div id="site-wizard">
+            <ng-stepper [linear]="true" class="wizard" [selectedIndex]="selectTabIndex">
+                <!--SITE DETAILS-->
+                <cdk-step [optional]="false">
+                    <ng-template cdkStepLabel>
+                        <div (click)="stepClicked(0)" class="hover-pointer">
+                            <span class="number">1</span>
+                            <span class="step-text">Basic Details</span>
+                        </div>
+                    </ng-template>
+                    <div class="custom-form">
+                        <section *ngIf="selectedTab == 0">
+                            <form [formGroup]="siteForm" class="custom-form">
+                                <h6 class="mb-2">Site Details</h6>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="siteName">Site Name</label>
+                                        <input type="text" class="form-control" formControlName="siteName">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="siteAddress">Site Address</label>
+                                        <input type="text" class="form-control" formControlName="siteAddress">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="type">Site Type</label>
+                                        <input type="text" class="form-control" formControlName="type">
+                                    </div>
+                                </div>
+                                <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+                                <div class="row" *ngIf="showListAccount">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="siteName">Account Name</label>
+                                        <input type="text" class="form-control" formControlName="account">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <h6 class="mb-2">Wifi Details</h6>
+                                            <div class="mb-2" *ngIf="siteWifiDetails.length == 0">
+                                                <label for="wifiUserName">No details available.</label>
+                                            </div>
+                                            <div *ngIf="siteWifiDetails.length > 0">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="wifiUserName">Username</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="wifiPassword">Password</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row" *ngFor="let wifi of siteWifiDetails; let i = index;">
+                                                    <div class="col-md-6 mb-4">
+                                                        <input type="text" class="form-control" [value]="wifi.username"
+                                                            [attr.disabled]="true">
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                        <input type="text" class="form-control" value="**********"
+                                                            [attr.disabled]="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
                     </div>
-                    <div class="col-md-6">
-                        <label for="wifiPassword">Password</label>
-                    </div>
-                </div>
-                <div class="row" *ngFor="let wifi of siteWifiDetails; let i = index;">
-                    <div class="col-md-6 mb-4">
-                        <input type="text" class="form-control" [value]="wifi.username" [attr.disabled]="true">
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <input type="text" class="form-control" value="**********" [attr.disabled]="true">
-                    </div>
-                </div>
-            </div>
-
-        </form>
+                </cdk-step>
+                <!--SITE CONFIGURATION-->
+                <cdk-step [optional]="true" class="scrollable-step">
+                    <ng-template cdkStepLabel>
+                        <div (click)="stepClicked(1)" class="hover-pointer">
+                            <span class="number">2</span>
+                            <span class="step-text">Site Configuration</span>
+                        </div>
+                    </ng-template>
+                    <section *ngIf="selectedTab === 1">
+                        <form [formGroup]="siteSettingForm" class="custom-form">
+                            <h6 class="mb-2">Theming</h6>
+                            <div class="col-md-4 mb-4">
+                                <label for="theme">Theme</label>
+                                <ng-select [items]="themes" bindLabel="label" [clearable]="false" bindValue="id"
+                                    formControlName="theme" [placeholder]="'Theme'"></ng-select>
+                            </div>
+                            <h6 class="mb-2">Tax Details</h6>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="sgst">SGST</label>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" formControlName="sgst">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="cgst">CGST</label>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" formControlName="cgst">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="serviceTax">Service Tax</label>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" formControlName="serviceTax">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="mb-2">Service Acceptance Settings</h6>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="acceptingOrders">Orders</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="orders"
+                                            [checked]="this.siteSettingForm.get('orders').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('orders').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="foodOrder">Food Orders</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="foodOrder"
+                                            [checked]="this.siteSettingForm.get('foodOrder').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('foodOrder').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="amenitiesOrder">Amenities Orders</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="amenitiesOrder"
+                                            [checked]="this.siteSettingForm.get('amenitiesOrder').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('amenitiesOrder').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="roomService">Room Service</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="roomService"
+                                            [checked]="this.siteSettingForm.get('roomService').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('roomService').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="cleaningService">Cleaning Service</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="cleaningService"
+                                            [checked]="this.siteSettingForm.get('cleaningService').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('cleaningService').value
+                                            ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="orderHistory">Order History</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="orderHistory"
+                                            [checked]="this.siteSettingForm.get('orderHistory').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('orderHistory').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="callReception">Call Reception</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="callReception"
+                                            [checked]="this.siteSettingForm.get('callReception').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('callReception').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="sos">SOS</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="sos" [checked]="this.siteSettingForm.get('sos').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('sos').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="wifiSerive">Wi-Fi</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="wifi" [checked]="this.siteSettingForm.get('wifi').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('wifi').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="events">Events</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="events"
+                                            [checked]="this.siteSettingForm.get('events').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('events').value ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="feedback">Feedback</label>
+                                    <div class="form-check form-switch form-switch-lg mb-3">
+                                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg"
+                                            formControlName="feedback"
+                                            [checked]="this.siteSettingForm.get('feedback').value">
+                                        <label class="form-check-label"
+                                            for="SwitchCheckSizelg">{{this.siteSettingForm.get('feedback').value
+                                            ?
+                                            'Enable' : 'Disable'}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </cdk-step>
+            </ng-stepper>
+        </div>
     </div>
 </div>
