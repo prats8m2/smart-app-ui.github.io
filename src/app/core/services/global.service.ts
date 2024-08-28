@@ -163,7 +163,7 @@ export class GlobalService {
 				break;
 		}
 	}
-}
+
 
 	enableSideNavRouting() {
 		this.allowSideNavRoute.next(true);
