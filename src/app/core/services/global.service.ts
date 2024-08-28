@@ -7,7 +7,7 @@ import { URL_ROUTES } from 'src/app/constants/routing';
 import { StorageType } from 'src/app/constants/storage-type';
 import Swal from 'sweetalert2';
 import { IAPIResponse } from '../interface/api-response';
-import { DecodedTokenI } from '../interface/decode-token';
+import { DecodedAppTokenI, DecodedTokenI } from '../interface/decode-token';
 @Injectable({
 	providedIn: 'root',
 })
@@ -130,5 +130,37 @@ export class GlobalService {
 				this.allowSideNavRoute.next(false);
 			});
 		});
+	}
+
+	getAppTokenInfo(value: string) {
+		const accessToken = StorageService.get(StorageType.APP_ACCESS_TOKEN);
+		let decodeToken: DecodedAppTokenI;
+		if (accessToken) {
+			decodeToken = JSON.parse(atob(accessToken.split('.')[1]));
+		} else {
+			this.router.navigateByUrl('');
+		}
+		switch (value) {
+			case 'SITE':
+				{
+					return decodeToken.siteId;
+				}
+				break;
+			case 'ROOM':
+				{
+					return decodeToken.roomId;
+				}
+				break;
+			case 'TABLE':
+				{
+					return decodeToken.tableId;
+				}
+				break;
+			case 'SESSION':
+				{
+					return decodeToken.sessionId;
+				}
+				break;
+		}
 	}
 }

@@ -1,9 +1,10 @@
 export enum StorageType {
-  ACCESS_TOKEN = 'access-token',
-  CLIENT = 'client',
-  LABEL = 'label',
-  REPORT_URL = 'report-url',
-  COMPOSER_URL = 'composer-url',
+	ACCESS_TOKEN = 'access-token',
+	CLIENT = 'client',
+	LABEL = 'label',
+	REPORT_URL = 'report-url',
+	COMPOSER_URL = 'composer-url',
+	APP_ACCESS_TOKEN = 'app-access-token',
 }
 
 export enum SessionStorageType {
