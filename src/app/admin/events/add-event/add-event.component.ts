@@ -142,6 +142,7 @@ export class AddEventComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_EVENTS);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -210,6 +211,7 @@ export class AddEventComponent implements OnInit {
 		this.eventService.addEvent(this.eventForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_EVENTS]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('ERROR');
 			}

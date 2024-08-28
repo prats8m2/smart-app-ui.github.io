@@ -134,6 +134,7 @@ export class AddDeviceComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_DEVICE);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -179,6 +180,7 @@ export class AddDeviceComponent implements OnInit {
 		this.deviceService.addDevice(this.deviceForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_DEVICE]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}

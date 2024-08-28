@@ -28,10 +28,17 @@ export class ViewSiteComponent {
 		type: [undefined, SITE_ACCOUNT_VALIDATION],
 		wifiDetails: new FormArray([]),
 	});
+	public siteSettingForm: FormGroup;
 	accountList: any = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
+	];
+	themes = [
+		{ id: 1, label: 'DEFAULT' },
+		{ id: 2, label: 'CUSTOM 1' },
+		{ id: 3, label: 'CUSTOM 2' },
+		{ id: 4, label: 'CUSTOM 3' },
 	];
 
 	constructor(
@@ -56,6 +63,9 @@ export class ViewSiteComponent {
 		limit: 100,
 		pageNumber: 1,
 	};
+
+	selectedTab: number = 0;
+	selectTabIndex: number = 0;
 
 	siteParams: IParams = {
 		accountId: null,
@@ -108,9 +118,53 @@ export class ViewSiteComponent {
 							: undefined;
 					this.siteForm.get('type')?.patchValue(type);
 					this.siteWifiDetails = [...res.data.wifi];
+					this.patchSiteSettingsData(res.data.settings);
 				}
 			});
 		});
+	}
+	patchSiteSettingsData(siteSettings: any) {
+		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
+		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
+		const amenitiesOrder = this.getStatusOfSiteConfig(
+			siteSettings.amenitiesOrder
+		);
+		const orderHistory = this.getStatusOfSiteConfig(siteSettings.orderHistory);
+		const callReception = this.getStatusOfSiteConfig(
+			siteSettings.callReception
+		);
+		const roomService = this.getStatusOfSiteConfig(siteSettings.roomService);
+		const cleaningService = this.getStatusOfSiteConfig(
+			siteSettings.cleaningService
+		);
+		const wifi = this.getStatusOfSiteConfig(siteSettings.wifi);
+		const sos = this.getStatusOfSiteConfig(siteSettings.sos);
+		const events = this.getStatusOfSiteConfig(siteSettings.events);
+		const feedback = this.getStatusOfSiteConfig(siteSettings.feedback);
+		this.siteSettingForm = this.formBuilder.group({
+			theme: [theme],
+			serviceTax: [serviceTax],
+			sgst: [sgst],
+			cgst: [cgst],
+			orders: [orders],
+			foodOrder: [foodOrder],
+			amenitiesOrder: [amenitiesOrder],
+			orderHistory: [orderHistory],
+			callReception: [callReception],
+			roomService: [roomService],
+			cleaningService: [cleaningService],
+			wifi: [wifi],
+			sos: [sos],
+			events: [events],
+			feedback: [feedback],
+		});
+
+		this.siteSettingForm.disable();
+	}
+
+	getStatusOfSiteConfig(value: number) {
+		return value === 1;
 	}
 
 	deleteSite() {
@@ -137,5 +191,10 @@ export class ViewSiteComponent {
 		});
 
 		this.router.navigateByUrl(URL_ROUTES.EDIT_SITE + '/' + siteId);
+	}
+
+	stepClicked(index: number) {
+		this.selectTabIndex = index;
+		this.selectedTab = index;
 	}
 }

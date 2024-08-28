@@ -199,6 +199,7 @@ export class AddMenuComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_MENU);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -287,6 +288,7 @@ export class AddMenuComponent implements OnInit {
 		this.menuService.addMenu(this.menuForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_MENU]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('ERROR');
 			}

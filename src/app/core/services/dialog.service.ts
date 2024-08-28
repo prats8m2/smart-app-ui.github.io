@@ -50,4 +50,18 @@ export class DialogService {
 		});
 		return result;
 	}
+
+	saveSiteDetailsFirst() {
+		const result = Swal.fire({
+			title: 'Update site data!',
+			text: 'Update site details to proceed!',
+			icon: 'warning',
+			showCancelButton: false,
+			confirmButtonColor: '#34c38f',
+			confirmButtonText: 'Okay',
+			allowOutsideClick: false,
+			showCloseButton: false,
+		});
+		return result;
+	}
 }

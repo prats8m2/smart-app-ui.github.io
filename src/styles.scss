@@ -46,3 +46,24 @@ ngx-dropzone-preview {
   }
 }
 
+.site-stepper{
+  .stepper-body{
+    height: calc(100vh - 375px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .stepper-body::-webkit-scrollbar {
+    width: 5px; 
+  }
+  
+  .stepper-body::-webkit-scrollbar-thumb {
+  background-color: #556080; 
+  border-radius: 10px;
+  }
+  
+  .stepper-body::-webkit-scrollbar-track {
+  background-color: transparent; 
+  }
+}
+
+

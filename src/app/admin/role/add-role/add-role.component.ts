@@ -189,6 +189,7 @@ export class AddRoleComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_ROLE);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -256,6 +257,7 @@ export class AddRoleComponent implements OnInit {
 		this.roleService.addRole(this.roleForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_ROLE]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('error');
 			}

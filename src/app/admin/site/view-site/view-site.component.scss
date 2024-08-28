@@ -1,23 +1,50 @@
 .custom-form{
   height: 90%;
-    overflow-y:scroll;
-    overflow-x: hidden;
-  }
+  overflow-y:scroll;
+  overflow-x: hidden;
+}
   
-  .custom-form::-webkit-scrollbar {
+.custom-form::-webkit-scrollbar {
     width: 5px; 
-  }
-  
-  .custom-form::-webkit-scrollbar-thumb {
-    background-color: #556080; 
-    border-radius: 10px;
-  }
-  
-  .custom-form::-webkit-scrollbar-track {
-    background-color: transparent; 
-  }
+}
 
-  .card-body{
-    height: calc(100vh - 180px);
-  }
+.custom-form::-webkit-scrollbar-thumb {
+  background-color: #556080; 
+  border-radius: 10px;
+}
+
+.custom-form::-webkit-scrollbar-track {
+  background-color: transparent; 
+}
+.card-body{
+  height: calc(100vh - 180px);
+}
   
+.scrollable-step {
+  max-height: 400px; /* Adjust this value according to your needs */
+  overflow-y: auto;
+  padding-right: 10px; /* Optional: To avoid content getting hidden behind the scrollbar */
+}
+.site-stepper::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.custom-form::-webkit-scrollbar-thumb {
+background-color: #556080; 
+border-radius: 10px;
+}
+
+.custom-form::-webkit-scrollbar-track {
+background-color: transparent; 
+}
+
+.step-text{
+  color: #fff
+}
+
+.hover-pointer{
+  width: 100%;
+}
+.hover-pointer:hover {
+  cursor: pointer;
+}

@@ -153,6 +153,7 @@ export class AddCategoryComponent implements OnInit {
 			this.dialogService.openBackConfirmDialog().then((result) => {
 				if (result.value) {
 					this.router.navigateByUrl(URL_ROUTES.LIST_CATEGORY);
+					this.globalService.enableSideNavRouting();
 				}
 			});
 		}
@@ -237,6 +238,7 @@ export class AddCategoryComponent implements OnInit {
 		this.categoryService.addCategory(this.categoryForm).then((res) => {
 			if (res.status) {
 				this.router.navigate([URL_ROUTES.LIST_CATEGORY]);
+				this.globalService.enableSideNavRouting();
 			} else {
 				console.log('ERROR');
 			}
