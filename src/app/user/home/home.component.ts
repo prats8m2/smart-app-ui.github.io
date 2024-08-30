@@ -23,7 +23,10 @@ export class HomeComponent {
 		private homeService: HomeService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
-		this.activatedRoute.params.subscribe((params) => {
+
+		// Subscribe to query parameters
+		this.activatedRoute.queryParams.subscribe((params) => {
+			console.log(params);
 			StorageService.set(StorageType.APP_ACCESS_TOKEN, params['token']);
 		});
 	}

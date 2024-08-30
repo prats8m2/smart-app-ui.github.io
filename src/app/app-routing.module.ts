@@ -33,7 +33,6 @@ const routes: Routes = [
 		path: 'app',
 		loadChildren: () =>
 			import('./user/user.module').then((m) => m.UserModule),
-		canActivate: [AuthGuard],
 	},
 ];
 

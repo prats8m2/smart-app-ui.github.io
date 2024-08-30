@@ -20,6 +20,7 @@ import { GlobalService } from '../services/global.service';
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
 	accessToken!: string | null;
+	appAccessToken!: string | null;
 
 	constructor(
 		private loadingService: LoadingService,
@@ -32,6 +33,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 	): Observable<HttpEvent<any>> {
 		this.loadingService.showLoader();
 		this.accessToken = StorageService.get(StorageType.ACCESS_TOKEN);
+		this.appAccessToken = StorageService.get(StorageType.APP_ACCESS_TOKEN);
+
 		const URL = environment.apiServer + req.url;
 
 		if (req.url.includes('assets')) {
@@ -43,7 +46,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 			url: URL,
 			headers: req.headers.set(
 				'token',
-				this.accessToken ? this.accessToken : ''
+				this.accessToken ? this.accessToken : this.appAccessToken
 			),
 		});
 

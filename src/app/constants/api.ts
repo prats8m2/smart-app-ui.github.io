@@ -92,6 +92,7 @@ export const MENU = {
 	VIEW_MENU: '/menu/get/',
 	DELETE_MENU: '/menu/delete/',
 	UPDATE_MENU: '/menu/update',
+	APP_MENU: '/menu/app',
 };
 
 export const ORDER = {
