@@ -2,7 +2,8 @@
     <!-- <app-user-header></app-user-header> -->
     <div class="main-content home-background">
         <div class="page-content pt-3">
-            <h5 class="display-6 mb-2"><i (click)="routeTo('HOME')" class="bx bx-left-arrow-alt me-1 text-muted"></i>Menu
+            <h5 class="display-6 mb-2"><i (click)="routeTo('HOME')"
+                    class="bx bx-left-arrow-alt me-1 text-muted"></i>Menu
             </h5>
             <div class="container-fluid">
                 <div class="row">
@@ -20,85 +21,68 @@
                     </div>
                 </div>
                 <div class="container text-center">
-                <div class="row align-items-start">
-                    <div class="col-4">
-                        <div class="form-check form-checkbox-outline form-check-success mb-3 ms-3">
-                            <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
-                            <label class="form-check-label" for="customCheckcolor1">
-                                Veg
-                            </label>
+                    <div class="row align-items-start">
+                        <div class="col-4">
+                            <div class="form-check form-checkbox-outline form-check-success mb-3 ms-3">
+                                <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
+                                <label class="form-check-label" for="customCheckcolor1">
+                                    Veg
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-4">
-                        <div class="form-check form-checkbox-outline form-check-danger mb-3 ms-2">
-                            <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
-                            <label class="form-check-label" for="customCheckcolor1">
-                                Non-Veg
-                            </label>
+                        <div class="col-4">
+                            <div class="form-check form-checkbox-outline form-check-danger mb-3 ms-2">
+                                <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
+                                <label class="form-check-label" for="customCheckcolor1">
+                                    Non-Veg
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-4">
-                    <div class="form-check form-checkbox-outline form-check-warning mb-3 ms-4">
-                        <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
-                        <label class="form-check-label" for="customCheckcolor1">
-                            Egg
-                        </label>
+                        <div class="col-4">
+                            <div class="form-check form-checkbox-outline form-check-warning mb-3 ms-4">
+                                <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
+                                <label class="form-check-label" for="customCheckcolor1">
+                                    Egg
+                                </label>
+                            </div>
+                        </div>
+
                     </div>
-                    </div>
-                    
                 </div>
-            </div>
-              
+
                 <div class="row">
                     <div class="col">
                         <div class="mt-1">
                             <accordion [isAnimated]="true" class="custom-accordion" [closeOthers]="true">
-                                <accordion-group [isOpen]="isFirstOpen" heading="BreakFast" class="accordion-item" #flush1>
-                                    <span accordion-heading class="float-end fs-5" style="background-color: transparent !important;">
+                                <!-- Loop through menuData to create accordion groups for each category -->
+                                <accordion-group *ngFor="let menu of menuData" [isOpen]="isFirstOpen"
+                                    [heading]="menu.category.name" class="accordion-item" #flush>
+                                    <!-- Icon for accordion open/close -->
+                                    <span accordion-heading class="float-end fs-5"
+                                        style="background-color: transparent !important;">
                                         <i class="mdi"
-                                            [ngClass]="!flush1?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                                            [ngClass]="!flush?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
                                     </span>
-                                   
-                                    <app-product></app-product>
-                                    <app-product></app-product><app-product></app-product>
-                                    </accordion-group>
-                                <accordion-group heading="Main Course" class="accordion-item" #flush2>
-                                    <span accordion-heading class="float-end fs-5">
-                                        <i class="mdi"
-                                            [ngClass]="!flush2?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
-                                    </span>
-                                    <div class="text-muted">
-                                        <strong class="text-dark">This is the second item's accordion body.</strong> It is hidden by
-                                        default, until the collapse plugin adds the appropriate classes that we use to style each element.
-                                        These classes control the overall appearance, as well as the showing and hiding via CSS
-                                        transitions. You can modify any of this with custom CSS or overriding our default variables. It's
-                                        also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
-                                        the transition does limit overflow.
-                                    </div>
-                                </accordion-group>
-                                <accordion-group heading="Drinks" class="accordion-item" #flush3>
-                                    <span accordion-heading class="float-end fs-5">
-                                        <i class="mdi"
-                                            [ngClass]="!flush3?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
-                                    </span>
-                                    <div class="text-muted">
-                                        <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by
-                                        default, until the collapse plugin adds the appropriate classes that we use to style each element.
-                                        These classes control the overall appearance, as well as the showing and hiding via CSS
-                                        transitions. You can modify any of this with custom CSS or overriding our default variables. It's
-                                        also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
-                                        the transition does limit overflow.
+
+                                    <!-- Loop through products in each category -->
+                                    <div *ngFor="let product of menu.products">
+                                        <app-product [product]="product" [isAddedinOrder]="isAddedinOrder.bind(this)"
+                                            [addProductToOrder]="addProductToOrder.bind(this)"
+                                            [calculateQty]="calculateQty.bind(this)" [addedProducts]="addedProducts">
+                                            ></app-product>
+                                        <!-- Pass product data to app-product component -->
                                     </div>
                                 </accordion-group>
                             </accordion>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-    </div>
-    
-<app-menu-footer></app-menu-footer>
+</div>
+
+<app-menu-footer [order]="order"></app-menu-footer>

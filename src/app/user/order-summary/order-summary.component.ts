@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-order-summary',
-  templateUrl: './order-summary.component.html',
-  styleUrls: ['./order-summary.component.scss']
+	selector: 'app-order-summary',
+	templateUrl: './order-summary.component.html',
+	styleUrls: ['./order-summary.component.scss'],
 })
 export class OrderSummaryComponent {
-public order: any[] = [];
+	@Input() order: any;
 }
