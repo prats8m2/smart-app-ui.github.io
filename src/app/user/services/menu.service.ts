@@ -21,4 +21,22 @@ export class MenuService {
 				return result;
 			});
 	}
+
+	createOrder(site, room, table, description, products, type, categoryType) {
+		return this.http
+			.post(ORDER.ADD_ORDER, {
+				site,
+				room,
+				table,
+				description,
+				products,
+				type,
+				categoryType,
+			})
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

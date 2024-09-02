@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { MenuService } from '../services/menu.service';
+import { GlobalService } from '../../core/services/global.service';
 
 @Component({
 	selector: 'app-menu',
@@ -21,10 +22,22 @@ export class MenuComponent {
 	isFirstOpen: boolean = false;
 	totalAmountOfProduct: number = 0;
 	addedProducts: { [key: number]: number } = {}; // Stores product ID and quantity
+	searchText: string = '';
+	filters = {
+		veg: true,
+		nonVeg: true,
+		egg: true,
+	};
 
 	menuData: any;
+	filteredMenuData: any[] = [];
+	accordionState: { [key: string]: boolean } = {};
 
-	constructor(private router: Router, private menuService: MenuService) {
+	constructor(
+		private router: Router,
+		private menuService: MenuService,
+		private globalService: GlobalService
+	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
 
@@ -32,6 +45,12 @@ export class MenuComponent {
 		const res = await this.menuService.getAppMenu();
 		if (res.status) {
 			this.menuData = res.data;
+			this.filteredMenuData = this.menuData;
+			// Initialize accordion state
+			this.menuData.forEach((category) => {
+				this.accordionState[category.category.id] = false; // All closed initially
+			});
+			this.applyFilters();
 			console.log(this.menuData);
 		} else {
 			return null;
@@ -48,7 +67,48 @@ export class MenuComponent {
 		}
 	}
 
-	addProductToOrder(product) {
+	applyFilters() {
+		this.filteredMenuData = this.menuData
+			.map((category) => {
+				const filteredProducts = category.products
+					.filter(this.searchProducts.bind(this))
+					.filter(this.filterByType.bind(this));
+
+				return {
+					...category,
+					products: filteredProducts,
+				};
+			})
+			.filter((category) => category.products.length > 0);
+	}
+
+	searchProducts(product: any): boolean {
+		if (!this.searchText) {
+			return true; // If no search text, include all products
+		}
+		const searchLower = this.searchText.toLowerCase();
+		return (
+			product.name.toLowerCase().includes(searchLower) ||
+			product.description.toLowerCase().includes(searchLower)
+		);
+	}
+
+	filterByType(product: any): boolean {
+		if (!this.filters.veg && !this.filters.nonVeg && !this.filters.egg) {
+			return true; // If no filters are selected, show all products
+		}
+		return (
+			(this.filters.veg && product.productType === 1) ||
+			(this.filters.nonVeg && product.productType === 2) ||
+			(this.filters.egg && product.productType === 3)
+		);
+	}
+	toggleAccordion(categoryId: string) {
+		this.accordionState[categoryId] = !this.accordionState[categoryId];
+	}
+
+	addProductToOrder(product, event) {
+		event.stopPropagation();
 		this.addedProducts[product.id] = 1; // Add product with initial quantity 1
 
 		const existingProduct = this.order.find((item) => item.id === product.id);

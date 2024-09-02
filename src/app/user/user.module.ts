@@ -15,6 +15,7 @@ import { TipsComponent } from '../shared/ui/tips/tips.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { UserRoutingModule } from './user-routing.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { UserRoutingModule } from './user-routing.module';
 		NgSelectModule,
 		SlickCarouselModule,
 		UIModule,
+		FormsModule,
 		AccordionModule.forRoot(),
 	],
 })

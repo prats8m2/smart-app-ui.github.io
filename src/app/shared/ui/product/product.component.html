@@ -10,20 +10,20 @@
         <div class="d-flex justify-content-between align-items-center">
             <span class="text-muted">${{ product.price }}</span>
             <ng-container *ngIf="!isAddedinOrder(product.id); else qtySelector">
-                <button class="btn btn-primary" (click)="addProductToOrder(product)">Add to Cart</button>
+                <button class="btn btn-primary" (click)="addProductToOrder(product, $event)">Add to Cart</button>
             </ng-container>
             <ng-template #qtySelector>
                 <div class="me-3" style="width: 120px;">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button type="button" class="btn btn-primary"
-                                (click)="calculateQty('1', product.id)">+</button>
+                                (click)="calculateQty('1', product.id, $event)">+</button>
                         </div>
                         <input name="demo_vertical" value="{{addedProducts[product.id]}}" type="text"
                             class="form-control text-center" min="0" readonly>
                         <div class="input-group-append">
                             <button type="button" class="btn btn-primary"
-                                (click)="calculateQty('0', product.id)">-</button>
+                                (click)="calculateQty('0', product.id, $event)">-</button>
                         </div>
                     </div>
                 </div>

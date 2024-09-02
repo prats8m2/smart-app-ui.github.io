@@ -1,16 +1,9 @@
 <footer class="footer p-2">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col d-flex align-items-center">
-                <span class="display-4 me-2">
-                    Total:
-                </span>
-                <span class="display-6">
-                    $23
-                </span>
-            </div>
+        <div class="row mt-1">
+
             <div class="col text-end">
-                <app-order-summary [order]="order"></app-order-summary>
+                <app-order-summary [order]="order" [totalAmountOfProduct]="totalAmountOfProduct"></app-order-summary>
             </div>
         </div>
     </div>
