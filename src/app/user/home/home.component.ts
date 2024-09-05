@@ -51,9 +51,16 @@ export class HomeComponent {
 		switch (page) {
 			case 'MENU':
 				{
-					this.router.navigateByUrl(URL_ROUTES.MENU);
+					this.router.navigateByUrl(URL_ROUTES.MENU + '/' + 1);
 				}
 				break;
+
+			case 'AMENITIES':
+				{
+					this.router.navigateByUrl(URL_ROUTES.AMENITIES + '/' + 2);
+				}
+				break;
+
 			case 'ORDERS':
 				{
 					this.router.navigateByUrl(URL_ROUTES.ORDER_HISTORY);

@@ -12,9 +12,9 @@ import { GlobalService } from 'src/app/core/services/global.service';
 export class MenuService {
 	constructor(private http: HttpClient, private globalService: GlobalService) {}
 
-	getAppMenu() {
+	getAppMenu(type: number) {
 		return this.http
-			.get(MENU.APP_MENU)
+			.get(MENU.APP_MENU + '/' + type)
 			.toPromise()
 			.then((response) => {
 				const result = JSON.parse(JSON.stringify(response));

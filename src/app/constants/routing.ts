@@ -81,6 +81,7 @@ export const URL_ROUTES = {
 	//user app
 	HOME: 'app',
 	MENU: 'app/menu',
+	AMENITIES: 'app/menu',
 	ORDER_HISTORY: 'app/orders',
 	ORDER_DETAILS: 'app/order',
 };

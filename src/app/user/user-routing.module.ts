@@ -13,18 +13,17 @@ const routes: Routes = [
 		component: HomeComponent,
 	},
 	{
-		path: 'menu',
+		path: 'menu/:type',
 		component: MenuComponent,
 	},
 	{
 		path: 'orders',
 		component: UserOrderHistoryComponent,
-	},	
+	},
 	{
 		path: 'order',
 		component: OrderDetailsComponent,
-	},	
-	
+	},
 ];
 
 @NgModule({

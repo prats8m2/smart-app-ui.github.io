@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { MenuService } from '../services/menu.service';
 import { GlobalService } from '../../core/services/global.service';
@@ -32,17 +32,23 @@ export class MenuComponent {
 	menuData: any;
 	filteredMenuData: any[] = [];
 	accordionState: { [key: string]: boolean } = {};
-
+	type: number;
 	constructor(
 		private router: Router,
 		private menuService: MenuService,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private activatedRoute: ActivatedRoute
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
+		// Subscribe to query parameters
+		this.activatedRoute.params.subscribe((params) => {
+			console.log(params);
+			this.type = params['type'];
+		});
 	}
 
 	async ngOnInit() {
-		const res = await this.menuService.getAppMenu();
+		const res = await this.menuService.getAppMenu(1);
 		if (res.status) {
 			this.menuData = res.data;
 			this.filteredMenuData = this.menuData;
