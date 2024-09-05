@@ -27,4 +27,14 @@ export class HomeService {
 				return result;
 			});
 	}
+
+	getAppOrders() {
+		return this.http
+			.get(ORDER.LIST_APP_ORDER)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

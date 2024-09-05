@@ -3,19 +3,19 @@
         <div class="hstack gap-3 ">
             <a routerLink="/invoices/detail" class="d-block text-primary mb-2">#342335</a>
             <h5 class="font-size-14 ms-auto" placement="top" tooltip="Amount">
-                <i class="bx bx-money me-1 text-muted"></i>$23
+                <i class="bx bx-money me-1 text-muted"></i>{{order?.payment?.total}}
             </h5>
         </div>
         <div class="d-flex align-items-center mb-2">
             <span class="status-dot bg-success"></span>
-            <span>Order Processing</span>
+            <span>{{order?.status}}</span>
         </div>
         <div class="mt-3 d-flex">
             <p class="fw-light me-2">
                 <i class="bx bx-calendar me-1 text-muted"></i>
-                24 May 2024 at 1:57PM
-        </p>
-            <p><small>(6 min ago)</small></p>
+                {{order?.createdOn | date:'medium'}}
+            </p>
+            <!-- <p><small>{{order?.createdOn}}</small></p> -->
         </div>
     </div>
 </div>
