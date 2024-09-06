@@ -59,8 +59,7 @@
                 </div>
                 <div class="col-lg-6 mb-4">
                     <label for="productType">Type</label>
-                    <ng-select [items]="productTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Type'"></ng-select>
+                    <input type="text" class="form-control" formControlName="type">
                 </div>
             </div>
             <div class="row">
@@ -110,8 +109,15 @@
             <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
-                        formControlName="site" (change)="changeSiteData($event.id)" [placeholder]="'Site'">
+                    <ng-select #sitesList [items]="siteList" [searchable]="false" [ngModel]="siteList[0]?.id"
+                        bindLabel="name" [clearable]="false" bindValue="id" (change)="changeSiteData($event?.id)"
+                        formControlName="site" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="sitesList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
@@ -119,12 +125,25 @@
             <!-- Category Name -->
             <div class="row" *ngIf="showListCategory">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
-                        [placeholder]="'Category'" [multiple]="true" formControlName="categories"></ng-select>
+                    <ng-select #cList [items]="categoryList" bindLabel="name" [clearable]="false" bindValue="id"
+                        [multiple]="true" formControlName="categories" [closeOnSelect]="false" [searchable]="false">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="cList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.name}}
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="productForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="productForm.invalid || !productForm.dirty">Submit</button>
             </div>
         </form>
     </div>

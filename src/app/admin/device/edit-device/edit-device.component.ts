@@ -166,6 +166,7 @@ export class EditDeviceComponent implements OnInit {
 					const { device } = res.data;
 					this.deviceForm.patchValue({
 						id: deviceId,
+						account: device.site.account.name,
 						site: device.site.name,
 						room: device.room?.id || null,
 						deviceName: device.code,

@@ -66,20 +66,41 @@
             <h6 class="mb-2">Device Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="deviceList" bindLabel="code" [clearable]="false" bindValue="id"  
-                        [placeholder]="'Device'" formControlName="device" [ngModel]="selectedDevice?.id"></ng-select>
+                    <ng-select #devicesList [items]="deviceList" [searchable]="false" [ngModel]="selectedDevice?.id"
+                        bindLabel="code" [clearable]="false" bindValue="id" formControlName="device"
+                        typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="devicesList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
             <h6 class="mb-2">Wifi Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="wifiList" bindLabel="username" [clearable]="false" bindValue="id"
-                        [placeholder]="'Wifi'" [multiple]="true" formControlName="wifi">
+                    <ng-select #wifisList [items]="wifiList" [searchable]="false" bindLabel="username"
+                        [clearable]="false" bindValue="id" formControlName="wifi" [multiple]="true"
+                        typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="wifisList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.username}}
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="roomForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="roomForm.invalid || !roomForm.dirty">Submit</button>
             </div>
         </form>
     </div>

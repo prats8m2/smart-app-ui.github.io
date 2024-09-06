@@ -55,8 +55,16 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <label for="siteType">Site Type</label>
-                  <ng-select [items]="siteTypes" bindLabel="label" [ngModel]="this.siteForm.get('type')?.value"
-                    [clearable]="false" bindValue="id" formControlName="type" [placeholder]="'Site'"></ng-select>
+                  <ng-select #siteType [items]="siteTypes" [searchable]="false" bindLabel="label" bindValue="id"
+                    [clearable]="false" formControlName="type" [ngModel]="this.siteForm.get('type')?.value"
+                    typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="siteType.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
                 </div>
               </div>
               <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>

@@ -60,7 +60,8 @@
                 <div class="col-lg-6 mb-4">
                     <label for="productType">Type</label>
                     <ng-select #pTypes [items]="productTypes" [searchable]="false" bindLabel="label" [clearable]="false"
-                        bindValue="id" formControlName="type" typeToSearchText="Type to search">
+                        bindValue="id" formControlName="type" typeToSearchText="Type to search"
+                        (change)="changeProductType($event?.id)">
                         <ng-template ng-header-tmp>
                             <div class="form-group has-feedback">
                                 <input style="width: 100%;line-height: 24px" type="text" class="form-control"
@@ -150,6 +151,11 @@
                                 <input style="width: 100%;line-height: 24px" type="text" class="form-control"
                                     placeholder="Search" (input)="cList.filter($event.target.value)" />
                             </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.name}}
                         </ng-template>
                     </ng-select>
                 </div>

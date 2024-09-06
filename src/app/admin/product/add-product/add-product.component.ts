@@ -131,8 +131,7 @@ export class AddProductComponent implements OnInit {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
 				if (this.siteList.length) {
-					this.categoryParams.siteId = this.siteList[0].id;
-					// this.listCategoryApi(this.categoryParams);
+					this.categoryParams.siteId = this.siteList[0]?.id;
 				}
 			}
 		});
@@ -197,6 +196,11 @@ export class AddProductComponent implements OnInit {
 			this.productForm.get('account').patchValue(accountId);
 			this.listSiteAPI(this.siteParams);
 		}
+	}
+
+	changeProductType(typeId: number) {
+		this.categoryParams.type = typeId;
+		this.listCategoryApi(this.categoryParams);
 	}
 
 	changeSiteData(siteId: any) {

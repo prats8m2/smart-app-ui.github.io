@@ -53,14 +53,10 @@ export class EditProductComponent implements OnInit {
 	};
 	categoryParams: IParams = {
 		siteId: null,
+		type: null,
 		limit: 100,
 		pageNumber: 1,
 	};
-
-	productTypes = [
-		{ id: 1, label: 'Food' },
-		{ id: 2, label: 'Amenities' },
-	];
 
 	productId: any;
 	productData: any;
@@ -83,7 +79,7 @@ export class EditProductComponent implements OnInit {
 				site: [Validators.required],
 				productName: ['', PRODUCT_NAME_VALIDATION],
 				productDesc: [null, PRODUCT_DESC_VALIDATION],
-				categories: [[], Validators.required],
+				categories: [null, Validators.required],
 				productPrice: [null, Validators.required],
 				status: [null],
 				isNew: [null],
@@ -97,7 +93,7 @@ export class EditProductComponent implements OnInit {
 				site: [Validators.required],
 				productName: [null, PRODUCT_NAME_VALIDATION],
 				productDesc: [null, PRODUCT_DESC_VALIDATION],
-				categories: [[], Validators.required],
+				categories: [null, Validators.required],
 				productPrice: [null, Validators.required],
 				status: [null],
 				isNew: [null],
@@ -131,12 +127,14 @@ export class EditProductComponent implements OnInit {
 						status: this.productData.status,
 						isNew: this.productData.isNew,
 						isSpecial: this.productData.isSpecial,
-						type: this.productData.type,
+						type: this.productData.type === 1 ? 'Food' : 'Amenities',
 					});
 					this.productForm.get('account')?.disable();
+					this.productForm.get('type')?.disable();
 					const accountId = this.productData.site.account.id;
 					this.siteParams.accountId = accountId;
 					this.categoryParams.siteId = this.productData.site.id;
+					this.categoryParams.type = this.productData.type;
 					this.listSiteAPI(this.siteParams);
 					this.listCategoryApi(this.categoryParams);
 				}
@@ -208,9 +206,11 @@ export class EditProductComponent implements OnInit {
 
 	changeSiteData(siteId: any) {
 		//list categories
-		this.productForm.get('categories').patchValue(null);
-		this.categoryParams.siteId = siteId;
-		this.listCategoryApi(this.categoryParams);
+		if (siteId) {
+			this.productForm.get('categories').patchValue(null);
+			this.categoryParams.siteId = siteId;
+			this.listCategoryApi(this.categoryParams);
+		}
 	}
 
 	listCategoryApi(params: IParams) {

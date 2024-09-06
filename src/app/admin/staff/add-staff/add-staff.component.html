@@ -169,8 +169,7 @@
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
                     <ng-select #select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
-                        [placeholder]="'Site'" [multiple]="true" formControlName="site" [closeOnSelect]="false"
-                        [searchable]="false">
+                        [multiple]="true" formControlName="site" [closeOnSelect]="false" [searchable]="false">
                         <ng-template ng-header-tmp>
                             <div class="form-group has-feedback">
                                 <input style="width: 100%;line-height: 24px" type="text" class="form-control"
