@@ -112,10 +112,12 @@ export class ListRoomComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.roomListResp = [];
-		this.updateDisplayedData();
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.roomListResp = [];
+			this.updateDisplayedData();
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {
@@ -130,8 +132,10 @@ export class ListRoomComponent implements OnInit {
 		});
 	}
 	changeSitesData(siteId: any) {
-		this.roomParams.siteId = siteId;
-		this.listRoomAPI(this.roomParams);
+		if (siteId) {
+			this.roomParams.siteId = siteId;
+			this.listRoomAPI(this.roomParams);
+		}
 	}
 
 	listRoomAPI(params: IParams) {

@@ -124,10 +124,12 @@ export class ListStaffComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.staffListResp = [];
-		this.updateDisplayedData();
-		this.roleParams.accountId = accountId;
-		this.listRoleAPI(this.roleParams);
+		if (accountId) {
+			this.staffListResp = [];
+			this.updateDisplayedData();
+			this.roleParams.accountId = accountId;
+			this.listRoleAPI(this.roleParams);
+		}
 	}
 
 	listRoleAPI(params: IParams) {
@@ -142,8 +144,10 @@ export class ListStaffComponent implements OnInit {
 		});
 	}
 	changeRoleData(roleId: any) {
-		this.staffParams.roleId = roleId;
-		this.listStaffAPI(this.staffParams);
+		if (roleId) {
+			this.staffParams.roleId = roleId;
+			this.listStaffAPI(this.staffParams);
+		}
 	}
 
 	listStaffAPI(params: IParams) {

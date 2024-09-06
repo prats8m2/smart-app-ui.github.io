@@ -55,16 +55,31 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <label for="siteType">Site Type</label>
-                  <ng-select [items]="siteTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                    formControlName="type" [placeholder]="'Site'"></ng-select>
+                  <ng-select [items]="siteTypes" [searchable]="false" bindLabel="label" bindValue="id"
+                    (search)="onSearch($event)" [clearable]="false" formControlName="type" [ngModel]="siteTypes[0]?.id"
+                    typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="select.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
                 </div>
               </div>
               <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
               <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                  <ng-select [items]="accountList" bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                    formControlName="account" [ngModel]="accountList[0]?.account?.id"
-                    [placeholder]="'Account'"></ng-select>
+                  <ng-select [items]="accountList" [searchable]="false" [ngModel]="accountList[0]?.account?.id"
+                    bindLabel="account.name" bindValue="account.id" (search)="onSearch($event)" [clearable]="false"
+                    formControlName="account" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="select.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
                 </div>
               </div>
               <div class="row">

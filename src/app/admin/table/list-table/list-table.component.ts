@@ -121,10 +121,12 @@ export class ListTableComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.tableListResp = [];
-		this.updateDisplayedData();
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.tableListResp = [];
+			this.updateDisplayedData();
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {
@@ -139,8 +141,10 @@ export class ListTableComponent implements OnInit {
 		});
 	}
 	changeSitesData(siteId: any) {
-		this.tableParams.siteId = siteId;
-		this.listTableAPI(this.tableParams);
+		if (siteId) {
+			this.tableParams.siteId = siteId;
+			this.listTableAPI(this.tableParams);
+		}
 	}
 
 	listTableAPI(params: IParams) {

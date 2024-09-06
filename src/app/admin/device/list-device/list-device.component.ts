@@ -114,10 +114,12 @@ export class ListDeviceComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.deviceListResp = [];
-		this.updateDisplayedData();
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.deviceListResp = [];
+			this.updateDisplayedData();
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {
@@ -132,8 +134,10 @@ export class ListDeviceComponent implements OnInit {
 		});
 	}
 	changeSitesData(siteId: any) {
-		this.deviceParams.siteId = siteId;
-		this.listDeviceAPI(this.deviceParams);
+		if (siteId) {
+			this.deviceParams.siteId = siteId;
+			this.listDeviceAPI(this.deviceParams);
+		}
 	}
 
 	listDeviceAPI(params: IParams) {

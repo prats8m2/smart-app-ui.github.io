@@ -76,10 +76,12 @@ export class ListEventComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.eventListResp = [];
-		this.updateDisplayedData();
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.eventListResp = [];
+			this.updateDisplayedData();
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	routeToAddEvent() {
@@ -119,8 +121,10 @@ export class ListEventComponent implements OnInit {
 	}
 
 	changeSitesData(siteId: any) {
-		this.eventParams.siteId = siteId;
-		this.listEventsAPI(this.eventParams);
+		if (siteId) {
+			this.eventParams.siteId = siteId;
+			this.listEventsAPI(this.eventParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {
