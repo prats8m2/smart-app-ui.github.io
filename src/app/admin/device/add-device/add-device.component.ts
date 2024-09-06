@@ -162,18 +162,22 @@ export class AddDeviceComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.deviceForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.deviceForm.get('account').patchValue(accountId);
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSiteData(siteId: any) {
-		const randomNumber = Math.floor(1000 + Math.random() * 9000);
-		this.roomParams.siteId = siteId;
-		this.deviceForm
-			.get('deviceName')
-			.patchValue(`DV_${siteId}_${randomNumber}`);
-		this.listRoomAPI(this.roomParams);
+		if (siteId) {
+			const randomNumber = Math.floor(1000 + Math.random() * 9000);
+			this.roomParams.siteId = siteId;
+			this.deviceForm
+				.get('deviceName')
+				.patchValue(`DV_${siteId}_${randomNumber}`);
+			this.listRoomAPI(this.roomParams);
+		}
 	}
 
 	addDevice() {

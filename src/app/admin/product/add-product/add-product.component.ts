@@ -191,16 +191,20 @@ export class AddProductComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.productForm.get('categories').patchValue([]);
-		this.productForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.productForm.get('categories').patchValue([]);
+			this.productForm.get('account').patchValue(accountId);
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSiteData(siteId: any) {
 		//list categories
-		this.categoryParams.siteId = siteId;
-		this.listCategoryApi(this.categoryParams);
+		if (siteId) {
+			this.categoryParams.siteId = siteId;
+			this.listCategoryApi(this.categoryParams);
+		}
 	}
 
 	listCategoryApi(params: IParams) {

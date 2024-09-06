@@ -170,14 +170,20 @@ export class AddEventComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.eventForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.eventForm.get('account').patchValue(accountId);
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSiteData(siteId: any) {
-		const randomNumber = Math.floor(1000 + Math.random() * 9000);
-		this.eventForm.get('eventName').patchValue(`CT_${siteId}_${randomNumber}`);
+		if (siteId) {
+			const randomNumber = Math.floor(1000 + Math.random() * 9000);
+			this.eventForm
+				.get('eventName')
+				.patchValue(`CT_${siteId}_${randomNumber}`);
+		}
 	}
 
 	addEvent() {

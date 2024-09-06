@@ -42,9 +42,16 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteType">Type</label>
-                    <ng-select [items]="menuTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        [ngModel]="menuTypes[0]?.id" (change)="changeCategoryType($event.id)" formControlName="type"
-                        [placeholder]="'Type'"></ng-select>
+                    <ng-select #mTypes [items]="menuTypes" [ngModel]="menuTypes[0]?.id" [searchable]="false"
+                        bindLabel="label" [clearable]="false" bindValue="id" formControlName="type"
+                        typeToSearchText="Type to search" (change)="changeCategoryType($event.id)">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="mTypes.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="menuStatus">Status</label>
@@ -182,29 +189,47 @@
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <div class="col-sm-12" *ngIf="showListAccount">
-                        <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
+                        <ng-select #accList [ngModel]="accountList[0]?.account?.id" [items]="accountList"
                             bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                            formControlName="account" (change)="changeAccountData($event.account.id)"
-                            [placeholder]="'Account'"></ng-select>
+                            formControlName="account" (change)="changeAccountData($event.account?.id)"
+                            [searchable]="false" typeToSearchText="Type to search">
+                            <ng-template ng-header-tmp>
+                                <div class="form-group has-feedback">
+                                    <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                        placeholder="Search" (input)="accList.filter($event.target.value)" />
+                                </div>
+                            </ng-template>
+                        </ng-select>
                     </div>
                 </div>
             </div>
             <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [ngModel]="siteList[0]?.id" [items]="siteList" bindLabel="name" [clearable]="false"
-                        bindValue="id" (change)="changeSiteData($event.id)" formControlName="site"
-                        [placeholder]="'Site'">
+                    <ng-select #sList [items]="siteList" [ngModel]="siteList[0]?.id" bindLabel="name"
+                        [clearable]="false" bindValue="id" formControlName="site" (change)="changeSiteData($event.id)"
+                        [searchable]="false">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="sList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
             <h6 class="mb-2" *ngIf="showListCategory">Product Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4" *ngIf="showListCategory">
-                    <ng-select class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
-                        bindLabel="productName" groupBy="categoryName" [selectableGroup]="true"
-                        [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData"
-                        [placeholder]="'Select Products'">
+                    <ng-select #cpList class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
+                        bindLabel="productName" groupBy="categoryName" [selectableGroup]="true" [searchable]="false"
+                        [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="cpList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
