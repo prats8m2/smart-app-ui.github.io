@@ -70,4 +70,41 @@ ngx-dropzone-preview {
   background: #2A3042;
 }
 
+.custom-checkbox {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background-color: #A6B0CF;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #A6B0CF;
+}
+
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup.ng-option-marked {
+  background-color: #A6B0CF;
+}
 

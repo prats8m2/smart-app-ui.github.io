@@ -177,6 +177,11 @@
                                     placeholder="Search" (input)="select.filter($event.target.value)" />
                             </div>
                         </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.name}}
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
