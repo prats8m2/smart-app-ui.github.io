@@ -5,6 +5,8 @@ import { StorageService } from '../../core/services/storage.service';
 import { StorageType } from '../../constants/storage-type';
 import { GlobalService } from '../../core/services/global.service';
 import { HomeService } from '../services/home.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WifiDetailsComponent } from '../../shared/ui/wifi-details/wifi-details.component';
 
 @Component({
 	selector: 'app-home',
@@ -15,12 +17,17 @@ export class HomeComponent {
 	siteId: any;
 	roomId: any;
 	tableId: any;
+	wifiDetails: any;
+	receptionNumber: any;
+	eventDetails: any;
+	settings: any;
 
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private globalService: GlobalService,
-		private homeService: HomeService
+		private homeService: HomeService,
+		private modalService: NgbModal
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 
@@ -35,6 +42,24 @@ export class HomeComponent {
 		this.siteId = this.globalService.getAppTokenInfo('SITE');
 		this.roomId = this.globalService.getAppTokenInfo('ROOM');
 		this.tableId = this.globalService.getAppTokenInfo('TABLE');
+
+		this.homeService.getSiteDetails(this.siteId).then((res) => {
+			this.wifiDetails = res?.data?.wifi;
+			this.receptionNumber = res?.data?.receptionNumber;
+			this.eventDetails = res?.data?.events;
+			this.settings = res?.data?.settings;
+			console.log(
+				this.wifiDetails,
+				this.receptionNumber,
+				this.eventDetails,
+				this.settings
+			);
+		});
+	}
+
+	openWifiDetails() {
+		const modalRef = this.modalService.open(WifiDetailsComponent);
+		modalRef.componentInstance.wifiDetails = this.wifiDetails;
 	}
 
 	async createOrder(type, description) {

@@ -16,6 +16,7 @@ import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { UserRoutingModule } from './user-routing.module';
 import { FormsModule } from '@angular/forms';
+import { WifiDetailsComponent } from '../shared/ui/wifi-details/wifi-details.component';
 
 @NgModule({
 	declarations: [

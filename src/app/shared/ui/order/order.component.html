@@ -1,7 +1,7 @@
 <div class="row mb-4 border-bottom">
     <div class="col mb-2">
         <div class="hstack gap-3 ">
-            <a routerLink="/invoices/detail" class="d-block text-primary mb-2">#342335</a>
+            <a routerLink="/invoices/detail" class="d-block text-primary mb-2">#{{order?.id}}</a>
             <h5 class="font-size-14 ms-auto" placement="top" tooltip="Amount">
                 <i class="bx bx-money me-1 text-muted"></i>{{order?.payment?.total}}
             </h5>

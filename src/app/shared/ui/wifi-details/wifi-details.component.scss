@@ -1,0 +1,18 @@
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #007bff;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #0056b3;
+  }
+}
