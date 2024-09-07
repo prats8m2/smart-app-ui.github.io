@@ -61,6 +61,7 @@ export class EditMenuComponent implements OnInit {
 	};
 
 	selectedSiteId!: number;
+	selectedMenuType!: number;
 	menuData: any;
 
 	today: Date = new Date();
@@ -101,7 +102,6 @@ export class EditMenuComponent implements OnInit {
 		private globalService: GlobalService,
 		public accountService: AccountService,
 		private config: NgbTimepickerConfig,
-		private categoryService: CategoryService,
 		private activatedRoute: ActivatedRoute,
 		private menuService: MenuService,
 		private categortService: CategoryService,
@@ -187,7 +187,7 @@ export class EditMenuComponent implements OnInit {
 						(category) =>
 							category.products.map((product) => ({
 								category: category.id,
-								menuName: category.name,
+								categoryName: category.name,
 								product: product.id,
 								productName: product.name,
 							}))
@@ -238,11 +238,9 @@ export class EditMenuComponent implements OnInit {
 				);
 		}
 
-		console.log(this.menuForm.getRawValue());
-
 		//call update menu API
 		this.menuService
-			.updateMenu(this.menuForm, this.selectedSiteId)
+			.updateMenu(this.menuForm, this.selectedSiteId, this.selectedMenuType)
 			.then((res) => {
 				if (res.status) {
 					this.router.navigate([URL_ROUTES.LIST_MENU]);
@@ -295,13 +293,15 @@ export class EditMenuComponent implements OnInit {
 						site: this.menuData.site.name,
 						menuName: this.menuData.name,
 						menuDesc: this.menuData.description,
-						type: type,
+						type: type === 1 ? 'Food' : 'Amenities',
 						status: this.menuData.status,
 						menuItemsData: this.menuData.menuItems,
 					});
 					this.selectedSiteId = this.menuData.site.id;
+					this.selectedMenuType = type;
 					this.menuForm.get('account').disable();
 					this.menuForm.get('site').disable();
+					this.menuForm.get('type').disable();
 					this.categoryParams.siteId = '' + this.selectedSiteId;
 					this.categoryParams.type = type;
 					this.listCategoryAPI(this.categoryParams);

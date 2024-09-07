@@ -159,8 +159,10 @@ export class AddTableComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	addTable() {
@@ -175,8 +177,10 @@ export class AddTableComponent implements OnInit {
 	}
 
 	changeSiteData(siteId: any) {
-		this.deviceParams.siteId = siteId;
-		this.listDeviceAPI(this.deviceParams);
+		if (siteId) {
+			this.deviceParams.siteId = siteId;
+			this.listDeviceAPI(this.deviceParams);
+		}
 	}
 
 	listDeviceAPI(params: IParams) {

@@ -157,12 +157,16 @@ export class AddRoomComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeRoleData(roleId: any) {
-		this.roomForm.get('role').patchValue(roleId);
+		if (roleId) {
+			this.roomForm.get('role').patchValue(roleId);
+		}
 	}
 
 	addRoom() {
@@ -187,11 +191,13 @@ export class AddRoomComponent implements OnInit {
 	}
 
 	changeSiteData(siteId: any) {
-		this.siteServices.viewSite(siteId).then((res) => {
-			this.wifiList = [...res.data.wifi];
-		});
-		this.deviceParams.siteId = siteId;
-		this.listDeviceAPI(this.deviceParams);
+		if (siteId) {
+			this.siteServices.viewSite(siteId).then((res) => {
+				this.wifiList = [...res.data.wifi];
+			});
+			this.deviceParams.siteId = siteId;
+			this.listDeviceAPI(this.deviceParams);
+		}
 	}
 
 	listDeviceAPI(params: IParams) {

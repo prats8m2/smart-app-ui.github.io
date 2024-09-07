@@ -104,13 +104,17 @@ export class ListProductComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSitesData(siteId: any) {
-		this.productParams.siteId = siteId;
-		this.listProductsAPI(this.productParams);
+		if (siteId) {
+			this.productParams.siteId = siteId;
+			this.listProductsAPI(this.productParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {

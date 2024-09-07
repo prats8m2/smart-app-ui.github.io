@@ -116,10 +116,12 @@ export class ListCategoryComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.categoryListResp = [];
-		this.updateDisplayedData();
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.categoryListResp = [];
+			this.updateDisplayedData();
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {
@@ -134,8 +136,10 @@ export class ListCategoryComponent implements OnInit {
 		});
 	}
 	changeSitesData(siteId: any) {
-		this.categoryParams.siteId = siteId;
-		this.listCategoryAPI(this.categoryParams);
+		if (siteId) {
+			this.categoryParams.siteId = siteId;
+			this.listCategoryAPI(this.categoryParams);
+		}
 	}
 
 	listCategoryAPI(params: IParams) {

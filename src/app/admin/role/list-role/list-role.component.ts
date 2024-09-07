@@ -99,8 +99,10 @@ export class ListRoleComponent {
 	}
 
 	changeSitesData(accountId: any) {
-		this.roleParams.accountId = accountId;
-		this.listRoleAPI(this.roleParams);
+		if (accountId) {
+			this.roleParams.accountId = accountId;
+			this.listRoleAPI(this.roleParams);
+		}
 	}
 
 	listRoleAPI(params: IParams) {

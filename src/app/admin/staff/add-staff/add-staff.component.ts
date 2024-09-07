@@ -183,15 +183,19 @@ export class AddStaffComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.roleParams.accountId = accountId;
-		this.staffForm.get('account').patchValue(accountId);
-		this.clearSiteData();
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.roleParams.accountId = accountId;
+			this.staffForm.get('account').patchValue(accountId);
+			this.clearSiteData();
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeRoleData(roleId: any) {
-		this.staffForm.get('role').patchValue(roleId);
+		if (roleId) {
+			this.staffForm.get('role').patchValue(roleId);
+		}
 	}
 
 	clearSiteData() {

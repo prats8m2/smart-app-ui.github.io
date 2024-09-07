@@ -265,8 +265,10 @@ export class AddRoleComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.permissionParams.accountId = accountId;
-		this.listPermissionsAPI(this.permissionParams);
+		if (accountId) {
+			this.permissionParams.accountId = accountId;
+			this.listPermissionsAPI(this.permissionParams);
+		}
 	}
 
 	listPermissionsAPI(params: any) {

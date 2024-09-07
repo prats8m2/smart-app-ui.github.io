@@ -100,13 +100,17 @@ export class ListMenuComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSitesData(siteId: any) {
-		this.menuParams.siteId = siteId;
-		this.listMenuAPI(this.menuParams);
+		if (siteId) {
+			this.menuParams.siteId = siteId;
+			this.listMenuAPI(this.menuParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {

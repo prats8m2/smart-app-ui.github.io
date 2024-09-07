@@ -160,7 +160,7 @@ export class EditTableComponent implements OnInit {
 			.updateTable(this.tableForm, this.roomSiteId)
 			.then((res: any) => {
 				if (res.status) {
-					this.routeToListTable();
+					this.router.navigateByUrl(URL_ROUTES.LIST_TABLE);
 				} else {
 					console.log('error');
 				}

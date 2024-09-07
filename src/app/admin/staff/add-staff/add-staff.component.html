@@ -5,7 +5,7 @@
             <h4 class="card-title mb-4">Add Staff</h4>
         </div>
         <!-- Form Start -->
-        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="custom-form">
+        <form (ngSubmit)="addStaff()" [formGroup]="staffForm" class="custom-form" autocomplete="off">
             <!-- First Row -->
             <h6 class="mb-2">Staff Details</h6>
             <!-- Forth Row -->
@@ -150,9 +150,17 @@
             <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="accountList" [ngModel]="accountList[0]?.account?.id" bindLabel="account.name"
-                        [clearable]="false" bindValue="account.id" (change)="changeAccountData($event.account.id)"
-                        [placeholder]="'Account'" formControlName="account"></ng-select>
+                    <ng-select #accList [items]="accountList" [searchable]="false"
+                        [ngModel]="accountList[0]?.account?.id" bindLabel="account.name" [clearable]="false"
+                        bindValue="account.id" (change)="changeAccountData($event?.account?.id)"
+                        [placeholder]="'Account'" formControlName="account" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="accList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
             <!-- Second Row -->
@@ -160,9 +168,20 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
-                        [placeholder]="'Site'" [multiple]="true" formControlName="site"
-                        [closeOnSelect]="false"></ng-select>
+                    <ng-select #select [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
+                        [multiple]="true" formControlName="site" [closeOnSelect]="false" [searchable]="false">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="select.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.name}}
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
             <!--Third Row -->
@@ -170,9 +189,16 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRole">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="roleList" [ngModel]="roleList[0]?.id" bindLabel="name" [clearable]="false"
-                        bindValue="id" [placeholder]="'Role'" formControlName="role"
-                        (change)="changeRoleData($event.id)"></ng-select>
+                    <ng-select #rList [items]="roleList" [searchable]="false" [ngModel]="roleList[0]?.id"
+                        bindLabel="name" bindValue="id" (change)="changeRoleData($event?.id)" [clearable]="false"
+                        formControlName="role" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="rList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
 

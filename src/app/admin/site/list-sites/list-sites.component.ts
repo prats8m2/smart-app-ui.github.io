@@ -103,8 +103,10 @@ export class ListSitesComponent {
 	}
 
 	changeSitesData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {

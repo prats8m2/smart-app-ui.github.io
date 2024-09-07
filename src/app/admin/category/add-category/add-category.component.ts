@@ -181,16 +181,20 @@ export class AddCategoryComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.categoryForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.categoryForm.get('account').patchValue(accountId);
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSiteData(siteId: any) {
-		const randomNumber = Math.floor(1000 + Math.random() * 9000);
-		this.categoryForm
-			.get('categoryName')
-			.patchValue(`CT_${siteId}_${randomNumber}`);
+		if (siteId) {
+			const randomNumber = Math.floor(1000 + Math.random() * 9000);
+			this.categoryForm
+				.get('categoryName')
+				.patchValue(`CT_${siteId}_${randomNumber}`);
+		}
 	}
 
 	addCategory() {

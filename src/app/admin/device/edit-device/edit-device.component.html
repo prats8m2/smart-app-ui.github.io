@@ -41,8 +41,15 @@
                 <h6 class="mb-2" *ngIf="showListRooms">Room Details</h6>
                 <div class="row" *ngIf="showListRooms">
                     <div class="col-md-6 mb-4">
-                        <ng-select [items]="roomList" bindLabel="name" [clearable]="false" bindValue="id"
-                            formControlName="room" [placeholder]="'Room'"></ng-select>
+                        <ng-select #rList [items]="roomList" [searchable]="false" bindLabel="name" [clearable]="false"
+                            bindValue="id" formControlName="room" typeToSearchText="Type to search">
+                            <ng-template ng-header-tmp>
+                                <div class="form-group has-feedback">
+                                    <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                        placeholder="Search" (input)="rList.filter($event.target.value)" />
+                                </div>
+                            </ng-template>
+                        </ng-select>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">

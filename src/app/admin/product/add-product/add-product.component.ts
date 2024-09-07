@@ -131,8 +131,7 @@ export class AddProductComponent implements OnInit {
 			if (res.status) {
 				this.siteList = [...res.data.sites];
 				if (this.siteList.length) {
-					this.categoryParams.siteId = this.siteList[0].id;
-					// this.listCategoryApi(this.categoryParams);
+					this.categoryParams.siteId = this.siteList[0]?.id;
 				}
 			}
 		});
@@ -191,16 +190,25 @@ export class AddProductComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.productForm.get('categories').patchValue([]);
-		this.productForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.productForm.get('categories').patchValue([]);
+			this.productForm.get('account').patchValue(accountId);
+			this.listSiteAPI(this.siteParams);
+		}
+	}
+
+	changeProductType(typeId: number) {
+		this.categoryParams.type = typeId;
+		this.listCategoryApi(this.categoryParams);
 	}
 
 	changeSiteData(siteId: any) {
 		//list categories
-		this.categoryParams.siteId = siteId;
-		this.listCategoryApi(this.categoryParams);
+		if (siteId) {
+			this.categoryParams.siteId = siteId;
+			this.listCategoryApi(this.categoryParams);
+		}
 	}
 
 	listCategoryApi(params: IParams) {

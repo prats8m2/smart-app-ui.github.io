@@ -139,7 +139,6 @@ export class EditStaffComponent implements OnInit {
 					this.roleParams.accountId = accountId;
 					const status = res.data.status ? true : false;
 					this.staffForm.get('status')?.patchValue(status);
-
 					this.listSiteAPI(this.siteParams);
 				}
 			});
@@ -199,16 +198,10 @@ export class EditStaffComponent implements OnInit {
 		return errorMessages[formControlName][errorType];
 	}
 
-	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.roleParams.accountId = accountId;
-		this.staffForm.get('account').patchValue(accountId);
-		this.listSiteAPI(this.siteParams);
-		this.listRoleAPI(this.roleParams);
-	}
-
 	changeRoleData(roleId: any) {
-		this.staffForm.get('role').patchValue(roleId);
+		if (roleId) {
+			this.staffForm.get('role').patchValue(roleId);
+		}
 	}
 
 	updateStaff() {

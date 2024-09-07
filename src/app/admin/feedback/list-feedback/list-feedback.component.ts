@@ -85,13 +85,17 @@ export class ListFeedbackComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSitesData(siteId: any) {
-		this.feedbackParams.siteId = siteId;
-		this.listFeedbackAPI(this.feedbackParams);
+		if (siteId) {
+			this.feedbackParams.siteId = siteId;
+			this.listFeedbackAPI(this.feedbackParams);
+		}
 	}
 
 	listSiteAPI(params: IParams) {

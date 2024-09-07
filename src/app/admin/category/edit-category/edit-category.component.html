@@ -43,8 +43,15 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteType">Type</label>
-                    <ng-select [items]="categoryTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Category'"></ng-select>
+                    <ng-select #cTypes [items]="categoryTypes" [searchable]="false" bindLabel="label"
+                        [clearable]="false" bindValue="id" formControlName="type" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="cTypes.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="categorySeq">Sequence</label>

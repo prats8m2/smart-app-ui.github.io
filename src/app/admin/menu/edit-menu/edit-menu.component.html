@@ -42,9 +42,7 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="siteType">Type</label>
-                    <ng-select [items]="menuTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        (change)="changeCategoryType($event.id)" formControlName="type"
-                        [placeholder]="'Category'"></ng-select>
+                    <input type="text" class="form-control" formControlName="type">
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="menuStatus">Status</label>
@@ -195,15 +193,31 @@
             <h6 class="mb-2" *ngIf="showListMenu">Product Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4" *ngIf="showListMenu">
-                    <ng-select class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
-                        bindLabel="productName" groupBy="menuName" [selectableGroup]="true"
-                        [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData"
-                        [placeholder]="'Select Products'">
+                    <ng-select #cpList class="text-color" [items]="categoryProductDropdownList" [multiple]="true"
+                        bindLabel="productName" groupBy="categoryName" [selectableGroup]="true" [searchable]="false"
+                        [selectableGroupAsModel]="false" [closeOnSelect]="false" formControlName="menuItemsData">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="cpList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.categoryName}}
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.productName }}
+                        </ng-template>
                     </ng-select>
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="menuForm.invalid">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="menuForm.invalid || !menuForm.dirty">Submit</button>
             </div>
         </form>
     </div>

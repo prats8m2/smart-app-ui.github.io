@@ -251,11 +251,15 @@ export class AddSiteComponent {
 	}
 
 	updateMiscConfig(control: string) {
-		const controlValue = this.siteSettingForm.get(control).value;
-		this.siteService.updateSiteSetting(
-			this.createdSiteId,
-			control,
-			controlValue
-		);
+		if (control) {
+			const controlValue = this.siteSettingForm.get(control).value;
+			if (controlValue) {
+				this.siteService.updateSiteSetting(
+					this.createdSiteId,
+					control,
+					controlValue
+				);
+			}
+		}
 	}
 }

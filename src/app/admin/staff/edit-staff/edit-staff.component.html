@@ -158,8 +158,20 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="siteList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                        [multiple]="true" formControlName="site"></ng-select>
+                    <ng-select #sList [items]="siteList" bindLabel="name" [clearable]="false" bindValue="id"
+                        [multiple]="true" formControlName="site" [closeOnSelect]="false" [searchable]="false">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="sList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected"
+                                [checked]="item$.selected" class="custom-checkbox" /> {{
+                            item?.name}}
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
             <!--Third Row -->
@@ -167,13 +179,22 @@
             <!-- Site Name -->
             <div class="row" *ngIf="showListRole">
                 <div class="col-md-6 mb-4">
-                    <ng-select [items]="roleList"  bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Role'"
-                        formControlName="role" (change)="changeRoleData($event.id)"></ng-select>
+                    <ng-select #rList [items]="roleList" [searchable]="false" [ngModel]="roleList[0]?.id"
+                        bindLabel="name" bindValue="id" (change)="changeRoleData($event?.id)" [clearable]="false"
+                        formControlName="role" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="rList.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
             </div>
-            
+
             <div>
-                <button type="submit" class="btn btn-primary w-md" [disabled]="staffForm.invalid || !staffForm.dirty">Submit</button>
+                <button type="submit" class="btn btn-primary w-md"
+                    [disabled]="staffForm.invalid || !staffForm.dirty">Submit</button>
             </div>
         </form>
     </div>

@@ -41,9 +41,16 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <label for="siteType">Type</label>
-                    <ng-select [items]="eventTypes" bindLabel="label" [clearable]="false" bindValue="id"
-                        formControlName="type" [placeholder]="'Type'"></ng-select>
+                    <label for="eventTypes">Type</label>
+                    <ng-select #eTypes [items]="eventTypes" [searchable]="false" bindLabel="label" [clearable]="false"
+                        bindValue="id" formControlName="type" typeToSearchText="Type to search">
+                        <ng-template ng-header-tmp>
+                            <div class="form-group has-feedback">
+                                <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                    placeholder="Search" (input)="eTypes.filter($event.target.value)" />
+                            </div>
+                        </ng-template>
+                    </ng-select>
                 </div>
                 <div class="col-md-6 mb-4">
                     <label for="eventPrice">Entry Fees</label>

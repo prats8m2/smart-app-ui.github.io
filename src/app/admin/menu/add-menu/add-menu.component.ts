@@ -227,16 +227,20 @@ export class AddMenuComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.menuForm.get('account').patchValue(accountId);
-		this.clearProductListData();
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.menuForm.get('account').patchValue(accountId);
+			this.clearProductListData();
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSiteData(siteId: any) {
-		this.categoryParams.siteId = siteId;
-		this.clearProductListData();
-		this.listCategoryAPI(this.categoryParams);
+		if (siteId) {
+			this.categoryParams.siteId = siteId;
+			this.clearProductListData();
+			this.listCategoryAPI(this.categoryParams);
+		}
 	}
 
 	clearProductListData() {
@@ -295,9 +299,11 @@ export class AddMenuComponent implements OnInit {
 		});
 	}
 
-	changeCategoryType(id: number) {
-		this.categoryParams.type = id;
-		this.listCategoryAPI(this.categoryParams);
+	changeCategoryType(typeId: number) {
+		if (typeId) {
+			this.categoryParams.type = typeId;
+			this.listCategoryAPI(this.categoryParams);
+		}
 	}
 
 	startDateSellected(event: any) {

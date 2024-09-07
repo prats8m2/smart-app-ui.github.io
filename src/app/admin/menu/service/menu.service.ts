@@ -73,16 +73,9 @@ export class MenuService {
 			});
 	}
 
-	updateMenu(menuForm: any, siteId: any) {
-		const {
-			id,
-			menuName,
-			menuDesc,
-			type,
-			scheduleData,
-			menuItemsData,
-			status,
-		} = menuForm.value;
+	updateMenu(menuForm: FormGroup, siteId: any, type: number) {
+		const { id, menuName, menuDesc, scheduleData, menuItemsData, status } =
+			menuForm.getRawValue();
 
 		return this.http
 			.put(MENU.UPDATE_MENU, {

@@ -8,7 +8,6 @@ import { DeviceService } from '../service/device.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import * as QRCodeStyling from 'qr-code-styling';
 
-
 @Component({
 	selector: 'app-view-device',
 	templateUrl: './view-device.component.html',
@@ -81,15 +80,13 @@ export class ViewDeviceComponent implements OnInit {
 				if (res.status === true) {
 					const deviceForm = this.deviceForm;
 					const { device } = res.data;
-
 					deviceForm.patchValue({
-						account: 'asasa',
+						account: device.site.account.name,
 						site: device.site.name,
 						room: device.room ? device.room.name : '-',
 						deviceName: device.code,
 						status: device.status ? 1 : 0,
 					});
-
 					deviceForm.disable();
 				}
 			});

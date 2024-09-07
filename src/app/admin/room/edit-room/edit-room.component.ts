@@ -172,7 +172,7 @@ export class EditRoomComponent implements OnInit {
 			.updateRoom(this.roomForm, this.roomSiteId)
 			.then((res: any) => {
 				if (res.status) {
-					this.routeToListRoom();
+					this.router.navigateByUrl(URL_ROUTES.LIST_ROOM);
 				} else {
 					console.log('error');
 				}
