@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { OrderComponent } from './order/order.component';
 import { TipsComponent } from './tips/tips.component';
 import { WifiDetailsComponent } from './wifi-details/wifi-details.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
 @NgModule({
 	declarations: [
 		PagetitleComponent,
@@ -16,6 +17,7 @@ import { WifiDetailsComponent } from './wifi-details/wifi-details.component';
 		OrderComponent,
 		TipsComponent,
 		WifiDetailsComponent,
+		OrderModalComponent,
 	],
 	imports: [CommonModule, FormsModule],
 	exports: [
@@ -25,6 +27,7 @@ import { WifiDetailsComponent } from './wifi-details/wifi-details.component';
 		OrderComponent,
 		TipsComponent,
 		WifiDetailsComponent,
+		OrderModalComponent,
 	],
 })
 export class UIModule {}

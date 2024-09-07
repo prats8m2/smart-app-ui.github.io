@@ -86,13 +86,15 @@
                                 </div>
                             </div>
                             <div class="col  p-2 ">
-                                <div class="rounded rounded-4 w-100   fixed-rounded-div">
+                                <div class="rounded rounded-4 w-100   fixed-rounded-div"
+                                    (click)="openOrderModal(ORDER_TYPE.ROOM_SERVICE)">
                                     <img src="assets//icons/bell.png" alt="My Icon" class="my-icon mt-2 mb-2">
                                     <p class="mb-2">Room Service</p>
                                 </div>
                             </div>
                             <div class="col  p-2 ">
-                                <div class="rounded rounded-4 w-100   fixed-rounded-div">
+                                <div class="rounded rounded-4 w-100   fixed-rounded-div"
+                                    (click)="openOrderModal(ORDER_TYPE.ROOM_CLEANING)">
                                     <img src="assets//icons/cleaning.png" alt="My Icon" class="my-icon mt-2 mb-2">
                                     <p class="mb-2">Room Cleaning</p>
                                 </div>
@@ -104,7 +106,8 @@
                                 </div>
                             </div>
                             <div class="col  p-2 ">
-                                <div class="rounded rounded-4 w-100   fixed-rounded-div">
+                                <div class="rounded rounded-4 w-100   fixed-rounded-div"
+                                    (click)="openOrderModal(ORDER_TYPE.SOS)">
                                     <img src="assets//icons/sos.png" alt="My Icon" class="my-icon mt-2 mb-2">
                                     <p class="mb-2">Emergency Help</p>
                                 </div>

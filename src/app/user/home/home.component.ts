@@ -7,6 +7,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { HomeService } from '../services/home.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WifiDetailsComponent } from '../../shared/ui/wifi-details/wifi-details.component';
+import { OrderModalComponent } from '../../shared/ui/order-modal/order-modal.component';
 
 @Component({
 	selector: 'app-home',
@@ -21,6 +22,16 @@ export class HomeComponent {
 	receptionNumber: any;
 	eventDetails: any;
 	settings: any;
+
+	ORDER_TYPE = {
+		TABLE: 1,
+		ROOM: 2,
+		ONLINE: 3,
+		OFFLINE: 4,
+		SOS: 5,
+		ROOM_SERVICE: 6,
+		ROOM_CLEANING: 7,
+	};
 
 	constructor(
 		private router: Router,
@@ -58,8 +69,30 @@ export class HomeComponent {
 	}
 
 	openWifiDetails() {
-		const modalRef = this.modalService.open(WifiDetailsComponent);
+		const modalRef = this.modalService.open(WifiDetailsComponent, {
+			centered: true,
+			size: 'lg', // You can adjust the size as needed: 'sm', 'lg', 'xl'
+		});
 		modalRef.componentInstance.wifiDetails = this.wifiDetails;
+	}
+
+	openOrderModal(orderType: number) {
+		const modalRef = this.modalService.open(OrderModalComponent, {
+			centered: true,
+			size: 'lg', // You can adjust the size as needed: 'sm', 'lg', 'xl'
+		});
+		modalRef.componentInstance.orderType = orderType;
+
+		modalRef.result.then(
+			(result) => {
+				if (result) {
+					this.createOrder(orderType, result);
+				}
+			},
+			(reason) => {
+				// Modal dismissed
+			}
+		);
 	}
 
 	async createOrder(type, description) {
