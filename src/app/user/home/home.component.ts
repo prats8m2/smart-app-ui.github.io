@@ -22,6 +22,8 @@ export class HomeComponent {
 	receptionNumber: any;
 	eventDetails: any;
 	settings: any;
+	greetingText: string = '';
+	greetingIcon: string = '';
 
 	ORDER_TYPE = {
 		TABLE: 1,
@@ -53,6 +55,7 @@ export class HomeComponent {
 		this.siteId = this.globalService.getAppTokenInfo('SITE');
 		this.roomId = this.globalService.getAppTokenInfo('ROOM');
 		this.tableId = this.globalService.getAppTokenInfo('TABLE');
+		this.updateGreeting();
 
 		this.homeService.getSiteDetails(this.siteId).then((res) => {
 			this.wifiDetails = res?.data?.wifi;
@@ -93,6 +96,21 @@ export class HomeComponent {
 				// Modal dismissed
 			}
 		);
+	}
+
+	updateGreeting() {
+		const currentHour = new Date().getHours();
+
+		if (currentHour >= 5 && currentHour < 12) {
+			this.greetingText = 'Good Morning';
+			this.greetingIcon = 'assets/icons/morning.png';
+		} else if (currentHour >= 12 && currentHour < 18) {
+			this.greetingText = 'Good Afternoon';
+			this.greetingIcon = 'assets/icons/afternoon.png';
+		} else {
+			this.greetingText = 'Good Evening';
+			this.greetingIcon = 'assets/icons/evening.png';
+		}
 	}
 
 	async createOrder(type, description) {
