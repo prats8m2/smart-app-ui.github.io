@@ -1,0 +1,24 @@
+<div id="layout-wrapper">
+    <app-user-header></app-user-header>
+    <div class="main-content home-background">
+        <div class="page-content">
+            <h5 class="display-6 mb-4">
+                <i (click)="routeTo('HOME')" class="bx bx-left-arrow-alt me-1 text-muted"></i>
+                Events
+            </h5>
+            <div class="container-fluid">
+                <div *ngFor="let event of events" class="event-item" (click)="openEventDetails(event)">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">
+                                <strong>Date:</strong> {{ event.date | date }}
+                            </p>
+                            <!-- Add more event information as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

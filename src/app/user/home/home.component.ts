@@ -144,6 +144,12 @@ export class HomeComponent {
 					this.router.navigateByUrl(URL_ROUTES.ORDER_HISTORY);
 				}
 				break;
+
+			case 'EVENTS':
+				{
+					this.router.navigateByUrl(URL_ROUTES.APP_EVENTS);
+				}
+				break;
 		}
 	}
 }

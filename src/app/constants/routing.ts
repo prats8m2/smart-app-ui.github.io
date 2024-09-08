@@ -66,6 +66,8 @@ export const URL_ROUTES = {
 	VIEW_PRODUCT: 'admin/products/view-product',
 	LIST_PRODUCT: 'admin/products/list-products',
 
+	//events
+	APP_EVENTS: 'app/events',
 	//menu
 	ADD_MENU: 'admin/menu/add-menu',
 	EDIT_MENU: 'admin/menu/edit-menu',

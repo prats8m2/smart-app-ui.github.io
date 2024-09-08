@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
 	// { path: '', redirectTo: 'dashboard' },
@@ -23,6 +24,10 @@ const routes: Routes = [
 	{
 		path: 'order',
 		component: OrderDetailsComponent,
+	},
+	{
+		path: 'events',
+		component: EventsComponent,
 	},
 ];
 

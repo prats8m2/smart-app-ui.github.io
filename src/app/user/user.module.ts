@@ -17,6 +17,7 @@ import { UserOrderHistoryComponent } from './user-order-history/user-order-histo
 import { UserRoutingModule } from './user-routing.module';
 import { FormsModule } from '@angular/forms';
 import { WifiDetailsComponent } from '../shared/ui/wifi-details/wifi-details.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { WifiDetailsComponent } from '../shared/ui/wifi-details/wifi-details.com
 		OrderSummaryComponent,
 		OrderTimelineComponent,
 		OrderDetailsComponent,
+  EventsComponent,
 	],
 	imports: [
 		CommonModule,

@@ -9,6 +9,7 @@ import { OrderComponent } from './order/order.component';
 import { TipsComponent } from './tips/tips.component';
 import { WifiDetailsComponent } from './wifi-details/wifi-details.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 @NgModule({
 	declarations: [
 		PagetitleComponent,
@@ -18,6 +19,7 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
 		TipsComponent,
 		WifiDetailsComponent,
 		OrderModalComponent,
+		EventDetailsComponent,
 	],
 	imports: [CommonModule, FormsModule],
 	exports: [
@@ -28,6 +30,7 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
 		TipsComponent,
 		WifiDetailsComponent,
 		OrderModalComponent,
+		EventDetailsComponent,
 	],
 })
 export class UIModule {}
