@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { EventsComponent } from './events/events.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
 	// { path: '', redirectTo: 'dashboard' },
@@ -26,8 +27,8 @@ const routes: Routes = [
 		component: OrderDetailsComponent,
 	},
 	{
-		path: 'events',
-		component: EventsComponent,
+		path: 'feedback',
+		component: FeedbackComponent,
 	},
 ];
 

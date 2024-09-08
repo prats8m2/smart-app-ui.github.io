@@ -150,6 +150,12 @@ export class HomeComponent {
 					this.router.navigateByUrl(URL_ROUTES.APP_EVENTS);
 				}
 				break;
+
+			case 'FEEDBACK':
+				{
+					this.router.navigateByUrl(URL_ROUTES.APP_FEEDBACK);
+				}
+				break;
 		}
 	}
 }
