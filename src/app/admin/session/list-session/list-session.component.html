@@ -75,8 +75,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end">
-                                <button type="button" class="btn btn-primary mb-2 me-2" (click)="refreshSessions()"><i
-                                        class="mdi mdi-refresh mr-1"></i>
+                                <button type="button" class="btn btn-primary mb-2 me-2" (click)="refreshSessions()"
+                                    [disabled]="!sitesList?.length"><i class="mdi mdi-refresh mr-1"></i>
                                     Refresh</button>
                             </div>
                         </div>
