@@ -15,9 +15,10 @@ import { TipsComponent } from '../shared/ui/tips/tips.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { UserOrderHistoryComponent } from './user-order-history/user-order-history.component';
 import { UserRoutingModule } from './user-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WifiDetailsComponent } from '../shared/ui/wifi-details/wifi-details.component';
 import { EventsComponent } from './events/events.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +30,8 @@ import { EventsComponent } from './events/events.component';
 		OrderSummaryComponent,
 		OrderTimelineComponent,
 		OrderDetailsComponent,
-  EventsComponent,
+		EventsComponent,
+		FeedbackComponent,
 	],
 	imports: [
 		CommonModule,
@@ -40,6 +42,7 @@ import { EventsComponent } from './events/events.component';
 		UIModule,
 		FormsModule,
 		AccordionModule.forRoot(),
+		ReactiveFormsModule,
 	],
 })
 export class UserModule {}

@@ -68,6 +68,7 @@ export const URL_ROUTES = {
 
 	//events
 	APP_EVENTS: 'app/events',
+	APP_FEEDBACK: 'app/feedback',
 	//menu
 	ADD_MENU: 'admin/menu/add-menu',
 	EDIT_MENU: 'admin/menu/edit-menu',

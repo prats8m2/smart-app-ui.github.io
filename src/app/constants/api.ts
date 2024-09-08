@@ -106,4 +106,5 @@ export const ORDER = {
 
 export const FEEDBACK = {
 	LIST_FEEDBACK: '/feedback/list',
+	ADD_FEEDBACK: '/feedback/add',
 };

@@ -1,0 +1,58 @@
+<div class="main-content home-background">
+    <app-user-header></app-user-header>
+    <div class="page-content">
+        <h5 class="display-6 mb-4"><i (click)="routeTo('HOME')"
+                class="bx bx-left-arrow-alt me-1 text-muted"></i>Feedback
+        </h5>
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" formControlName="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="tel" id="mobile" formControlName="mobile" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="review">Review</label>
+                <textarea id="review" formControlName="review" class="form-control" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group mt-2">
+                <label>Cleanliness Rating</label>
+                <app-star-rating formControlName="cleanlinessRating"></app-star-rating>
+            </div>
+
+            <div class="form-group">
+                <label>Service Quality Rating</label>
+                <app-star-rating formControlName="serviceQualityRating"></app-star-rating>
+            </div>
+
+            <div class="form-group">
+                <label>Facilities Rating</label>
+                <app-star-rating formControlName="facilitiesRating"></app-star-rating>
+            </div>
+
+            <div class="form-group">
+                <label>Food Rating</label>
+                <app-star-rating formControlName="foodRating"></app-star-rating>
+            </div>
+
+            <div class="form-group">
+                <label>Overall Rating</label>
+                <app-star-rating formControlName="overallRating"></app-star-rating>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary" [disabled]="!feedbackForm.valid">Submit Feedback</button>
+        </form>
+    </div>
+</div>
