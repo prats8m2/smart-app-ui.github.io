@@ -111,5 +111,5 @@ export const FEEDBACK = {
 
 export const SESSION = {
 	LIST_SESSION: '/session/list',
-	TERMINATE_SESSION: 'session/terminate',
+	TERMINATE_SESSION: '/session/terminate',
 };

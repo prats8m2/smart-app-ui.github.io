@@ -73,27 +73,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end">
+                                <button type="button" class="btn btn-primary mb-2 me-2" (click)="refreshSessions()"><i
+                                        class="mdi mdi-refresh mr-1"></i>
+                                    Refresh</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive mb-0">
                         <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="device-list">
                             <thead class="table-light table-fixed-header">
                                 <tr>
                                     <th class="align-middle">Session ID</th>
+                                    <th class="align-middle">Unique ID</th>
+                                    <th class="align-middle">{{selectedSessionType == 1 ? 'Room' :'Table'}}</th>
                                     <th class="align-middle">Activation Time</th>
                                     <th class="align-middle">Status</th>
                                     <th class="align-middle" *ngIf="showTerminateSession">Action</th>
                                 </tr>
                                 <tr *ngIf="sessionList.length == 0">
-                                    <th class="align-middle" style="text-align: center;" colspan="4">No data available
+                                    <th class="align-middle" style="text-align: center;" colspan="6">No data available
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let data of sessionList; let i = index;" id="o_{{data?.id}}">
                                     <td>
-                                        <a class="text-body fw-bold pointer">{{data?.id}}</a>
+                                        <a class="text-body fw-bold">{{data?.id}}</a>
                                     </td>
-                                    <td class="pointer">{{data?.id}}</td>
+                                    <td>{{data?.sessionId}}</td>
+                                    <td>{{selectedSessionType == 1 ? data?.room?.name : data?.table?.name}}</td>
+                                    <td>{{data?.createdOn | date:'medium'}}</td>
                                     <td>
                                         <span class="badge badge-pill badge-soft-success font-size-11"
                                             [ngClass]=" { 'badge-soft-danger': data.isActive === 0 }">{{data?.isActive

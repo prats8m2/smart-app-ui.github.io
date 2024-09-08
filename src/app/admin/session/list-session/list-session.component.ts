@@ -56,6 +56,8 @@ export class ListSessionComponent implements OnInit {
 		limit: 100,
 	};
 
+	selectedSessionType: number = 1;
+
 	ngOnInit(): void {
 		if (this.showListAccount) {
 			this.accountService.listUser(this.accountParams).subscribe((res) => {
@@ -83,7 +85,7 @@ export class ListSessionComponent implements OnInit {
 		this.sessionList = this.sessionListResp
 			.slice(startIndex, endIndex)
 			.filter((item) =>
-				item.name.toLowerCase().includes(this.searchInput.toLowerCase())
+				item.sessionId.toLowerCase().includes(this.searchInput.toLowerCase())
 			);
 
 		this.total = this.searchInput
@@ -127,6 +129,7 @@ export class ListSessionComponent implements OnInit {
 		this.sessionService.listSessions(params).subscribe((res) => {
 			if (res.status) {
 				this.sessionListResp = [...res.data.sessions];
+				this.selectedSessionType = res?.data?.type;
 				this.updateDisplayedData();
 			}
 		});
@@ -148,7 +151,13 @@ export class ListSessionComponent implements OnInit {
 	}
 
 	changeSesionType(type: any) {
-		this.sessionParams.type = type;
+		if (type) {
+			this.sessionParams.type = type;
+			this.listSessionAPI(this.sessionParams);
+		}
+	}
+
+	refreshSessions() {
 		this.listSessionAPI(this.sessionParams);
 	}
 }
