@@ -11,9 +11,18 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.name }}</h5>
-                            <p class="card-text">
-                                <strong>Date:</strong> {{ event.date | date }}
-                            </p>
+                            <div class="card-text mt-2">
+                                <strong>Location:</strong> {{ event.location }}
+                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                    <span>
+                                        <strong>Date:</strong> {{ event?.schedule?.startDate | date }} {{
+                                        event?.schedule?.startTime }}
+                                    </span>
+                                    <span>
+                                        <strong>Entry Fee:</strong> {{ event.entryFee ? event.entryFee : 'Free' }}
+                                    </span>
+                                </div>
+                            </div>
                             <!-- Add more event information as needed -->
                         </div>
                     </div>

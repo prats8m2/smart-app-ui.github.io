@@ -5,8 +5,26 @@
     </button>
 </div>
 <div class="modal-body">
-    <p><strong>Date:</strong> {{ event.date | date }}</p>
-    <p><strong>Description:</strong> {{ event.description }}</p>
+    <div class="card-body">
+        <h5 class="card-title">{{ event.name }}</h5>
+        <div class="card-text mt-2">
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Location:</strong>&nbsp; {{ event.location }}</p>
+            <p><strong>Google Maps:</strong>&nbsp; <a [href]="event.googleLocation" target="_blank">View on Google
+                    Maps</a>
+            </p>
+            <div class="d-flex justify-content-between align-items-center mt-1">
+                <span>
+                    <strong>Start:</strong> {{ event?.schedule?.startDate | date }} {{ event?.schedule?.startTime }}
+                </span>
+                <span>
+                    <strong>End:</strong> {{ event?.schedule?.endDate | date }} {{ event?.schedule?.endTime }}
+                </span>
+            </div>
+            <p class="mt-2"><strong>Entry Fee:</strong> {{ event.entryFee ? (event.entryFee | currency) : 'Free' }}</p>
+            <p><strong>Event Type:</strong> {{ event.inHouse === 1 ? 'Internal' : 'External' }}</p>
+        </div>
+    </div>
     <!-- Add more event details as needed -->
 </div>
 <div class="modal-footer">
