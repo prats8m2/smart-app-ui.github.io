@@ -47,7 +47,9 @@ export class HomeComponent {
 		// Subscribe to query parameters
 		this.activatedRoute.queryParams.subscribe((params) => {
 			console.log(params);
-			StorageService.set(StorageType.APP_ACCESS_TOKEN, params['token']);
+			if (params['token']) {
+				StorageService.set(StorageType.APP_ACCESS_TOKEN, params['token']);
+			}
 		});
 	}
 

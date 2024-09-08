@@ -48,5 +48,7 @@ export class OrderSummaryComponent {
 			type,
 			this.categoryType
 		);
+
+		this.router.navigate(['/app']);
 	}
 }
