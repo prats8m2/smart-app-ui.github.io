@@ -18,7 +18,7 @@
                             <div class="col-sm-4" *ngIf="showListAccount">
                                 <ng-select #select1 [items]="accountList" [searchable]="false"
                                     [ngModel]="accountList[0]?.account?.id" bindLabel="account.name"
-                                    bindValue="account.id" [clearable]="false"
+                                    bindValue="account.id" [clearable]="false" placeholder="Select Account"
                                     (change)="changeAccountData($event?.account?.id)" typeToSearchText="Type to search">
                                     <ng-template ng-header-tmp>
                                         <div class="form-group has-feedback">
@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <ng-select #select2 [items]="roleList" [searchable]="false" [ngModel]="roleList[0]?.id"
-                                    bindLabel="name" bindValue="id" [clearable]="false"
+                                    bindLabel="name" bindValue="id" [clearable]="false" placeholder="Select Role"
                                     (change)="changeRoleData($event?.id)" typeToSearchText="Type to search">
                                     <ng-template ng-header-tmp>
                                         <div class="form-group has-feedback">

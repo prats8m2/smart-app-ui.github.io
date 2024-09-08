@@ -16,15 +16,32 @@
                                 </div>
                             </div>
                             <div class="col-sm-3" *ngIf="showListAccount">
-                                <ng-select [ngModel]="accountList[0]?.account?.id" [items]="accountList"
-                                    bindLabel="account.name" [clearable]="false" bindValue="account.id"
-                                    (change)="changeAccountData($event?.account?.id)"
-                                    [placeholder]="'Account'"></ng-select>
+                                <ng-select #accList [items]="accountList" [searchable]="false"
+                                    [ngModel]="accountList[0]?.account?.id" bindLabel="account.name"
+                                    bindValue="account.id" [clearable]="false" placeholder="Select Account"
+                                    (change)="changeAccountData($event?.account?.id)" typeToSearchText="Type to search">
+                                    <ng-template ng-header-tmp>
+                                        <div class="form-group has-feedback">
+                                            <input style="width: 100%;line-height: 24px" type="text"
+                                                class="form-control" placeholder="Search"
+                                                (input)="accList.filter($event.target.value)" />
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
                             </div>
                             <div class="col-sm-3" *ngIf="showListSite && sitesList.length > 1">
-                                <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
-                                    [ngModel]="sitesList[0]?.id" (change)="changeSitesData($event?.id)"
-                                    [placeholder]="'Site'"></ng-select>
+                                <ng-select #sList [items]="sitesList" [searchable]="false" placeholder="Select Site"
+                                    [ngModel]="sitesList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
+                                    (change)="changeSitesData($event?.id)" typeToSearchText="Type to search">
+
+                                    <ng-template ng-header-tmp>
+                                        <div class="form-group has-feedback">
+                                            <input style="width: 100%;line-height: 24px" type="text"
+                                                class="form-control" placeholder="Search"
+                                                (input)="select1.filter($event.target.value)" />
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
                             </div>
                             <div class="col-sm-3">
                                 <div class="col-sm-6">

@@ -112,14 +112,18 @@ export class ListOrderComponent implements OnInit {
 	}
 
 	changeAccountData(accountId: any) {
-		this.siteParams.accountId = accountId;
-		this.listSiteAPI(this.siteParams);
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
 	}
 
 	changeSitesData(siteId: any) {
 		// call list order API
-		this.selectedSite = siteId;
-		this.listOrderAPI(this.selectedSite, this.orderType);
+		if (siteId) {
+			this.selectedSite = siteId;
+			this.listOrderAPI(this.selectedSite, this.orderType);
+		}
 	}
 
 	listSiteAPI(params: IParams) {

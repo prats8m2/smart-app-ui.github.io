@@ -18,7 +18,7 @@
                             <div class="col-sm-6" *ngIf="showListAccount">
                                 <ng-select #select [items]="accountList" [searchable]="false"
                                     [ngModel]="accountList[0]?.account?.id" bindLabel="account.name"
-                                    bindValue="account.id" [clearable]="false"
+                                    bindValue="account.id" [clearable]="false" placeholder="Select Account"
                                     (change)="changeSitesData($event?.account?.id)" typeToSearchText="Type to search">
                                     <ng-template ng-header-tmp>
                                         <div class="form-group has-feedback">

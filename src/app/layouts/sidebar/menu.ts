@@ -98,4 +98,11 @@ export const MENU: MenuItem[] = [
 		link: '/admin/feedback/list-feedbacks',
 		permission: 'LIST-FEEDBACK',
 	},
+	{
+		id: 15,
+		label: 'Sessions',
+		icon: 'bxs-user-circle',
+		link: '/admin/session/list-sessions',
+		permission: 'LIST-SESSION',
+	},
 ];

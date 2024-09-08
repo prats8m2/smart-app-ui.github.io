@@ -107,3 +107,8 @@ export const ORDER = {
 export const FEEDBACK = {
 	LIST_FEEDBACK: '/feedback/list',
 };
+
+export const SESSION = {
+	LIST_SESSION: '/session/list',
+	TERMINATE_SESSION: 'session/terminate',
+};
