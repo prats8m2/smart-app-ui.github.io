@@ -42,6 +42,7 @@ export class AddStaffComponent implements OnInit {
 	accountList: any = [];
 	siteList: any = [];
 	roleList: any = [];
+	showPassword: boolean = false;
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');

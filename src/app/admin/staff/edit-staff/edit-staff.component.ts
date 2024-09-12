@@ -46,6 +46,7 @@ export class EditStaffComponent implements OnInit {
 		this.globalService.checkForPermission('LIST-ACCOUNT');
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
+	showPassword: boolean = false;
 	accountParams: IParams = {
 		limit: 100,
 		pageNumber: 1,

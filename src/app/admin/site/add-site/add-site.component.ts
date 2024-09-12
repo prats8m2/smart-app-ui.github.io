@@ -141,6 +141,7 @@ export class AddSiteComponent {
 		return this.formBuilder.group({
 			username: ['', USER_NAME_VALIDATION],
 			password: ['', PASSWORD_VALIDATION],
+			showPassword: false,
 		});
 	}
 

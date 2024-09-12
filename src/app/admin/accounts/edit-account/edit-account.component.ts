@@ -44,6 +44,8 @@ export class EditAccountComponent {
 		mobile: ['', PHONE_VALIDATION],
 		status: [null],
 	});
+
+	showPassword: boolean = false;
 	ngOnInit() {
 		this.getAccount();
 	}

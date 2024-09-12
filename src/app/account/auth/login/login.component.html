@@ -46,7 +46,6 @@
 
                   <button class="btn btn-light ms-0" type="button" id="password-addon"
                     (click)="showPassword = !showPassword">
-
                     <i [ngClass]="showPassword ? 'mdi mdi-eye-off-outline' : 'mdi mdi-eye-outline'"></i>
                   </button>
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">

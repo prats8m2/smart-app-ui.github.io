@@ -31,6 +31,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 export class AddAccountComponent {
 	isProduction = environment.production;
 	public userForm: FormGroup;
+	showPassword: boolean = false;
 
 	constructor(
 		private formBuilder: FormBuilder,

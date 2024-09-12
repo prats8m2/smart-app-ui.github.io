@@ -115,12 +115,14 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control"
+                    <label for="password">Password</label>
+                    <div class="mb-3 input-group auth-pass-inputgroup">
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control"
                             [ngClass]="{ 'form-error':showError('password'),'form-success':showSuccess('password')}"
                             formControlName="password" />
-                        <!-- Password Validation -->
+                        <button class="btn btn-light ms-0" type="button" id="password-addon"
+                            (click)="showPassword = !showPassword"> <i
+                                [ngClass]="showPassword ? 'mdi mdi-eye-off-outline' : 'mdi mdi-eye-outline'"></i></button>
                         <div *ngIf="formTouched('password')">
                             <div *ngIf="isError('password','required')" class="text-danger">
                                 {{errorMessage('password','required')}}
