@@ -16,6 +16,8 @@ import { StorageType } from 'src/app/constants/storage-type';
 import { LoadingService } from '../services/loading.service';
 import Swal from 'sweetalert2';
 import { GlobalService } from '../services/global.service';
+import { Router } from '@angular/router';
+import { EXTRA_ROUTES } from 'src/app/constants/routing';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -24,7 +26,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
 	constructor(
 		private loadingService: LoadingService,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private router: Router
 	) {}
 
 	intercept(
@@ -79,14 +82,22 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 	}
 
 	private handleError(error: HttpErrorResponse): Observable<never> {
-		Swal.fire({
-			icon: 'error',
-			text: 'Some error occurred',
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 2000,
-		});
+		//route to 404 not found
+		switch (error?.status) {
+			case 404: {
+				this.router.navigateByUrl(EXTRA_ROUTES.PAGE_NOT_FOUND);
+				break;
+			}
+			case 403: {
+				this.router.navigateByUrl(EXTRA_ROUTES.ACCESS_DENIED);
+				break;
+			}
+			case 500: {
+				this.router.navigateByUrl(EXTRA_ROUTES.INTERNAL_SERVER_ERROR);
+				break;
+			}
+		}
+
 		return throwError(error);
 	}
 }

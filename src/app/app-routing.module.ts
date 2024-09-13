@@ -31,8 +31,14 @@ const routes: Routes = [
 	},
 	{
 		path: 'app',
+		loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+	},
+	{
+		path: 'error',
 		loadChildren: () =>
-			import('./user/user.module').then((m) => m.UserModule),
+			import('./miscellaneous/miscellaneous.module').then(
+				(m) => m.MiscellaneousModule
+			),
 	},
 ];
 

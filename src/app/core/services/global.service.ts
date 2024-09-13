@@ -164,7 +164,6 @@ export class GlobalService {
 		}
 	}
 
-
 	enableSideNavRouting() {
 		this.allowSideNavRoute.next(true);
 	}
