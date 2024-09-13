@@ -56,37 +56,43 @@ export class OrderHeaderComponent {
 	}
 
 	async listSites(account) {
-		const siteParams: IParams = {
-			limit: 100,
-			pageNumber: 1,
-			accountId: account?.id,
-		};
-		const res = await this.siteService.listSitesPromise(siteParams);
-		if (res.status) {
-			this.sitesList = res.data.sites;
-			if (this.sitesList.length) {
-				this.selectedSiteId = this.sitesList[0].id;
-				this.listCategory(this.selectedSiteId);
+		if (account && account?.id) {
+			const siteParams: IParams = {
+				limit: 100,
+				pageNumber: 1,
+				accountId: account?.id,
+			};
+			const res = await this.siteService.listSitesPromise(siteParams);
+			if (res.status) {
+				this.sitesList = res.data.sites;
+				if (this.sitesList.length) {
+					this.selectedSiteId = this.sitesList[0].id;
+					this.listCategory(this.selectedSiteId);
+				}
+			} else {
+				return null;
 			}
-		} else {
-			return null;
 		}
 	}
 
 	onOrderTypeChange(orderType: number): void {
-		this.selectedOrderType = orderType;
-		if (this.sitesList.length) {
-			this.listCategory(null);
+		if (orderType) {
+			this.selectedOrderType = orderType;
+			if (this.sitesList.length) {
+				this.listCategory(this.selectedSiteId);
+			}
 		}
 	}
 
 	listCategory(siteId) {
-		if (siteId) this.selectedSiteId = siteId;
-		this.orderService.categoryChange.next({
-			siteId: this.selectedSiteId,
-			orderType: this.selectedOrderType,
-			categoryType: this.selectedOrderType,
-		});
+		if (siteId) {
+			this.selectedSiteId = siteId;
+			this.orderService.categoryChange.next({
+				siteId: this.selectedSiteId,
+				orderType: this.selectedOrderType,
+				categoryType: this.selectedOrderType,
+			});
+		}
 	}
 
 	onSearch() {

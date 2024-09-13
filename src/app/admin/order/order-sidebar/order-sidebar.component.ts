@@ -65,11 +65,13 @@ export class OrderSidebarComponent implements AfterViewInit {
 	}
 
 	listProducts(products: any) {
-		this.orderService.productsDetails.next({
-			products,
-			siteId: this.categoryParams.siteId,
-			categoryType: this.selectedCategoryType,
-		});
+		if (products) {
+			this.orderService.productsDetails.next({
+				products,
+				siteId: this.categoryParams.siteId,
+				categoryType: this.selectedCategoryType,
+			});
+		}
 	}
 	ngAfterViewInit() {
 		// this.menu = new MetisMenu(this.sideMenu.nativeElement);

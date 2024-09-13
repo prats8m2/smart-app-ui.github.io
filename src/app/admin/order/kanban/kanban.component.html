@@ -7,16 +7,21 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">New</h4>
-                            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move"
+                            <div id="new-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, newOrders,1)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
-                                <ng-container *ngFor="let order of newOrders; let i = index">
-                                    <div [dndDraggable]="order" dndEffectAllowed="move"
-                                        (dndMoved)="onDropCompleted(order ,newOrders)">
-                                        <ng-template [ngTemplateOutlet]="TaskContent"
-                                            [ngTemplateOutletContext]="{order:order, index: i}">
-                                        </ng-template>
-                                    </div>
+                                <div *ngIf="!inProgresOrders.length">
+                                    No New Orders
+                                </div>
+                                <ng-container *ngIf="inProgresOrders.length">
+                                    <ng-container *ngFor="let order of newOrders; let i = index">
+                                        <div [dndDraggable]="order" dndEffectAllowed="move"
+                                            (dndMoved)="onDropCompleted(order ,newOrders)">
+                                            <ng-template [ngTemplateOutlet]="TaskContent"
+                                                [ngTemplateOutletContext]="{order:order, index: i}">
+                                            </ng-template>
+                                        </div>
+                                    </ng-container>
                                 </ng-container>
                             </div>
                         </div>
@@ -26,7 +31,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">In Progress</h4>
-                            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move"
+                            <div id="inprogress-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, inProgresOrders,2)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
                                 <ng-container *ngFor="let order of inProgresOrders; let i = index">
@@ -45,7 +50,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">Completed</h4>
-                            <div id="upcoming-task" class="pb-1 task-list" dndDropzone dndEffectAllowed="move"
+                            <div id="completed-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, completedOrders,3)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
                                 <ng-container *ngFor="let order of completedOrders; let i = index">

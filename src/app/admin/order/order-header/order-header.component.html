@@ -11,7 +11,6 @@
                         <img src="assets/images/logo-dark.png" alt="" height="17">
                     </span>
                 </a>
-
                 <a class="logo logo-light">
                     <span class="logo-sm">
                         <img src="assets/images/logo-light.svg" alt="" height="22">
@@ -21,25 +20,40 @@
                     </span>
                 </a>
             </div>
-
-            <div class=" d-inline-block">
+            <div class="d-inline-block">
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                            <ng-select *ngIf="showListAccount" [ngModel]="accountList[0]?.id" [items]="accountList"
-                                bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Account'"
-                                (change)="listSites($event)"></ng-select>
+                            <ng-select #accList [items]="accountList" [searchable]="false" *ngIf="showListAccount"
+                                [ngModel]="accountList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
+                                placeholder="Select Account" (change)="listSites($event)"
+                                typeToSearchText="Type to search">
+                                <ng-template ng-header-tmp>
+                                    <div class="form-group has-feedback">
+                                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                            placeholder="Search" (input)="accList.filter($event.target.value)" />
+                                    </div>
+                                </ng-template>
+                            </ng-select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class=" d-inline-block">
+            <div class="d-inline-block">
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                            <ng-select *ngIf="showListSite" [ngModel]="sitesList[0]?.id" [items]="sitesList"
-                                bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Site'"
-                                (change)="listCategory($event.id)"></ng-select>
+                            <ng-select #sList [items]="sitesList" [searchable]="false" *ngIf="showListSite"
+                                [ngModel]="sitesList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
+                                placeholder="Select Site" (change)="listCategory($event.id)"
+                                typeToSearchText="Type to search">
+                                <ng-template ng-header-tmp>
+                                    <div class="form-group has-feedback">
+                                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                            placeholder="Search" (input)="sList.filter($event.target.value)" />
+                                    </div>
+                                </ng-template>
+                            </ng-select>
                         </div>
                     </div>
                 </div>
@@ -59,7 +73,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="d-inline-block">
                 <div class="col-lg-10 mt-4 ms-2">
                     <div class="search-box me-2 d-inline-block">
@@ -75,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class=" d-inline-block">
+            <div class="d-inline-block">
                 <div class="col-lg-10 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
@@ -86,9 +99,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </header>

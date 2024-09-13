@@ -64,6 +64,11 @@
                                                             <th>Quantity</th>
                                                             <th colspan="2">Total</th>
                                                         </tr>
+                                                        <tr *ngIf="order.length == 0">
+                                                            <th class="align-middle" style="text-align: center;"
+                                                                colspan="4">No product selected
+                                                            </th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr class="product"
@@ -142,14 +147,36 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="col-sm-12" *ngIf="showRoomDropdown">
-                                                        <ng-select [items]="rooms" bindLabel="name" bindLabel="name"
-                                                            [clearable]="false" bindValue="id" [placeholder]="'Room'"
-                                                            (change)="updateRoom($event)"></ng-select>
+                                                        <ng-select #rList [items]="rooms" [searchable]="false"
+                                                            [ngModel]="rooms[0]?.id" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" placeholder="Select Room"
+                                                            (change)="updateRoom($event)"
+                                                            typeToSearchText="Type to search">
+                                                            <ng-template ng-header-tmp>
+                                                                <div class="form-group has-feedback">
+                                                                    <input style="width: 100%;line-height: 24px"
+                                                                        type="text" class="form-control"
+                                                                        placeholder="Search"
+                                                                        (input)="rList.filter($event.target.value)" />
+                                                                </div>
+                                                            </ng-template>
+                                                        </ng-select>
                                                     </div>
                                                     <div class="col-sm-12" *ngIf="showTableDropdown">
-                                                        <ng-select [items]="tables" bindLabel="name" [clearable]="false"
-                                                            bindValue="id" [placeholder]="'Table'"
-                                                            (change)="updateTable($event)"></ng-select>
+                                                        <ng-select #tList [items]="tables" [searchable]="false"
+                                                            [ngModel]="tables[0]?.id" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" placeholder="Select Table"
+                                                            (change)="updateTable($event)"
+                                                            typeToSearchText="Type to search">
+                                                            <ng-template ng-header-tmp>
+                                                                <div class="form-group has-feedback">
+                                                                    <input style="width: 100%;line-height: 24px"
+                                                                        type="text" class="form-control"
+                                                                        placeholder="Search"
+                                                                        (input)="tList.filter($event.target.value)" />
+                                                                </div>
+                                                            </ng-template>
+                                                        </ng-select>
                                                     </div>
                                                 </div>
                                             </div>

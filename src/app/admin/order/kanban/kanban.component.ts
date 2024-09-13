@@ -24,9 +24,8 @@ export class KanbanComponent implements OnInit {
 	constructor(
 		private orderService: OrderService,
 		private socketService: SocketService,
-		private cdr: ChangeDetectorRef
-	) // private modalService: BsModalService
-	{
+		private cdr: ChangeDetectorRef // private modalService: BsModalService
+	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {

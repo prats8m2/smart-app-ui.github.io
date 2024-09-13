@@ -62,10 +62,10 @@ export class OrderService {
 		};
 
 		if (table != 0) {
-			obj.table = table;
+			obj.table = table?.id;
 		}
 		if (room != 0) {
-			obj.room = room;
+			obj.room = room?.id;
 		}
 		return this.http
 			.post(ORDER.ADD_ORDER, obj)

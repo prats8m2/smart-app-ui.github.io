@@ -55,18 +55,18 @@ export class AddOrderComponent implements OnInit {
 		private tableService: TableService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
-
 		this.orderService.productsDetails.subscribe((res) => {
 			if (res) {
 				this.products = res.products;
 				this.filteredProducts = this.products;
 				this.categoryType = res.categoryType;
 				if (this.selectedSite !== res.siteId) {
+					// clear orders
+					this.order = [];
 					//list rooms and tables
 					if (this.showListRoom) {
 						this.listRooms(res.siteId);
 					}
-
 					if (this.showListTable) {
 						this.listTables(res.siteId);
 					}
@@ -122,6 +122,9 @@ export class AddOrderComponent implements OnInit {
 		} else if (operation === '0' && this.order[index].quantity > 0) {
 			this.order[index].quantity -= 1;
 			this.totalAmountOfProduct -= this.order[index].price;
+			if (this.order[index].quantity == 0) {
+				this.delete(index);
+			}
 		}
 		this.order[index].total =
 			this.order[index].quantity * this.order[index].price;
@@ -134,37 +137,45 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	async listRooms(siteId) {
-		this.roomParams.siteId = siteId;
-		const res = await this.roomService.listRoomsPromise(this.roomParams);
-		if (res.status) {
-			this.rooms = res.data.rooms;
-		} else {
-			return null;
+		if (siteId) {
+			this.roomParams.siteId = siteId;
+			const res = await this.roomService.listRoomsPromise(this.roomParams);
+			if (res.status) {
+				this.rooms = [...res.data.rooms];
+			} else {
+				return null;
+			}
 		}
 	}
 
 	async listTables(siteId) {
-		this.tableParams.siteId = siteId;
-		const res = await this.tableService.listTablePromise(this.tableParams);
-		if (res.status) {
-			this.tables = res.data.tables;
-		} else {
-			return null;
+		if (siteId) {
+			this.tableParams.siteId = siteId;
+			const res = await this.tableService.listTablePromise(this.tableParams);
+			if (res.status) {
+				this.tables = [...res.data.tables];
+			} else {
+				return null;
+			}
 		}
 	}
 
 	updateRoom(selectedRoomId: number): void {
-		this.selectedRoom = selectedRoomId;
-		this.selectedTable = 0;
-		this.disableSaveButton = false;
-		this.selectedType = 2;
+		if (selectedRoomId) {
+			this.selectedRoom = selectedRoomId;
+			this.selectedTable = 0;
+			this.disableSaveButton = false;
+			this.selectedType = 2;
+		}
 	}
 
 	updateTable(selectedTableId: number): void {
-		this.selectedTable = selectedTableId;
-		this.selectedRoom = 0;
-		this.disableSaveButton = false;
-		this.selectedType = 1;
+		if (selectedTableId) {
+			this.selectedTable = selectedTableId;
+			this.selectedRoom = 0;
+			this.disableSaveButton = false;
+			this.selectedType = 1;
+		}
 	}
 
 	ngOnInit(): void {}
@@ -197,7 +208,6 @@ export class AddOrderComponent implements OnInit {
 
 	addOrder() {
 		//create order API
-		console.log(this.categoryType);
 		this.orderService
 			.addOrder(
 				this.selectedType,
