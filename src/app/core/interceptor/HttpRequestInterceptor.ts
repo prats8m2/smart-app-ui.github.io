@@ -16,6 +16,8 @@ import { StorageType } from 'src/app/constants/storage-type';
 import { LoadingService } from '../services/loading.service';
 import Swal from 'sweetalert2';
 import { GlobalService } from '../services/global.service';
+import { Router } from '@angular/router';
+import { EXTRA_ROUTES } from 'src/app/constants/routing';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -24,7 +26,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
 	constructor(
 		private loadingService: LoadingService,
-		private globalService: GlobalService
+		private globalService: GlobalService,
+		private router: Router
 	) {}
 
 	intercept(
@@ -67,7 +70,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 				window.location.href = '';
 				StorageService.remove(StorageType.ACCESS_TOKEN);
 			}
-
 			if (evt.body.status != true) {
 				this.handleError(evt.body.message);
 			} else {
@@ -79,14 +81,24 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 	}
 
 	private handleError(error: HttpErrorResponse): Observable<never> {
-		Swal.fire({
-			icon: 'error',
-			text: 'Some error occurred',
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 2000,
-		});
+		switch (error?.status) {
+			//route to 404 not found
+			case 404: {
+				this.router.navigateByUrl(EXTRA_ROUTES.PAGE_NOT_FOUND);
+				break;
+			}
+			//route to 403 not found
+			case 403: {
+				this.router.navigateByUrl(EXTRA_ROUTES.ACCESS_DENIED);
+				break;
+			}
+			//route to 500 not found
+			case 500: {
+				this.router.navigateByUrl(EXTRA_ROUTES.INTERNAL_SERVER_ERROR);
+				break;
+			}
+		}
+
 		return throwError(error);
 	}
 }

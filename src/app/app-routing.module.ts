@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AuthGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layouts/layout.component';
 import { AddOrderComponent } from './admin/order/add-order/add-order.component';
@@ -32,6 +31,13 @@ const routes: Routes = [
 	{
 		path: 'app',
 		loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+	},
+	{
+		path: 'error',
+		loadChildren: () =>
+			import('./miscellaneous/miscellaneous.module').then(
+				(m) => m.MiscellaneousModule
+			),
 	},
 ];
 

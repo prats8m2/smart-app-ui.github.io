@@ -88,3 +88,9 @@ export const URL_ROUTES = {
 	ORDER_HISTORY: 'app/orders',
 	ORDER_DETAILS: 'app/order',
 };
+
+export const EXTRA_ROUTES = {
+	ACCESS_DENIED: 'error/403',
+	PAGE_NOT_FOUND: 'error/404',
+	INTERNAL_SERVER_ERROR: 'error/500',
+};
