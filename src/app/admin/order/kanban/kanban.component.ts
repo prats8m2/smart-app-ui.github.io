@@ -85,6 +85,10 @@ export class KanbanComponent implements OnInit {
 			this.orders.push(order);
 			this.filterForKanban();
 		});
+
+		this.socketService.updateOrderStatus().subscribe((order) => {
+			console.log('Order updated', order);
+		});
 	}
 
 	async listOrders(siteId, type) {

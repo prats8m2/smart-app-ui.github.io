@@ -280,7 +280,7 @@ export class ListOrderComponent implements OnInit {
 					//call delete site API
 					this.orderService.cancelOrder(orderId).then((res: any) => {
 						if (res.status) {
-							this.listOrderAPI(this.selectedSite, this.orderType);
+							// this.listOrderAPI(this.selectedSite, this.orderType);
 						}
 					});
 				}

@@ -79,3 +79,19 @@
   opacity: 0.25; 
   pointer-events: none; 
 }
+
+.btn-view {
+  color: #007bff; 
+}
+
+.btn-assign {
+  color: #28a745; 
+}
+
+.btn-cancel {
+  color: #dc3545; 
+}
+
+.pointer:hover {
+  opacity: 0.8; 
+}

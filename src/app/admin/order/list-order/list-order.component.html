@@ -124,14 +124,14 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <span *ngIf="showViewOrder" class="pointer"
+                                            <span *ngIf="showViewOrder" class="pointer btn-view"
                                                 (click)="openViewModal(viewOrders, order.id)"><i
                                                     class="mdi mdi-eye font-size-18"></i></span>
-                                            <span *ngIf="showAssignOrder" class="pointer"
+                                            <span *ngIf="showAssignOrder" class="pointer btn-assign"
                                                 [class.disabled]="order?.status == 5"
                                                 (click)="openAssignModal(assignContent, order?.id)"><i
                                                     class="mdi mdi-account-plus font-size-18"></i></span>
-                                            <span class="pointer" (click)="openCancelDialogBox(order?.id)"
+                                            <span class="pointer btn-cancel" (click)="openCancelDialogBox(order?.id)"
                                                 [class.disabled]="order?.status == 5"> <i
                                                     class="mdi mdi-close font-size-18"></i></span>
                                         </div>

@@ -85,37 +85,42 @@
 </div>
 
 <ng-template #TaskContent let-order="order" let-i="index">
-    <div class="card task-box">
+    <div class="card task-box" [ngClass]="{
+        'border-blue': order?.status === 1,
+        'border-yellow': order?.status === 2,
+        'border-green': order?.status === 3
+    }">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <div class="d-flex justify-content-end">
-                    <span class="pointer mx-2" (click)="openViewModal(viewOrders, order?.id)">
+                    <span class="pointer mx-2 btn-view" (click)="openViewModal(viewOrders, order?.id)">
                         <i class="mdi mdi-eye font-size-18"></i>
                     </span>
-                    <span class="pointer mx-2" (click)="openAssignModal(assignContent, order?.id)"
-                        [class.disabled]="order?.status == 5">
+                    <span class="pointer mx-2 btn-assign" (click)="openAssignModal(assignContent, order?.id)"
+                        [class.disabled]="order?.status === 5">
                         <i class="mdi mdi-account-plus font-size-18"></i>
                     </span>
-                    <span class="pointer mx-2" (click)="openCancelDialogBox( order?.id)"
-                        [class.disabled]="order?.status == 5">
+                    <span class="pointer mx-2 btn-cancel" (click)="openCancelDialogBox(order?.id)"
+                        [class.disabled]="order?.status === 5">
                         <i class="mdi mdi-close font-size-18"></i>
                     </span>
                 </div>
-                <h5 class="font-size-15">Order ID : {{ order?.id }}</h5>
-                <span class="badge rounded-pill badge-soft-secondary font-size-12 mb-4">
+                <h5 class="font-size-15 text-black">Order ID: {{ order?.id }}</h5>
+                <span class="badge rounded-pill badge-soft-secondary font-size-12 mb-4 text-black">
                     {{order?.room ? order?.room.name : order?.table?.name}}
                 </span>
             </div>
             <div class="d-flex justify-content-between align-items-end">
                 <div class="text-start">
-                    <p class="text-muted mb-0">Created {{order?.createdOn | timeAgo}}</p>
+                    <p class="text-muted mb-0 text-black">Created {{order?.createdOn | timeAgo}}</p>
                 </div>
                 <div class="text-end">
-                    <h5 class="font-size-15 mb-1">$ {{order?.payment?.total}}</h5>
+                    <h5 class="font-size-15 mb-1 text-black">$ {{order?.payment?.total}}</h5>
                 </div>
             </div>
         </div>
     </div>
+
 </ng-template>
 
 <ng-template #viewOrders role="document" let-modal>
