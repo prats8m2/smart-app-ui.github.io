@@ -74,3 +74,8 @@
 .card-body{
   height: calc(100vh - 180px);
 }
+
+.disabled {
+  opacity: 0.25; 
+  pointer-events: none; 
+}

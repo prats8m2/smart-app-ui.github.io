@@ -15,7 +15,7 @@ export class DialogService {
 			showCancelButton: true,
 			confirmButtonColor: '#34c38f',
 			cancelButtonColor: '#f46a6a',
-			confirmButtonText: 'Yes, delete!',
+			confirmButtonText: 'Yes, delete !',
 			allowOutsideClick: false,
 			showCloseButton: true,
 		});
@@ -61,6 +61,21 @@ export class DialogService {
 			confirmButtonText: 'Okay',
 			allowOutsideClick: false,
 			showCloseButton: false,
+		});
+		return result;
+	}
+
+	openCancelOrderConfirmDialg() {
+		const result = Swal.fire({
+			title: 'Are you sure you want to cancel?',
+			text: "You won't be able to revert!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#34c38f',
+			cancelButtonColor: '#f46a6a',
+			confirmButtonText: 'Yes, cancel !',
+			allowOutsideClick: false,
+			showCloseButton: true,
 		});
 		return result;
 	}

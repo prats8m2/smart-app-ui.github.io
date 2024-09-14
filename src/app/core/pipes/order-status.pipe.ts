@@ -12,6 +12,10 @@ export class OrderStatusPipe implements PipeTransform {
 				return 'In Progress';
 			case 3:
 				return 'Completed';
+			case 4:
+				return 'Delivered';
+			case 5:
+				return 'Cancelled';
 		}
 	}
 }

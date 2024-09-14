@@ -99,6 +99,8 @@ export const ORDER = {
 	LIST_ORDER: '/order/list',
 	LIST_APP_ORDER: '/order/list/app',
 	ADD_ORDER: '/order/add',
+	ASSIGN_ORDER: '/order/assign',
+	CANCEL_ORDER: '/order/cancel',
 	UPDATE_ORDER_STATUS: '/order/update/status',
 	VIEW_ORDER: '/order/get/',
 	ASSIGN_USER_LISR: '/user/assign/list',

@@ -98,4 +98,24 @@ export class OrderService {
 				return result;
 			});
 	}
+
+	assignOrder(id: number, userId: number) {
+		return this.http
+			.patch(ORDER.ASSIGN_ORDER, { id, userId })
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
+	cancelOrder(id: number) {
+		return this.http
+			.patch(ORDER.CANCEL_ORDER, { id })
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
 }

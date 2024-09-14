@@ -9,6 +9,9 @@ import { SiteService } from '../../site/service/site.service';
 import { OrderService } from '../service/order.service';
 import { SocketService } from '../service/socket.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RoleService } from '../../role/service/role.service';
+import { StaffService } from '../../staff/service/staff.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-list-order',
@@ -24,7 +27,10 @@ export class ListOrderComponent implements OnInit {
 		private socketService: SocketService,
 		private cdr: ChangeDetectorRef,
 		private orderService: OrderService,
-		private modalService: BsModalService
+		private modalService: BsModalService,
+		private roleService: RoleService,
+		private staffService: StaffService,
+		private dialogService: DialogService
 	) {}
 
 	showListAccount: boolean =
@@ -38,6 +44,8 @@ export class ListOrderComponent implements OnInit {
 		this.globalService.checkForPermission('DELETE-ORDER');
 	showAssignOrder: boolean =
 		this.globalService.checkForPermission('LIST-STAFF');
+	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
+	showListStaff: boolean = this.globalService.checkForPermission('LIST-STAFF');
 
 	siteParams: IParams = {
 		accountId: null,
@@ -56,6 +64,18 @@ export class ListOrderComponent implements OnInit {
 		siteId: null,
 	};
 
+	roleParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
+
+	staffParams: IParams = {
+		roleId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
+
 	orderList: any = [];
 	sitesList: any = [];
 	selectedSite: number;
@@ -70,6 +90,12 @@ export class ListOrderComponent implements OnInit {
 	modalRef?: BsModalRef;
 	orderDetails: any;
 	assignUsersList: any[] = [];
+	roleList: any = [];
+	staffList: any = [];
+	selectedAccountId: number;
+	selectedRoleId: number;
+	selectedStaffId: number;
+	selectedOrderId: number;
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -78,6 +104,7 @@ export class ListOrderComponent implements OnInit {
 					this.accountList = [...res.data.users];
 					if (this.accountList.length) {
 						this.siteParams.accountId = this.accountList[0]?.account.id;
+						this.selectedAccountId = this.accountList[0]?.account.id;
 						this.listSiteAPI(this.siteParams);
 					}
 				}
@@ -114,6 +141,7 @@ export class ListOrderComponent implements OnInit {
 	changeAccountData(accountId: any) {
 		if (accountId) {
 			this.siteParams.accountId = accountId;
+			this.selectedAccountId = accountId;
 			this.listSiteAPI(this.siteParams);
 		}
 	}
@@ -132,6 +160,7 @@ export class ListOrderComponent implements OnInit {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					//call list order API
+					this.selectedSite = this.sitesList[0]?.id;
 					this.assignUsersParams.siteId = this.sitesList[0]?.id;
 					this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
 				}
@@ -183,17 +212,77 @@ export class ListOrderComponent implements OnInit {
 		});
 	}
 
-	openAssignModal(content: any) {
-		//call get order api
-		this.orderService
-			.listAssignUsersList(this.assignUsersParams)
-			.then((res) => {
-				if (res.status && res.data.length) {
-					this.assignUsersList = [...res.data];
-				} else {
-					this.assignUsersList = null;
+	openAssignModal(content: any, orderId: number) {
+		//call list roles api
+		if (content && orderId) {
+			this.roleParams.accountId = this.selectedAccountId;
+			this.listRoleAPI(this.roleParams);
+			this.selectedOrderId = orderId;
+		}
+		this.modalRef = this.modalService.show(content);
+	}
+
+	listRoleAPI(params: IParams) {
+		this.roleService.listRoles(params).subscribe((res) => {
+			if (res.status) {
+				this.roleList = [...res.data.roles];
+				if (this.roleList.length) {
+					this.selectedRoleId = this.roleList[0].id;
+					this.staffParams.roleId = this.roleList[0].id;
 				}
-				// this.modalRef = this.modalService.show(content);
+			}
+		});
+	}
+
+	listStaffAPI(params: IParams) {
+		this.staffService.listStaff(params).subscribe((res) => {
+			if (res.status) {
+				this.staffList = [...res.data.users];
+				if (this.staffList.length) {
+					this.selectedStaffId = this.staffList[0].id;
+				}
+			}
+		});
+	}
+
+	changeRoleValue(roleId: number) {
+		if (roleId) {
+			this.selectedRoleId = roleId;
+			this.staffParams.roleId = roleId;
+			this.listStaffAPI(this.staffParams);
+		}
+	}
+
+	changeStaffValue(staffId: number) {
+		if (staffId) {
+			this.selectedStaffId = staffId;
+		}
+	}
+
+	assignOrder() {
+		if (this.selectedOrderId && this.selectedStaffId) {
+			this.orderService
+				.assignOrder(this.selectedOrderId, this.selectedStaffId)
+				.then((res) => {
+					if (res.status) {
+						this.modalRef.hide();
+					}
+				});
+		}
+	}
+
+	openCancelDialogBox(orderId: number) {
+		if (orderId) {
+			this.dialogService.openCancelOrderConfirmDialg().then((result) => {
+				if (result.value) {
+					//call delete site API
+					this.orderService.cancelOrder(orderId).then((res: any) => {
+						if (res.status) {
+							this.listOrderAPI(this.selectedSite, this.orderType);
+						}
+					});
+				}
 			});
+		}
 	}
 }

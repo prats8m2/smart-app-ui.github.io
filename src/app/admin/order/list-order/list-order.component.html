@@ -33,12 +33,11 @@
                                 <ng-select #sList [items]="sitesList" [searchable]="false" placeholder="Select Site"
                                     [ngModel]="sitesList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
                                     (change)="changeSitesData($event?.id)" typeToSearchText="Type to search">
-
                                     <ng-template ng-header-tmp>
                                         <div class="form-group has-feedback">
                                             <input style="width: 100%;line-height: 24px" type="text"
                                                 class="form-control" placeholder="Search"
-                                                (input)="select1.filter($event.target.value)" />
+                                                (input)="sList.filter($event.target.value)" />
                                         </div>
                                     </ng-template>
                                 </ng-select>
@@ -87,46 +86,54 @@
                         <table class="table align-middle table-nowrap dt-responsive nowrap w-100" id="order-list">
                             <thead class="table-light table-fixed-header">
                                 <tr>
-                                    <th class="align-middle">Order ID</th>
+                                    <th class="align-middle">Order Id</th>
                                     <th class="align-middle">Location</th>
                                     <th class="align-middle">Amount</th>
+                                    <th class="align-middle">Assigned To</th>
                                     <th class="align-middle">Payment Method</th>
                                     <th class="align-middle">Status</th>
                                     <th class="align-middle">Created</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
                                 <tr *ngIf="orderList.length == 0">
-                                    <th class="align-middle" style="text-align: center;" colspan="7">No data available
+                                    <th class="align-middle" style="text-align: center;" colspan="8">No data available
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let order of orderList; let i = index;" id="o_{{order.id}}">
                                     <td>
-                                        <a class="text-body">{{order.id}}</a>
+                                        <a class="text-body">{{order?.id}}</a>
                                     </td>
-                                    <td>{{order.type | orderType}}</td>
-                                    <td>$ {{order.payment.total}}</td>
-                                    <td>{{order.payment.type | paymentType}}</td>
+                                    <td>{{order?.type | orderType}}</td>
+                                    <td>$ {{order?.payment?.total}}</td>
+                                    <td>{{order?.user?.username ? order?.user?.username : 'Not Assigned'}}</td>
+                                    <td>{{order?.payment?.type | paymentType}}</td>
                                     <td>
                                         <span class="badge badge-pill font-size-11" [ngClass]="{
                                                 'badge-soft-info': order.status == 1,
                                                 'badge-soft-warning': order.status == 2,
-                                                'badge-soft-success': order.status == 3
+                                                'badge-soft-success': order.status == 3,
+                                                'badge-soft-primary': order.status == 4,
+                                                'badge-soft-danger': order.status == 5
                                             }">
-                                            {{ order.status | orderStatus }}
+                                            {{ order?.status | orderStatus }}
                                         </span>
                                     </td>
-                                    <td>{{order.createdOn | timeAgo}}
+                                    <td>{{order?.createdOn | timeAgo}}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
                                             <span *ngIf="showViewOrder" class="pointer"
-                                                (click)="openViewModal(ViewContent, order.id)"><i
+                                                (click)="openViewModal(viewOrders, order.id)"><i
                                                     class="mdi mdi-eye font-size-18"></i></span>
                                             <span *ngIf="showAssignOrder" class="pointer"
-                                                (click)="openAssignModal(ViewContent, order.id)"><i
+                                                [class.disabled]="order?.status == 5"
+                                                (click)="openAssignModal(assignContent, order?.id)"><i
                                                     class="mdi mdi-account-plus font-size-18"></i></span>
+                                            <span class="pointer" (click)="openCancelDialogBox(order?.id)"
+                                                [class.disabled]="order?.status == 5"> <i
+                                                    class="mdi mdi-close font-size-18"></i></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -144,7 +151,7 @@
     </div>
 </div>
 
-<ng-template #ViewContent role="document" let-modal>
+<ng-template #viewOrders role="document" let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
         <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
@@ -212,6 +219,52 @@
         </div>
     </div>
     <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #assignContent role="document" let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Assign Order: <span
+                class="list-id text-primary">{{selectedOrderId}}</span></h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <h6 class="mb-2" *ngIf="showListRole">Select Role</h6>
+        <div class="row" *ngIf="showListRole">
+            <div class="col-md-6 mb-4">
+                <ng-select #rList [items]="roleList" [searchable]="false" [ngModel]="roleList[0]?.id" bindLabel="name"
+                    [clearable]="false" bindValue="id" (change)="changeRoleValue($event?.id)" placeholder="Select Role"
+                    typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                        <div class="form-group has-feedback">
+                            <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                placeholder="Search" (input)="rList.filter($event.target.value)" />
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+        <!-- Second Row -->
+        <h6 class="mb-2" *ngIf="showListStaff">Select Staff</h6>
+        <!-- Site Name -->
+        <div class="row" *ngIf="showListStaff">
+            <div class="col-md-6 mb-4">
+                <ng-select #stfList [items]="staffList" [searchable]="false" [ngModel]="staffList[0]?.id"
+                    bindLabel="username" [clearable]="false" bindValue="id" (change)="changeStaffValue($event?.id)"
+                    placeholder="Select Staff" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                        <div class="form-group has-feedback">
+                            <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                placeholder="Search" (input)="stfList.filter($event.target.value)" />
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer text-end">
+        <button class="btn btn-success" [disabled]="!selectedStaffId" (click)="assignOrder()">Assign</button>
         <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>
 </ng-template>

@@ -149,9 +149,8 @@
                                                 <div class="col-6">
                                                     <div class="col-sm-12" *ngIf="showRoomDropdown">
                                                         <ng-select #rList [items]="rooms" [searchable]="false"
-                                                            [ngModel]="rooms[0]?.id" bindLabel="name" bindValue="id"
-                                                            [clearable]="false" placeholder="Select Room"
-                                                            (change)="updateRoom($event)"
+                                                            bindLabel="name" bindValue="id" [clearable]="false"
+                                                            placeholder="Select Room" (change)="updateRoom($event)"
                                                             typeToSearchText="Type to search">
                                                             <ng-template ng-header-tmp>
                                                                 <div class="form-group has-feedback">
@@ -165,9 +164,8 @@
                                                     </div>
                                                     <div class="col-sm-12" *ngIf="showTableDropdown">
                                                         <ng-select #tList [items]="tables" [searchable]="false"
-                                                            [ngModel]="tables[0]?.id" bindLabel="name" bindValue="id"
-                                                            [clearable]="false" placeholder="Select Table"
-                                                            (change)="updateTable($event)"
+                                                            bindLabel="name" bindValue="id" [clearable]="false"
+                                                            placeholder="Select Table" (change)="updateTable($event)"
                                                             typeToSearchText="Type to search">
                                                             <ng-template ng-header-tmp>
                                                                 <div class="form-group has-feedback">

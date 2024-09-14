@@ -67,9 +67,6 @@ export class AddOrderComponent implements OnInit {
 					if (this.showListRoom) {
 						this.listRooms(res.siteId);
 					}
-					if (this.showListTable) {
-						this.listTables(res.siteId);
-					}
 				}
 				this.selectedSite = res.siteId;
 			}
@@ -204,6 +201,12 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	onChangeRadio(value: number) {
+		if (value == 1 && this.showListRoom) {
+			this.listRooms(this.selectedSite);
+		}
+		if (value == 2 && this.showListTable) {
+			this.listTables(this.selectedSite);
+		}
 		this.showRoomDropdown = value === 1;
 		this.showTableDropdown = !this.showRoomDropdown;
 	}
