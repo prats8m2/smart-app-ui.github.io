@@ -91,7 +91,7 @@ export class KanbanComponent implements OnInit {
 		});
 	}
 
-	async listOrders(siteId, type) {
+	async listOrders(siteId: any, type: number) {
 		const orderParams: IParams = {
 			siteId,
 			type: type,
@@ -214,6 +214,18 @@ export class KanbanComponent implements OnInit {
 					});
 				}
 			});
+		}
+	}
+
+	assignOrder() {
+		if (this.selectedOrderId && this.selectedStaffId) {
+			this.orderService
+				.assignOrder(this.selectedOrderId, this.selectedStaffId)
+				.then((res) => {
+					if (res.status) {
+						this.modalRef.hide();
+					}
+				});
 		}
 	}
 }

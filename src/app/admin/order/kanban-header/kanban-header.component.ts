@@ -16,9 +16,20 @@ export class KanbanHeaderComponent {
 	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
 	accountList: any = [];
 	sitesList: any = [];
-	selectedOrderType: number = 1; // Default to food
+	selectedOrderType: number = 1;
 	selectedSiteId: number;
 	selectedAccountId: number;
+
+	accountParams: IParams = {
+		limit: 100,
+		pageNumber: 1,
+	};
+
+	siteParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
 	constructor(
 		private orderService: OrderService,
 		private globalService: GlobalService,
@@ -28,46 +39,43 @@ export class KanbanHeaderComponent {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
 
-	async ngOnInit() {
+	ngOnInit() {
 		document.body.setAttribute('data-bs-theme', 'dark');
-		// this.orderService.productsDetails.next(null);
-		//check for account permission
+
 		if (this.showListAccount) {
-			this.accountList = await this.listAccounts();
-			if (this.accountList?.length) {
-				this.selectedAccountId = this.accountList[0]?.id;
-				this.listSiteAPI(this.accountList[0]);
-			}
+			this.listAccountsAPI();
 		} else {
 			this.listSiteAPI(null);
 		}
 	}
 
-	async listAccounts() {
-		const accountParams: IParams = {
-			limit: 100,
-			pageNumber: 1,
-		};
-		const res = await this.accountService.listAccounts(accountParams);
-		if (res.status) {
-			return res.data.accounts;
-		} else {
-			return null;
+	listAccountsAPI() {
+		this.accountService.listUser(this.accountParams).subscribe((res) => {
+			if (res.status) {
+				this.accountList = [...res.data.users];
+				if (this.accountList.length) {
+					this.siteParams.accountId = this.accountList[0]?.account?.id;
+					this.selectedAccountId = this.accountList[0]?.account?.id;
+					this.listSiteAPI(this.siteParams);
+				}
+			}
+		});
+	}
+
+	changeSitesData(accountId: any) {
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
 		}
 	}
 
-	listSiteAPI(account) {
-		const siteParams: IParams = {
-			limit: 100,
-			pageNumber: 1,
-			accountId: account?.id,
-		};
-		this.siteService.listSites(siteParams).subscribe((res) => {
+	listSiteAPI(params: IParams) {
+		this.siteService.listSites(params).subscribe((res) => {
 			if (res.status) {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					this.selectedSiteId = this.sitesList[0]?.id;
-					this.listOrders(this.selectedSiteId);
+					this.listOrders(this.selectedSiteId, this.selectedOrderType);
 				}
 			}
 		});
@@ -75,16 +83,16 @@ export class KanbanHeaderComponent {
 
 	onOrderTypeChange(orderType: number): void {
 		this.selectedOrderType = orderType;
-		this.listOrders(null);
+		this.listOrders(this.selectedSiteId, this.selectedOrderType);
 	}
 
-	listOrders(siteId) {
+	listOrders(siteId: number, orderType: number) {
 		if (siteId) {
 			this.selectedSiteId = siteId;
 			this.orderService.ordersChange.next({
 				accountId: this.selectedAccountId,
 				siteId: this.selectedSiteId,
-				orderType: this.selectedOrderType,
+				orderType: orderType || this.selectedOrderType,
 			});
 		}
 	}

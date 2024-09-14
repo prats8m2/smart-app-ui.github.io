@@ -83,7 +83,7 @@
         </div>
     </div>
 </div>
-
+<!--FOR ORDER CARD-->
 <ng-template #TaskContent let-order="order" let-i="index">
     <div class="card task-box" [ngClass]="{
         'border-blue': order?.status === 1,
@@ -120,9 +120,8 @@
             </div>
         </div>
     </div>
-
 </ng-template>
-
+<!--FOR VIEW MODAL-->
 <ng-template #viewOrders role="document" let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
@@ -143,6 +142,11 @@
                 class="orderlist-customer text-primary">{{orderDetails?.table?.name}}</span>
             <span *ngIf="orderDetails.room && !orderDetails.table "
                 class="orderlist-customer text-primary">{{orderDetails?.room?.name}}</span>
+        </p>
+        <p class="mb-4">
+            Assigned:
+            <span class="orderlist-customer text-primary">{{orderDetails?.user ? orderDetails?.user?.username :'Not
+                Assigned'}}</span>
         </p>
         <div class="table-responsive">
             <table class="table table-centered table-nowrap">
@@ -194,7 +198,7 @@
         <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>
 </ng-template>
-
+<!--FOR ASSIGN MODAL-->
 <ng-template #assignContent role="document" let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Assign Order: <span

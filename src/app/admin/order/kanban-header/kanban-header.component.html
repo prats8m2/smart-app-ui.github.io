@@ -22,22 +22,37 @@
             </div>
             <div class=" d-inline-block">
                 <div class="col-lg-15 mt-3 ms-2">
-                    <div class="search-box me-2 mb-2 d-inline-block">
+                    <div class="me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                            <ng-select *ngIf="showListAccount" [ngModel]="accountList[0]?.id" [items]="accountList"
-                                bindLabel="name" [clearable]="false" bindValue="id" [placeholder]="'Account'"
-                                (change)="listSiteAPI($event)"></ng-select>
+                            <ng-select #accList [items]="accountList" [searchable]="false"
+                                [ngModel]="accountList[0]?.account?.id" bindLabel="account.name" bindValue="account.id"
+                                [clearable]="false" placeholder="Select Account"
+                                (change)="changeSitesData($event?.account?.id)" typeToSearchText="Type to search">
+                                <ng-template ng-header-tmp>
+                                    <div class="form-group has-feedback">
+                                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                            placeholder="Search" (input)="accList.filter($event.target.value)" />
+                                    </div>
+                                </ng-template>
+                            </ng-select>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-inline-block" *ngIf="showListSite && sitesList.length > 1">
                 <div class="col-lg-15 mt-3 ms-2">
-                    <div class="search-box me-2 mb-2 d-inline-block">
+                    <div class="me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                            <ng-select [items]="sitesList" bindLabel="name" [clearable]="false" bindValue="id"
-                                [ngModel]="sitesList[0]?.id" (change)="listOrders($event?.id)"
-                                [placeholder]="'Site'"></ng-select>
+                            <ng-select #sList [items]="sitesList" [searchable]="false" [ngModel]="sitesList[0]?.id"
+                                bindLabel="name" bindValue="id" [clearable]="false" placeholder="Select Site"
+                                (change)="listOrders($event?.id)" typeToSearchText="Type to search">
+                                <ng-template ng-header-tmp>
+                                    <div class="form-group has-feedback">
+                                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                            placeholder="Search" (input)="sList.filter($event.target.value)" />
+                                    </div>
+                                </ng-template>
+                            </ng-select>
                         </div>
                     </div>
                 </div>
@@ -48,7 +63,7 @@
                         <div class="position-relative">
                             <div class="form-check form-radio-outline form-radio-primary">
                                 <input class="form-check-input" type="radio" name="orderType" id="formRadioFood"
-                                    value="1" (change)="onOrderTypeChange(1)" checked>
+                                    value="1" (change)="onOrderTypeChange(1)" checked [disabled]="!sitesList.length">
                                 <label class="form-check-label" for="formRadioFood">
                                     Food
                                 </label>
@@ -63,7 +78,7 @@
                         <div class="position-relative">
                             <div class="form-check form-radio-outline form-radio-success">
                                 <input class="form-check-input" type="radio" name="orderType" id="formRadioAmenities"
-                                    value="2" (change)="onOrderTypeChange(2)">
+                                    value="2" (change)="onOrderTypeChange(2)" [disabled]="!sitesList.length">
                                 <label class="form-check-label" for="formRadioAmenities">
                                     Amenities
                                 </label>
