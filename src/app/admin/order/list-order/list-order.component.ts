@@ -115,6 +115,9 @@ export class ListOrderComponent implements OnInit {
 			this.socketService.onNewOrder().subscribe((order) => {
 				this.orders.push(order);
 			});
+			this.socketService.updateOrder().subscribe((order) => {
+				console.log('Order updated', order);
+			});
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
