@@ -5,6 +5,10 @@ import { IParams } from 'src/app/core/interface/params';
 import { SocketService } from '../service/socket.service';
 import { Subscription, interval } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RoleService } from '../../role/service/role.service';
+import { StaffService } from '../../staff/service/staff.service';
+import { GlobalService } from 'src/app/core/services/global.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 
 @Component({
 	selector: 'app-kanban',
@@ -12,27 +16,66 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 	styleUrls: ['./kanban.component.scss'],
 })
 export class KanbanComponent implements OnInit {
-	orders: any = [];
-
-	newOrders: any = [];
-	inProgresOrders: any = [];
-	completedOrders: any = [];
-	private subscription: Subscription;
-	orderDetails: any;
-	// modalRef?: BsModalRef;
-
 	constructor(
 		private orderService: OrderService,
 		private socketService: SocketService,
-		private cdr: ChangeDetectorRef // private modalService: BsModalService
+		private cdr: ChangeDetectorRef,
+		private modalService: BsModalService,
+		private roleService: RoleService,
+		private staffService: StaffService,
+		private globalService: GlobalService,
+		private dialogService: DialogService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {
+				this.selectedAccountId = res?.accountId;
 				this.listOrders(res.siteId, res.orderType);
 			}
 		});
 	}
+
+	showListAccount: boolean =
+		this.globalService.checkForPermission('LIST-ACCOUNT');
+	showListSite: boolean = this.globalService.checkForPermission('LIST-SITE');
+	showAddOrder: boolean = this.globalService.checkForPermission('ADD-ORDER');
+	showViewOrder: boolean = this.globalService.checkForPermission('VIEW-ORDER');
+	showEditOrder: boolean =
+		this.globalService.checkForPermission('UPDATE-ORDER');
+	showDeleteOrder: boolean =
+		this.globalService.checkForPermission('DELETE-ORDER');
+	showAssignOrder: boolean =
+		this.globalService.checkForPermission('LIST-STAFF');
+	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
+	showListStaff: boolean = this.globalService.checkForPermission('LIST-STAFF');
+
+	orders: any = [];
+	newOrders: any = [];
+	inProgresOrders: any = [];
+	roleList: any = [];
+	staffList: any = [];
+	completedOrders: any = [];
+	private subscription: Subscription;
+	orderDetails: any;
+	modalRef?: BsModalRef;
+	selectedAccountId: number;
+	selectedRoleId: number;
+	selectedStaffId: number;
+	selectedOrderId: number;
+	selectedSiteId: number;
+	selectedTypeId: number;
+
+	roleParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
+
+	staffParams: IParams = {
+		roleId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
 
 	ngOnInit(): void {
 		this.subscription = interval(60000).subscribe(() => {
@@ -51,6 +94,8 @@ export class KanbanComponent implements OnInit {
 			limit: 100,
 			pageNumber: 1,
 		};
+		this.selectedSiteId = siteId;
+		this.selectedTypeId = type;
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
 			this.orders = res.data.orders;
@@ -108,7 +153,63 @@ export class KanbanComponent implements OnInit {
 			} else {
 				this.orderDetails = null;
 			}
-			// this.modalRef = this.modalService.show(content);
+			this.modalRef = this.modalService.show(content);
 		});
+	}
+
+	openAssignModal(content: any, orderId: number) {
+		//call list roles api
+		if (content && orderId) {
+			this.roleParams.accountId = this.selectedAccountId;
+			this.listRoleAPI(this.roleParams);
+			this.selectedOrderId = orderId;
+		}
+		this.modalRef = this.modalService.show(content);
+	}
+
+	listRoleAPI(params: IParams) {
+		this.roleService.listRoles(params).subscribe((res) => {
+			if (res.status) {
+				this.roleList = [...res.data.roles];
+				if (this.roleList.length) {
+					this.selectedRoleId = this.roleList[0].id;
+					this.staffParams.roleId = this.roleList[0].id;
+				}
+			}
+		});
+	}
+
+	listStaffAPI(params: IParams) {
+		this.staffService.listStaff(params).subscribe((res) => {
+			if (res.status) {
+				this.staffList = [...res.data.users];
+				if (this.staffList.length) {
+					this.selectedStaffId = this.staffList[0].id;
+				}
+			}
+		});
+	}
+
+	changeRoleValue(roleId: number) {
+		if (roleId) {
+			this.selectedRoleId = roleId;
+			this.staffParams.roleId = roleId;
+			this.listStaffAPI(this.staffParams);
+		}
+	}
+
+	openCancelDialogBox(orderId: number) {
+		if (orderId) {
+			this.dialogService.openCancelOrderConfirmDialg().then((result) => {
+				if (result.value) {
+					//call cancel order  API
+					this.orderService.cancelOrder(orderId).then((res: any) => {
+						if (res.status) {
+							this.listOrders(this.selectedSiteId, this.selectedTypeId);
+						}
+					});
+				}
+			});
+		}
 	}
 }

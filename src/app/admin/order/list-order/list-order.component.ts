@@ -192,7 +192,6 @@ export class ListOrderComponent implements OnInit {
 		}
 	}
 
-	//KANBAN BOARD CODE
 	changeCategoryType(type: any) {
 		this.orderType = type;
 		if (this.sitesList.length) {

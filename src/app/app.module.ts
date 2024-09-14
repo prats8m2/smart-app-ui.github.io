@@ -27,6 +27,7 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { HttpRequestInterceptor } from './core/interceptor/HttpRequestInterceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function createTranslateLoader(http: HttpClient): any {
 	return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -55,6 +56,7 @@ export function createTranslateLoader(http: HttpClient): any {
 		ToastrModule.forRoot(),
 		NgbDatepickerModule,
 		NgSelectModule,
+		ModalModule.forRoot(),
 	],
 	bootstrap: [AppComponent],
 	providers: [

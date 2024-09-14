@@ -10,10 +10,11 @@
                             <div id="new-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, newOrders,1)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
-                                <div *ngIf="!inProgresOrders.length">
+                                <div class="text-center label-text d-flex align-items-center justify-content-center"
+                                    *ngIf="!newOrders.length">
                                     No New Orders
                                 </div>
-                                <ng-container *ngIf="inProgresOrders.length">
+                                <ng-container *ngIf="newOrders.length">
                                     <ng-container *ngFor="let order of newOrders; let i = index">
                                         <div [dndDraggable]="order" dndEffectAllowed="move"
                                             (dndMoved)="onDropCompleted(order ,newOrders)">
@@ -34,13 +35,19 @@
                             <div id="inprogress-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, inProgresOrders,2)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
-                                <ng-container *ngFor="let order of inProgresOrders; let i = index">
-                                    <div [dndDraggable]="order" dndEffectAllowed="move"
-                                        (dndMoved)="onDropCompleted(order, inProgresOrders)">
-                                        <ng-template [ngTemplateOutlet]="TaskContent"
-                                            [ngTemplateOutletContext]="{order:order, index: i}">
-                                        </ng-template>
-                                    </div>
+                                <div class="text-center label-text d-flex align-items-center justify-content-center"
+                                    *ngIf="!inProgresOrders.length">
+                                    No in progress orders
+                                </div>
+                                <ng-container *ngIf="inProgresOrders.length">
+                                    <ng-container *ngFor="let order of inProgresOrders; let i = index">
+                                        <div [dndDraggable]="order" dndEffectAllowed="move"
+                                            (dndMoved)="onDropCompleted(order, inProgresOrders)">
+                                            <ng-template [ngTemplateOutlet]="TaskContent"
+                                                [ngTemplateOutletContext]="{order:order, index: i}">
+                                            </ng-template>
+                                        </div>
+                                    </ng-container>
                                 </ng-container>
                             </div>
                         </div>
@@ -53,13 +60,20 @@
                             <div id="completed-task" class="pb-1 dropzone-box" dndDropzone dndEffectAllowed="move"
                                 (dndDrop)="onDrop($event, completedOrders,3)">
                                 <div class="dndPlaceholder" dndPlaceholderRef></div>
-                                <ng-container *ngFor="let order of completedOrders; let i = index">
-                                    <div [dndDraggable]="order" dndEffectAllowed="move"
-                                        (dndMoved)="onDropCompleted(order,completedOrders)">
-                                        <ng-template [ngTemplateOutlet]="TaskContent"
-                                            [ngTemplateOutletContext]="{order:order, index: i}">
-                                        </ng-template>
-                                    </div>
+                                <div class="text-center label-text d-flex align-items-center justify-content-center"
+                                    *ngIf="!completedOrders.length">
+                                    No completed orders
+                                </div>
+                                <ng-container *ngIf="completedOrders.length">
+
+                                    <ng-container *ngFor="let order of completedOrders; let i = index">
+                                        <div [dndDraggable]="order" dndEffectAllowed="move"
+                                            (dndMoved)="onDropCompleted(order,completedOrders)">
+                                            <ng-template [ngTemplateOutlet]="TaskContent"
+                                                [ngTemplateOutletContext]="{order:order, index: i}">
+                                            </ng-template>
+                                        </div>
+                                    </ng-container>
                                 </ng-container>
                             </div>
                         </div>
@@ -71,22 +85,30 @@
 </div>
 
 <ng-template #TaskContent let-order="order" let-i="index">
-    <div id="{{order.id}}" class="card task-box">
+    <div class="card task-box">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
-                <div class="float-end">
-                    <span class="pointer" (click)="openViewModal(ViewContent, order.id)"><i
-                            class="mdi mdi-eye font-size-18"></i></span>
+                <div class="d-flex justify-content-end">
+                    <span class="pointer mx-2" (click)="openViewModal(viewOrders, order?.id)">
+                        <i class="mdi mdi-eye font-size-18"></i>
+                    </span>
+                    <span class="pointer mx-2" (click)="openAssignModal(assignContent, order?.id)"
+                        [class.disabled]="order?.status == 5">
+                        <i class="mdi mdi-account-plus font-size-18"></i>
+                    </span>
+                    <span class="pointer mx-2" (click)="openCancelDialogBox( order?.id)"
+                        [class.disabled]="order?.status == 5">
+                        <i class="mdi mdi-close font-size-18"></i>
+                    </span>
                 </div>
-                <h5 class="font-size-15">Order ID : {{ order.id }}
-                </h5>
+                <h5 class="font-size-15">Order ID : {{ order?.id }}</h5>
                 <span class="badge rounded-pill badge-soft-secondary font-size-12 mb-4">
-                    {{order.room? order.room.name : order.table.name}}
+                    {{order?.room ? order?.room.name : order?.table?.name}}
                 </span>
             </div>
             <div class="d-flex justify-content-between align-items-end">
                 <div class="text-start">
-                    <p class="text-muted mb-0">Created {{order.createdOn | timeAgo}}</p>
+                    <p class="text-muted mb-0">Created {{order?.createdOn | timeAgo}}</p>
                 </div>
                 <div class="text-end">
                     <h5 class="font-size-15 mb-1">$ {{order?.payment?.total}}</h5>
@@ -96,7 +118,7 @@
     </div>
 </ng-template>
 
-<ng-template #ViewContent role="document" let-modal>
+<ng-template #viewOrders role="document" let-modal>
     <div class="modal-header">
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
         <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
@@ -108,14 +130,14 @@
         </p>
         <p class="mb-4">
             Billing Name:
-            <span class="orderlist-customer text-primary">{{orderDetails.user}}</span>
+            <span class="orderlist-customer text-primary">{{orderDetails?.user?.name}}</span>
         </p>
         <p class="mb-4">
             Location:
             <span *ngIf="orderDetails.table && !orderDetails.room"
-                class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
+                class="orderlist-customer text-primary">{{orderDetails?.table?.name}}</span>
             <span *ngIf="orderDetails.room && !orderDetails.table "
-                class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
+                class="orderlist-customer text-primary">{{orderDetails?.room?.name}}</span>
         </p>
         <div class="table-responsive">
             <table class="table table-centered table-nowrap">
@@ -127,7 +149,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let product of orderDetails.products; let i = index;" id="prod_{{product.id}}">
                         <th scope="row">
                             <div>
                                 <img src="assets/images/product/img-7.png" alt class="avatar-sm" />
@@ -135,25 +157,11 @@
                         </th>
                         <td>
                             <div>
-                                <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                <p class="text-muted mb-0">$ 225 x 1</p>
+                                <h5 class="text-truncate font-size-14">{{product?.name}}</h5>
+                                <p class="text-muted mb-0">$ {{product.price}} x {{product.quantity}}</p>
                             </div>
                         </td>
-                        <td>$ 255</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div>
-                                <img src="assets/images/product/img-4.png" alt class="avatar-sm" />
-                            </div>
-                        </th>
-                        <td>
-                            <div>
-                                <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
-                                <p class="text-muted mb-0">$ 145 x 1</p>
-                            </div>
-                        </td>
-                        <td>$ 145</td>
+                        <td>$ {{product.price * product.quantity}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -178,6 +186,52 @@
         </div>
     </div>
     <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #assignContent role="document" let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Assign Order: <span
+                class="list-id text-primary">{{selectedOrderId}}</span></h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+    </div>
+    <div class="modal-body">
+        <h6 class="mb-2" *ngIf="showListRole">Select Role</h6>
+        <div class="row" *ngIf="showListRole">
+            <div class="col-md-6 mb-4">
+                <ng-select #rList [items]="roleList" [searchable]="false" [ngModel]="roleList[0]?.id" bindLabel="name"
+                    [clearable]="false" bindValue="id" (change)="changeRoleValue($event?.id)" placeholder="Select Role"
+                    typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                        <div class="form-group has-feedback">
+                            <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                placeholder="Search" (input)="rList.filter($event.target.value)" />
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+        <!-- Second Row -->
+        <h6 class="mb-2" *ngIf="showListStaff">Select Staff</h6>
+        <!-- Site Name -->
+        <div class="row" *ngIf="showListStaff">
+            <div class="col-md-6 mb-4">
+                <ng-select #stfList [items]="staffList" [searchable]="false" [ngModel]="staffList[0]?.id"
+                    bindLabel="username" [clearable]="false" bindValue="id" (change)="changeStaffValue($event?.id)"
+                    placeholder="Select Staff" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                        <div class="form-group has-feedback">
+                            <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                                placeholder="Search" (input)="stfList.filter($event.target.value)" />
+                        </div>
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer text-end">
+        <button class="btn btn-success" [disabled]="!selectedStaffId" (click)="assignOrder()">Assign</button>
         <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>
 </ng-template>

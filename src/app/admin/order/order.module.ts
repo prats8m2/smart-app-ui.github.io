@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewOrderComponent } from './view-order/view-order.component';
 import { ListOrderComponent } from './list-order/list-order.component';

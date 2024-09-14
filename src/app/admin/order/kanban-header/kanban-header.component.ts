@@ -18,6 +18,7 @@ export class KanbanHeaderComponent {
 	sitesList: any = [];
 	selectedOrderType: number = 1; // Default to food
 	selectedSiteId: number;
+	selectedAccountId: number;
 	constructor(
 		private orderService: OrderService,
 		private globalService: GlobalService,
@@ -34,10 +35,11 @@ export class KanbanHeaderComponent {
 		if (this.showListAccount) {
 			this.accountList = await this.listAccounts();
 			if (this.accountList?.length) {
-				await this.listSites(this.accountList[0]);
+				this.selectedAccountId = this.accountList[0]?.id;
+				this.listSiteAPI(this.accountList[0]);
 			}
 		} else {
-			await this.listSites(null);
+			this.listSiteAPI(null);
 		}
 	}
 
@@ -54,22 +56,21 @@ export class KanbanHeaderComponent {
 		}
 	}
 
-	async listSites(account) {
+	listSiteAPI(account) {
 		const siteParams: IParams = {
 			limit: 100,
 			pageNumber: 1,
 			accountId: account?.id,
 		};
-		const res = await this.siteService.listSitesPromise(siteParams);
-		if (res.status) {
-			this.sitesList = res.data.sites;
-			if (this.sitesList.length) {
-				this.selectedSiteId = this.sitesList[0]?.id;
-				this.listOrders(this.selectedSiteId);
+		this.siteService.listSites(siteParams).subscribe((res) => {
+			if (res.status) {
+				this.sitesList = [...res.data.sites];
+				if (this.sitesList.length) {
+					this.selectedSiteId = this.sitesList[0]?.id;
+					this.listOrders(this.selectedSiteId);
+				}
 			}
-		} else {
-			return null;
-		}
+		});
 	}
 
 	onOrderTypeChange(orderType: number): void {
@@ -78,11 +79,14 @@ export class KanbanHeaderComponent {
 	}
 
 	listOrders(siteId) {
-		if (siteId) this.selectedSiteId = siteId;
-		this.orderService.ordersChange.next({
-			siteId: this.selectedSiteId,
-			orderType: this.selectedOrderType,
-		});
+		if (siteId) {
+			this.selectedSiteId = siteId;
+			this.orderService.ordersChange.next({
+				accountId: this.selectedAccountId,
+				siteId: this.selectedSiteId,
+				orderType: this.selectedOrderType,
+			});
+		}
 	}
 
 	onSearch() {

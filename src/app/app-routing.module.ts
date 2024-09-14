@@ -6,7 +6,7 @@ import { LayoutComponent } from './layouts/layout.component';
 import { AddOrderComponent } from './admin/order/add-order/add-order.component';
 import { KanbanComponent } from './admin/order/kanban/kanban.component';
 import { RedirectGuard } from './core/guards/redirect.guard';
-import { HomeComponent } from './user/home/home.component';
+
 const routes: Routes = [
 	{
 		path: '',
@@ -31,8 +31,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'app',
-		loadChildren: () =>
-			import('./user/user.module').then((m) => m.UserModule),
+		loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
 	},
 ];
 
