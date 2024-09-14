@@ -119,15 +119,17 @@ export class AddOrderComponent implements OnInit {
 		if (operation === '1') {
 			this.order[index].quantity += 1;
 			this.totalAmountOfProduct += this.order[index].price;
-		} else if (operation === '0' && this.order[index].quantity > 0) {
+		} else if (operation === '0' && this.order[index]?.quantity > 0) {
 			this.order[index].quantity -= 1;
 			this.totalAmountOfProduct -= this.order[index].price;
-			if (this.order[index].quantity == 0) {
+			if (this.order[index]?.quantity == 0) {
 				this.delete(index);
 			}
 		}
-		this.order[index].total =
-			this.order[index].quantity * this.order[index].price;
+		if (this.order[index]) {
+			this.order[index].total =
+				this.order[index]?.quantity * this.order[index]?.price;
+		}
 	}
 
 	delete(index): void {
@@ -142,6 +144,9 @@ export class AddOrderComponent implements OnInit {
 			const res = await this.roomService.listRoomsPromise(this.roomParams);
 			if (res.status) {
 				this.rooms = [...res.data.rooms];
+				if (this.rooms.length) {
+					this.updateRoom(this.rooms[0]?.id);
+				}
 			} else {
 				return null;
 			}
@@ -154,6 +159,10 @@ export class AddOrderComponent implements OnInit {
 			const res = await this.tableService.listTablePromise(this.tableParams);
 			if (res.status) {
 				this.tables = [...res.data.tables];
+
+				if (this.tables.length) {
+					this.updateTable(this.tables[0]?.id);
+				}
 			} else {
 				return null;
 			}

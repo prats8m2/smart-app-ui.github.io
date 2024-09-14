@@ -76,17 +76,18 @@
                                                             <td>
                                                                 <h5 class="font-size-14 text-truncate"><a
                                                                         class="text-dark">{{
-                                                                        product.name
+                                                                        product?.name
                                                                         }}</a></h5>
                                                             </td>
-                                                            <td>$<span class="product-price"> {{ product.price }}</span>
+                                                            <td>$<span class="product-price"> {{ product?.price
+                                                                    }}</span>
                                                             </td>
                                                             <td>
                                                                 <div class="me-3" style="width: 120px;">
                                                                     <div class="input-group">
                                                                         <div class="input-group-prepend"><button
                                                                                 type="button" class="btn btn-primary"
-                                                                                (click)="calculateQty('1',product.quantity,i)">+</button>
+                                                                                (click)="calculateQty('1',product?.quantity , i)">+</button>
                                                                         </div>
                                                                         <input name="demo_vertical"
                                                                             value="{{product.quantity}}" type="text"
@@ -94,12 +95,12 @@
                                                                             readonly>
                                                                         <div class="input-group-append"><button
                                                                                 type="button" class="btn btn-primary"
-                                                                                (click)="calculateQty('0',product.quantity,i)">-</button>
+                                                                                (click)="calculateQty('0', product?.quantity , i)">-</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>$<span class="product-line-price">{{ product.total
+                                                            <td>$<span class="product-line-price">{{ product?.total
                                                                     }}</span>
                                                             </td>
                                                             <td>
