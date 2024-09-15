@@ -111,4 +111,22 @@ export class AccountService {
 				return result;
 			});
 	}
+
+	listCountries(): Observable<any> {
+		return this.http.get(USER.LIST_COUNTRIES).pipe(
+			map((response: any) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			})
+		);
+	}
+
+	listStates(code: any): Observable<any> {
+		return this.http.get(USER.LIST_STATES + code).pipe(
+			map((response: any) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			})
+		);
+	}
 }

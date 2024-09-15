@@ -40,8 +40,15 @@ export class SiteService {
 	}
 
 	addSite(siteForm: FormGroup) {
-		const { account, siteName, siteAddress, type, wifiDetails } =
-			siteForm.value;
+		const {
+			account,
+			siteName,
+			siteAddress,
+			type,
+			wifiDetails,
+			country,
+			state,
+		} = siteForm.value;
 
 		return this.http
 			.post(SITE.ADD_SITE, {
@@ -50,6 +57,8 @@ export class SiteService {
 				type: parseInt(type),
 				address: siteAddress,
 				wifiDetails: wifiDetails,
+				country,
+				state,
 			})
 			.toPromise()
 			.then((response) => {

@@ -9,6 +9,8 @@ export const USER = {
 	VIEW_USER: '/user/get/',
 	UPDATE_USER: '/user/update',
 	LIST_ACCOUNTS: '/user/accounts/list',
+	LIST_COUNTRIES: '/user/countries',
+	LIST_STATES: '/user/states/',
 };
 
 export const SITE = {

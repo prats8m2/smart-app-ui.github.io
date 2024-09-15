@@ -54,6 +54,34 @@
               </div>
               <div class="row">
                 <div class="col-md-6 mb-4">
+                  <label for="siteCountry">Site Country</label>
+                  <ng-select #cList [items]="countriesList" [searchable]="false" [ngModel]="countriesList[0]?.code"
+                    bindLabel="name" bindValue="code" [clearable]="false" formControlName="country"
+                    (change)="listStatesAPI($event?.code)" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="cList.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <label for="siteCountry">Site State</label>
+                  <ng-select #stList [items]="stateList" [searchable]="false" [ngModel]="stateList[0]?.code"
+                    bindLabel="name" bindValue="code" [clearable]="false" formControlName="state"
+                    typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="stList.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
                   <label for="siteType">Site Type</label>
                   <ng-select #siteType [items]="siteTypes" [searchable]="false" bindLabel="label" bindValue="id"
                     [clearable]="false" formControlName="type" [ngModel]="siteTypes[0]?.id"
@@ -223,7 +251,8 @@
                       (click)="toggle('roomService')" formControlName="roomService"
                       [checked]="this.siteSettingForm.get('roomService').value">
                     <label class="form-check-label"
-                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('roomService').value ?
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('roomService').value
+                      ?
                       'Enable' : 'Disable'}}</label>
                   </div>
                 </div>
@@ -247,7 +276,8 @@
                       (click)="toggle('orderHistory')" formControlName="orderHistory"
                       [checked]="this.siteSettingForm.get('orderHistory').value">
                     <label class="form-check-label"
-                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('orderHistory').value ?
+                      for="SwitchCheckSizelg">{{this.siteSettingForm.get('orderHistory').value
+                      ?
                       'Enable' : 'Disable'}}</label>
                   </div>
                 </div>
