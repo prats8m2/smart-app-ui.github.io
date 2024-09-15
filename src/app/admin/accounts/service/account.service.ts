@@ -23,6 +23,7 @@ export class AccountService {
 			password,
 			accountName,
 			status,
+			mobile,
 		} = userForm.getRawValue();
 
 		return this.http
@@ -33,6 +34,7 @@ export class AccountService {
 				accountName: accountName,
 				firstName: firstName,
 				lastName: lastName,
+				mobile,
 				status: status ? 1 : 0,
 			})
 			.toPromise()

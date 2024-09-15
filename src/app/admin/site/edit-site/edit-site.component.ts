@@ -63,6 +63,9 @@ export class EditSiteComponent {
 				account: [null],
 				siteName: ['', SITE_NAME_VALIDATION],
 				siteAddress: ['', SITE_ADDRESS_VALIDATION],
+				country: [null],
+				state: [null],
+				mapLocation: [null],
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
 				wifiDetails: new FormArray([]),
 			});
@@ -73,6 +76,9 @@ export class EditSiteComponent {
 				account: [null],
 				siteName: ['Site-' + randomNumber, SITE_NAME_VALIDATION],
 				siteAddress: ['Address-' + randomNumber, SITE_ADDRESS_VALIDATION],
+				country: [null],
+				state: [null],
+				mapLocation: [null],
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
 				wifiDetails: new FormArray([]),
 			});
@@ -159,17 +165,32 @@ export class EditSiteComponent {
 			this.siteForm.value.id = params['id'];
 			this.siteService.viewSite(siteId).then((res) => {
 				if (res.status === true) {
-					const { id, account, name, address, type, wifi } = res.data;
+					const {
+						id,
+						account,
+						name,
+						address,
+						type,
+						wifi,
+						country,
+						state,
+						mapLocation,
+					} = res.data;
 					const siteForm = this.siteForm;
 
 					this.siteData = res.data;
 					siteForm.get('account').disable();
+					siteForm.get('country').disable();
+					siteForm.get('state').disable();
 					siteForm.patchValue({
 						id,
 						account: account.name,
 						siteName: name,
 						siteAddress: address,
 						type,
+						country,
+						state,
+						mapLocation,
 					});
 					this.siteWifiDetails = [...res.data.wifi];
 					this.initializeWifiDetails(wifi);

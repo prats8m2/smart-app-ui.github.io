@@ -55,8 +55,8 @@
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <label for="siteCountry">Site Country</label>
-                  <ng-select #cList [items]="countriesList" [searchable]="false" [ngModel]="countriesList[0]?.code"
-                    bindLabel="name" bindValue="code" [clearable]="false" formControlName="country"
+                  <ng-select #cList [items]="countriesList" [searchable]="false" [ngModel]="countriesList[0]?.name"
+                    bindLabel="name" bindValue="name" [clearable]="false" formControlName="country"
                     (change)="listStatesAPI($event?.code)" typeToSearchText="Type to search">
                     <ng-template ng-header-tmp>
                       <div class="form-group has-feedback">
@@ -68,8 +68,8 @@
                 </div>
                 <div class="col-md-6 mb-4">
                   <label for="siteCountry">Site State</label>
-                  <ng-select #stList [items]="stateList" [searchable]="false" [ngModel]="stateList[0]?.code"
-                    bindLabel="name" bindValue="code" [clearable]="false" formControlName="state"
+                  <ng-select #stList [items]="stateList" [searchable]="false" [ngModel]="stateList[0]?.name"
+                    bindLabel="name" bindValue="name" [clearable]="false" formControlName="state"
                     typeToSearchText="Type to search">
                     <ng-template ng-header-tmp>
                       <div class="form-group has-feedback">
@@ -78,6 +78,19 @@
                       </div>
                     </ng-template>
                   </ng-select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="geoLocation">Geo Location</label>
+                  <div class="row">
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" formControlName="mapLocation">
+                    </div>
+                    <div class="col-md-2 mt-2">
+                      <a class="text-body pointer text-decoration-underline">Find in Map</a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row">

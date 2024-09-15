@@ -27,6 +27,9 @@ export class ViewSiteComponent {
 		siteAddress: ['', SITE_ADDRESS_VALIDATION],
 		type: [undefined, SITE_ACCOUNT_VALIDATION],
 		wifiDetails: new FormArray([]),
+		country: [null],
+		state: [null],
+		mapLocation: [null],
 	});
 	public siteSettingForm: FormGroup;
 	accountList: any = [];
@@ -196,5 +199,12 @@ export class ViewSiteComponent {
 	stepClicked(index: number) {
 		this.selectTabIndex = index;
 		this.selectedTab = index;
+	}
+
+	routeToLocation() {
+		const url = this.siteForm.get('mapLocation')?.value;
+		if (url) {
+			window.open(url, '_blank');
+		}
 	}
 }

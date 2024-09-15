@@ -67,6 +67,7 @@ export class AddSiteComponent {
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
 				country: [null],
 				state: [null],
+				mapLocation: [''],
 				wifiDetails: new FormArray([]),
 			});
 		} else {
@@ -78,6 +79,7 @@ export class AddSiteComponent {
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
 				country: [null],
 				state: [null],
+				mapLocation: [''],
 				wifiDetails: new FormArray([]),
 			});
 		}

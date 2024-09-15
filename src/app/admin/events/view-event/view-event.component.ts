@@ -147,7 +147,8 @@ export class ViewEventComponent implements OnInit {
 	routeToLocation() {
 		const scheduleData = this.eventForm.get('scheduleData');
 		const url = scheduleData.get('geoLocation').value;
-		console.log(url);
-		window.open(url, '_blank');
+		if (url) {
+			window.open(url, '_blank');
+		}
 	}
 }

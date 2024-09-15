@@ -48,6 +48,7 @@ export class SiteService {
 			wifiDetails,
 			country,
 			state,
+			mapLocation,
 		} = siteForm.value;
 
 		return this.http
@@ -59,6 +60,7 @@ export class SiteService {
 				wifiDetails: wifiDetails,
 				country,
 				state,
+				mapLocation,
 			})
 			.toPromise()
 			.then((response) => {
@@ -78,7 +80,8 @@ export class SiteService {
 	}
 
 	updateSite(siteForm: any) {
-		const { id, siteName, siteAddress, type, wifiDetails } = siteForm.value;
+		const { id, siteName, siteAddress, type, wifiDetails, mapLocation } =
+			siteForm.value;
 
 		return this.http
 			.put(SITE.UPDATE_SITE, {
@@ -87,6 +90,7 @@ export class SiteService {
 				type: parseInt(type),
 				address: siteAddress,
 				wifiDetails: wifiDetails,
+				mapLocation: mapLocation?.length > 0 ? mapLocation : null,
 			})
 			.toPromise()
 			.then((response) => {
