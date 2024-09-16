@@ -33,6 +33,11 @@ const routes: Routes = [
 		loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
 	},
 	{
+		path: 'attendant',
+		loadChildren: () =>
+			import('./attendant/attendant.module').then((m) => m.AttendantModule),
+	},
+	{
 		path: 'error',
 		loadChildren: () =>
 			import('./miscellaneous/miscellaneous.module').then(

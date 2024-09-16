@@ -87,6 +87,9 @@ export const URL_ROUTES = {
 	AMENITIES: 'app/menu',
 	ORDER_HISTORY: 'app/orders',
 	ORDER_DETAILS: 'app/order',
+
+	//attendant app
+	ATTENDANT_HOME: 'attendant',
 };
 
 export const EXTRA_ROUTES = {

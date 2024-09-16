@@ -65,12 +65,13 @@ export class GlobalService {
 			this.router.navigateByUrl('');
 		}
 		let userRole = decodeToken.role.name.toLowerCase();
+		console.log(userRole);
 		let permissions = decodeToken.role.permissions;
 		let account = decodeToken.account;
 
-		if (userRole != 'super-admin' && userRole != 'client-admin') {
-			userRole = 'user';
-		}
+		// if (userRole != 'super-admin' && userRole != 'client-admin') {
+		// 	userRole = 'user';
+		// }
 		switch (value) {
 			case 'decodeToken':
 				return decodeToken;
