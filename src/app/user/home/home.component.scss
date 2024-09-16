@@ -29,7 +29,7 @@
 }
 
 .fixed-rounded-div {
-    width: 80px !important; /* Set fixed width */
+    width: 90px !important; /* Set fixed width */
     height: 80px; /* Set fixed height */
     border-radius: 50%; /* Make the div rounded */
     display: flex; /* Enable flexbox for centering */
@@ -38,6 +38,14 @@
     justify-content: center; /* Center items vertically */
     padding: 10px; /* Add padding for internal spacing */
     background-color: var(--bs-primary-subtle); /* Bootstrap primary subtle background color */
+}
+
+.bs-cs-shadow{
+  box-shadow: 0px 0px 15px 2px #0a2137 !important;
+}
+
+.border-cs-primary{
+border: var(--bs-border-width) var(--bs-border-style) #0a2137 !important
 }
 
 
