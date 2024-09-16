@@ -23,6 +23,7 @@ export class AccountService {
 			password,
 			accountName,
 			status,
+			mobile,
 		} = userForm.getRawValue();
 
 		return this.http
@@ -33,6 +34,7 @@ export class AccountService {
 				accountName: accountName,
 				firstName: firstName,
 				lastName: lastName,
+				mobile,
 				status: status ? 1 : 0,
 			})
 			.toPromise()
@@ -110,5 +112,23 @@ export class AccountService {
 				const result = JSON.parse(JSON.stringify(response));
 				return result;
 			});
+	}
+
+	listCountries(): Observable<any> {
+		return this.http.get(USER.LIST_COUNTRIES).pipe(
+			map((response: any) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			})
+		);
+	}
+
+	listStates(code: any): Observable<any> {
+		return this.http.get(USER.LIST_STATES + code).pipe(
+			map((response: any) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			})
+		);
 	}
 }

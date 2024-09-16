@@ -26,6 +26,8 @@ export class ListStaffComponent implements OnInit {
 
 	showListAccount: boolean =
 		this.globalService.checkForPermission('LIST-ACCOUNT');
+
+	showListRole: boolean = this.globalService.checkForPermission('LIST-ROLE');
 	showAddStaff: boolean = this.globalService.checkForPermission('ADD-ROLE');
 	showEditStaff: boolean =
 		this.globalService.checkForPermission('UPDATE-STAFF');

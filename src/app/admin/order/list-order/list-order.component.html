@@ -6,6 +6,17 @@
                     <div class="row mb-2">
                         <div class=" row col-8">
                             <div class="col-sm-3">
+                                <label for="searchBox">Search</label>
+                            </div>
+                            <div class="col-sm-3" *ngIf="showListAccount">
+                                <label for="acountLabel">Account</label>
+                            </div>
+                            <div class="col-sm-3" *ngIf="showListSite && sitesList.length > 1">
+                                <label for="siteLabel">Site</label>
+                            </div>
+                        </div>
+                        <div class=" row col-8">
+                            <div class="col-sm-3">
                                 <div class="search-box me-2 mb-2 d-inline-block">
                                     <div class="position-relative">
                                         <input type="search" class="form-control" autocomplete="off"

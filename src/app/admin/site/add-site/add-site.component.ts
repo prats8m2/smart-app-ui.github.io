@@ -33,6 +33,8 @@ export class AddSiteComponent {
 	public siteForm: FormGroup;
 	public siteSettingForm: FormGroup;
 	accountList: any = [];
+	countriesList: any = [];
+	stateList: any = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
@@ -63,6 +65,9 @@ export class AddSiteComponent {
 				siteName: ['', SITE_NAME_VALIDATION],
 				siteAddress: ['', SITE_ADDRESS_VALIDATION],
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
+				country: [null],
+				state: [null],
+				mapLocation: [''],
 				wifiDetails: new FormArray([]),
 			});
 		} else {
@@ -72,6 +77,9 @@ export class AddSiteComponent {
 				siteName: ['Site-' + randomNumber, SITE_NAME_VALIDATION],
 				siteAddress: ['Address-' + randomNumber, SITE_ADDRESS_VALIDATION],
 				type: [undefined, SITE_ACCOUNT_VALIDATION],
+				country: [null],
+				state: [null],
+				mapLocation: [''],
 				wifiDetails: new FormArray([]),
 			});
 		}
@@ -100,6 +108,15 @@ export class AddSiteComponent {
 				}
 			});
 		}
+		this.accountService.listCountries().subscribe((res) => {
+			if (res.status) {
+				this.countriesList = [...res.data];
+				if (this.countriesList.length) {
+					//call list state API
+					this.listStatesAPI(this.countriesList[0]?.code);
+				}
+			}
+		});
 		this.globalService.formControlValuesChanged(this.siteForm);
 	}
 	//form validation function
@@ -135,6 +152,16 @@ export class AddSiteComponent {
 				console.log('error');
 			}
 		});
+	}
+
+	listStatesAPI(cCode: string) {
+		if (cCode) {
+			this.accountService.listStates(cCode).subscribe((res) => {
+				if (res.status) {
+					this.stateList = [...res.data.states];
+				}
+			});
+		}
 	}
 
 	field(): FormGroup {

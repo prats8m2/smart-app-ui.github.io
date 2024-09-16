@@ -67,6 +67,23 @@
                   </ng-select>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label for="siteAddress">Site Country</label>
+                  <input type="text" class="form-control" formControlName="country" disabled>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <label for="siteAddress">Site State</label>
+                  <input type="text" class="form-control" formControlName="state" disabled>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-md-6 mb-4">
+                  <label for="mapLocation">Geo Location</label>
+                  <input type="text" class="form-control" formControlName="mapLocation" disabled>
+                </div>
+              </div>
               <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
               <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">

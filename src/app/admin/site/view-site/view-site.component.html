@@ -48,6 +48,31 @@
                                         <input type="text" class="form-control" formControlName="type">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="siteCountry">Site Country</label>
+                                        <input type="text" class="form-control" formControlName="country">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="siteCountry">Site State</label>
+                                        <input type="text" class="form-control" formControlName="state">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="geoLocation">Geo Location</label>
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" formControlName="mapLocation">
+                                            </div>
+                                            <div class="col-md-2 mt-2">
+                                                <a class="text-body pointer text-decoration-underline"
+                                                    (click)="routeToLocation()">View
+                                                    in Map</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
                                 <div class="row" *ngIf="showListAccount">
                                     <div class="col-md-6 mb-4">
