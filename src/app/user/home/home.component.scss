@@ -41,11 +41,22 @@
 }
 
 .bs-cs-shadow{
-  box-shadow: 0px 0px 15px 2px #0a2137 !important;
+  // box-shadow: 0px 0px 15px 2px #0a2137 !important;
+  background: rgb(9 33 54 / 4%);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgb(11 35 57 / 44%);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.31);
+  
 }
 
 .border-cs-primary{
 border: var(--bs-border-width) var(--bs-border-style) #0a2137 !important
 }
 
+.shadow{
+  /* From https://css.glass */
+
+}
 
