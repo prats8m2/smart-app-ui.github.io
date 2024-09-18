@@ -162,6 +162,9 @@ export class GlobalService {
 					return decodeToken.sessionId;
 				}
 				break;
+			case 'SETTINGS': {
+				return decodeToken.settings;
+			}
 		}
 	}
 

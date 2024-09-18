@@ -29,6 +29,19 @@ export class MenuComponent {
 		egg: true,
 	};
 
+	siteId: any;
+	roomId: any;
+	tableId: any;
+	orderDescription: string = 'test';
+	categoryType: any = 1;
+	siteSettings: any;
+	pricing: any;
+
+	sgstAmount: number = 0;
+	cgstAmount: number = 0;
+	serviceTaxAmount: number = 0;
+	totalAmountWithTaxes: number = 0;
+
 	menuData: any;
 	filteredMenuData: any[] = [];
 	accordionState: { [key: string]: boolean } = {};
@@ -130,6 +143,7 @@ export class MenuComponent {
 			this.totalAmountOfProduct += product.price;
 		} else {
 		}
+		this.calculatePrice();
 	}
 
 	isAddedinOrder(id) {
@@ -159,6 +173,32 @@ export class MenuComponent {
 			this.order[index].total =
 				this.addedProducts[productId] * this.order[index].price;
 		}
+		this.calculatePrice();
+	}
+
+	calculatePrice() {
+		this.siteSettings = this.globalService.getAppTokenInfo('SETTINGS');
+		this.sgstAmount =
+			(this.totalAmountOfProduct * this.siteSettings.sgst) / 100;
+		this.cgstAmount =
+			(this.totalAmountOfProduct * this.siteSettings.cgst) / 100;
+		this.serviceTaxAmount =
+			(this.totalAmountOfProduct * this.siteSettings.serviceTax) / 100;
+		console.log(this.totalAmountOfProduct);
+		console.log(this.siteSettings);
+		this.totalAmountWithTaxes =
+			this.totalAmountOfProduct +
+			this.sgstAmount +
+			this.cgstAmount +
+			this.serviceTaxAmount;
+
+		this.pricing = {
+			totalAmountOfProduct: this.totalAmountOfProduct,
+			sgstAmount: this.sgstAmount,
+			cgstAmount: this.cgstAmount,
+			serviceTaxAmount: this.serviceTaxAmount,
+			totalAmountWithTaxes: this.totalAmountWithTaxes,
+		};
 	}
 
 	delete(index): void {
