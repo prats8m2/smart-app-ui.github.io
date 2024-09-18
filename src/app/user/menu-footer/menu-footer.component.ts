@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class MenuFooterComponent {
 	@Input() order: any;
-	@Input() totalAmountOfProduct: number;
+	@Input() pricing: any;
 }

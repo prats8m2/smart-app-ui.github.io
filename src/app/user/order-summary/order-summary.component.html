@@ -51,16 +51,51 @@
                 [(ngModel)]="orderDescription"></textarea>
         </div>
         <hr>
+        <div class="table-responsive">
+            <table class="table table-centered table-nowrap" style="
+    bottom: 50px;
+    position: absolute;
+    left: 0px;
+">
+
+                <tbody>
+
+
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Sub Total:</h6>
+                        </td>
+                        <td>$ {{pricing?.totalAmountOfProduct}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">SGST:</h6>
+                        </td>
+                        <td>${{pricing?.sgstAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">CGST:</h6>
+                        </td>
+                        <td>$ {{pricing?.cgstAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">Service Charge:</h6>
+                        </td>
+                        <td>$ {{pricing?.serviceTaxAmount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <footer class="footer p-2">
+
             <div class="row">
+
                 <div class="col d-flex align-items-center">
-                    <span class="display-4 me-2">
-                        Total:
-                    </span>
-                    <span class="display-6">
-                        ${{ totalAmountOfProduct }}
-                    </span>
+                    <span class="display-4 me-2">Total:</span>
+                    <span class="display-6">${{ pricing?.totalAmountWithTaxes }}</span>
                 </div>
                 <div class="col text-end">
                     <button type="submit" class="btn btn-primary w-md" [disabled]="order?.length == 0"
@@ -70,6 +105,7 @@
                 </div>
             </div>
         </footer>
+
 
     </div>
 </div>

@@ -35,4 +35,5 @@ export interface DecodedAppTokenI {
 	roomId: number;
 	tableId: number;
 	siteId: number;
+	settings: any;
 }
