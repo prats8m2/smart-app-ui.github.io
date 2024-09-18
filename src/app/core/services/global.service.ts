@@ -65,7 +65,6 @@ export class GlobalService {
 			this.router.navigateByUrl('');
 		}
 		let userRole = decodeToken.role.name.toLowerCase();
-		console.log(userRole);
 		let permissions = decodeToken.role.permissions;
 		let account = decodeToken.account;
 

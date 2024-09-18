@@ -60,9 +60,9 @@ export class AddOrderComponent implements OnInit {
 				this.products = res.products;
 				this.filteredProducts = this.products;
 				this.categoryType = res.categoryType;
+				// clear orders
+				this.order = [];
 				if (this.selectedSite !== res.siteId) {
-					// clear orders
-					this.order = [];
 					//list rooms and tables
 					if (this.showListRoom) {
 						this.listRooms(res.siteId);

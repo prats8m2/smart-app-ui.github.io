@@ -56,8 +56,8 @@ export class OrderSidebarComponent implements AfterViewInit {
 		);
 		if (res.status) {
 			this.categoryList = res.data.categories;
-			if (this.categoryList[0] && this.categoryList[0].products)
-				this.listProducts(this.categoryList[0].products);
+			if (this.categoryList.length)
+				this.listProducts(this.categoryList[0]?.products);
 			else {
 				this.listProducts([]);
 			}
@@ -65,13 +65,11 @@ export class OrderSidebarComponent implements AfterViewInit {
 	}
 
 	listProducts(products: any) {
-		if (products) {
-			this.orderService.productsDetails.next({
-				products,
-				siteId: this.categoryParams.siteId,
-				categoryType: this.selectedCategoryType,
-			});
-		}
+		this.orderService.productsDetails.next({
+			products,
+			siteId: this.categoryParams.siteId,
+			categoryType: this.selectedCategoryType,
+		});
 	}
 	ngAfterViewInit() {
 		// this.menu = new MetisMenu(this.sideMenu.nativeElement);

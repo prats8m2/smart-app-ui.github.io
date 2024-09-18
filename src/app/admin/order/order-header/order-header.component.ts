@@ -19,6 +19,17 @@ export class OrderHeaderComponent {
 	sitesList: any = [];
 	selectedOrderType: number = 1; // Default to food
 	selectedSiteId: number;
+
+	accountParams: IParams = {
+		limit: 100,
+		pageNumber: 1,
+	};
+
+	siteParams: IParams = {
+		accountId: null,
+		limit: 100,
+		pageNumber: 1,
+	};
 	constructor(
 		private orderService: OrderService,
 		private globalService: GlobalService,
@@ -28,50 +39,53 @@ export class OrderHeaderComponent {
 		document.body.setAttribute('data-bs-theme', 'dark');
 	}
 
-	async ngOnInit() {
+	ngOnInit(): void {
 		document.body.setAttribute('data-bs-theme', 'dark');
-		// this.orderService.productsDetails.next(null);
-		//check for account permission
 		if (this.showListAccount) {
-			this.accountList = await this.listAccounts();
-			if (this.accountList?.length) {
-				await this.listSites(this.accountList[0]);
-			}
+			this.listAccounts();
 		} else {
-			await this.listSites(null);
+			this.listSiteAPI(this.siteParams);
 		}
 	}
 
-	async listAccounts() {
-		const accountParams: IParams = {
-			limit: 100,
-			pageNumber: 1,
-		};
-		const res = await this.accountService.listAccounts(accountParams);
-		if (res.status) {
-			return res.data.accounts;
-		} else {
-			return null;
-		}
-	}
-
-	async listSites(account) {
-		if (account && account?.id) {
-			const siteParams: IParams = {
-				limit: 100,
-				pageNumber: 1,
-				accountId: account?.id,
-			};
-			const res = await this.siteService.listSitesPromise(siteParams);
+	listAccounts() {
+		this.accountService.listUser(this.accountParams).subscribe((res) => {
 			if (res.status) {
-				this.sitesList = res.data.sites;
-				if (this.sitesList.length) {
-					this.selectedSiteId = this.sitesList[0].id;
-					this.listCategory(this.selectedSiteId);
+				this.accountList = [...res.data.users];
+				console.log(this.accountList);
+				if (this.accountList.length) {
+					this.siteParams.accountId = this.accountList[0]?.account?.id;
+					this.listSiteAPI(this.siteParams);
 				}
-			} else {
-				return null;
 			}
+		});
+	}
+
+	changeAccountData(accountId: any) {
+		if (accountId) {
+			this.siteParams.accountId = accountId;
+			this.listSiteAPI(this.siteParams);
+		}
+	}
+
+	changeSitesData(siteId: any) {
+		if (siteId) {
+			this.selectedSiteId = siteId;
+			this.listCategory(this.selectedSiteId);
+		}
+	}
+
+	listSiteAPI(params: IParams) {
+		if (this.showListSite) {
+			this.siteService.listSites(params).subscribe((res) => {
+				if (res.status) {
+					this.sitesList = [...res.data.sites];
+					if (this.sitesList.length) {
+						this.selectedSiteId = this.sitesList[0].id;
+						this.listCategory(this.selectedSiteId);
+					}
+				}
+			});
 		}
 	}
 
@@ -84,7 +98,7 @@ export class OrderHeaderComponent {
 		}
 	}
 
-	listCategory(siteId) {
+	listCategory(siteId: number) {
 		if (siteId) {
 			this.selectedSiteId = siteId;
 			this.orderService.categoryChange.next({
