@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RoleService } from '../../role/service/role.service';
 import { StaffService } from '../../staff/service/staff.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import { ORDER_STATUS } from 'src/app/constants/core';
 
 @Component({
 	selector: 'app-list-order',
@@ -278,11 +279,13 @@ export class ListOrderComponent implements OnInit {
 			this.dialogService.openCancelOrderConfirmDialg().then((result) => {
 				if (result.value) {
 					//call delete site API
-					this.orderService.cancelOrder(orderId).then((res: any) => {
-						if (res.status) {
-							this.listOrderAPI(this.selectedSite, this.orderType);
-						}
-					});
+					this.orderService
+						.updateOrderStatus(orderId, ORDER_STATUS.CANCELED)
+						.then((res: any) => {
+							if (res.status) {
+								this.listOrderAPI(this.selectedSite, this.orderType);
+							}
+						});
 				}
 			});
 		}

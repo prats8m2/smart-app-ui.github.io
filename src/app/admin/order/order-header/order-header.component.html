@@ -24,10 +24,10 @@
                 <div class="col-lg-15 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
-                            <ng-select #accList [items]="accountList" [searchable]="false" *ngIf="showListAccount"
-                                [ngModel]="accountList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
-                                placeholder="Select Account" (change)="listSites($event)"
-                                typeToSearchText="Type to search">
+                            <ng-select #accList [items]="accountList" [searchable]="false"
+                                [ngModel]="accountList[0]?.account?.id" bindLabel="account.name" bindValue="account.id"
+                                [clearable]="false" placeholder="Select Account"
+                                (change)="changeAccountData($event?.account?.id)" typeToSearchText="Type to search">
                                 <ng-template ng-header-tmp>
                                     <div class="form-group has-feedback">
                                         <input style="width: 100%;line-height: 24px" type="text" class="form-control"
@@ -45,7 +45,7 @@
                         <div class="position-relative">
                             <ng-select #sList [items]="sitesList" [searchable]="false" *ngIf="showListSite"
                                 [ngModel]="sitesList[0]?.id" bindLabel="name" bindValue="id" [clearable]="false"
-                                placeholder="Select Site" (change)="listCategory($event.id)"
+                                placeholder="Select Site" (change)="changeSitesData($event.id)"
                                 typeToSearchText="Type to search">
                                 <ng-template ng-header-tmp>
                                     <div class="form-group has-feedback">

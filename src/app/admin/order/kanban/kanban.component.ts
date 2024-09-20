@@ -9,6 +9,7 @@ import { RoleService } from '../../role/service/role.service';
 import { StaffService } from '../../staff/service/staff.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import { ORDER_STATUS } from 'src/app/constants/core';
 
 @Component({
 	selector: 'app-kanban',
@@ -207,11 +208,13 @@ export class KanbanComponent implements OnInit {
 			this.dialogService.openCancelOrderConfirmDialg().then((result) => {
 				if (result.value) {
 					//call cancel order  API
-					this.orderService.cancelOrder(orderId).then((res: any) => {
-						if (res.status) {
-							this.listOrders(this.selectedSiteId, this.selectedTypeId);
-						}
-					});
+					this.orderService
+						.updateOrderStatus(orderId, ORDER_STATUS.CANCELED)
+						.then((res: any) => {
+							if (res.status) {
+								this.listOrders(this.selectedSiteId, this.selectedTypeId);
+							}
+						});
 				}
 			});
 		}

@@ -1,5 +1,13 @@
 //role
 export const APP_ROLE = {
-  SUPER_ADMIN: 'super-admin',
-  SUPER_USER: 'user',
+	SUPER_ADMIN: 'super-admin',
+	SUPER_USER: 'user',
+};
+
+export const ORDER_STATUS = {
+	CREATED: 1,
+	PROGRESS: 2,
+	COMPLETED: 3,
+	DELIVERED: 4,
+	CANCELED: 5,
 };
