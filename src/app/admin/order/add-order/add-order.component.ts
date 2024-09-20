@@ -4,6 +4,7 @@ import { GlobalService } from 'src/app/core/services/global.service';
 import { IParams } from 'src/app/core/interface/params';
 import { RoomService } from '../../room/services/room.service';
 import { TableService } from '../../table/services/table.service';
+import { SiteService } from '../../site/service/site.service';
 
 @Component({
 	selector: 'app-add-order',
@@ -30,6 +31,14 @@ export class AddOrderComponent implements OnInit {
 	showTableDropdown: boolean = false;
 	disableSaveButton: boolean = true;
 	categoryType: number = 1;
+	siteDetails: any;
+	siteSettings: any;
+	pricing: any;
+
+	sgstAmount: number = 0;
+	cgstAmount: number = 0;
+	serviceTaxAmount: number = 0;
+	totalAmountWithTaxes: number = 0;
 
 	roomParams: IParams = {
 		siteId: null,
@@ -52,10 +61,11 @@ export class AddOrderComponent implements OnInit {
 		private orderService: OrderService,
 		private globalService: GlobalService,
 		private roomService: RoomService,
-		private tableService: TableService
+		private tableService: TableService,
+		private siteService: SiteService
 	) {
 		document.body.setAttribute('data-bs-theme', 'dark');
-		this.orderService.productsDetails.subscribe((res) => {
+		this.orderService.productsDetails.subscribe(async (res) => {
 			if (res) {
 				this.products = res.products;
 				this.filteredProducts = this.products;
@@ -69,6 +79,8 @@ export class AddOrderComponent implements OnInit {
 					}
 				}
 				this.selectedSite = res.siteId;
+				const siteResponse = await this.siteService.viewSite(res.siteId);
+				this.siteDetails = siteResponse.data;
 			}
 		});
 
@@ -92,6 +104,31 @@ export class AddOrderComponent implements OnInit {
 		});
 	}
 
+	calculatePrice() {
+		this.siteSettings = this.siteDetails.settings;
+		this.sgstAmount =
+			(this.totalAmountOfProduct * this.siteSettings.sgst) / 100;
+		this.cgstAmount =
+			(this.totalAmountOfProduct * this.siteSettings.cgst) / 100;
+		this.serviceTaxAmount =
+			(this.totalAmountOfProduct * this.siteSettings.serviceTax) / 100;
+		console.log(this.totalAmountOfProduct);
+		console.log(this.siteSettings);
+		this.totalAmountWithTaxes =
+			this.totalAmountOfProduct +
+			this.sgstAmount +
+			this.cgstAmount +
+			this.serviceTaxAmount;
+
+		this.pricing = {
+			totalAmountOfProduct: this.totalAmountOfProduct,
+			sgstAmount: this.sgstAmount,
+			cgstAmount: this.cgstAmount,
+			serviceTaxAmount: this.serviceTaxAmount,
+			totalAmountWithTaxes: this.totalAmountWithTaxes,
+		};
+	}
+
 	addProductToOrder(product) {
 		const existingProduct = this.order.find((item) => item.id === product.id);
 		if (!existingProduct) {
@@ -104,6 +141,7 @@ export class AddOrderComponent implements OnInit {
 			};
 			this.order.push(productOrder);
 			this.totalAmountOfProduct += product.price;
+			this.calculatePrice();
 		} else {
 		}
 	}
@@ -127,6 +165,7 @@ export class AddOrderComponent implements OnInit {
 			this.order[index].total =
 				this.order[index]?.quantity * this.order[index]?.price;
 		}
+		this.calculatePrice();
 	}
 
 	delete(index): void {

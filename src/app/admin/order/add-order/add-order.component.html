@@ -177,9 +177,47 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-4">
+                                                <div class="table-responsive">
+                                                    <table class="table table-centered table-nowrap"
+                                                        style="
+                                                                                                                                            bottom: 50px;
+                                                                                                                                           
+                                                                                                                                            left: 0px;
+                                                                                                                                        ">
+
+                                                        <tbody>
+
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <h6 class="m-0">Sub Total:</h6>
+                                                                </td>
+                                                                <td>$ {{pricing?.totalAmountOfProduct}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <h6 class="m-0">SGST:</h6>
+                                                                </td>
+                                                                <td>${{pricing?.sgstAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <h6 class="m-0">CGST:</h6>
+                                                                </td>
+                                                                <td>$ {{pricing?.cgstAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <h6 class="m-0">Service Charge:</h6>
+                                                                </td>
+                                                                <td>$ {{pricing?.serviceTaxAmount}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                                 <div class="col-sm-6">
                                                     <h5 class="mt-2">Price : <span class="text-muted me-2"></span> <b>$
-                                                            {{totalAmountOfProduct}}
+                                                            {{totalAmountWithTaxes}}
                                                             USD</b></h5>
                                                 </div>
                                                 <div class="col-sm-6">
