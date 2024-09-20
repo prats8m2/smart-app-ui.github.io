@@ -99,6 +99,7 @@ export const MENU = {
 
 export const ORDER = {
 	LIST_ORDER: '/order/list',
+	LIST_ORDER_OF_ATTENDANT: '/order/list/attendant',
 	LIST_APP_ORDER: '/order/list/app',
 	ADD_ORDER: '/order/add',
 	ASSIGN_ORDER: '/order/assign',

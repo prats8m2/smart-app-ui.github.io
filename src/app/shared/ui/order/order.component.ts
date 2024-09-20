@@ -7,4 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class OrderComponent {
 	@Input() order: any;
+	ngOnInit(): void {
+		console.log(this.order);
+	}
 }

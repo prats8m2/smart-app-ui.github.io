@@ -33,6 +33,16 @@ export class OrderService {
 			});
 	}
 
+	listOrderOfAttendant() {
+		return this.http
+			.get(ORDER.LIST_ORDER_OF_ATTENDANT)
+			.toPromise()
+			.then((response) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			});
+	}
+
 	updateOrderStatus(id: number, status: number) {
 		return this.http
 			.put(ORDER.UPDATE_ORDER_STATUS, {
