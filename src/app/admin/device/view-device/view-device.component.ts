@@ -7,6 +7,7 @@ import { AccountService } from '../../accounts/service/account.service';
 import { DeviceService } from '../service/device.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import * as QRCodeStyling from 'qr-code-styling';
+import { QR_THEME, QR_THEME_LIST } from '../../../constants/qr-theme';
 
 @Component({
 	selector: 'app-view-device',
@@ -25,6 +26,11 @@ export class ViewDeviceComponent implements OnInit {
 		this.globalService.checkForPermission('LIST-DEVICE');
 	showDeleteDevice: boolean =
 		this.globalService.checkForPermission('DELETE-DEVICE');
+	QR_THEME_LIST = QR_THEME_LIST;
+	qrTheme: any = {
+		name: QR_THEME_LIST[0],
+		frameOptions: QR_THEME[QR_THEME_LIST[0]].frameOptions,
+	};
 
 	public deviceForm: FormGroup = this.formBuilder.group({
 		account: [null],
@@ -50,6 +56,11 @@ export class ViewDeviceComponent implements OnInit {
 		if (!QRCodeStyling) {
 			return;
 		}
+		const savedTheme = localStorage.getItem('qrTheme');
+		if (savedTheme) {
+			this.qrTheme = JSON.parse(savedTheme); // Load from localStorage
+		}
+
 		// const qrCode = new QRCodeStyling({
 		// 	width: 232,
 		// 	height: 232,
@@ -119,5 +130,16 @@ export class ViewDeviceComponent implements OnInit {
 			deviceId = params['id'];
 		});
 		this.router.navigateByUrl(URL_ROUTES.EDIT_DEVICE + '/' + deviceId);
+	}
+
+	changeQrTheme(event: any) {
+		console.log(event);
+		this.qrTheme = {
+			name: event,
+			frameOptions: QR_THEME[event].frameOptions,
+		};
+		localStorage.setItem('qrTheme', JSON.stringify(this.qrTheme)); // Save to localStorage
+		location.reload(); // Reload the page
+		console.log(this.qrTheme);
 	}
 }
