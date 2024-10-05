@@ -86,9 +86,12 @@
 <!--FOR ORDER CARD-->
 <ng-template #TaskContent let-order="order" let-i="index">
     <div class="card task-box" [ngClass]="{
-        'border-blue': order?.status === 1,
-        'border-yellow': order?.status === 2,
-        'border-green': order?.status === 3
+        'order-added': order?.status === 1 && order?.isNew,
+        'order-updated': order?.status === 2 && !order?.isNew && order.isUpdated,
+        'order-completed': order?.status === 3 && !order?.isNew && order.isUpdated,
+        'border-blue': order?.status === 1 && !order?.isNew,
+        'border-yellow': order?.status === 2 && !order.isUpdated,
+        'border-green': order?.status === 3 && !order.isUpdated
     }">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
@@ -101,7 +104,7 @@
                         <i class="mdi mdi-account-plus font-size-18"></i>
                     </span>
                     <span class="pointer mx-2 btn-cancel" (click)="openCancelDialogBox(order?.id)"
-                        [class.disabled]="order?.status === 5">
+                        [class.disabled]="order?.status === 5 || order?.status == 3">
                         <i class="mdi mdi-close font-size-18"></i>
                     </span>
                 </div>

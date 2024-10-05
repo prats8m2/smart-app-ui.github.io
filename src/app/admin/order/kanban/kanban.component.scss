@@ -13,6 +13,79 @@
     background-color: #e3f2fd !important;
 }
 
+// for order added
+@keyframes OrderAddedFadeIn {
+  0% {
+    background-color: #e3f2fd;
+  }
+  100% {
+    background-color: blue !important; 
+  }
+}
+
+@keyframes OrderAddFadeOut {
+  0% {
+    background-color: blue !important;
+  }
+  100% {
+    background-color: #e3f2fd; 
+  }
+}
+
+.order-added {
+  border: 3px solid #007bff !important;
+  animation: OrderAddedFadeIn 1s ease-in-out forwards, OrderAddFadeOut 1s ease-in-out forwards infinite; 
+}
+
+//for order update
+@keyframes OrderUpdateFadeIn {
+  0% {
+    background-color: #fff3cd;
+  }
+  100% {
+    background-color: #ffc107 !important; 
+  }
+}
+
+@keyframes OrderUpdateFadeOut {
+  0% {
+    background-color: #ffc107 !important;
+  }
+  100% {
+    background-color: #fff3cd; 
+  }
+}
+
+.order-updated {
+  border: 3px solid #ffc107 !important;
+  animation: OrderUpdateFadeIn 1s ease-in-out forwards, OrderUpdateFadeOut 1s ease-in-out forwards 5; 
+}
+
+//for order completed
+@keyframes OrderCompletedFadeIn {
+  0% {
+    background-color: #d4edda;
+  }
+  100% {
+    background-color: #28a745 !important; 
+  }
+}
+
+@keyframes OrderCompletedFadeOut {
+  0% {
+    background-color: #28a745 !important;
+  }
+  100% {
+    background-color: #d4edda; 
+  }
+}
+
+.order-completed {
+  border: 3px solid #28a745 !important;
+  animation: OrderCompletedFadeIn 1s ease-in-out forwards, OrderCompletedFadeOut 1s ease-in-out forwards 5; 
+}
+
+
 .border-yellow {
     border: 3px solid #ffc107 !important;
     background-color: #fff3cd !important;

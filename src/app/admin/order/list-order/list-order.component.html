@@ -128,7 +128,27 @@
                                     </th>
                                     <th class="align-middle">Assigned To</th>
                                     <th class="align-middle">Payment Method</th>
-                                    <th class="align-middle">Status</th>
+                                    <th class="align-middle">Status
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-light dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-filter"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" (click)="filterDataByStatus(0)">All</a>
+                                                </li>
+                                                <li><a class="dropdown-item" (click)="filterDataByStatus(1)">New</a>
+                                                </li>
+                                                <li><a class="dropdown-item" (click)="filterDataByStatus(2)">In
+                                                        Progress</a></li>
+                                                <li><a class="dropdown-item"
+                                                        (click)="filterDataByStatus(3)">Completed</a></li>
+                                                <li><a class="dropdown-item"
+                                                        (click)="filterDataByStatus(5)">Cancelled</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th>
                                     <th class="align-middle">Created</th>
                                     <th class="align-middle">Action</th>
                                 </tr>
@@ -138,9 +158,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let order of orderList; let i = index;" id="o_{{order.id}}" [ngClass]="{'order-added': order.isNew, 
-                                     'order-updated': order.isUpdated && !order.isDeleted,
-                                     'order-deleted': order.isUpdated && order.isDeleted }">
+                                <tr *ngFor="let order of orderList; let i = index;" id="o_{{order?.id}}" [ngClass]="{'order-added': order?.isNew && !order?.isUpdated && !order?.isDeleted, 
+                                     'order-updated': order?.isUpdated && !order?.isNew && !order?.isDeleted && !order.isCompleted,
+                                     'order-deleted': order?.isUpdated && order?.isDeleted && !order?.isNew,
+                                     'order-completed': order?.isUpdated && order?.isCompleted && !order?.isNew}">
                                     <td>
                                         <a class="text-body">{{order?.id}}</a>
                                     </td>
@@ -156,11 +177,11 @@
                                     <td>{{order?.payment?.type | paymentType}}</td>
                                     <td>
                                         <span class="badge badge-pill p-2 font-size-11" [ngClass]="{
-                                            'badge-soft-info': order.status == 1,
-                                            'badge-soft-warning': order.status == 2,
-                                            'badge-soft-success': order.status == 3,
-                                            'badge-soft-primary': order.status == 4,
-                                            'badge-soft-danger': order.status == 5
+                                            'badge-soft-info': order?.status == 1,
+                                            'badge-soft-warning': order?.status == 2,
+                                            'badge-soft-success': order?.status == 3,
+                                            'badge-soft-primary': order?.status == 4,
+                                            'badge-soft-danger': order?.status == 5
                                         }">
                                             {{ order?.status | orderStatus }}
                                         </span>
@@ -169,14 +190,14 @@
                                     <td>
                                         <div class="d-flex gap-3">
                                             <span *ngIf="showViewOrder" class="pointer btn-view"
-                                                (click)="openViewModal(viewOrders, order.id)"><i
+                                                (click)="openViewModal(viewOrders, order?.id)"><i
                                                     class="mdi mdi-eye font-size-18"></i></span>
                                             <span *ngIf="showAssignOrder" class="pointer btn-assign"
                                                 [class.disabled]="order?.status == 5"
                                                 (click)="openAssignModal(assignContent, order?.id)"><i
                                                     class="mdi mdi-account-plus font-size-18"></i></span>
                                             <span class="pointer btn-cancel" (click)="openCancelDialogBox(order?.id)"
-                                                [class.disabled]="order?.status == 5"> <i
+                                                [class.disabled]="order?.status == 5 || order?.status == 3"> <i
                                                     class="mdi mdi-close font-size-18"></i></span>
                                         </div>
                                     </td>

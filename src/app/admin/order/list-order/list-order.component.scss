@@ -105,17 +105,17 @@
 }
 
 .order-added {
-  animation: newOrderBadge 1s ease-in-out 10;
+  animation: newOrderBadge 1s ease-in-out 5;
 }
 
 @keyframes newOrderBadge {
   100% {
-     --bs-table-bg: rgb(0 255 162 / 18%)
+     --bs-table-bg: rgb(43 79 255 / 18%);
   }
 }
 
 .order-updated {
-  animation: updateOrderBadge 1s ease-in-out 10;
+  animation: updateOrderBadge 1s ease-in-out 5;
 }
 
 @keyframes updateOrderBadge {
@@ -124,8 +124,19 @@
   }
 }
 
+.order-completed {
+  animation: completeOrderBadge 1s ease-in-out 5;
+}
+
+@keyframes completeOrderBadge {
+  100% {
+     --bs-table-bg: rgb(0 255 162 / 18%);
+  }
+}
+
+
 .order-deleted {
-  animation: orderDeleteBadge 1s ease-in-out 10;
+  animation: orderDeleteBadge 1s ease-in-out 5;
 }
 
 @keyframes orderDeleteBadge {

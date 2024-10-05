@@ -116,7 +116,13 @@ export class ListOrderComponent implements OnInit {
 				this.cdr.markForCheck();
 			});
 			this.socketService.onNewOrder().subscribe((order) => {
-				this.orders.unshift({ ...order, isNew: true });
+				this.orders.unshift({
+					...order,
+					isNew: true,
+					isUpdated: false,
+					isDeleted: false,
+					isCompleted: false,
+				});
 				this.updateDisplayedData();
 			});
 			this.socketService.updateOrder().subscribe((order) => {
@@ -129,8 +135,10 @@ export class ListOrderComponent implements OnInit {
 						? {
 								...item,
 								status: order.status,
+								isNew: false,
 								isUpdated: true,
 								isDeleted: order.status === ORDER_STATUS.CANCELED,
+								isCompleted: order.status === ORDER_STATUS.COMPLETED,
 						  }
 						: item
 				);
@@ -149,7 +157,6 @@ export class ListOrderComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		console.log(this.orders);
 		this.orderList = this.orders
 			.slice(startIndex, endIndex)
 			.filter((item) =>
@@ -348,5 +355,36 @@ export class ListOrderComponent implements OnInit {
 			this.orderType,
 			this.selectedOrderType
 		);
+	}
+
+	filterDataByStatus(status: number) {
+		switch (status) {
+			case 0:
+				this.listOrderAPI(
+					this.selectedSite,
+					this.orderType,
+					this.selectedOrderType
+				);
+			case 1:
+				this.orderList = this.orders.filter(
+					(order) => order.status === ORDER_STATUS.CREATED
+				);
+				break;
+			case 2:
+				this.orderList = this.orders.filter(
+					(order) => order.status === ORDER_STATUS.PROGRESS
+				);
+				break;
+			case 3:
+				this.orderList = this.orders.filter(
+					(order) => order.status === ORDER_STATUS.COMPLETED
+				);
+				break;
+			case 5:
+				this.orderList = this.orders.filter(
+					(order) => order.status === ORDER_STATUS.CANCELED
+				);
+				break;
+		}
 	}
 }

@@ -30,7 +30,6 @@ export class KanbanComponent implements OnInit {
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {
-				console.log(res);
 				this.selectedAccountId = res?.accountId;
 				this.selectedCategoryType = res.selectedCategortType;
 				this.listOrders(res.siteId, res.orderType, this.selectedCategoryType);
@@ -87,13 +86,26 @@ export class KanbanComponent implements OnInit {
 			this.cdr.markForCheck();
 		});
 		this.socketService.onNewOrder().subscribe((order) => {
-			this.orders.unshift(order);
+			this.orders.unshift({
+				...order,
+				isNew: true,
+				isUpdated: false,
+				isDeleted: false,
+			});
 			this.filterForKanban();
 		});
 
 		this.socketService.updateOrderStatus().subscribe((order) => {
 			this.orders = this.orders.map((item) =>
-				item.id === order.id ? { ...item, status: order.status } : item
+				item.id === order.id
+					? {
+							...item,
+							status: order.status,
+							isNew: false,
+							isUpdated: true,
+							isDeleted: order.status === ORDER_STATUS.CANCELED,
+					  }
+					: item
 			);
 			this.filterForKanban();
 		});
@@ -111,7 +123,12 @@ export class KanbanComponent implements OnInit {
 		this.selectedTypeId = type;
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
-			this.orders = res.data.orders;
+			this.orders = res.data.orders.map((order: any) => ({
+				...order,
+				isNew: false,
+				isUpdated: false,
+				isDeleted: false,
+			}));
 			this.filterForKanban();
 		} else {
 			return null;
@@ -119,9 +136,15 @@ export class KanbanComponent implements OnInit {
 	}
 
 	filterForKanban() {
-		this.newOrders = this.orders.filter((t) => t.status === 1);
-		this.inProgresOrders = this.orders.filter((t) => t.status === 2);
-		this.completedOrders = this.orders.filter((t) => t.status === 3);
+		this.newOrders = this.orders.filter(
+			(t) => t.status === ORDER_STATUS.CREATED
+		);
+		this.inProgresOrders = this.orders.filter(
+			(t) => t.status === ORDER_STATUS.PROGRESS
+		);
+		this.completedOrders = this.orders.filter(
+			(t) => t.status === ORDER_STATUS.COMPLETED
+		);
 	}
 
 	onDrop(event: DndDropEvent, filteredList?: any[], targetStatus?: number) {
