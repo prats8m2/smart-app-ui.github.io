@@ -26,9 +26,11 @@
   .role-form{
     overflow-y: scroll;
     overflow-x:hidden;
-    scrollbar-width: thin;
-    scrollbar-color: #556080; 
     height: 90%;
+  }
+
+  .card-body{
+    height: calc(100vh - 180px);
   }
   
   .role-form::-webkit-scrollbar {

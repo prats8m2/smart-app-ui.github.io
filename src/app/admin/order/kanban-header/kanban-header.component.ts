@@ -57,7 +57,7 @@ export class KanbanHeaderComponent {
 		if (this.showListAccount) {
 			this.listAccountsAPI();
 		} else {
-			this.listSiteAPI(null);
+			this.listSiteAPI(this.siteParams);
 		}
 	}
 

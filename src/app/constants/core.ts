@@ -1,7 +1,9 @@
 //role
 export const APP_ROLE = {
 	SUPER_ADMIN: 'super-admin',
-	SUPER_USER: 'user',
+	APP_OWNER: 'owner',
+	APP_ATTENDANT: 'attendant',
+	APP_USER: 'user',
 };
 
 export const ORDER_STATUS = {
