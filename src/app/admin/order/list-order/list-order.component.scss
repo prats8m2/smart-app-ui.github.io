@@ -103,3 +103,33 @@
 .dropdown-menu li {
   cursor: pointer;
 }
+
+.order-added {
+  animation: newOrderBadge 1s ease-in-out 10;
+}
+
+@keyframes newOrderBadge {
+  100% {
+     --bs-table-bg: rgb(0 255 162 / 18%)
+  }
+}
+
+.order-updated {
+  animation: updateOrderBadge 1s ease-in-out 10;
+}
+
+@keyframes updateOrderBadge {
+  100% {
+     --bs-table-bg: rgb(255 185 66 / 18%)
+  }
+}
+
+.order-deleted {
+  animation: orderDeleteBadge 1s ease-in-out 10;
+}
+
+@keyframes orderDeleteBadge {
+  100% {
+     --bs-table-bg: rgb(255 101 101 / 18%)
+  }
+}

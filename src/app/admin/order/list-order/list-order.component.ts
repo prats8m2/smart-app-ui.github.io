@@ -116,7 +116,7 @@ export class ListOrderComponent implements OnInit {
 				this.cdr.markForCheck();
 			});
 			this.socketService.onNewOrder().subscribe((order) => {
-				this.orders.unshift(order);
+				this.orders.unshift({ ...order, isNew: true });
 				this.updateDisplayedData();
 			});
 			this.socketService.updateOrder().subscribe((order) => {
@@ -125,7 +125,14 @@ export class ListOrderComponent implements OnInit {
 
 			this.socketService.updateOrderStatus().subscribe((order) => {
 				this.orders = this.orders.map((item) =>
-					item.id === order.id ? { ...item, status: order.status } : item
+					item.id === order.id
+						? {
+								...item,
+								status: order.status,
+								isUpdated: true,
+								isDeleted: order.status === ORDER_STATUS.CANCELED,
+						  }
+						: item
 				);
 				this.updateDisplayedData();
 			});
@@ -142,6 +149,7 @@ export class ListOrderComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
+		console.log(this.orders);
 		this.orderList = this.orders
 			.slice(startIndex, endIndex)
 			.filter((item) =>
@@ -216,7 +224,12 @@ export class ListOrderComponent implements OnInit {
 		};
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
-			this.orders = res.data.orders;
+			this.orders = res.data.orders.map((order: any) => ({
+				...order,
+				isNew: false,
+				isUpdated: false,
+				isDeleted: false,
+			}));
 			this.updateDisplayedData();
 		} else {
 			return null;
@@ -311,7 +324,7 @@ export class ListOrderComponent implements OnInit {
 		if (orderId) {
 			this.dialogService.openCancelOrderConfirmDialg().then((result) => {
 				if (result.value) {
-					//call delete site API
+					//call cancel order API
 					this.orderService
 						.updateOrderStatus(orderId, ORDER_STATUS.CANCELED)
 						.then((res: any) => {
@@ -329,7 +342,6 @@ export class ListOrderComponent implements OnInit {
 	}
 
 	filterDataByType(orderType: number) {
-		// if (orderType) {
 		this.selectedOrderType = orderType;
 		this.listOrderAPI(
 			this.selectedSite,
@@ -337,5 +349,4 @@ export class ListOrderComponent implements OnInit {
 			this.selectedOrderType
 		);
 	}
-	// }
 }
