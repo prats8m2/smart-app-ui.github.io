@@ -24,7 +24,7 @@ export class OrderService {
 		return this.http
 			.get(
 				ORDER.LIST_ORDER +
-					`/${params.siteId}/${params.type}/${params.pageNumber}/${params.limit}`
+					`/${params.siteId}/${params.categoryType}/${params.orderType}/${params.pageNumber}/${params.limit}`
 			)
 			.toPromise()
 			.then((response) => {

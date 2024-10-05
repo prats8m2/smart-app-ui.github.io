@@ -87,13 +87,13 @@
                                     <td class="pointer" (click)="routeToViewTable(data.id)">{{data.name}}</td>
                                     <td class="pointer" (click)="routeToViewTable(data.id)">{{data.device.code}}</td>
                                     <td>
-                                        <span class="badge badge-pill badge-soft-info font-size-11"
+                                        <span class="badge badge-pill p-2 badge-soft-info font-size-11"
                                             [ngClass]=" { 'badge-soft-warning': data.occupied === 1 }">{{ data.occupied
                                             |
                                             isOccupied}}</span>
                                     </td>
                                     <td>
-                                        <span class="badge badge-pill badge-soft-success font-size-11"
+                                        <span class="badge badge-pill p-2 badge-soft-success font-size-11"
                                             [ngClass]=" { 'badge-soft-danger': data.status === 0 }">{{data.status |
                                             transformStatus}}</span>
                                     </td>

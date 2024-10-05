@@ -14,6 +14,9 @@
                             <div class="col-sm-3" *ngIf="showListSite && sitesList.length > 1">
                                 <label for="siteLabel">Site</label>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="categoryTypeLabel">Category Type</label>
+                            </div>
                         </div>
                         <div class=" row col-8">
                             <div class="col-sm-3">
@@ -98,7 +101,31 @@
                             <thead class="table-light table-fixed-header">
                                 <tr>
                                     <th class="align-middle">Order Id</th>
-                                    <th class="align-middle">Location</th>
+                                    <th class="align-middle">
+                                        Type
+                                        <!-- Dropdown for filtering order types -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-light dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-filter"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" (click)="filterDataByType(0)">All</a></li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(1)">Table</a>
+                                                </li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(2)">Room</a></li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(3)">Online</a>
+                                                </li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(4)">Offline</a>
+                                                </li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(5)">SOS</a></li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(6)">Room
+                                                        Service</a></li>
+                                                <li><a class="dropdown-item" (click)="filterDataByType(7)">Room
+                                                        Cleaning</a></li>
+                                            </ul>
+                                        </div>
+                                    </th>
                                     <th class="align-middle">Assigned To</th>
                                     <th class="align-middle">Payment Method</th>
                                     <th class="align-middle">Status</th>
@@ -116,10 +143,17 @@
                                         <a class="text-body">{{order?.id}}</a>
                                     </td>
                                     <td>{{order?.type | orderType}}</td>
-                                    <td>{{order?.user?.username ? order?.user?.username : 'Not Assigned'}}</td>
+                                    <td>
+                                        <span class="badge badge-pill p-2 font-size-11" [ngClass]="{
+                                            'badge-soft-success': order?.user?.username,
+                                            'badge-soft-primary': !order?.user?.username
+                                        }">
+                                            {{order?.user?.username ? order?.user?.username : 'Not Assigned'}}
+                                        </span>
+                                    </td>
                                     <td>{{order?.payment?.type | paymentType}}</td>
                                     <td>
-                                        <span class="badge badge-pill font-size-11" [ngClass]="{
+                                        <span class="badge badge-pill p-2 font-size-11" [ngClass]="{
                                                 'badge-soft-info': order.status == 1,
                                                 'badge-soft-warning': order.status == 2,
                                                 'badge-soft-success': order.status == 3,

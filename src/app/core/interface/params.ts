@@ -5,5 +5,7 @@ export interface IParams {
 	roleId?: number;
 	siteId?: string;
 	categoryId?: number;
-	type?: number
+	type?: number;
+	categoryType?: number;
+	orderType?: number;
 }

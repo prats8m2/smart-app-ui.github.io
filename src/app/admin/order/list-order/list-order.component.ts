@@ -1,18 +1,18 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription, interval } from 'rxjs';
+import { ORDER_STATUS } from 'src/app/constants/core';
 import { URL_ROUTES } from 'src/app/constants/routing';
 import { IParams } from 'src/app/core/interface/params';
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { GlobalService } from 'src/app/core/services/global.service';
 import { AccountService } from '../../accounts/service/account.service';
+import { RoleService } from '../../role/service/role.service';
 import { SiteService } from '../../site/service/site.service';
+import { StaffService } from '../../staff/service/staff.service';
 import { OrderService } from '../service/order.service';
 import { SocketService } from '../service/socket.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { RoleService } from '../../role/service/role.service';
-import { StaffService } from '../../staff/service/staff.service';
-import { DialogService } from 'src/app/core/services/dialog.service';
-import { ORDER_STATUS } from 'src/app/constants/core';
 
 @Component({
 	selector: 'app-list-order',
@@ -98,6 +98,7 @@ export class ListOrderComponent implements OnInit {
 	selectedStaffId: number;
 	selectedOrderId: number;
 	siteCurrency: string = '';
+	selectedOrderType: number = 0;
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -121,6 +122,13 @@ export class ListOrderComponent implements OnInit {
 			this.socketService.updateOrder().subscribe((order) => {
 				console.log('Order updated', order);
 			});
+
+			this.socketService.updateOrderStatus().subscribe((order) => {
+				this.orders = this.orders.map((item) =>
+					item.id === order.id ? { ...item, status: order.status } : item
+				);
+				this.updateDisplayedData();
+			});
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
@@ -134,7 +142,14 @@ export class ListOrderComponent implements OnInit {
 	updateDisplayedData(): void {
 		const startIndex = (this.currentPage - 1) * this.perPage;
 		const endIndex = startIndex + this.perPage;
-		this.orderList = this.orders.slice(startIndex, endIndex);
+		this.orderList = this.orders
+			.slice(startIndex, endIndex)
+			.filter((item) =>
+				item?.id
+					.toString()
+					.toLowerCase()
+					.includes(this.searchInput.toString().toLowerCase())
+			);
 
 		this.total = this.searchInput ? this.orderList.length : this.orders.length;
 	}
@@ -156,7 +171,12 @@ export class ListOrderComponent implements OnInit {
 		// call list order API
 		if (siteId) {
 			this.selectedSite = siteId;
-			this.listOrderAPI(this.selectedSite, this.orderType);
+			this.selectedOrderType = 0;
+			this.listOrderAPI(
+				this.selectedSite,
+				this.orderType,
+				this.selectedOrderType
+			);
 		}
 	}
 
@@ -168,7 +188,11 @@ export class ListOrderComponent implements OnInit {
 					//call list order API
 					this.selectedSite = this.sitesList[0]?.id;
 					this.assignUsersParams.siteId = this.sitesList[0]?.id;
-					this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
+					this.listOrderAPI(
+						this.sitesList[0]?.id,
+						this.orderType,
+						this.selectedOrderType
+					);
 				}
 			}
 		});
@@ -182,10 +206,11 @@ export class ListOrderComponent implements OnInit {
 		this.router.navigateByUrl(URL_ROUTES.KANBAN);
 	}
 
-	async listOrderAPI(siteId: any, type: any) {
+	async listOrderAPI(siteId: any, categoryType: any, orderType: number) {
 		const orderParams: IParams = {
 			siteId,
-			type: type,
+			categoryType,
+			orderType,
 			limit: 100,
 			pageNumber: 1,
 		};
@@ -201,7 +226,11 @@ export class ListOrderComponent implements OnInit {
 	changeCategoryType(type: any) {
 		this.orderType = type;
 		if (this.sitesList.length) {
-			this.listOrderAPI(this.sitesList[0]?.id, this.orderType);
+			this.listOrderAPI(
+				this.sitesList[0]?.id,
+				this.orderType,
+				this.selectedOrderType
+			);
 		}
 	}
 
@@ -287,11 +316,26 @@ export class ListOrderComponent implements OnInit {
 						.updateOrderStatus(orderId, ORDER_STATUS.CANCELED)
 						.then((res: any) => {
 							if (res.status) {
-								this.listOrderAPI(this.selectedSite, this.orderType);
+								this.listOrderAPI(
+									this.selectedSite,
+									this.orderType,
+									this.selectedOrderType
+								);
 							}
 						});
 				}
 			});
 		}
 	}
+
+	filterDataByType(orderType: number) {
+		// if (orderType) {
+		this.selectedOrderType = orderType;
+		this.listOrderAPI(
+			this.selectedSite,
+			this.orderType,
+			this.selectedOrderType
+		);
+	}
+	// }
 }

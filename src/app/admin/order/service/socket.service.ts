@@ -13,6 +13,7 @@ export class SocketService {
 
 	constructor() {
 		this.socket = io('http://localhost:3000'); // Change this to your server's URL
+
 		this.socket.on('orderCreated', (order) => {
 			this.orderSubject.next(order);
 		});
