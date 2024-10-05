@@ -124,11 +124,18 @@
                     </ng-template>
                     <section *ngIf="selectedTab === 1">
                         <form [formGroup]="siteSettingForm">
-                            <h6 class="mb-2">Theming</h6>
-                            <div class="col-md-4 mb-4">
-                                <label for="theme">Theme</label>
-                                <ng-select [items]="themes" bindLabel="label" [clearable]="false" bindValue="id"
-                                    formControlName="theme" [placeholder]="'Theme'"></ng-select>
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="theme">Theme</label>
+                                    <ng-select [items]="themes" bindLabel="label" [clearable]="false" bindValue="id"
+                                        formControlName="theme" [placeholder]="'Theme'"></ng-select>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="currency">Currency</label>
+                                    <ng-select [items]="currenciesList" bindLabel="name" [clearable]="false"
+                                        bindValue="symbol" formControlName="currency"
+                                        [placeholder]="'Currency'"></ng-select>
+                                </div>
                             </div>
                             <h6 class="mb-2">Tax Details</h6>
                             <div class="row">

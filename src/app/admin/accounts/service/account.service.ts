@@ -123,6 +123,15 @@ export class AccountService {
 		);
 	}
 
+	listCurrencies(): Observable<any> {
+		return this.http.get(USER.LIST_CURRENCIES).pipe(
+			map((response: any) => {
+				const result = JSON.parse(JSON.stringify(response));
+				return result;
+			})
+		);
+	}
+
 	listStates(code: any): Observable<any> {
 		return this.http.get(USER.LIST_STATES + code).pipe(
 			map((response: any) => {

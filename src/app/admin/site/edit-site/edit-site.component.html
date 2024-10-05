@@ -147,11 +147,33 @@
           </ng-template>
           <section *ngIf="selectedTab === 1">
             <form [formGroup]="siteSettingForm" class="custom-form">
-              <h6 class="mb-2">Theming</h6>
-              <div class="col-md-4 mb-4">
-                <label for="theme">Theme</label>
-                <ng-select [items]="themes" bindLabel="label" [clearable]="false" bindValue="id" formControlName="theme"
-                  [placeholder]="'Theme'" (change)="updateMiscConfig('theme')"></ng-select>
+              <div class="row">
+                <div class="col-md-4 mb-4">
+                  <label for="theme">Theme</label>
+                  <ng-select #themList [items]="themes" [searchable]="false" bindLabel="label" bindValue="id"
+                    [clearable]="false" placeholder="Select Theme" formControlName="theme"
+                    (change)="updateMiscConfig('theme')" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="themList.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <label for="cgst">Currency</label>
+                  <ng-select #currList [items]="currenciesList" [searchable]="false" bindLabel="name" bindValue="symbol"
+                    [clearable]="false" placeholder="Select Currency" formControlName="currency"
+                    (change)="updateMiscConfig('currency')" typeToSearchText="Type to search">
+                    <ng-template ng-header-tmp>
+                      <div class="form-group has-feedback">
+                        <input style="width: 100%;line-height: 24px" type="text" class="form-control"
+                          placeholder="Search" (input)="currList.filter($event.target.value)" />
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
               </div>
 
               <h6 class="mb-2">Tax Details</h6>

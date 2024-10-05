@@ -25,7 +25,7 @@
                                                     </div>
                                                     <div class="mt-2">
                                                         <div class="text-center">
-                                                            <h5><b>${{product.price}}</b></h5>
+                                                            <h5><b>{{currency}} {{product.price}}</b></h5>
                                                         </div>
                                                         <div class="text-center">
                                                             <button class="btn btn-soft-primary w-100"
@@ -76,7 +76,8 @@
                                                                         product?.name
                                                                         }}</a></h5>
                                                             </td>
-                                                            <td>$<span class="product-price"> {{ product?.price
+                                                            <td>{{currency}} <span class="product-price"> {{
+                                                                    product?.price
                                                                     }}</span>
                                                             </td>
                                                             <td>
@@ -97,7 +98,8 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>$<span class="product-line-price">{{ product?.total
+                                                            <td>{{currency}} <span class="product-line-price">{{
+                                                                    product?.total
                                                                     }}</span>
                                                             </td>
                                                             <td>
@@ -113,7 +115,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="card-footer">
+                                        <div class="mt-2 card-footer">
                                             <div class="row col-12">
                                                 <div class="col-6 mt-2">
                                                     <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListRoom">
@@ -179,46 +181,47 @@
                                             <div class="row mt-4">
                                                 <div class="table-responsive">
                                                     <table class="table table-centered table-nowrap"
-                                                        style="
-                                                                                                                                            bottom: 50px;
-                                                                                                                                           
-                                                                                                                                            left: 0px;
-                                                                                                                                        ">
-
+                                                        style="bottom: 50px; left: 0px;  ">
                                                         <tbody>
-
-
-                                                            <tr>
-                                                                <td colspan="2">
-                                                                    <h6 class="m-0">Sub Total:</h6>
-                                                                </td>
-                                                                <td>$ {{pricing?.totalAmountOfProduct}}</td>
-                                                            </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">SGST:</h6>
                                                                 </td>
-                                                                <td>${{pricing?.sgstAmount}}</td>
+                                                                <td class="align-right"> {{currency}}
+                                                                    {{pricing?.sgstAmount ?? 0}}
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">CGST:</h6>
                                                                 </td>
-                                                                <td>$ {{pricing?.cgstAmount}}</td>
+                                                                <td class="align-right">{{currency}}
+                                                                    {{pricing?.cgstAmount ?? 0}}
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">Service Charge:</h6>
                                                                 </td>
-                                                                <td>$ {{pricing?.serviceTaxAmount}}</td>
+                                                                <td class="align-right">{{currency}}
+                                                                    {{pricing?.serviceTaxAmount ??
+                                                                    0}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <h6 class="m-0">Item Total:</h6>
+                                                                </td>
+                                                                <td class="align-right">{{currency}}
+                                                                    {{pricing?.totalAmountOfProduct ?? 0}}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h5 class="mt-2">Price : <span class="text-muted me-2"></span> <b>$
-                                                            {{totalAmountWithTaxes}}
-                                                            USD</b></h5>
+                                                    <h5 class="mt-2">Sub Total : <span class="text-muted me-2"></span>
+                                                        <b>{{currency}}
+                                                            {{totalAmountWithTaxes}}</b>
+                                                    </h5>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="text-sm-end mt-2 mt-sm-0">

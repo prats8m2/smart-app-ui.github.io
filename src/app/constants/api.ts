@@ -10,6 +10,7 @@ export const USER = {
 	UPDATE_USER: '/user/update',
 	LIST_ACCOUNTS: '/user/accounts/list',
 	LIST_COUNTRIES: '/user/countries',
+	LIST_CURRENCIES: '/user/currencies',
 	LIST_STATES: '/user/states/',
 };
 

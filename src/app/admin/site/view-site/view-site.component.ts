@@ -33,6 +33,7 @@ export class ViewSiteComponent {
 	});
 	public siteSettingForm: FormGroup;
 	accountList: any = [];
+	currenciesList: any[] = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
 		{ id: 2, label: 'Restaurant' },
@@ -127,7 +128,7 @@ export class ViewSiteComponent {
 		});
 	}
 	patchSiteSettingsData(siteSettings: any) {
-		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const { theme, serviceTax, sgst, cgst, currency } = siteSettings;
 		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
 		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
 		const amenitiesOrder = this.getStatusOfSiteConfig(
@@ -148,6 +149,7 @@ export class ViewSiteComponent {
 		this.siteSettingForm = this.formBuilder.group({
 			theme: [theme],
 			serviceTax: [serviceTax],
+			currency: [currency],
 			sgst: [sgst],
 			cgst: [cgst],
 			orders: [orders],
@@ -163,7 +165,16 @@ export class ViewSiteComponent {
 			feedback: [feedback],
 		});
 
+		this.listCurrenciesAPI();
 		this.siteSettingForm.disable();
+	}
+
+	listCurrenciesAPI() {
+		this.accountService.listCurrencies().subscribe((res) => {
+			if (res.status) {
+				this.currenciesList = [...res.data];
+			}
+		});
 	}
 
 	getStatusOfSiteConfig(value: number) {

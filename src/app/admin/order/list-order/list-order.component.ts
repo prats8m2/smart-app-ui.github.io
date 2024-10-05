@@ -97,6 +97,7 @@ export class ListOrderComponent implements OnInit {
 	selectedRoleId: number;
 	selectedStaffId: number;
 	selectedOrderId: number;
+	siteCurrency: string = '';
 
 	ngOnInit(): void {
 		if (this.showListAccount) {
@@ -114,7 +115,8 @@ export class ListOrderComponent implements OnInit {
 				this.cdr.markForCheck();
 			});
 			this.socketService.onNewOrder().subscribe((order) => {
-				this.orders.push(order);
+				this.orders.unshift(order);
+				this.updateDisplayedData();
 			});
 			this.socketService.updateOrder().subscribe((order) => {
 				console.log('Order updated', order);
@@ -208,6 +210,7 @@ export class ListOrderComponent implements OnInit {
 		this.orderService.viewOrder(orderId).then((res) => {
 			if (res.status && res.data) {
 				this.orderDetails = res.data;
+				this.siteCurrency = res.data.site.settings.currency;
 			} else {
 				this.orderDetails = null;
 			}
@@ -232,6 +235,7 @@ export class ListOrderComponent implements OnInit {
 				if (this.roleList.length) {
 					this.selectedRoleId = this.roleList[0].id;
 					this.staffParams.roleId = this.roleList[0].id;
+					this.listStaffAPI(this.staffParams);
 				}
 			}
 		});

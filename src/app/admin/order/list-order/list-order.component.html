@@ -99,7 +99,6 @@
                                 <tr>
                                     <th class="align-middle">Order Id</th>
                                     <th class="align-middle">Location</th>
-                                    <th class="align-middle">Amount</th>
                                     <th class="align-middle">Assigned To</th>
                                     <th class="align-middle">Payment Method</th>
                                     <th class="align-middle">Status</th>
@@ -107,7 +106,7 @@
                                     <th class="align-middle">Action</th>
                                 </tr>
                                 <tr *ngIf="orderList.length == 0">
-                                    <th class="align-middle" style="text-align: center;" colspan="8">No data available
+                                    <th class="align-middle" style="text-align: center;" colspan="7">No data available
                                     </th>
                                 </tr>
                             </thead>
@@ -117,7 +116,6 @@
                                         <a class="text-body">{{order?.id}}</a>
                                     </td>
                                     <td>{{order?.type | orderType}}</td>
-                                    <td>$ {{order?.payment?.total}}</td>
                                     <td>{{order?.user?.username ? order?.user?.username : 'Not Assigned'}}</td>
                                     <td>{{order?.payment?.type | paymentType}}</td>
                                     <td>
@@ -167,6 +165,7 @@
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
         <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
     </div>
+
     <div class="modal-body">
         <p class="mb-2" id="orderlist-overview">
             Order id:
@@ -180,12 +179,14 @@
             Location:
             <span *ngIf="orderDetails.table && !orderDetails.room"
                 class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
-            <span *ngIf="orderDetails.room && !orderDetails.table "
+            <span *ngIf="orderDetails.room && !orderDetails.table"
                 class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
         </p>
-        <div class="table-responsive">
+
+        <!-- Scrollable Product Table -->
+        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
             <table class="table table-centered table-nowrap">
-                <thead>
+                <thead class="">
                     <tr>
                         <th scope="col">Product</th>
                         <th scope="col">Product Name</th>
@@ -202,33 +203,48 @@
                         <td>
                             <div>
                                 <h5 class="text-truncate font-size-14">{{product.name}}</h5>
-                                <p class="text-muted mb-0">$ {{product.price}} x {{product.quantity}}</p>
+                                <p class="text-muted mb-0">{{siteCurrency}} {{product.price}} x {{product.quantity}}</p>
                             </div>
                         </td>
-                        <td>$ {{product.price * product.quantity}}</td>
+                        <td class="align-right">{{siteCurrency}} {{product.price * product.quantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Non-scrollable Tax and Total Table -->
+        <div class="table-responsive mt-4">
+            <table class="table table-centered table-nowrap">
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">SGST:</h6>
+                        </td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.sgst}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6 class="m-0">Sub Total:</h6>
+                            <h6 class="m-0">CGST:</h6>
                         </td>
-                        <td>$ {{orderDetails.payment.total}}</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.cgst}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <h6 class="m-0">Service charges:</h6>
                         </td>
-                        <td>Free</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.serviceCharge}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6 class="m-0">Total:</h6>
+                            <h6 class="m-0">Sub Total:</h6>
                         </td>
-                        <td>$ {{orderDetails.payment.total}}</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.total}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
     <div class="modal-footer">
         <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>

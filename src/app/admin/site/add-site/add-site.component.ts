@@ -34,6 +34,7 @@ export class AddSiteComponent {
 	public siteSettingForm: FormGroup;
 	accountList: any = [];
 	countriesList: any = [];
+	currenciesList: any[] = [];
 	stateList: any = [];
 	siteTypes = [
 		{ id: 1, label: 'Hotel' },
@@ -180,7 +181,7 @@ export class AddSiteComponent {
 	}
 
 	patchSiteSettingsData(siteSettings: any) {
-		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const { theme, serviceTax, sgst, cgst, currency } = siteSettings;
 		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
 		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
 		const amenitiesOrder = this.getStatusOfSiteConfig(
@@ -200,6 +201,7 @@ export class AddSiteComponent {
 		const feedback = this.getStatusOfSiteConfig(siteSettings.feedback);
 		this.siteSettingForm = this.formBuilder.group({
 			theme: [theme],
+			currency: [currency],
 			serviceTax: [serviceTax],
 			sgst: [sgst],
 			cgst: [cgst],
@@ -214,6 +216,15 @@ export class AddSiteComponent {
 			sos: [sos],
 			events: [events],
 			feedback: [feedback],
+		});
+		this.listCurrenciesAPI();
+	}
+
+	listCurrenciesAPI() {
+		this.accountService.listCurrencies().subscribe((res) => {
+			if (res.status) {
+				this.currenciesList = [...res.data];
+			}
 		});
 	}
 

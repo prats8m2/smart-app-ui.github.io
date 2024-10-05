@@ -27,6 +27,7 @@ export class AddOrderComponent implements OnInit {
 	selectedSite: number;
 	selectedType: number;
 	totalAmountOfProduct: number = 0;
+	currency: string = '';
 	showRoomDropdown: boolean = true;
 	showTableDropdown: boolean = false;
 	disableSaveButton: boolean = true;
@@ -81,6 +82,7 @@ export class AddOrderComponent implements OnInit {
 				this.selectedSite = res.siteId;
 				const siteResponse = await this.siteService.viewSite(res.siteId);
 				this.siteDetails = siteResponse.data;
+				this.currency = this.siteDetails.settings.currency;
 			}
 		});
 
@@ -112,20 +114,21 @@ export class AddOrderComponent implements OnInit {
 			(this.totalAmountOfProduct * this.siteSettings.cgst) / 100;
 		this.serviceTaxAmount =
 			(this.totalAmountOfProduct * this.siteSettings.serviceTax) / 100;
-		console.log(this.totalAmountOfProduct);
-		console.log(this.siteSettings);
-		this.totalAmountWithTaxes =
-			this.totalAmountOfProduct +
-			this.sgstAmount +
-			this.cgstAmount +
-			this.serviceTaxAmount;
+		this.totalAmountWithTaxes = Number(
+			(
+				this.totalAmountOfProduct +
+				this.sgstAmount +
+				this.cgstAmount +
+				this.serviceTaxAmount
+			).toFixed(2)
+		);
 
 		this.pricing = {
-			totalAmountOfProduct: this.totalAmountOfProduct,
-			sgstAmount: this.sgstAmount,
-			cgstAmount: this.cgstAmount,
-			serviceTaxAmount: this.serviceTaxAmount,
-			totalAmountWithTaxes: this.totalAmountWithTaxes,
+			totalAmountOfProduct: Number(this.totalAmountOfProduct.toFixed(2)),
+			sgstAmount: Number(this.sgstAmount.toFixed(2)),
+			cgstAmount: Number(this.cgstAmount.toFixed(2)),
+			serviceTaxAmount: Number(this.serviceTaxAmount.toFixed(2)),
+			totalAmountWithTaxes: Number(this.totalAmountWithTaxes.toFixed(2)),
 		};
 	}
 
@@ -170,7 +173,11 @@ export class AddOrderComponent implements OnInit {
 
 	delete(index): void {
 		if (index !== -1) {
+			this.totalAmountOfProduct =
+				this.totalAmountOfProduct -
+				this.order[index].price * this.order[index].quantity;
 			this.order.splice(index, 1);
+			this.calculatePrice();
 		}
 	}
 
@@ -180,9 +187,6 @@ export class AddOrderComponent implements OnInit {
 			const res = await this.roomService.listRoomsPromise(this.roomParams);
 			if (res.status) {
 				this.rooms = [...res.data.rooms];
-				if (this.rooms.length) {
-					this.updateRoom(this.rooms[0]?.id);
-				}
 			} else {
 				return null;
 			}
@@ -195,10 +199,6 @@ export class AddOrderComponent implements OnInit {
 			const res = await this.tableService.listTablePromise(this.tableParams);
 			if (res.status) {
 				this.tables = [...res.data.tables];
-
-				if (this.tables.length) {
-					this.updateTable(this.tables[0]?.id);
-				}
 			} else {
 				return null;
 			}
@@ -240,6 +240,7 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	onChangeRadio(value: number) {
+		this.disableSaveButton = true;
 		if (value == 1 && this.showListRoom) {
 			this.listRooms(this.selectedSite);
 		}

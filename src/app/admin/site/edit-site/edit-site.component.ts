@@ -44,6 +44,7 @@ export class EditSiteComponent {
 		{ id: 3, label: 'CUSTOM 2' },
 		{ id: 4, label: 'CUSTOM 3' },
 	];
+	currenciesList: any[] = [];
 	showNoSiteAvailable: boolean = true;
 	selectedTab: number = 0;
 	selectTabIndex: number = 0;
@@ -232,7 +233,7 @@ export class EditSiteComponent {
 	}
 
 	patchSiteSettingsData(siteSettings: any) {
-		const { theme, serviceTax, sgst, cgst } = siteSettings;
+		const { theme, serviceTax, sgst, cgst, currency } = siteSettings;
 		const orders = this.getStatusOfSiteConfig(siteSettings.orders);
 		const foodOrder = this.getStatusOfSiteConfig(siteSettings.foodOrder);
 		const amenitiesOrder = this.getStatusOfSiteConfig(
@@ -252,6 +253,7 @@ export class EditSiteComponent {
 		const feedback = this.getStatusOfSiteConfig(siteSettings.feedback);
 		this.siteSettingForm = this.formBuilder.group({
 			theme: [theme],
+			currency: [currency],
 			serviceTax: [serviceTax],
 			sgst: [sgst],
 			cgst: [cgst],
@@ -266,6 +268,16 @@ export class EditSiteComponent {
 			sos: [sos],
 			events: [events],
 			feedback: [feedback],
+		});
+
+		this.listCurrenciesAPI();
+	}
+
+	listCurrenciesAPI() {
+		this.accountService.listCurrencies().subscribe((res) => {
+			if (res.status) {
+				this.currenciesList = [...res.data];
+			}
 		});
 	}
 
