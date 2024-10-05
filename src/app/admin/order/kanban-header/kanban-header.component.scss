@@ -66,6 +66,7 @@
 .ng-select.ng-select-single .ng-select-container {
   height: 36px;
   border-radius: 22px;
+  width: calc(100vw - 1525px) !important;
 }
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {

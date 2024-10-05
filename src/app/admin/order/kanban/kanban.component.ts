@@ -30,8 +30,10 @@ export class KanbanComponent implements OnInit {
 		document.body.setAttribute('data-bs-theme', 'dark');
 		this.orderService.ordersChange.subscribe((res) => {
 			if (res) {
+				console.log(res);
 				this.selectedAccountId = res?.accountId;
-				this.listOrders(res.siteId, res.orderType);
+				this.selectedCategoryType = res.selectedCategortType;
+				this.listOrders(res.siteId, res.orderType, this.selectedCategoryType);
 			}
 		});
 	}
@@ -64,6 +66,7 @@ export class KanbanComponent implements OnInit {
 	selectedStaffId: number;
 	selectedOrderId: number;
 	selectedSiteId: number;
+	selectedCategoryType!: string;
 	selectedTypeId: number;
 	siteCurrency: string = '';
 
@@ -84,20 +87,23 @@ export class KanbanComponent implements OnInit {
 			this.cdr.markForCheck();
 		});
 		this.socketService.onNewOrder().subscribe((order) => {
-			console.log(order);
 			this.orders.unshift(order);
 			this.filterForKanban();
 		});
 
 		this.socketService.updateOrderStatus().subscribe((order) => {
-			console.log('Order updated', order);
+			this.orders = this.orders.map((item) =>
+				item.id === order.id ? { ...item, status: order.status } : item
+			);
+			this.filterForKanban();
 		});
 	}
 
-	async listOrders(siteId: any, type: number) {
+	async listOrders(siteId: any, type: number, categoryType: any) {
 		const orderParams: IParams = {
 			siteId,
-			type: type,
+			orderType: categoryType,
+			categoryType: type,
 			limit: 100,
 			pageNumber: 1,
 		};
@@ -215,7 +221,11 @@ export class KanbanComponent implements OnInit {
 						.updateOrderStatus(orderId, ORDER_STATUS.CANCELED)
 						.then((res: any) => {
 							if (res.status) {
-								this.listOrders(this.selectedSiteId, this.selectedTypeId);
+								this.listOrders(
+									this.selectedSiteId,
+									this.selectedTypeId,
+									this.selectedCategoryType
+								);
 							}
 						});
 				}

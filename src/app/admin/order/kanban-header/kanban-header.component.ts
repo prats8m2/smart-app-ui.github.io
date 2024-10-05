@@ -19,6 +19,18 @@ export class KanbanHeaderComponent {
 	selectedOrderType: number = 1;
 	selectedSiteId: number;
 	selectedAccountId: number;
+	selectedCategoryType: number = 0;
+
+	categoryTypeOptions: any[] = [
+		{ label: 'All', value: 0 },
+		{ label: 'Table', value: 1 },
+		{ label: 'Room', value: 2 },
+		{ label: 'Online', value: 3 },
+		{ label: 'Offline', value: 4 },
+		{ label: 'SOS', value: 5 },
+		{ label: 'Room Service', value: 6 },
+		{ label: 'Room Cleaning', value: 7 },
+	];
 
 	accountParams: IParams = {
 		limit: 100,
@@ -75,7 +87,12 @@ export class KanbanHeaderComponent {
 				this.sitesList = [...res.data.sites];
 				if (this.sitesList.length) {
 					this.selectedSiteId = this.sitesList[0]?.id;
-					this.listOrders(this.selectedSiteId, this.selectedOrderType);
+					this.selectedCategoryType = 0;
+					this.listOrders(
+						this.selectedSiteId,
+						this.selectedOrderType,
+						this.selectedCategoryType
+					);
 				}
 			}
 		});
@@ -83,16 +100,22 @@ export class KanbanHeaderComponent {
 
 	onOrderTypeChange(orderType: number): void {
 		this.selectedOrderType = orderType;
-		this.listOrders(this.selectedSiteId, this.selectedOrderType);
+		this.selectedCategoryType = 0;
+		this.listOrders(
+			this.selectedSiteId,
+			this.selectedOrderType,
+			this.selectedCategoryType
+		);
 	}
 
-	listOrders(siteId: number, orderType: number) {
+	listOrders(siteId: number, orderType: number, categoryType: number) {
 		if (siteId) {
 			this.selectedSiteId = siteId;
 			this.orderService.ordersChange.next({
 				accountId: this.selectedAccountId,
 				siteId: this.selectedSiteId,
 				orderType: orderType || this.selectedOrderType,
+				selectedCategortType: categoryType,
 			});
 		}
 	}
@@ -102,5 +125,14 @@ export class KanbanHeaderComponent {
 			data: this.search,
 			action: 1,
 		});
+	}
+
+	changeType(orderType: any) {
+		this.selectedCategoryType = orderType;
+		this.listOrders(
+			this.selectedSiteId,
+			this.selectedOrderType,
+			this.selectedCategoryType
+		);
 	}
 }

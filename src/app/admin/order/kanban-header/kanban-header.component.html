@@ -88,6 +88,18 @@
                 </div>
             </div>
             <div class=" d-inline-block">
+                <div class="col-lg-15 mt-3 ms-2">
+                    <div class="me-2 mb-2 d-inline-block">
+                        <div class="position-relative">
+                            <ng-select [items]="categoryTypeOptions" [searchable]="false" bindLabel="label"
+                                bindValue="value" [clearable]="false" placeholder="Select Type"
+                                [ngModel]="selectedCategoryType" (change)="changeType($event.value)">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" d-inline-block">
                 <div class="col-lg-10 mt-3 ms-2">
                     <div class="search-box me-2 mb-2 d-inline-block">
                         <div class="position-relative">
