@@ -114,9 +114,6 @@
                 <div class="text-start">
                     <p class="text-muted mb-0 text-black">Created {{order?.createdOn | timeAgo}}</p>
                 </div>
-                <div class="text-end">
-                    <h5 class="font-size-15 mb-1 text-black">$ {{order?.payment?.total}}</h5>
-                </div>
             </div>
         </div>
     </div>
@@ -127,30 +124,27 @@
         <h5 class="modal-title mt-0" id="orderdetailsModalLabel">Order Details</h5>
         <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
     </div>
-    <div class="modal-body">
+
+    <div class="modal-body" style="max-height: 500px;">
         <p class="mb-2" id="orderlist-overview">
             Order id:
             <span class="list-id text-primary">{{orderDetails.id}}</span>
         </p>
-        <p class="mb-4">
+        <p class="mb-2">
             Billing Name:
-            <span class="orderlist-customer text-primary">{{orderDetails?.user?.name}}</span>
+            <span class="orderlist-customer text-primary">{{orderDetails.user}}</span>
         </p>
-        <p class="mb-4">
+        <p class="mb-2">
             Location:
             <span *ngIf="orderDetails.table && !orderDetails.room"
-                class="orderlist-customer text-primary">{{orderDetails?.table?.name}}</span>
-            <span *ngIf="orderDetails.room && !orderDetails.table "
-                class="orderlist-customer text-primary">{{orderDetails?.room?.name}}</span>
+                class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
+            <span *ngIf="orderDetails.room && !orderDetails.table"
+                class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
         </p>
-        <p class="mb-4">
-            Assigned:
-            <span class="orderlist-customer text-primary">{{orderDetails?.user ? orderDetails?.user?.username :'Not
-                Assigned'}}</span>
-        </p>
-        <div class="table-responsive">
+
+        <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
             <table class="table table-centered table-nowrap">
-                <thead>
+                <thead class="">
                     <tr>
                         <th scope="col">Product</th>
                         <th scope="col">Product Name</th>
@@ -166,34 +160,48 @@
                         </th>
                         <td>
                             <div>
-                                <h5 class="text-truncate font-size-14">{{product?.name}}</h5>
-                                <p class="text-muted mb-0">$ {{product.price}} x {{product.quantity}}</p>
+                                <h5 class="text-truncate font-size-14">{{product.name}}</h5>
+                                <p class="text-muted mb-0">{{siteCurrency}} {{product.price}} x {{product.quantity}}</p>
                             </div>
                         </td>
-                        <td>$ {{product.price * product.quantity}}</td>
+                        <td class="align-right">{{siteCurrency}} {{product.price * product.quantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-centered table-nowrap">
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <h6 class="m-0">SGST:</h6>
+                        </td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.sgst}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6 class="m-0">Sub Total:</h6>
+                            <h6 class="m-0">CGST:</h6>
                         </td>
-                        <td>$ {{orderDetails.payment.total}}</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.cgst}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <h6 class="m-0">Service charges:</h6>
                         </td>
-                        <td>Free</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.serviceCharge}}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6 class="m-0">Total:</h6>
+                            <h6 class="m-0">Sub Total:</h6>
                         </td>
-                        <td>$ {{orderDetails.payment.total}}</td>
+                        <td class="align-right">{{siteCurrency}} {{orderDetails.payment.total}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
     <div class="modal-footer">
         <button class="btn btn-secondary" (click)="modalRef?.hide()">Close</button>
     </div>

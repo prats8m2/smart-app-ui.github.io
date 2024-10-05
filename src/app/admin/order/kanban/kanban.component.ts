@@ -65,6 +65,7 @@ export class KanbanComponent implements OnInit {
 	selectedOrderId: number;
 	selectedSiteId: number;
 	selectedTypeId: number;
+	siteCurrency: string = '';
 
 	roleParams: IParams = {
 		accountId: null,
@@ -83,7 +84,8 @@ export class KanbanComponent implements OnInit {
 			this.cdr.markForCheck();
 		});
 		this.socketService.onNewOrder().subscribe((order) => {
-			this.orders.push(order);
+			console.log(order);
+			this.orders.unshift(order);
 			this.filterForKanban();
 		});
 
@@ -155,6 +157,7 @@ export class KanbanComponent implements OnInit {
 		this.orderService.viewOrder(orderId).then((res) => {
 			if (res.status && res.data) {
 				this.orderDetails = res.data;
+				this.siteCurrency = res.data.site.settings.currency;
 			} else {
 				this.orderDetails = null;
 			}

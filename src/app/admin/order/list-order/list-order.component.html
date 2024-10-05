@@ -166,16 +166,16 @@
         <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body" style="max-height: 500px;">
         <p class="mb-2" id="orderlist-overview">
             Order id:
             <span class="list-id text-primary">{{orderDetails.id}}</span>
         </p>
-        <p class="mb-4">
+        <p class="mb-2">
             Billing Name:
             <span class="orderlist-customer text-primary">{{orderDetails.user}}</span>
         </p>
-        <p class="mb-4">
+        <p class="mb-2">
             Location:
             <span *ngIf="orderDetails.table && !orderDetails.room"
                 class="orderlist-customer text-primary">{{orderDetails.table.name}}</span>
@@ -183,8 +183,7 @@
                 class="orderlist-customer text-primary">{{orderDetails.room.name}}</span>
         </p>
 
-        <!-- Scrollable Product Table -->
-        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+        <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
             <table class="table table-centered table-nowrap">
                 <thead class="">
                     <tr>
@@ -212,8 +211,7 @@
             </table>
         </div>
 
-        <!-- Non-scrollable Tax and Total Table -->
-        <div class="table-responsive mt-4">
+        <div class="table-responsive mt-3">
             <table class="table table-centered table-nowrap">
                 <tbody>
                     <tr>
