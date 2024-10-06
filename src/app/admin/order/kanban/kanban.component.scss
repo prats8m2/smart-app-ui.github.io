@@ -13,6 +13,30 @@
     background-color: #e3f2fd !important;
 }
 
+//order added back to new
+@keyframes OrderAddedBackFadeIn {
+  0% {
+    background-color: #e3f2fd;
+  }
+  100% {
+    background-color: blue !important; 
+  }
+}
+
+@keyframes OrderAddBackFadeOut {
+  0% {
+    background-color: blue !important;
+  }
+  100% {
+    background-color: #e3f2fd; 
+  }
+}
+
+.order-added-back {
+  border: 3px solid #007bff !important;
+  animation: OrderAddedBackFadeIn 1s ease-in-out forwards, OrderAddBackFadeOut 1s ease-in-out forwards 5; 
+}
+
 // for order added
 @keyframes OrderAddedFadeIn {
   0% {

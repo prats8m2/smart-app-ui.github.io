@@ -112,41 +112,10 @@ export class ListOrderComponent implements OnInit {
 					}
 				}
 			});
-			this.subscription = interval(60000).subscribe(() => {
-				this.cdr.markForCheck();
-			});
-			this.socketService.onNewOrder().subscribe((order) => {
-				this.orders.unshift({
-					...order,
-					isNew: true,
-					isUpdated: false,
-					isDeleted: false,
-					isCompleted: false,
-				});
-				this.updateDisplayedData();
-			});
-			this.socketService.updateOrder().subscribe((order) => {
-				console.log('Order updated', order);
-			});
-
-			this.socketService.updateOrderStatus().subscribe((order) => {
-				this.orders = this.orders.map((item) =>
-					item.id === order.id
-						? {
-								...item,
-								status: order.status,
-								isNew: false,
-								isUpdated: true,
-								isDeleted: order.status === ORDER_STATUS.CANCELED,
-								isCompleted: order.status === ORDER_STATUS.COMPLETED,
-						  }
-						: item
-				);
-				this.updateDisplayedData();
-			});
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
+		this.listenForSocketEvents();
 	}
 
 	pageChanged(event: any): void {
@@ -231,12 +200,7 @@ export class ListOrderComponent implements OnInit {
 		};
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
-			this.orders = res.data.orders.map((order: any) => ({
-				...order,
-				isNew: false,
-				isUpdated: false,
-				isDeleted: false,
-			}));
+			this.orders = [...res.data.orders];
 			this.updateDisplayedData();
 		} else {
 			return null;
@@ -386,5 +350,29 @@ export class ListOrderComponent implements OnInit {
 				);
 				break;
 		}
+	}
+
+	//method for socket events
+	listenForSocketEvents() {
+		this.subscription = interval(60000).subscribe(() => {
+			this.cdr.markForCheck();
+		});
+		this.socketService.onNewOrder().subscribe((order) => {
+			if (order && order.site === this.selectedSite) {
+				this.orders.unshift(order);
+				this.updateDisplayedData();
+			}
+		});
+		this.socketService.updateOrder().subscribe((order) => {
+			console.log('Order updated', order);
+		});
+
+		this.socketService.updateOrderStatus().subscribe((order) => {
+			if (order && order.site.id === this.selectedSite) {
+				this.orders = this.orders.filter((item) => item.id !== order.id);
+				this.orders.unshift(order);
+				this.updateDisplayedData();
+			}
+		});
 	}
 }

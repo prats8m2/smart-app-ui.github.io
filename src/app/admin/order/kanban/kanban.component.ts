@@ -85,30 +85,7 @@ export class KanbanComponent implements OnInit {
 		this.subscription = interval(60000).subscribe(() => {
 			this.cdr.markForCheck();
 		});
-		this.socketService.onNewOrder().subscribe((order) => {
-			this.orders.unshift({
-				...order,
-				isNew: true,
-				isUpdated: false,
-				isDeleted: false,
-			});
-			this.filterForKanban();
-		});
-
-		this.socketService.updateOrderStatus().subscribe((order) => {
-			this.orders = this.orders.map((item) =>
-				item.id === order.id
-					? {
-							...item,
-							status: order.status,
-							isNew: false,
-							isUpdated: true,
-							isDeleted: order.status === ORDER_STATUS.CANCELED,
-					  }
-					: item
-			);
-			this.filterForKanban();
-		});
+		this.listenForSocketEvents();
 	}
 
 	async listOrders(siteId: any, type: number, categoryType: any) {
@@ -123,12 +100,7 @@ export class KanbanComponent implements OnInit {
 		this.selectedTypeId = type;
 		const res = await this.orderService.listOrderPromise(orderParams);
 		if (res.status) {
-			this.orders = res.data.orders.map((order: any) => ({
-				...order,
-				isNew: false,
-				isUpdated: false,
-				isDeleted: false,
-			}));
+			this.orders = [...res.data.orders];
 			this.filterForKanban();
 		} else {
 			return null;
@@ -266,5 +238,28 @@ export class KanbanComponent implements OnInit {
 					}
 				});
 		}
+	}
+
+	listenForSocketEvents() {
+		this.subscription = interval(60000).subscribe(() => {
+			this.cdr.markForCheck();
+		});
+		this.socketService.onNewOrder().subscribe((order) => {
+			if (order && order.site === this.selectedSiteId) {
+				this.orders.unshift(order);
+				this.filterForKanban();
+			}
+		});
+		this.socketService.updateOrder().subscribe((order) => {
+			console.log('Order updated', order);
+		});
+
+		this.socketService.updateOrderStatus().subscribe((order) => {
+			if (order && order.site.id === this.selectedSiteId) {
+				this.orders = this.orders.filter((item) => item.id !== order.id);
+				this.orders.unshift(order);
+				this.filterForKanban();
+			}
+		});
 	}
 }
