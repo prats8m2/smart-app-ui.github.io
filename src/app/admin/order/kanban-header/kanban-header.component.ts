@@ -115,7 +115,7 @@ export class KanbanHeaderComponent {
 				accountId: this.selectedAccountId,
 				siteId: this.selectedSiteId,
 				orderType: orderType || this.selectedOrderType,
-				selectedCategortType: categoryType,
+				selectedCategortType: categoryType || this.selectedCategoryType,
 			});
 		}
 	}
