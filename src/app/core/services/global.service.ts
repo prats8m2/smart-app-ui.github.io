@@ -36,17 +36,17 @@ export class GlobalService {
 				});
 				return true;
 			}
-		}
-		if (!result.status) {
-			Swal.fire({
-				icon: 'error',
-				text: result.message,
-				toast: true,
-				position: 'top-end',
-				showConfirmButton: false,
-				timer: 2000,
-			});
-			return true;
+			if (!result.status) {
+				Swal.fire({
+					icon: 'error',
+					text: result.message,
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+				return true;
+			}
 		}
 	}
 

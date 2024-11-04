@@ -58,6 +58,8 @@ export class EditProductComponent implements OnInit {
 		pageNumber: 1,
 	};
 
+	siteCurrency: string  = '$';
+
 	productId: any;
 	productData: any;
 
@@ -112,7 +114,6 @@ export class EditProductComponent implements OnInit {
 			this.productId = params['id'];
 			this.productService.viewProduct(this.productId).then((res) => {
 				if (res.status) {
-					console.log(res.data);
 					this.productData = res.data;
 					this.productForm.patchValue({
 						id: this.productId,
@@ -129,6 +130,7 @@ export class EditProductComponent implements OnInit {
 						isSpecial: this.productData.isSpecial,
 						type: this.productData.type === 1 ? 'Food' : 'Amenities',
 					});
+					this.siteCurrency = this.productData.site.settings.currency;
 					this.productForm.get('account')?.disable();
 					this.productForm.get('type')?.disable();
 					const accountId = this.productData.site.account.id;

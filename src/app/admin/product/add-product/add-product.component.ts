@@ -67,6 +67,8 @@ export class AddProductComponent implements OnInit {
 		{ id: 2, label: 'Amenities' },
 	];
 
+	siteCurrency: string= '$';
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private router: Router,
@@ -132,6 +134,7 @@ export class AddProductComponent implements OnInit {
 				this.siteList = [...res.data.sites];
 				if (this.siteList.length) {
 					this.categoryParams.siteId = this.siteList[0]?.id;
+					this.siteCurrency = this.siteList[0].settings.currency;
 				}
 			}
 		});
@@ -207,7 +210,11 @@ export class AddProductComponent implements OnInit {
 		//list categories
 		if (siteId) {
 			this.categoryParams.siteId = siteId;
-			this.listCategoryApi(this.categoryParams);
+			const selectedSiteData = this.siteList.find((s) => s.id == siteId);
+			this.siteCurrency = selectedSiteData.settings.currency;
+			if(this.categoryParams.type){
+				this.listCategoryApi(this.categoryParams);
+			}
 		}
 	}
 

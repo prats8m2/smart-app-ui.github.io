@@ -21,6 +21,20 @@
     scrollbar-width: thin;
     scrollbar-color: #556080; 
   }
+
+  .update-text {
+    display: inline-block;
+    max-width: 100%; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 576px) {
+    .update-text {
+      max-width: 40px; 
+    }
+  }
   
   .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
     background-color: #556080;

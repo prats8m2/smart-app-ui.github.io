@@ -115,7 +115,6 @@ export class ListOrderComponent implements OnInit {
 		} else {
 			this.listSiteAPI(this.siteParams);
 		}
-		this.listenForSocketEvents();
 	}
 
 	pageChanged(event: any): void {
@@ -178,6 +177,8 @@ export class ListOrderComponent implements OnInit {
 						this.selectedOrderType
 					);
 				}
+		this.listenForSocketEvents();
+
 			}
 		});
 	}
@@ -357,6 +358,8 @@ export class ListOrderComponent implements OnInit {
 		this.subscription = interval(60000).subscribe(() => {
 			this.cdr.markForCheck();
 		});
+
+		this.socketService.initialize(`${this.selectedSite}`, `${this.orderType}`);
 		this.socketService.onNewOrder().subscribe((order) => {
 			if (order && order.site === this.selectedSite) {
 				this.orders.unshift(order);
@@ -368,11 +371,9 @@ export class ListOrderComponent implements OnInit {
 		});
 
 		this.socketService.updateOrderStatus().subscribe((order) => {
-			if (order && order.site.id === this.selectedSite) {
 				this.orders = this.orders.filter((item) => item.id !== order.id);
 				this.orders.unshift(order);
 				this.updateDisplayedData();
-			}
 		});
 	}
 }

@@ -177,7 +177,6 @@ export class AddMenuComponent implements OnInit {
 		this.categortService.listCategory(params).subscribe((res) => {
 			if (res.status) {
 				this.categoriesList = [...res.data.categories];
-				if (this.categoriesList.length) {
 					this.categoryProductDropdownList = this.categoriesList.flatMap(
 						(category) =>
 							category.products.map((product) => ({
@@ -187,7 +186,6 @@ export class AddMenuComponent implements OnInit {
 								productName: product.name,
 							}))
 					);
-				}
 			}
 		});
 	}

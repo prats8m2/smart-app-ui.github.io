@@ -23,6 +23,20 @@
   color: #fff
 }
 
+.update-text {
+  display: inline-block;
+  max-width: 100%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 576px) {
+  .update-text {
+    max-width: 40px; 
+  }
+}
+
 .hover-pointer{
   width: 100%;
 }

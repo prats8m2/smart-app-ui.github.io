@@ -126,24 +126,24 @@
                 </div>
                 <div class="col-md-6">
                     <label for="password">Password</label>
-                    <div class="mb-3 input-group auth-pass-inputgroup">
+                    <div class="input-group auth-pass-inputgroup">
                         <input [type]="showPassword ? 'text' : 'password'" class="form-control"
                             [ngClass]="{ 'form-error':showError('password'),'form-success':showSuccess('password')}"
                             formControlName="password" />
                         <button class="btn btn-light ms-0" type="button" id="password-addon"
                             (click)="showPassword = !showPassword"> <i
                                 [ngClass]="showPassword ? 'mdi mdi-eye-off-outline' : 'mdi mdi-eye-outline'"></i></button>
-                        <div *ngIf="formTouched('password')">
-                            <div *ngIf="isError('password','required')" class="text-danger">
-                                {{errorMessage('password','required')}}
-                            </div>
-                            <div *ngIf="isError('password','pattern')" class="text-danger">
-                                {{errorMessage('password','pattern')}} </div>
-                            <div *ngIf="isError('password','maxlength')" class="text-danger">
-                                {{errorMessage('password','maxlength')}} </div>
-                            <div *ngIf="isError('password','minlength')" class="text-danger">
-                                {{errorMessage('password','minlength')}} </div>
+                    </div>
+                    <div *ngIf="formTouched('password')">
+                        <div *ngIf="isError('password','required')" class="text-danger">
+                            {{errorMessage('password','required')}}
                         </div>
+                        <div *ngIf="isError('password','pattern')" class="text-danger">
+                            {{errorMessage('password','pattern')}} </div>
+                        <div *ngIf="isError('password','maxlength')" class="text-danger">
+                            {{errorMessage('password','maxlength')}} </div>
+                        <div *ngIf="isError('password','minlength')" class="text-danger">
+                            {{errorMessage('password','minlength')}} </div>
                     </div>
                 </div>
             </div>
