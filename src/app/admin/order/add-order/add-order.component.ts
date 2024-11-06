@@ -277,4 +277,18 @@ export class AddOrderComponent implements OnInit {
 				}
 			});
 	}
+
+	clearOrder(){
+		this.order = [];
+		this.selectedRoom = 0;
+		this.selectedTable = 0;
+		this.pricing = {
+			totalAmountOfProduct: 0,
+			sgstAmount: 0,
+			cgstAmount: 0,
+			serviceTaxAmount: 0,
+			totalAmountWithTaxes: 0,
+		};
+		this.totalAmountOfProduct = 0;
+	}
 }

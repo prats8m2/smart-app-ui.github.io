@@ -120,11 +120,8 @@
                                                 <div class="col-6 mt-2">
                                                     <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListRoom">
                                                         <div class="position-relative">
-                                                            <div
-                                                                class="form-check form-radio-outline form-radio-primary">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="orderType1" id="formRoomRadio" value="1"
-                                                                    (change)="onChangeRadio(1)" checked>
+                                                            <div class="form-check form-radio-outline form-radio-primary">
+                                                                <input class="form-check-input" type="radio" name="orderType1" id="formRoomRadio" value="1" (change)="onChangeRadio(1)" checked>
                                                                 <label class="form-check-label" for="formRoomRadio">
                                                                     Room
                                                                 </label>
@@ -133,11 +130,8 @@
                                                     </div>
                                                     <div class="col-mt-6 me-2 d-inline-block" *ngIf="showListTable">
                                                         <div class="position-relative">
-                                                            <div
-                                                                class="form-check form-radio-outline form-radio-success">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="orderType1" id="formTableRadio" value="2"
-                                                                    (change)="onChangeRadio(2)">
+                                                            <div class="form-check form-radio-outline form-radio-success">
+                                                                <input class="form-check-input" type="radio" name="orderType1" id="formTableRadio" value="2" (change)="onChangeRadio(2)">
                                                                 <label class="form-check-label" for="formTableRadio">
                                                                     Table
                                                                 </label>
@@ -147,31 +141,19 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="col-sm-12" *ngIf="showRoomDropdown">
-                                                        <ng-select #rList [items]="rooms" [searchable]="false"
-                                                            bindLabel="name" bindValue="id" [clearable]="false"
-                                                            placeholder="Select Room" (change)="updateRoom($event)"
-                                                            typeToSearchText="Type to search">
+                                                        <ng-select #rList [items]="rooms" [searchable]="false" bindLabel="name" bindValue="id" [clearable]="false" placeholder="Select Room" (change)="updateRoom($event)" typeToSearchText="Type to search">
                                                             <ng-template ng-header-tmp>
                                                                 <div class="form-group has-feedback">
-                                                                    <input style="width: 100%;line-height: 24px"
-                                                                        type="text" class="form-control"
-                                                                        placeholder="Search"
-                                                                        (input)="rList.filter($event.target.value)" />
+                                                                    <input style="width: 100%;line-height: 24px" type="text" class="form-control" placeholder="Search" (input)="rList.filter($event.target.value)" />
                                                                 </div>
                                                             </ng-template>
                                                         </ng-select>
                                                     </div>
                                                     <div class="col-sm-12" *ngIf="showTableDropdown">
-                                                        <ng-select #tList [items]="tables" [searchable]="false"
-                                                            bindLabel="name" bindValue="id" [clearable]="false"
-                                                            placeholder="Select Table" (change)="updateTable($event)"
-                                                            typeToSearchText="Type to search">
+                                                        <ng-select #tList [items]="tables" [searchable]="false" bindLabel="name" bindValue="id" [clearable]="false" placeholder="Select Table" (change)="updateTable($event)" typeToSearchText="Type to search">
                                                             <ng-template ng-header-tmp>
                                                                 <div class="form-group has-feedback">
-                                                                    <input style="width: 100%;line-height: 24px"
-                                                                        type="text" class="form-control"
-                                                                        placeholder="Search"
-                                                                        (input)="tList.filter($event.target.value)" />
+                                                                    <input style="width: 100%;line-height: 24px" type="text" class="form-control" placeholder="Search" (input)="tList.filter($event.target.value)" />
                                                                 </div>
                                                             </ng-template>
                                                         </ng-select>
@@ -180,60 +162,47 @@
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="table-responsive">
-                                                    <table class="table table-centered table-nowrap"
-                                                        style="bottom: 50px; left: 0px;  ">
+                                                    <table class="table table-centered table-nowrap" style="bottom: 50px; left: 0px;">
                                                         <tbody>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">SGST:</h6>
                                                                 </td>
-                                                                <td class="align-right"> {{currency}}
-                                                                    {{pricing?.sgstAmount ?? 0}}
-                                                                </td>
+                                                                <td class="align-right"> {{currency}} {{pricing?.sgstAmount ?? 0}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">CGST:</h6>
                                                                 </td>
-                                                                <td class="align-right">{{currency}}
-                                                                    {{pricing?.cgstAmount ?? 0}}
-                                                                </td>
+                                                                <td class="align-right">{{currency}} {{pricing?.cgstAmount ?? 0}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">Service Charge:</h6>
                                                                 </td>
-                                                                <td class="align-right">{{currency}}
-                                                                    {{pricing?.serviceTaxAmount ??
-                                                                    0}}</td>
+                                                                <td class="align-right">{{currency}} {{pricing?.serviceTaxAmount ?? 0}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <h6 class="m-0">Item Total:</h6>
                                                                 </td>
-                                                                <td class="align-right">{{currency}}
-                                                                    {{pricing?.totalAmountOfProduct ?? 0}}</td>
+                                                                <td class="align-right">{{currency}} {{pricing?.totalAmountOfProduct ?? 0}}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h5 class="mt-2">Sub Total : <span class="text-muted me-2"></span>
-                                                        <b>{{currency}}
-                                                            {{totalAmountWithTaxes}}</b>
-                                                    </h5>
+                                                    <h6 class="mt-2">Sub Total: <span class="text-muted me-2"></span><b>{{currency}} {{pricing?.totalAmountWithTaxes ?? 0}}</b></h6>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="text-sm-end mt-2 mt-sm-0">
-                                                        <button type="submit" class="btn btn-primary w-md"
-                                                            [disabled]="order?.length == 0 || disableSaveButton"
-                                                            (click)="addOrder()">
-                                                            <i
-                                                                class=" mdi mdi-cart-arrow-right me-1"></i>Submit</button>
-                                                    </div>
+                                                <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                                                    <button type="button" class="btn btn-danger me-2" [disabled]="order?.length == 0" (click)="clearOrder()">Clear</button>
+                                                    <button type="submit" class="btn btn-primary" [disabled]="order?.length == 0 || disableSaveButton" (click)="addOrder()">
+                                                        Submit
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -135,6 +135,9 @@ export class AddProductComponent implements OnInit {
 				if (this.siteList.length) {
 					this.categoryParams.siteId = this.siteList[0]?.id;
 					this.siteCurrency = this.siteList[0].settings.currency;
+					if(this.categoryParams.type){
+						this.listCategoryApi(this.categoryParams)
+					}
 				}
 			}
 		});
