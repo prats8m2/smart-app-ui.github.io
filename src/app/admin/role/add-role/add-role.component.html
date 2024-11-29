@@ -5,7 +5,6 @@
             <h4 class="card-title mb-4">Add Role</h4>
         </div>
         <form (ngSubmit)="addRole()" [formGroup]="roleForm" class="custom-form">
-            <h6 class="mb-2">Role Details</h6>
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <label for="roleName">Role Name</label>
@@ -25,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <label class="mb-2" *ngIf="showListAccount">Account Details</label>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <ng-select #accList [items]="accountList" [searchable]="false"
@@ -44,7 +43,7 @@
             <div class="row">
                 <div class="col-container">
                     <div class="col-md-12 mb-4">
-                        <h6>Permissions</h6>
+                        <label>Permissions</label>
                         <div formGroupName="userPermissions" class="row">
                             <div *ngFor="let key of permissionsData | keys" class="col-md-6 mt-3">
                                 <label for="rolePermissions">{{ key }}</label>

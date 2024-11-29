@@ -115,6 +115,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <label for="password">Password</label>
                     <div class="mb-3 input-group auth-pass-inputgroup">
                         <input [type]="showPassword ? 'text' : 'password'" class="form-control"
                             [ngClass]="{ 'form-error':showError('password'),'form-success':showSuccess('password')}"
@@ -138,9 +139,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <label for="accountName">Staff Status</label>
+                    <label for="accountName">Status</label>
                     <div class="form-check form-switch form-switch-lg mb-3">
-                        <input class="form-check-input ml-2" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
+                        <input class="form-check-input" type="checkbox" id="SwitchCheckSizelg" (click)="toggle()"
                             formControlName="status" [checked]="this.staffForm.get('status').value">
                         <label class="form-check-label" for="SwitchCheckSizelg">{{this.staffForm.get('status').value ?
                             'Active' : 'In
@@ -148,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <label class="mb-2" *ngIf="showListAccount">Account Name</label>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <ng-select #accList [items]="accountList" [searchable]="false"
@@ -165,7 +166,7 @@
                 </div>
             </div>
             <!-- Second Row -->
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <label class="mb-2" *ngIf="showListSite">Site Name</label>
             <!-- Site Name -->
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">

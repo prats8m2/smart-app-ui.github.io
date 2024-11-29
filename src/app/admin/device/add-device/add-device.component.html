@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListAccount">Account Details</h6>
+            <label class="mb-2" *ngIf="showListAccount">Account Name</label>
             <div class="row" *ngIf="showListAccount">
                 <div class="col-md-6 mb-4">
                     <div class="col-sm-12" *ngIf="showListAccount">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mb-2" *ngIf="showListSite">Site Details</h6>
+            <label class="mb-2" *ngIf="showListSite">Site Name</label>
             <div class="row" *ngIf="showListSite">
                 <div class="col-md-6 mb-4">
                     <ng-select #sitesList [items]="siteList" [searchable]="false" [ngModel]="siteList[0]?.id"
